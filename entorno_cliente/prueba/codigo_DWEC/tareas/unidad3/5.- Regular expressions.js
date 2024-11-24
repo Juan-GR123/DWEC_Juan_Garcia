@@ -37,15 +37,47 @@ while ((resultado4=comprobar4.exec(definir4))!==null) {
    console.log(comprobar4.lastIndex,resultado4[0]);
 }
 //Problem 6: Design a regular expression that validates an IPv4 address, ensuring the entire string is a valid IP address.
+let definir5="255.255.255.255";
+let definir55="255.100.50.25";
+let comprobar5=/^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)$/;
 
+//\d significa cualquier numero y \. significa el punto que separa los numeros
+console.log(comprobar5.test(definir5));//true
+console.log(comprobar5.test(definir55));//true
 //Problem 7: Create a regular expression that finds words that repeat consecutively in a text, such as "hello hello" or "goodbye goodbye".
+let definir6="hello hello goodbye goodbye hola ";
+let comprobar6=/([a-zA-Z0-9]+)\s+\1/g;
+//\1 : Coincide con el contenido del grupo del mismo grupo.
 
+let resultado6;
+while ((resultado6=comprobar6.exec(definir6))!==null) {
+   console.log(comprobar6.lastIndex,resultado6[0]);
+}
 //Problem 8: Use a regular expression that finds strings with at least 2 consecutive "a" letters.
+let definir7="aaaaaaaaaaaaaa aaa comprobar";
+let comprobar7=/(a){2,}/g;
 
+let resultado7;
+while ((resultado7=comprobar7.exec(definir7))!==null) {
+   console.log(comprobar7.lastIndex,resultado7[0]);
+}
 //Problem 9: Find all occurrences of the word "JavaScript" (case-insensitive) in a paragraph, showing each match's index.
+let definir8="Javascript JavaScript javascript algo que no es jaVaScriPt";
+let comprobar8=/JavaScript/ig;
 
+let resultado8;
+while ((resultado8=comprobar8.exec(definir8))!==null) {
+   console.log(comprobar8.lastIndex,resultado8[0]);
+};
 //Problem 10: Validate if a string contains exactly two words separated by a space.
+let definir9="hola hola";
+let comprobar9=/^[A-Za-z]+\s[A-Za-z]+$/;
 
+console.log(comprobar9.test(definir9));
 //Problem 11: Design a regular expression to validate passwords that have at least 8 characters, contain an uppercase letter, a lowercase letter, a number, and a special symbol.
 
+
+//preguntar al profe en clase
 //Problem 12: Find all sentences that end with an exclamation mark ! or a question mark ?.
+
+
