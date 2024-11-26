@@ -75,9 +75,19 @@ let comprobar9=/^[A-Za-z]+\s[A-Za-z]+$/;
 
 console.log(comprobar9.test(definir9));
 //Problem 11: Design a regular expression to validate passwords that have at least 8 characters, contain an uppercase letter, a lowercase letter, a number, and a special symbol.
+let comprobar10=/^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])){8,}/;
+//?: te indica que sea al menos 1 o 0 caracteres 
+//. te indica que antes de que vaya la condicion haya un caracter 
+//?=.*[a-z] que haya un caracter antes de letras minusculas
+let definir10="Queen?123";
+
+console.log(comprobar10.test(definir10));
 
 
-//preguntar al profe en clase
 //Problem 12: Find all sentences that end with an exclamation mark ! or a question mark ?.
+let comprobar11=/[(?|!)]$/;
+let definir11="hola?";
+
+console.log(comprobar11.test(definir11));
 
 
