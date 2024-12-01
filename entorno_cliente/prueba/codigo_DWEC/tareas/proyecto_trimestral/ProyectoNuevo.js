@@ -88,8 +88,8 @@ class Estudiantes {
     #nombre;
     #edad;
     #direccion;//Tendra {calle,numero,posp,codigo postal,provincia y localidad}
-    #asignaturas;
-    #registros;
+    #asignaturas;//[nombre: , nota: ]
+    #registros;//{tipo: , fecha:}
 
     static #numeros_ocupados = [];//servira para almacenar en el constructor la id de cada estudiante
 
@@ -135,18 +135,6 @@ class Estudiantes {
         return [...this.#asignaturas];
     }
 
-    //registrar la fecha de matriculacion o desmatriculacion
-    get registros() {
-        return this.#registros.map(registro => {
-            const fechaFormateada = registro.fecha.toLocaleDateString('es-ES', {
-                anio: 'numeric',
-                mes: 'long',
-                dia: 'numeric',
-                finde: 'long'
-            });
-            return `${registro.tipo}: ${fechaFormateada}`;
-        });
-    }
 
 
     //mostramos por pantalla el id del estudiante y su nombre y edad
@@ -154,65 +142,91 @@ class Estudiantes {
         return this.#id + ": " + this.#nombre + ", " + this.#edad;
     }
 
+
+
     matricular(asignatura) {
+
         if (!this.#asignaturas.includes(asignatura)) {
-            this.#asignaturas.push(asignatura);
-            this.#registros.push({ tipo: 'Matrícula', fecha: new Date() });
+            const asignaturaObj = { nombre: asignatura, nota: null }; // Nota inicial en null
+            this.#asignaturas.push(asignaturaObj);// Agrega la asignatura a la lista
+            this.#registros.push({
+                tipo: 'Matrícula', // Crea el campo `tipo` con el valor "Matrícula"
+                fecha: new Date()
+            });// Crea el campo `fecha` con la fecha y hora actual
         } else {
             throw new Error(`El estudiante ya está matriculado en ${asignatura}`);
         }
     }
 
+
+
     desmatricular(asignatura) {
-        const index = this.#asignaturas.indexOf(asignatura);
-        if (index !== -1) {
-            this.#asignaturas.splice(index, 1);
-            this.#registros.push({ tipo: 'Desmatriculación', fecha: new Date() });
+        const indice = this.#asignaturas.findIndex(asig => asig.nombre === asignatura);//buscamos en el array una asignatura con el mismo nombre
+        if (indice !== -1) {//si no es valor negativo la asignatura existe
+            this.#asignaturas.splice(indice, 1);// Elimina la asignatura de la lista
+            this.#registros.push({
+                tipo: 'Desmatriculación', // Crea el campo `tipo` con el valor "Desmatriculación"
+                fecha: new Date()
+            }); // Crea el campo `fecha` con la fecha y hora actual
         } else {
             throw new Error(`El estudiante no está matriculado en ${asignatura}`);
         }
     }
 
-    agregar_calificacion(asignatura, nota) {
 
+    //registrar la fecha de matriculacion o desmatriculacion
+
+    get registros() {
+        return this.#registros.map(registro => {//recorre todo el array registros y le asigna las siguiente opciones
+            const fecha = registro.fecha.toLocaleDateString('es-ES');//convertimos la fecha que le hemos introducido a registros en la matriculacion y desmatriculacion en el horario español
+
+            return `${registro.tipo}: ${fecha}`;
+        });
     }
 
+    //cambiar la nota de calificacion si existe esta asignatura
+    agregar_calificacion(asignatura, nota) {
+        // Validar que la nota sea un número válido
+        let comprobacion = false;
+        if (typeof nota !== 'number' || nota < 0 || nota > 10) {
+            throw new Error('La nota debe ser un número entre 0 y 10.');
+        }
+
+        const asignaturaEncontrada = this.#asignaturas.find(asig => asig.nombre === asignatura);
+        //Con find recorre todo el array asignaturas y busca la coincidencia de nombre
+        if (asignaturaEncontrada) {
+            asignaturaEncontrada.nota = nota;
+        } else {
+            throw new Error(`El estudiante no está matriculado en la asignatura ${asignatura}`);
+        }
+    }
+
+    // Calcula el promedio de todas las calificaciones del estudiante.
     promedio() {
 
+
+
+
     }
 }
 
 
 
-
-class GestorEst {
-    #listas;
-
-
-    constructor(...estudiantes) {
-
-    }
-}
-
-
-class Asignaturas {
-
-}
-
-
-class GestorAs {
-
-}
 
 let estudiante = new Estudiantes(1, "Juan Pérez", 20, { calle: "Calle Falsa", numero: 123 });
 
 estudiante.matricular("Matemáticas");
 console.log(estudiante.registros);
 
-setTimeout(() => {
-    estudiante.desmatricular("Matemáticas");
-    console.log(estudiante.registros);
-}, 1000);
+estudiante.desmatricular("Matemáticas");
+console.log(estudiante.registros);
 
 
+estudiante.matricular("Matemáticas");
+estudiante.matricular("Física");
 
+// Agregar calificaciones
+estudiante.agregar_calificacion("Matemáticas", 8.5);
+estudiante.agregar_calificacion("Física", 9);
+
+console.log(estudiante.asignaturas);
