@@ -36,25 +36,48 @@ string9.match(/javascript/ig).forEach(elemento=> {
 let string10="Hello, cruel world";
 console.log(string10.slice(-10));
 //Exercise 11: Replace a word: In the string "I like coffee", replace the word "coffee" with "tea".
-
+let string11="I like coffee";
+console.log(string11.replace("coffee","tea"));
 //Exercise 12: Replace all words: Given the string "Hello hello hello", replace all occurrences of the word "hello" with "goodbye".
-
+let string12="Hello hello hello";
+console.log(string12.replaceAll("hello","goodbye"));
 //Exercise 13: Remove spaces: Remove the spaces from the beginning and the end of the string " JavaScript ".
-
+let string13=" JavaScript ";
+console.log(string13.trim());
 //Exercise 14: Remove leading spaces: Remove only the leading spaces from the string " Welcome to JavaScript".
-
+let string14=" Welcome to JavaScript";
+console.log(string14.trim());
 //Exercise 15: Remove trailing spaces: Remove only the trailing spaces from the string "JavaScript class ".
-
+let string15="JavaScript class ";
+console.log(string15.trim());
 //Exercise 16: Split the string into words: Split the string "JavaScript is fun" into an array of words.
-
+let string16="JavaScript is fun";
+console.log(string16.split(" "));
 //Exercise 17: Get the Unicode value: Get the Unicode value of the first character in the string "Hello".
 
 //Exercise 18: Iterate over a string: Given the string "string", display each letter on a new line.
-
+let string18="string";
+for(let caracter of string18.valueOf()){
+  console.log(caracter);
+}
 //Exercise 19: Given the string " JavaScript, Python, Ruby, PHP, C++ ", remove the whitespace at the beginning and end, and convert the rest of the string into an array with the names of the programming languages.
-
+let string19=" JavaScript, Python, Ruby, PHP, C++ ";
+console.log(string19.trim().split(" "));
 //Exercise 20: Given the string "123456789", split the numbers into pairs of two digits and then reverse the order of each pair, returning the result as "21436587".
+let string20="123456789";
+function algo(string) {
+  
+    const pares = string.match(/.{1,2}/g);
+    
 
+    const reverso = pares.map(pares => pares.split('').reverse().join(''));
+
+    return reverso.join('');
+}
+
+const stringg = "123456789";
+const resultado = algo(stringg);
+console.log(resultado);
 //Exercise 21: Write a function that takes a string like "El lenguaje JavaScript es popular" and replaces all the vowels with their accented equivalents: a -> á, e -> é, i -> í, o -> ó, u -> ú. The resulting string should be "Él lénguáje Jávascrípt és pópulár".
 
 //Exercise 22: Given the string "Hola-mundo-bonito", replace all the hyphens with spaces and then capitalize the first letter of each word, resulting in "Hola Mundo Bonito".
