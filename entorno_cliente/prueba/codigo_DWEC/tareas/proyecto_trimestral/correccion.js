@@ -1,3 +1,6 @@
+//Todas las salidas serán por consola y todas las entradas por teclado
+//promt y console.log
+
 //creamos una clase para saber la direccion de cada estudiante
 class Direccion {
     #calle;
@@ -7,9 +10,9 @@ class Direccion {
     #provincia;
     #localidad;
 
-    constuctor(calle, numero, piso, codigo, provincia, localidad) {
+    constructor(calle, numero, piso, codigo, provincia, localidad) {
         let patron = /^[0-9]{5}$/;
-        let comprobacion = (codigo.test(patron) ? codigo : "Error");
+        let comprobacion = (patron.test(codigo) ? codigo : "Error");
 
         this.#calle = calle;
         this.#numero = numero;
@@ -42,7 +45,7 @@ class Direccion {
         return this.#localidad;
     }
 
-    get toString() {
+    ToString() {
         return this.#calle + " " + this.#numero + ", " + this.#piso + " - " + this.#codigo_postal + " " + this.#localidad + " (" + this.#provincia + ")";
     }
 
@@ -78,6 +81,7 @@ class Estudiantes {
         }
         Estudiantes.numeros.push(ID);
         this.#id = ID;
+
         this.#edad = N_edad;
         this.#direccion = N_direc;//N_direc sera una clase direccion con todos sus valores
         this.#asignaturas = [];
@@ -108,7 +112,7 @@ class Estudiantes {
 
 
     //mostramos por pantalla el id del estudiante y su nombre y edad
-    get String() {
+    ToString() {
         return `${this.#id}: ${this.#nombre},  ${this.#edad}`;
     }
 
@@ -116,7 +120,7 @@ class Estudiantes {
 
     matricular(asignatura) {
         if (!this.#asignaturas.includes(asignatura)) {
-            const asignaturaObj = { nombre: asignatura.nombre, nota: 0 }; // Nota inicial en null
+            const asignaturaObj = { nombre: asignatura.nombre, nota: asignatura.nota };
             this.#asignaturas.push(asignaturaObj);// Agrega la asignatura a la lista
             this.#registros.push({
                 tipo: 'Matrícula', // Crea el campo `tipo` con el valor "Matrícula"
@@ -180,6 +184,7 @@ class Estudiantes {
         return promedioF;
 
     }
+
 }
 
 
@@ -203,7 +208,7 @@ class Asignaturas {
         return this.nombre;
     }
 
-    get ToString() {//join para que ponga cualquier cosa entre los valores de los arrays
+    ToString() {//join para que ponga cualquier cosa entre los valores de los arrays
         return `Asignatura: ${this.nombre}, Calificaciones: ${this.#calificaciones.join(", ")}`;
     }
 
@@ -246,12 +251,26 @@ class Asignaturas {
 
 }
 
+class Gestores {
+    _gestor;//si pongo el atributo protegido entonces las subclases tambien podrán acceder a el.
 
-class GestorEs {
-    #estudiantes;
+    constructor() {
+        this._gestor = [];
+    }
 
-    constructor(...estudiantes) {
-        this.#estudiantes = [];
+    get gestor() {
+        return [...this._gestor];
+    }
+}
+
+
+
+
+class GestorEs extends Gestores {
+
+
+    constructor(...estudiantes) {//sobrecarga del constructor de la clase Gestores
+        super();
 
         for (let estudiante of estudiantes) {
 
@@ -261,48 +280,43 @@ class GestorEs {
 
     }
 
-    get gestor() {
-        return [...this.#estudiantes];
-    }
-
     agregar_estudiante(estudiante) {//agrega un estudiante a la lista
-        if (this.#estudiantes.filter(elemento => elemento.id === estudiante.id)) {//si se introduce un id que ya exista entonces no se podrá agregar al estudiante
+        if (this._gestor.find(elemento => elemento.id === estudiante.id)) {//si se introduce un id que ya exista entonces no se podrá agregar al estudiante
             throw new Error("Ya existe el estudiante.");
+
         }
-        this.#estudiantes.push(estudiante);
+        this._gestor.push(estudiante);
     }
 
     eliminar_estudiante(id) {//elimina un estudiante de la lista
-        let eliminar = this.#estudiantes.findIndex(elemento => elemento.id === id);
+        let eliminar = this._gestor.findIndex(elemento => elemento.id === id);
         //findIndex:devuelve el indice del primer elemento que cumpla la funcion definida
         if (eliminar === -1) {
             throw new Error(`No se encontró ningún estudiante con ID ${id}.`);
         }
-        this.#estudiantes.splice(eliminar, 1);
+        this._gestor.splice(eliminar, 1);
     }
 
     listar_estudiantes() {//da una lista completa de cada estudiante
-        for (let persona of this.#estudiantes) {
-            console.log(persona.String);
+        for (let persona of this._gestor) {
+            console.log(persona.ToString());
         }
     }
 
     obtener_estudiante(id) {//busca un estudiante en la lista por id
-        let obtener = this.#estudiantes.find(elemento => elemento.id === id);
+        let obtener = this._gestor.find(elemento => elemento.id === id);
         //find:devuelve el valor del primer elemento que cumpla la funcion definida
         return obtener;
     }
 
-    //¿metodo ordenar?
-
 }
 
 
-class GestorAs {
-    #asignaturas;
+class GestorAs extends Gestores {
+
 
     constructor(...asignaturas) {
-        this.#asignaturas;
+        super();
 
         for (let asignatura of asignaturas) {
 
@@ -312,51 +326,107 @@ class GestorAs {
 
     }
 
-    get gestor() {
-        return [...this.#asignaturas];
-    }
-
     agregar_asignatura(asignatura) {
-        if (this.#asignaturas.filter(elemento => elemento.id === asignatura.id)) {
+        if (this._gestor.find(elemento => elemento.nombre === asignatura.nombre)) {
             throw new Error("Ya existe el estudiante.");
         }
-        this.#asignaturas.push(asignatura);
+        this._gestor.push(asignatura);
     } //Añade una asignatura.
 
     eliminar_asignatura(nombre) {
-        let eliminar = this.#asignaturas.findIndex(elemento => elemento.nombre === nombre);
+        let eliminar = this._gestor.findIndex(elemento => elemento.nombre === nombre);
         if (eliminar === -1) {
             throw new Error(`No se encontró ningún estudiante con nombre ${nombre}.`);
         }
-        this.#asignaturas.splice(eliminar, 1);
+        this._gestor.splice(eliminar, 1);
     } //Elimina una asignatura por nombre.
 
     listar_asignaturas() {
-        for (let asignatura of this.#asignaturas) {
-            console.log(asignatura.ToString);
+        for (let asignatura of this._gestor) {
+            console.log(asignatura.ToString());
         }
     }
 
     obtener_asignatura(nombre) {
-        let obtener = this.#asignaturas.find(elemento => elemento.nombre === nombre);
+        let obtener = this._gestor.find(elemento => elemento.nombre === nombre);
         return obtener;
     }
 
 }
 
-
+//////////////////////////////////////
 try {
     const listaEstudiantes = new GestorEs();
     const listaAsignaturas = new GestorAs();
     let listaDirecciones = [];
 
-    listaDirecciones.push(new Direccion("C/ Afán de Ribera", 15, "2ºA", 18005, "Granada", "Granada"));
-    listaDirecciones.push(new Direccion("C/ Aliatar", 17, "Piso Bajo", 18110, "Granada", "Híjar"));
-    listaDirecciones.push(new Direccion("C/ Canalejas", 5, "2ºB", 23790, "Jaén", "Porcuna"));
-    listaDirecciones.push(new Direccion("C/ Paraguay", 1, "Piso Bajo", 18210, "Granada", "Peligros"));
-    listaDirecciones.push(new Direccion("C/ Málaga", 23, "5ºC", 29770, "Málaga", "Torrox"));
+    listaDirecciones.push(new Direccion("Calle pez", 5, "6ºA", 29005, "Malaga", "Malaga"));
+    listaDirecciones.push(new Direccion("Calle Dolores", 10, "7ºC", 18210, "Granada", "Peligros"));
+    listaDirecciones.push(new Direccion("Calle Sierpes ", 20, "10ºB", 41004., "Sevilla", "Sevilla"));
+    listaDirecciones.push(new Direccion("Calle Cabezas", 1, "4ºD", 14003, "Cordoba", "Cordoba"));
+    listaDirecciones.push(new Direccion("Calle Aleatoria", 23, "8ºA", 32123, "Aleatoria", "Aleatoria"));
+
+    // Creación de Estudiantes
+    let estudiante1 = new Estudiantes("Estudiante A", 10, listaDirecciones[0]);//me esta poniendo todos los estudiantes con el mismo id
+    let estudiante2 = new Estudiantes("Estudiante B", 12, listaDirecciones[1]);
+    let estudiante3 = new Estudiantes("Estudiante C", 20, listaDirecciones[2]);
+    let estudiante4 = new Estudiantes("Estudiante D", 19, listaDirecciones[3]);
+    let estudiante5 = new Estudiantes("Estudiante E", 16, listaDirecciones[4]);
 
 
+    //añadimos los estudiantes
+    listaEstudiantes.agregar_estudiante(estudiante1);
+    listaEstudiantes.agregar_estudiante(estudiante2);
+    listaEstudiantes.agregar_estudiante(estudiante3);
+    listaEstudiantes.agregar_estudiante(estudiante4);
+    listaEstudiantes.agregar_estudiante(estudiante5);
+
+    //console.log(listaEstudiantes.listar_estudiantes())
+
+    // Creación de Asignaturas
+    let mates = new Asignaturas("Matematicas");
+    let fisica = new Asignaturas("Fisica");
+    let lengua = new Asignaturas("Lengua");
+    let biologia = new Asignaturas("Biologia");
+    let dibujo = new Asignaturas("Dibujo");
+
+
+    //Añadimos las asignaturas a la lista. Las asignaturas tienen que ser objetos para poder implementar mas facilmente sus metodos agregar calificacion y eliminar calificacion
+    listaAsignaturas.agregar_asignatura(mates);
+    listaAsignaturas.agregar_asignatura(fisica);
+    listaAsignaturas.agregar_asignatura(lengua);
+    listaAsignaturas.agregar_asignatura(biologia);
+    listaAsignaturas.agregar_asignatura(dibujo);
+
+    //console.log(listaAsignaturas.listar_asignaturas());
+
+
+    // Matriculación de Estudiantes
+
+
+    for (let i = 0; i < listaEstudiantes.gestor.length; i++) {
+        listaEstudiantes.gestor[i].matricular(listaAsignaturas.gestor[0]);
+        listaEstudiantes.gestor[i].matricular(listaAsignaturas.gestor[1]);
+        listaEstudiantes.gestor[i].matricular(listaAsignaturas.gestor[2]);
+        listaEstudiantes.gestor[i].matricular(listaAsignaturas.gestor[3]);
+        listaEstudiantes.gestor[i].matricular(listaAsignaturas.gestor[4]);
+    }
+
+    // Desmatriculaciones de Estudiantes
+
+    listaEstudiantes.gestor[0].desmatricular(listaAsignaturas.gestor[0]);
+    listaEstudiantes.gestor[1].desmatricular(listaAsignaturas.gestor[0]);
+    listaEstudiantes.gestor[2].desmatricular(listaAsignaturas.gestor[0]);
+    listaEstudiantes.gestor[3].desmatricular(listaAsignaturas.gestor[0]);
+
+    // Calificación de Estudiantes
+
+    listaEstudiantes.gestor[0].agregar_calificacion(listaAsignaturas.gestor[1], 10);
+    listaEstudiantes.gestor[1].agregar_calificacion(listaAsignaturas.gestor[1], 9.3);
+    listaEstudiantes.gestor[2].agregar_calificacion(listaAsignaturas.gestor[3], 9);
+
+
+    // Bucle while
 
 
 } catch (error) {

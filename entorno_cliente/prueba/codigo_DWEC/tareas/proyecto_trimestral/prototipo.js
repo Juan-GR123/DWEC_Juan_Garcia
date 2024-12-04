@@ -10,9 +10,9 @@ class Direccion {
   #provincia;
   #localidad;
 
-  constuctor(calle, numero, piso, codigo, provincia, localidad) {
+  constructor(calle, numero, piso, codigo, provincia, localidad) {
     let patron = /^[0-9]{5}$/;
-    let comprobacion = (codigo.test(patron) ? codigo : "Error");
+    let comprobacion = (patron.test(codigo) ? codigo : "Error");
 
     this.#calle = calle;
     this.#numero = numero;
