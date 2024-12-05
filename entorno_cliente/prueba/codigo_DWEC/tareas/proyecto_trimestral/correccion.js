@@ -116,8 +116,6 @@ class Estudiantes {
         return `${this.#id}: ${this.#nombre},  ${this.#edad}`;
     }
 
-
-
     matricular(asignatura) {
         if (!this.#asignaturas.includes(asignatura)) {
             const asignaturaObj = { nombre: asignatura.nombre, nota: asignatura.nota };
@@ -130,7 +128,6 @@ class Estudiantes {
             throw new Error(`El estudiante ya está matriculado en ${asignatura.nombre}`);
         }
     }
-
 
 
     desmatricular(asignatura) {
@@ -160,7 +157,6 @@ class Estudiantes {
     //cambiar la nota de calificacion si existe esta asignatura
     agregar_calificacion(asignatura, nota) {
         // Validar que la nota sea un número válido
-        let comprobacion = false;
         if (typeof nota !== 'number' || nota < 0 || nota > 10) {
             throw new Error('La nota debe ser un número entre 0 y 10.');
         }
@@ -210,7 +206,7 @@ class Asignaturas {
 
     ToString() {//join para que ponga cualquier cosa entre los valores de los arrays
         return `Asignatura: ${this.nombre}, Calificaciones: ${this.#calificaciones.join(", ")}`;
-    }
+    }//Sobrecarga del metodo To_String de estudiantes
 
     //agrega la calificaion a la asignatura elegida
     agregar_calificacion(nota) {
@@ -269,7 +265,7 @@ class Gestores {
 class GestorEs extends Gestores {
 
 
-    constructor(...estudiantes) {//sobrecarga del constructor de la clase Gestores
+    constructor(...estudiantes) {
         super();
 
         for (let estudiante of estudiantes) {
@@ -328,7 +324,7 @@ class GestorAs extends Gestores {
 
     agregar_asignatura(asignatura) {
         if (this._gestor.find(elemento => elemento.nombre === asignatura.nombre)) {
-            throw new Error("Ya existe el estudiante.");
+            throw new Error("Ya existe la asignatura");
         }
         this._gestor.push(asignatura);
     } //Añade una asignatura.
@@ -336,7 +332,7 @@ class GestorAs extends Gestores {
     eliminar_asignatura(nombre) {
         let eliminar = this._gestor.findIndex(elemento => elemento.nombre === nombre);
         if (eliminar === -1) {
-            throw new Error(`No se encontró ningún estudiante con nombre ${nombre}.`);
+            throw new Error(`No se encontró ningúna asignatura con nombre ${nombre}.`);
         }
         this._gestor.splice(eliminar, 1);
     } //Elimina una asignatura por nombre.
@@ -353,6 +349,8 @@ class GestorAs extends Gestores {
     }
 
 }
+
+
 
 //////////////////////////////////////
 try {
@@ -425,9 +423,144 @@ try {
     listaEstudiantes.gestor[1].agregar_calificacion(listaAsignaturas.gestor[1], 9.3);
     listaEstudiantes.gestor[2].agregar_calificacion(listaAsignaturas.gestor[3], 9);
 
+    let pregunta = 0;
 
-    // Bucle while
+    do {
 
+
+        console.log("Opciones");
+        console.log("1 - Crear estudiante");
+        console.log("2 - Crear Asignatura");
+        console.log("3 - Matricular estudiante");
+        console.log("4 - Desmatriucular estudiante");
+        console.log("5 - Eliminar estudiante de la lista");
+        console.log("6 - Calificar");//como calificar asignaturas que ya tienen una nota??
+        console.log("7 - Calcular promedio de Asignaturas");
+        console.log("8 - Calcular promedio de Estudiantes");
+        console.log("0- Salir");
+
+
+
+        pregunta = prompt("Dime la opción que desees realizar");
+        pregunta = Number(pregunta);
+
+        switch (pregunta) {
+
+            case 0:
+                console.log("Adios");
+                break;
+
+            case 1:
+                let nombre = prompt("Introduce el nombre del estudiante:");
+                let edad = prompt("Introduce la edad del estudiante:");
+                edad = Number(edad);
+
+                if (typeof edad != 'number' || edad <= 0) {
+                    throw new Error("La edad debe ser un número positivo.");
+                }
+
+                console.log("Introduce la dirección del estudiante:");
+                let calle = prompt("Calle:");
+                let numero = parseInt(prompt("Número:"));
+                let piso = prompt("Piso:");
+                let codigo_postal = prompt("Código postal (5 dígitos):");
+                let provincia = prompt("Provincia:");
+                let localidad = prompt("Localidad:");
+
+                if (calle === null || numero === null || piso === null || codigo_postal === null || provincia === null || localidad === null) {
+                    console.log("Los datos no se han introducido correctamente, vuelve a intentarlo");
+                    break;
+                }
+
+                let nuevaDireccion = new Direccion(calle, numero, piso, codigo_postal, provincia, localidad);
+
+                let nuevoEstudiante = new Estudiantes(nombre, edad, nuevaDireccion);
+
+                // Agregar el estudiante a la lista
+                listaEstudiantes.agregar_estudiante(nuevoEstudiante);
+
+                console.log("Estudiante creado y agregado con éxito:");
+                listaEstudiantes.listar_estudiantes();
+
+
+                break;
+
+            case 2:
+                let asignatura = prompt("Introduce el nombre de la asignatura:");
+
+                if (typeof asignatura != "string") {
+                    console.log("Error: La asignatura no es valida");
+                    break;
+                }
+
+                let N_asignatura = new Asignaturas(asignatura);//nueva asignatura
+
+
+                listaAsignaturas.agregar_asignatura(N_asignatura);
+
+                console.log(`Asignatura "${asignatura}" creada y agregada con éxito.`);
+                listaAsignaturas.listar_asignaturas(); // Mostrar todas las asignaturas
+
+
+                break;
+
+            case 3:
+                listaEstudiantes.listar_estudiantes();
+                let id = prompt("Dime el id del estudiante que quieras matricular");
+
+                id = Number(id);
+                //Buscamos el id del estudiante en el array que hemos creado de estudiantes
+                let encontrarE = listaEstudiantes.obtener_estudiante(id);
+                if (!encontrarE) {
+                    console.log("No se ha encontrado al estudiante especificado");
+                    break;
+                }
+
+                let asig = prompt("Ahora dime el nombre de la asignatura");
+                //Buscamos el nombre de la asignatura en el array que hemos creado de Asignaturas
+                let encontrarA = listaAsignaturas.obtener_asignatura(nombre);
+                if (!encontrarA) {
+                    console.log("La asignatura no existe");
+                    break;
+                }
+                encontrarE.matricular(encontrarA);
+                console.log(`${encontrarE.nombre} ha sido matriculado en ${encontrarA.nombre} con éxito.`);
+                break;
+
+            case 4:
+                listaEstudiantes.listar_estudiantes();
+                let id2 = prompt("Dime la id del estudiante que quieras desmatricular");
+
+                id2 = Number(id2);
+                //Buscamos el id del estudiante en el array que hemos creado de estudiantes
+                let estu_des = listaEstudiantes.obtener_estudiante(id);
+                if (!estu_des) {
+                    console.log("No se ha encontrado al estudiante especificado");
+                    break;
+                }
+
+                listaAsignaturas.listar_asignaturas();
+                let asig_estu = prompt("Ahora dime la asignatura de la cual quieres desmatricular al estudiante");
+                let asig_des = listaAsignaturas.obtener_asignatura(asig_estu);
+                if (!asig_des) {
+                    console.log("La asignatura no existe");
+                    break;
+                }
+                estu_des.desmatricular(asig_des);
+                console.log(`${estu_des.nombre} ha sido desmatriculado en ${asig_des.nombre} con éxito.`);
+                break;
+            case 5:
+
+
+                break;
+
+            default:
+                console.log("No se ha seleccionado la opcion correcta, vuelve a intentarlo");
+                break;
+        }
+
+
+    } while (pregunta != 0);
 
 } catch (error) {
     console.error(error.message);
