@@ -157,7 +157,7 @@ class Estudiantes {
     //cambiar la nota de calificacion si existe esta asignatura
     agregar_calificacion(asignatura, nota) {
         // Validar que la nota sea un número válido
-        if (typeof nota !== 'number' || nota < 0 || nota > 10) {
+        if (typeof nota != 'number' || nota < 0 || nota > 10) {
             throw new Error('La nota debe ser un número entre 0 y 10.');
         }
 
@@ -172,12 +172,22 @@ class Estudiantes {
 
     // Calcula el promedio de todas las calificaciones del estudiante.
     promedio() {
+        if (this.#asignaturas.length === 0) {
+            return "No tiene asignaturas matriculadas";
+        }
         let promedioF = 0;
+        let contadorNotas = 0;
         for (let asig of this.#asignaturas) {
-            promedioF += asig.nota;
+            if (typeof asig.nota === 'number') {
+                promedioF += asig.nota;
+                contadorNotas++;
+            }
+        }
+        if (contadorNotas === 0) {
+            return 0; // Evitar dividir entre 0 si no hay notas válidas. Si no se hace da NaN
         }
 
-        return promedioF;
+        return Number((promedioF / contadorNotas).toFixed(2)); // Redondea a 2 decimales.
 
     }
 
@@ -204,9 +214,15 @@ class Asignaturas {
         return this.nombre;
     }
 
+    get calificaciones() {
+        return [...this.#calificaciones];
+    }
+
     ToString() {//join para que ponga cualquier cosa entre los valores de los arrays
-        return `Asignatura: ${this.nombre}, Calificaciones: ${this.#calificaciones.join(", ")}`;
+        return `Asignatura: ${this.nombre}`;
     }//Sobrecarga del metodo To_String de estudiantes
+
+
 
     //agrega la calificacion a la asignatura elegida
     agregar_calificacion(nota) {
@@ -226,6 +242,7 @@ class Asignaturas {
         //ejemplo: [posicion,numero]
     }
 
+
     mostrar() {//creamos este metodo para saber el indice de cada asignatura
         this.#calificaciones.forEach((valor, clave) => {
             console.log(`Posicion:${clave} , valor:${valor} `);
@@ -242,7 +259,7 @@ class Asignaturas {
             suma += calificacion;
         }
         suma = suma / (this.#calificaciones.length);
-        return suma.toFixed(2);//toFixed es para que solo muestre un numero determinado de decimales
+        return Number(suma.toFixed(2));//toFixed es para que solo muestre un numero determinado de decimales
     }
 
 }
@@ -335,7 +352,7 @@ class GestorAs extends Gestores {
     } //Añade una asignatura.
 
     eliminar_asignatura(nombre) {
-        let eliminar = this._gestor.findIndex(elemento => elemento.nombre === nombre);
+        let eliminar = this._gestor.findIndex(elemento => elemento.nombre.toLowerCase() === nombre.toLowerCase());
         if (eliminar === -1) {
             throw new Error(`No se encontró ningúna asignatura con nombre ${nombre}.`);
         }
@@ -349,8 +366,8 @@ class GestorAs extends Gestores {
     }
 
     obtener_asignatura(nombre) {
-        let obtener = this._gestor.find(elemento => elemento.nombre.toLowerCase() == nombre.toLowerCase());
-        if (obtener) {
+        let obtener = this._gestor.find(elemento => elemento.nombre.toLowerCase() === nombre.toLowerCase());
+        if (obtener) {//si encuentra algun valor
             return obtener;
         } else {
             throw new Error(`No se encontró ningúna asignatura con nombre ${nombre}.`);
@@ -447,12 +464,13 @@ try {
         console.log("1 - Crear estudiante");
         console.log("2 - Crear Asignatura");
         console.log("3 - Matricular estudiante");
-        console.log("4 - Desmatriucular estudiante");
+        console.log("4 - Desmatricular estudiante");
         console.log("5 - Eliminar estudiante de la lista");
         console.log("6 - Eliminar asignatura de la lista");
-        console.log("7 - Calificar");//como calificar asignaturas que ya tienen una nota??
-        console.log("8 - Calcular promedio de Asignaturas");
-        console.log("9 - Calcular promedio de Estudiantes");
+        console.log("7 - Calificar asignaturas y estudiante y su promedio");
+        console.log("8 - Fechas de matriculacion");
+        console.log("9 - Buscar");//buscar estudiantes o asignaturas
+        console.log("10 - Mostrar reporte");/* Muestra el reporte de todos los estudiantes y su información, tanto datos personales (nombre, edad y dirección) como calificaciones (asignaturas y promedio).*/
         console.log("0- Salir");
 
 
@@ -484,8 +502,7 @@ try {
                 let localidad = prompt("Localidad:");
 
                 if (calle === null || numero === null || piso === null || codigo_postal === null || provincia === null || localidad === null) {
-                    console.log("Los datos no se han introducido correctamente, vuelve a intentarlo");//hago un console.log y no un throw error ya que quiero que 
-                    //aunque se introduzcan valores incorrectos se pueda intentar de nuevo sin que te salga un error.
+                    throw new Error("Los datos no se han introducido correctamente, vuelve a intentarlo");
                     break;
                 }
 
@@ -505,8 +522,8 @@ try {
             case 2:
                 let asignatura = prompt("Introduce el nombre de la asignatura:");
 
-                if (typeof asignatura != "string") {
-                    console.log("Error: La asignatura no es valida");
+                if (typeof asignatura != "string" || asignatura.trim() === "") {
+                    throw new Error("Error: La asignatura no es valida");
                     break;
                 }
 
@@ -535,7 +552,7 @@ try {
                 encontrarE.matricular(encontrarA);
                 console.log(`${encontrarE.nombre} ha sido matriculado en ${encontrarA.nombre} con éxito.`);
                 //mostramos al estudiante elegido y sus asignaturas matriculadas
-                encontrarE.asignaturas.forEach((elemento, clave) => {
+                encontrarE.asignaturas.forEach((elemento, clave) => {//numero de asignaturas en las que esta matriculado el estudiante
                     console.log(`${clave}. ${elemento.nombre}`);
                 });
                 break;
@@ -547,78 +564,103 @@ try {
                 id2 = Number(id2);
                 //Buscamos el id del estudiante en el array que hemos creado de estudiantes
                 let estu_des = listaEstudiantes.obtener_estudiante(id2);
-                if (!estu_des) {
-                    console.log("No se ha encontrado al estudiante especificado");
-                    break;
-                }
 
-                listaAsignaturas.listar_asignaturas();
+                estu_des.asignaturas.forEach((elemento, clave) => {//muestro las asignaturas en las que esta matriculado el estudiante
+                    console.log(`${clave}. ${elemento.nombre}`);
+                });
                 let asig_estu = prompt("Ahora dime la asignatura de la cual quieres desmatricular al estudiante");
                 let asig_des = listaAsignaturas.obtener_asignatura(asig_estu);
-                if (!asig_des) {
-                    console.log("La asignatura no existe");
-                    break;
-                }
+
                 estu_des.desmatricular(asig_des);
                 console.log(`${estu_des.nombre} ha sido desmatriculado en ${asig_des.nombre} con éxito.`);
+
+                estu_des.asignaturas.forEach((elemento, clave) => {
+                    console.log(`${clave}. ${elemento.nombre}`);
+                });
                 break;
             case 5:
+                listaEstudiantes.listar_estudiantes();
                 let elim_estu = prompt("Dime el id del estudiante que quieras eliminar");
                 elim_estu = Number(elim_estu);
 
                 if (isNaN(elim_estu) || elim_estu <= 0) {
-                    console.log("El ID debe ser un número positivo.");
+                    throw new Error("El ID debe ser un número positivo.");
                     break;
                 }
 
                 let obtener_E = listaEstudiantes.obtener_estudiante(elim_estu);//Comprobamos que el estudiante existe
-                if (!obtener_E) {//si no existe en el array nos lo indica
-                    console.log("El estudiante no existe");
-                    break;
-                }
+
                 listaEstudiantes.eliminar_estudiante(elim_estu);//si el estudiante existe, entonces se elimina indicando su id
+
                 console.log(`El estudiante con ID ${elim_estu} ha sido eliminado correctamente.`);
                 listaEstudiantes.listar_estudiantes();
 
                 break;
 
             case 6:
+                listaAsignaturas.listar_asignaturas();//muestra las asignaturas antes de eliminarlas
+
                 let elim_asig = prompt("Dime el nombre de la asignatura que quieres eliminar");
-                if (typeof elim_asig != "string") {
-                    console.log("Error: La asignatura no es valida");
-                    break;
-                }
-                let obtener_A = listaAsignaturas.obtener_asignatura(elim_asig);
-                if (!obtener_A) {
-                    console.log("La asignatura no existe");
+
+                if (typeof elim_asig != "string" || elim_asig.trim() === "") {
+                    throw new Error("Error: La asignatura no es valida");
                     break;
                 }
 
+
                 listaAsignaturas.eliminar_asignatura(elim_asig);
-                console.log(`La asignatura con Nombre ${elim_estu} ha sido eliminada correctamente.`);
+
+                console.log(`La asignatura ha sido eliminada correctamente.`);
                 listaAsignaturas.listar_asignaturas();
                 break;
             case 7:
+                //se califican asignaturas y el promedio de esas notas seran la nota final del estudiantes
+                let nombre_asig = prompt("Introduce el nombre de la asignatura que desees calificar");
+                let asignatura_N = listaAsignaturas.obtener_asignatura(nombre_asig);
+
+                let continuar = "";
+                let nota = 0;
+                do {
+                    nota = prompt("Introduce la nota de la asignatura a calificar");
+                    nota = Number(nota);
+                    asignatura_N.agregar_calificacion(nota);
+                    continuar = prompt("Quieres seguir agregando calificaciones a la asignatura? si/no");
+                    //Las validaciones ya las hace el metodo
+                } while (continuar.toLowerCase() != "no");
+
+                console.log("calculamos el promedio de las calificaciones de la asignatura elegida");
+                let nota_promedio_calificaciones = asignatura_N.calcular_promedio();
+
+
                 // Listar estudiantes disponibles
                 listaEstudiantes.listar_estudiantes();
-                let id_Estudiante = prompt("Introduce el ID del estudiante que deseas calificar:");
+                let id_Estudiante = prompt("Ahora, introduce el ID del estudiante que deseas calificar con el promedio de esas calificaciones:");
                 id_Estudiante = Number(id_Estudiante);
                 let estudiante = listaEstudiantes.obtener_estudiante(id_Estudiante);
-                if (!estudiante) {//No se puede hacer funcion de esta condicion ya que el break esta dentro de ella.
-                    console.log("No se ha encontrado al estudiante especificado.");
-                    break;
-                }
+
                 console.log(`Asignaturas en las que está matriculado ${estudiante.nombre}:`);
                 estudiante.asignaturas.forEach((elemento, clave) => {
                     console.log(`${clave}. ${elemento.nombre}`);
                 });
 
-                let calificar = prompt("Introduce el nombre de la asignatura que desees calificar");
-                let nota = prompt("Introduce la nota de la asignatura a calificar");
-                nota = Number(nota);
-                //Las validaciones ya las hace el metodo
-                estudiante.agregar_calificacion(calificar, nota);
-                console.log(`La calificación de ${nota} ha sido asignada a "${calificar}" para ${estudiante.nombre}.`);
+                console.log(`El promedio ${nota_promedio_calificaciones} de la asignatura ${asignatura_N.nombre} será asignado al estudiante ${estudiante.nombre}`);
+                estudiante.agregar_calificacion(asignatura_N, nota_promedio_calificaciones);
+
+                console.log("Ahora calcularemos el promedio de todas las notas del estudiante elegido");
+                console.log(estudiante.asignaturas);
+                let promedio = estudiante.promedio();
+
+                console.log(`El promedio de notas del estudiante ${estudiante.nombre} es ${promedio}`);
+
+                //ahora eliminaremos las calificaciones que se han añadido a la asignatura elegida para que si se vuelve a este caso no se interpongan las 
+                //notas anteriores
+                for (let i = 0; i < asignatura_N.calificaciones.length; i++) {
+                    asignatura_N.eliminar_calificacion(i);
+                }
+
+                console.log("Operación exitosa");
+
+
                 break;
             case 8:
 
