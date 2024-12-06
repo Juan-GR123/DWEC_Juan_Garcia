@@ -123,6 +123,7 @@ class Estudiantes {
             const asignaturaObj = { nombre: asignatura.nombre, nota: asignatura.nota };
             this.#asignaturas.push(asignaturaObj); // Agrega la asignatura a la lista
             this.#registros.push({
+            		nombre:asignatura.nombre,
                 tipo: 'Matrícula', // Crea el campo `tipo` con el valor "Matrícula"
                 fecha: new Date() // Crea el campo `fecha` con la fecha y hora actual
             });
@@ -133,8 +134,10 @@ class Estudiantes {
     desmatricular(asignatura) {
         const indice = this.#asignaturas.findIndex(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase());//buscamos en el array una asignatura con el mismo nombre
         if (indice !== -1) {//si no es valor negativo la asignatura existe
+        		let nombre=asignatura.nombre;
             this.#asignaturas.splice(indice, 1);// Elimina la asignatura de la lista
             this.#registros.push({
+            		nombre:nombre,
                 tipo: 'Desmatriculación', // Crea el campo `tipo` con el valor "Desmatriculación"
                 fecha: new Date()
             }); // Crea el campo `fecha` con la fecha y hora actual
@@ -150,7 +153,7 @@ class Estudiantes {
         return this.#registros.map(registro => {//recorre todo el array registros y le asigna las siguiente opciones
             const fecha = registro.fecha.toLocaleDateString('es-ES');//convertimos la fecha que le hemos introducido a registros en la matriculacion y desmatriculacion en el horario español
 
-            return `${registro.tipo}: ${fecha}`;
+            return `${registro.nombre} - ${registro.tipo}: ${fecha}`;
         });
     }
 
@@ -274,6 +277,7 @@ class Gestores {
     get gestor() {
         return [...this._gestor];
     }
+
 }
 
 
@@ -326,6 +330,33 @@ class GestorEs extends Gestores {
         }
 
     }
+    //Hacer un promedio del promedio de todos los estudiantes
+    promedio_listas(){
+     if (this._gestor.length === 0) {
+        console.log("No hay estudiantes en la lista para calcular el promedio.");
+        return;
+    	}
+    let sumaPromedios = 0;
+    let contador_Estudiantes = 0;
+
+    for (let estudiante of this._gestor) {
+        let promedio_E = estudiante.promedio();
+        
+        if (typeof promedio_E === "number" && promedio_E!=0) {//Si no tienen calificacion su valor sera 0 por lo tanto no se añade al calculo de promedio para que no 
+        //influya en la media general
+            sumaPromedios += promedio_E;
+            contador_Estudiantes++;
+        }
+        
+     
+   }
+   if (contador_Estudiantes === 0) {
+        throw new Error("Ningún estudiante tiene promedios válidos para calcular.");
+   		 }	
+
+    let promedioGeneral = (sumaPromedios / contador_Estudiantes).toFixed(2);
+    return Number(promedioGeneral);
+}
 
 }
 
@@ -374,6 +405,8 @@ class GestorAs extends Gestores {
         }
 
     }
+    
+    
 
 
 }
@@ -468,9 +501,10 @@ try {
         console.log("5 - Eliminar estudiante de la lista");
         console.log("6 - Eliminar asignatura de la lista");
         console.log("7 - Calificar asignaturas y estudiante y su promedio");
-        console.log("8 - Fechas de matriculacion");
-        console.log("9 - Buscar");//buscar estudiantes o asignaturas
-        console.log("10 - Mostrar reporte");/* Muestra el reporte de todos los estudiantes y su información, tanto datos personales (nombre, edad y dirección) como calificaciones (asignaturas y promedio).*/
+        console.log("8 - Promedio de todos los estudiantes");
+        console.log("9 - Fechas de matriculacion");
+        console.log("10 - Buscar");//buscar estudiantes o asignaturas
+        console.log("11 - Mostrar reporte");/* Muestra el reporte de todos los estudiantes y su información, tanto datos personales (nombre, edad y dirección) como calificaciones (asignaturas y promedio).*/
         console.log("0- Salir");
 
 
@@ -663,7 +697,26 @@ try {
 
                 break;
             case 8:
-
+								console.log("Ahora se calculara el promedio de notas de todos los estudiantes");
+                
+                let promedio_total=listaEstudiantes.promedio_listas();
+                
+                console.log(`El promedio de todos los estudiantes será ${promedio_total}`);
+                
+                break;
+                case 9:
+                listaEstudiantes.listar_estudiantes();
+                let F_matricula=prompt("Dime el ID del estudiante del que quieras saber su fecha de matriculacion y fecha de desmatriculacion de sus asignaturas hasta el momento");
+                F_matricula=Number(F_matricula);
+                
+                if (isNaN(F_matricula) || F_matricula <= 0) {
+                    throw new Error("El ID debe ser un número positivo.");
+                    break;
+                }
+                let estudiante_fecha=listaEstudiantes.obtener_estudiante(F_matricula);
+                
+                console.log("Las asignaturas de las que se ha matriculado y desmatriculado hasta el momento son: ");
+               	console.log(estudiante_fecha.registros);
                 break;
             default:
                 console.log("No se ha seleccionado la opcion correcta, vuelve a intentarlo");
