@@ -84,7 +84,7 @@ class Estudiantes {
 
         this.#edad = N_edad;
         this.#direccion = N_direc;//N_direc sera una clase direccion con todos sus valores
-        this.#asignaturas = [];
+        this.#asignaturas = [];//{nombre: , nota: }
         this.#registros = [];
     }
 
@@ -123,7 +123,7 @@ class Estudiantes {
             const asignaturaObj = { nombre: asignatura.nombre, nota: asignatura.nota };
             this.#asignaturas.push(asignaturaObj); // Agrega la asignatura a la lista
             this.#registros.push({
-            		nombre:asignatura.nombre,
+                nombre: asignatura.nombre,
                 tipo: 'Matrícula', // Crea el campo `tipo` con el valor "Matrícula"
                 fecha: new Date() // Crea el campo `fecha` con la fecha y hora actual
             });
@@ -134,10 +134,10 @@ class Estudiantes {
     desmatricular(asignatura) {
         const indice = this.#asignaturas.findIndex(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase());//buscamos en el array una asignatura con el mismo nombre
         if (indice !== -1) {//si no es valor negativo la asignatura existe
-        		let nombre=asignatura.nombre;
+            let nombre = asignatura.nombre;
             this.#asignaturas.splice(indice, 1);// Elimina la asignatura de la lista
             this.#registros.push({
-            		nombre:nombre,
+                nombre: nombre,
                 tipo: 'Desmatriculación', // Crea el campo `tipo` con el valor "Desmatriculación"
                 fecha: new Date()
             }); // Crea el campo `fecha` con la fecha y hora actual
@@ -173,6 +173,11 @@ class Estudiantes {
         }
     }
 
+    asig_mostrar() {
+        for (let asig of this.#asignaturas) {
+            console.log(asig.nota);
+        }
+    }
     // Calcula el promedio de todas las calificaciones del estudiante.
     promedio() {
         if (this.#asignaturas.length === 0) {
@@ -213,7 +218,7 @@ class Asignaturas {
         this.#calificaciones = [];
     }
 
-    get nombreg() {
+    get nombre_A() {
         return this.nombre;
     }
 
@@ -246,7 +251,7 @@ class Asignaturas {
     }
 
 
-    mostrar() {//creamos este metodo para saber el indice de cada asignatura
+    mostrar() {//creamos este metodo para saber el indice de cada nota
         this.#calificaciones.forEach((valor, clave) => {
             console.log(`Posicion:${clave} , valor:${valor} `);
         });
@@ -320,6 +325,30 @@ class GestorEs extends Gestores {
         }
     }
 
+    listar_informes() {
+        for (let informe of this._gestor) {
+            console.log(informe.ToString());
+
+            console.log("Direccion:");
+            console.log("Calle: " + informe.direccion.calle);
+            console.log("Número: " + informe.direccion.numero);
+            console.log("Piso: " + informe.direccion.piso);
+            console.log("Código Postal: " + informe.direccion.codigoPostal);
+            console.log("Provincia: " + informe.direccion.provincia);
+            console.log("Localidad: " + informe.direccion.localidad);
+
+            console.log("Asignaturas");
+            console.log(informe.asignaturas);
+
+            console.log("Fechas de matriculacion y desmatriculacion");
+            console.log(informe.registros);
+
+            console.log("Promedio del estudiante");
+            console.log(informe.promedio());//arreglar
+        }
+    }
+
+
     obtener_estudiante(id) {//busca un estudiante en la lista por id
         let obtener = this._gestor.find(elemento => elemento.id === id);
         //find:devuelve el valor del primer elemento que cumpla la funcion definida
@@ -330,33 +359,45 @@ class GestorEs extends Gestores {
         }
 
     }
-    //Hacer un promedio del promedio de todos los estudiantes
-    promedio_listas(){
-     if (this._gestor.length === 0) {
-        console.log("No hay estudiantes en la lista para calcular el promedio.");
-        return;
-    	}
-    let sumaPromedios = 0;
-    let contador_Estudiantes = 0;
+    obtener_nombre_estudiante(nombre) {
+        let obtener = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
+        //includes: Se usa para verificar si el nombre parcial está contenido en el nombre completo del estudiante.
+        //filter() devuelve un array con todos los estudiantes que coincidan. Se podria haber utilizado find pero ese metodo solo devuelve un valor
+        if (obtener) {
+            return obtener.forEach(elemento => {
+                console.log(elemento.ToString());
+            });
 
-    for (let estudiante of this._gestor) {
-        let promedio_E = estudiante.promedio();
-        
-        if (typeof promedio_E === "number" && promedio_E!=0) {//Si no tienen calificacion su valor sera 0 por lo tanto no se añade al calculo de promedio para que no 
-        //influya en la media general
-            sumaPromedios += promedio_E;
-            contador_Estudiantes++;
+        } else {
+            throw new Error(`No se encontro ningún estudiante con el nombre ${nombre}`);
         }
-        
-     
-   }
-   if (contador_Estudiantes === 0) {
-        throw new Error("Ningún estudiante tiene promedios válidos para calcular.");
-   		 }	
+    }
 
-    let promedioGeneral = (sumaPromedios / contador_Estudiantes).toFixed(2);
-    return Number(promedioGeneral);
-}
+    //Hacer un promedio del promedio de todos los estudiantes
+    promedio_listas() {
+        if (this._gestor.length === 0) {
+            console.log("No hay estudiantes en la lista para calcular el promedio.");
+            return;
+        }
+        let sumaPromedios = 0;
+        let contador_Estudiantes = 0;
+
+        for (let estudiante of this._gestor) {
+            let promedio_E = estudiante.promedio();//El promedio devuelve la media de cada estudiante
+
+            if (typeof promedio_E === "number") {//SI no son tipo number entonces significa que no estarán todavia calificados y por eso no se añaden en el calculo
+
+                sumaPromedios += promedio_E;
+                contador_Estudiantes++;
+            }
+        }
+        if (contador_Estudiantes === 0) {
+            throw new Error("Ningún estudiante tiene promedios válidos para calcular.");
+        }
+
+        let promedioGeneral = (sumaPromedios / contador_Estudiantes).toFixed(2);
+        return Number(promedioGeneral);
+    }
 
 }
 
@@ -396,7 +437,7 @@ class GestorAs extends Gestores {
         }
     }
 
-    obtener_asignatura(nombre) {
+    obtener_asignatura(nombre) {//para que solo te devuelva una asignatura en concreto. Tiene que ser su nombre completo para que no haya errores. Esto es para metodos en concreto
         let obtener = this._gestor.find(elemento => elemento.nombre.toLowerCase() === nombre.toLowerCase());
         if (obtener) {//si encuentra algun valor
             return obtener;
@@ -405,8 +446,21 @@ class GestorAs extends Gestores {
         }
 
     }
-    
-    
+
+    obtener_muchas_asignaturas(nombre) {//te devuleve muchos resultados dependiendo de lo que le introduzcas
+        let obtener_As = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
+        //includes: Se usa para verificar si el nombre parcial está contenido en el nombre completo del estudiante.
+        //filter() devuelve un array con todos los estudiantes que coincidan. Se podria haber utilizado find pero ese metodo solo devuelve un valor
+        if (obtener_As) {
+            return obtener_As.forEach(elemento => {
+                console.log("La asignatura encontrada es " + elemento.ToString());
+            });
+        } else {
+            throw new Error(`No se encontro ningún estudiante con el nombre ${nombre}`);
+        }
+    }
+
+
 
 
 }
@@ -500,11 +554,12 @@ try {
         console.log("4 - Desmatricular estudiante");
         console.log("5 - Eliminar estudiante de la lista");
         console.log("6 - Eliminar asignatura de la lista");
-        console.log("7 - Calificar asignaturas y estudiante y su promedio");
-        console.log("8 - Promedio de todos los estudiantes");
-        console.log("9 - Fechas de matriculacion");
-        console.log("10 - Buscar");//buscar estudiantes o asignaturas
-        console.log("11 - Mostrar reporte");/* Muestra el reporte de todos los estudiantes y su información, tanto datos personales (nombre, edad y dirección) como calificaciones (asignaturas y promedio).*/
+        console.log("7 - Calificar asignaturas y estudiantes");
+        console.log("8 - Promedio de un estudaiante");
+        console.log("9 - Promedio de todos los estudiantes");
+        console.log("10 - Fechas de matriculacion");
+        console.log("11 - Buscar");//buscar estudiantes o asignaturas por coincidencia parcial
+        console.log("12 - Mostrar reporte");/* Muestra el reporte de todos los estudiantes y su información, tanto datos personales (nombre, edad y dirección) como calificaciones (asignaturas y promedio).*/
         console.log("0- Salir");
 
 
@@ -647,6 +702,11 @@ try {
                 console.log(`La asignatura ha sido eliminada correctamente.`);
                 listaAsignaturas.listar_asignaturas();
                 break;
+            /*
+        En el caso 7 se califican las asignaturas con las notas que un estudiante haya estado sacando y al final de todo se hace el promedio
+        de esas notas y se le asigna a esa asignatura.
+        Despues se pide indicar el estudiante al que se le asignara ese promedio de notas como su calificacion en esa asignatura
+        */
             case 7:
                 //se califican asignaturas y el promedio de esas notas seran la nota final del estudiantes
                 let nombre_asig = prompt("Introduce el nombre de la asignatura que desees calificar");
@@ -672,7 +732,7 @@ try {
                 id_Estudiante = Number(id_Estudiante);
                 let estudiante = listaEstudiantes.obtener_estudiante(id_Estudiante);
 
-                console.log(`Asignaturas en las que está matriculado ${estudiante.nombre}:`);
+                console.log(`Asignaturas en las que está matriculado ${estudiante.nombre}`);
                 estudiante.asignaturas.forEach((elemento, clave) => {
                     console.log(`${clave}. ${elemento.nombre}`);
                 });
@@ -680,14 +740,11 @@ try {
                 console.log(`El promedio ${nota_promedio_calificaciones} de la asignatura ${asignatura_N.nombre} será asignado al estudiante ${estudiante.nombre}`);
                 estudiante.agregar_calificacion(asignatura_N, nota_promedio_calificaciones);
 
-                console.log("Ahora calcularemos el promedio de todas las notas del estudiante elegido");
-                console.log(estudiante.asignaturas);
-                let promedio = estudiante.promedio();
 
-                console.log(`El promedio de notas del estudiante ${estudiante.nombre} es ${promedio}`);
 
-                //ahora eliminaremos las calificaciones que se han añadido a la asignatura elegida para que si se vuelve a este caso no se interpongan las 
-                //notas anteriores
+                //ahora eliminaremos las calificaciones que se han añadido a la asignatura elegida para que si se vuelve a este caso para añadir notas a
+                //la misma asignatura las notas de este estudiante no se interpongan las 
+                //notas del nuevo estudiante
                 for (let i = 0; i < asignatura_N.calificaciones.length; i++) {
                     asignatura_N.eliminar_calificacion(i);
                 }
@@ -696,27 +753,68 @@ try {
 
 
                 break;
+            //Se hace el promedio de las calificaciones de un estudiante
             case 8:
-								console.log("Ahora se calculara el promedio de notas de todos los estudiantes");
-                
-                let promedio_total=listaEstudiantes.promedio_listas();
-                
-                console.log(`El promedio de todos los estudiantes será ${promedio_total}`);
-                
-                break;
-                case 9:
+                // Listar estudiantes disponibles
                 listaEstudiantes.listar_estudiantes();
-                let F_matricula=prompt("Dime el ID del estudiante del que quieras saber su fecha de matriculacion y fecha de desmatriculacion de sus asignaturas hasta el momento");
-                F_matricula=Number(F_matricula);
-                
+                let promedio_Es = prompt("Introduce el ID del estudiante del cual deseas hacer su promedio: ");
+                promedio_Es = Number(promedio_Es);
+                let obtener_promedio = listaEstudiantes.obtener_estudiante(promedio_Es);
+
+                console.log("Ahora calcularemos el promedio de todas las notas del estudiante elegido");
+                console.log(obtener_promedio.asignaturas);//se muestran las asignaturas con sus notas
+                let promedio = obtener_promedio.promedio();//se calcula el promedio
+
+                console.log(`El promedio de notas del estudiante ${obtener_promedio.nombre} es ${promedio}`);
+
+                break;
+            case 9:
+                listaEstudiantes.gestor.forEach(elemento => {
+                    console.log(`Estudiante: ${elemento.nombre}, Promedio: ${elemento.promedio()}, Asignaturas: ${elemento.asig_mostrar()}`);
+                });
+
+                console.log("Ahora se calculara el promedio de notas de todos los estudiantes");
+
+                let promedio_total = listaEstudiantes.promedio_listas();
+
+                console.log(`El promedio de todos los estudiantes será ${promedio_total}`);
+
+                break;
+            case 10:
+                listaEstudiantes.listar_estudiantes();
+                let F_matricula = prompt("Dime el ID del estudiante del que quieras saber su fecha de matriculacion y fecha de desmatriculacion de sus asignaturas hasta el momento");
+                F_matricula = Number(F_matricula);
+
                 if (isNaN(F_matricula) || F_matricula <= 0) {
                     throw new Error("El ID debe ser un número positivo.");
                     break;
                 }
-                let estudiante_fecha=listaEstudiantes.obtener_estudiante(F_matricula);
-                
+                let estudiante_fecha = listaEstudiantes.obtener_estudiante(F_matricula);
+
                 console.log("Las asignaturas de las que se ha matriculado y desmatriculado hasta el momento son: ");
-               	console.log(estudiante_fecha.registros);
+                console.log(estudiante_fecha.registros);
+                break;
+
+            case 11:
+                let buscar = prompt("Si quieres buscar un estudiante marca 1 y si quieres buscar una asignatura marca 2: ");
+                buscar = Number(buscar);
+
+                if (buscar == 1) {
+                    listaEstudiantes.listar_estudiantes();
+                    let buscar_E = prompt("Dime el nombre del estudiante al que estas buscando");
+
+                    listaEstudiantes.obtener_nombre_estudiante(buscar_E);
+
+                } else if (buscar == 2) {
+                    listaAsignaturas.listar_asignaturas();
+                    let buscar_A = prompt("Dime el nombre de la asignatura que estas buscando");
+
+                    listaAsignaturas.obtener_muchas_asignaturas(buscar_A);
+                }
+
+                break;
+            case 12:
+                listaEstudiantes.listar_informes();
                 break;
             default:
                 console.log("No se ha seleccionado la opcion correcta, vuelve a intentarlo");
