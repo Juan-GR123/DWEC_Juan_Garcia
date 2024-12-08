@@ -1,4 +1,4 @@
-//Este proyexto esta disponible en mi github
+//Este proyecto esta disponible en mi github
 //El enlace es: https://github.com/Virtual-Truck/git_cliente/blob/main/entorno_cliente/prueba/codigo_DWEC/tareas/proyecto_1/correccion.js
 
 
