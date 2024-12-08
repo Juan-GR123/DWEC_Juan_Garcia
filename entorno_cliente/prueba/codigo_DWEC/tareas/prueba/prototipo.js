@@ -1,3 +1,6 @@
+//IMPORTANTE:
+//Esto es solo un prototipo de la carpeta proyecto_1
+
 //Todas las salidas serán por consola y todas las entradas por teclado
 //promt y console.log
 
