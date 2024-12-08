@@ -592,9 +592,9 @@ class GestorEs extends Gestores {
         let obtener = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
         //includes: Se usa para verificar si el nombre parcial está contenido en el nombre completo del estudiante.
         //filter() devuelve un array con todos los estudiantes que coincidan. Se podría haber utilizado find pero ese metodo solo devuelve un valor
-        if (obtener) {
+        if (obtener.length > 0) {
             return obtener.forEach(elemento => {
-                console.log(elemento.ToString());
+                console.log("El estudiante encontrado es " + elemento.ToString());
             });
 
         } else {
@@ -761,7 +761,7 @@ class GestorAs extends Gestores {
         let obtener_As = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
         //includes: Se usa para verificar si el nombre parcial está contenido en el nombre completo de la asignatura.
         //filter() devuelve un array con todas las asignaturas que coincidan. Se podría haber utilizado find pero ese método solo devuelve un valor.
-        if (obtener_As) {
+        if (obtener_As.length > 0) {
             return obtener_As.forEach(elemento => {
                 console.log("La asignatura encontrada es " + elemento.ToString());
             });
@@ -1244,6 +1244,9 @@ try {
                     let buscar_A = prompt("Dime el nombre de la asignatura que estas buscando");
 
                     listaAsignaturas.obtener_muchas_asignaturas(buscar_A);
+
+
+
                 }
 
                 break;
@@ -1252,6 +1255,7 @@ try {
             los estudiantes contenidos en listaEstudiantes. 
             */
             case 12:
+                console.log("A continuación se mostrarán los informes de cada uno de los estudiantes: ");
                 listaEstudiantes.listar_informes();
                 break;
 
