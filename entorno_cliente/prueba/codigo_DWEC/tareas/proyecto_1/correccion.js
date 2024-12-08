@@ -5,7 +5,7 @@
 //Todas las salidas serán por consola y todas las entradas por teclado
 //promt y console.log
 
-//Creamos una clase para saber la direccion de cada estudiante
+//Creamos una clase para saber la dirección de cada estudiante
 /*
 La clase Direccion tendrá los siguiente Atributos:
 #calle: Indicará la calle en la que pertenece
@@ -15,9 +15,9 @@ La clase Direccion tendrá los siguiente Atributos:
 #provincia: Indicará la provincia
 #localidad: Indicará la localidad de dicha provincia
 
-Por último, contará con un constructor el cual se encargará de que el codigo postal solo contenga 
-5 digitos y los getters de cada uno de sus atributos. También se contará con el metodo ToString() para 
-mostrar todos los atributos por pantalla
+Por último, contará con un constructor el cual se encargará de incializar los valores y de
+que el código postal solo contenga 5 digitos y los getters de cada uno de sus atributos. 
+También se contará con el método ToString() para mostrar todos los atributos por pantalla.
 */
 class Direccion {
     #calle;
@@ -63,7 +63,7 @@ class Direccion {
     }
 
     ToString() {
-        return this.#calle + " " + this.#numero + ", " + this.#piso + " - " + this.#codigo_postal + " " + this.#localidad + " (" + this.#provincia + ")";
+        return this.#calle + " " + this.#numero + " " + this.#piso + "  " + this.#codigo_postal + " " + this.#localidad + " " + this.#provincia + " ";
     }
 
 
