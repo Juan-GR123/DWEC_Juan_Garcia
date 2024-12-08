@@ -74,7 +74,7 @@ class Direccion {
 //Hacemos una clase que representará a los estudiantes
 /*
 La clase Estudiantes contará con los siguiente atributos:
-#id: El id se asignará automaticamente sin la necesidad de que el usuario lo introduzca
+#id: El id se asignará automáticamente sin la necesidad de que el usuario lo introduzca
 
 #nombre: El nombre indicará el nombre del estudiante
 
@@ -149,7 +149,7 @@ class Estudiantes {
     #asignaturas;//{nombre: , nota: }
     #registros;//{nombre: , tipo: , fecha:}
 
-    static numeros = [];//servira para almacenar en el constructor la id de cada estudiante
+    static numeros = [];//servirá para almacenar en el constructor la id de cada estudiante
 
     constructor(N_nombre, N_edad, N_direc) {
         let patron = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;//que contenga letras y espacios 1 o mas veces
@@ -562,7 +562,7 @@ class GestorEs extends Gestores {
             console.log("Calle: " + informe.direccion.calle);
             console.log("Número: " + informe.direccion.numero);
             console.log("Piso: " + informe.direccion.piso);
-            console.log("Código Postal: " + informe.direccion.codigoPostal);
+            console.log("Código Postal: " + informe.direccion.codigo_postal);
             console.log("Provincia: " + informe.direccion.provincia);
             console.log("Localidad: " + informe.direccion.localidad);
 
