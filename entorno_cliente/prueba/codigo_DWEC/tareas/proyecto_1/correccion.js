@@ -856,6 +856,7 @@ try {
 
     let pregunta = 0;
 
+    //Hacemos un do{}while() en el que si el valor es 0 salga del menu
     do {
 
 
