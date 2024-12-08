@@ -570,7 +570,7 @@ class GestorEs extends Gestores {
             console.log("Provincia: " + informe.direccion.provincia);
             console.log("Localidad: " + informe.direccion.localidad);
 
-            console.log("Asignaturas");
+            console.log("Asignaturas y calificaciones");
             console.log(informe.asignaturas);
 
             console.log("Fechas de matriculacion y desmatriculacion");
