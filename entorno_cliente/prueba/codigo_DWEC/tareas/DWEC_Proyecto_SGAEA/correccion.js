@@ -224,7 +224,7 @@ class Estudiantes {
         const indice = this.#asignaturas.findIndex(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase());//buscamos en el array una asignatura con el mismo nombre
         if (indice !== -1) {//si no es valor negativo la asignatura existe ya que se encuentra en alguna posicion del array
             let nombre = asignatura.nombre;
-            this.#asignaturas.splice(indice, 1);// Elimina la asignatura de la lista
+            this.#asignaturas.splice(indice, 1);// Elimina la asignatura de la lista ej:splice(lugar_de_eliminacion,numero_de_elemento_a_eliminar)
             this.#registros.push({
                 nombre: nombre,//Crea el campo `nombre` con el valor nombre de la asignatura
                 tipo: 'Desmatriculación', // Crea el campo `tipo` con el valor "Desmatriculación"
@@ -239,7 +239,7 @@ class Estudiantes {
     //registrar la fecha de matriculación o desmatriculación
 
     get registros() {
-        const resultado = []; // Creamos un array vacío para almacenar los resultados
+        const resultado = []; // Creamos una variable resultado que funcionará como un array vacío para almacenar los resultados
         this.#registros.forEach(registro => { // Recorremos el array registros con forEach
             const fecha = registro.fecha.toLocaleDateString('es-ES'); //convertimos la fecha que le hemos introducido a registros en la matriculacion y desmatriculacion en el horario español
             resultado.push(`${registro.nombre} - ${registro.tipo}: ${fecha}`); // Agregamos el resultado al array creado anteriormente
@@ -271,11 +271,11 @@ class Estudiantes {
         if (this.#asignaturas.length === 0) {
             return "No tiene asignaturas matriculadas";
         }
-        let promedioF = 0;
+        let promedioF = 0;//se crean dos variables
         let contadorNotas = 0;
-        for (let asig of this.#asignaturas) {
+        for (let asig of this.#asignaturas) {//se recorre el array asignaturas
             if (typeof asig.nota === 'number') {
-                promedioF += asig.nota;
+                promedioF += asig.nota;// si la nota es de tipo número se suma la nota de promedioF por la nueva nota para ir acumulando la suma de notas
                 contadorNotas++;
             }
         }
@@ -283,8 +283,8 @@ class Estudiantes {
             return 0; // Evitar dividir entre 0 si no hay notas válidas. Si no se hace da NaN
         }
 
-        return Number((promedioF / contadorNotas).toFixed(2)); // Redondea a 2 decimales.
-
+        return Number((promedioF / contadorNotas).toFixed(2)); // toFixed(2): Redondea a 2 decimales.
+        //se devuelve la suma de notas dividido entre el numero de notas
     }
 
 }
@@ -340,7 +340,7 @@ class Asignaturas {
         if (!patron.test(nombre1)) {
             throw new Error("Error solo pueden mostrase espacios o letras");
         } else {
-            this.nombre = nombre1;
+            this.nombre = nombre1;//se inicializa
         }
 
         this.#calificaciones = [];
