@@ -16,7 +16,9 @@ La clase Direccion tendrá los siguiente Atributos:
 #localidad: Indicará la localidad de dicha provincia
 
 Por último, contará con un constructor el cual se encargará de incializar los valores y de
-que el código postal solo contenga 5 digitos y los getters de cada uno de sus atributos. 
+que el código postal solo contenga 5 digitos y los getters de cada uno de sus atributos en caso de que
+se les necesite en algun momento.
+
 También se contará con el método ToString() para mostrar todos los atributos por pantalla.
 */
 class Direccion {
@@ -149,7 +151,7 @@ class Estudiantes {
     #asignaturas;//{nombre: , nota: }
     #registros;//{nombre: , tipo: , fecha:}
 
-    static numeros = [];//servirá para almacenar en el constructor la id de cada estudiante
+    static numeros = [];//Es estatico ya que servirá para almacenar en el constructor la id de cada estudiante
 
     constructor(N_nombre, N_edad, N_direc) {
         let patron = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;//que contenga letras y espacios 1 o mas veces
@@ -159,9 +161,10 @@ class Estudiantes {
             this.#nombre = N_nombre;
         }
 
-        let ID = 1;
+        let ID = 1;//inicializamos el id a 1
 
-        while (Estudiantes.numeros.includes(ID)) {
+        while (Estudiantes.numeros.includes(ID)) {//En caso de que el id actual se encuentre en el array
+            //se le sumará al id un valor para poder darle el nuevo valor a un nuevo estudiante
             ID++;
         }
         Estudiantes.numeros.push(ID);
@@ -189,7 +192,7 @@ class Estudiantes {
         return this.#direccion;
     }
 
-    //devolvera un array de cada asignatura
+    //devolverá un array de cada asignatura
     get asignaturas() {
         return [...this.#asignaturas];
     }
@@ -200,6 +203,7 @@ class Estudiantes {
     ToString() {
         return `${this.#id}: ${this.#nombre},  ${this.#edad}`;
     }
+
     matricular(asignatura) {
         // Comprobar si la asignatura ya está matriculada por nombre
         if (this.#asignaturas.find(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase())) {
@@ -232,7 +236,7 @@ class Estudiantes {
     }
 
 
-    //registrar la fecha de matriculacion o desmatriculacion
+    //registrar la fecha de matriculación o desmatriculación
 
     get registros() {
         const resultado = []; // Creamos un array vacío para almacenar los resultados
