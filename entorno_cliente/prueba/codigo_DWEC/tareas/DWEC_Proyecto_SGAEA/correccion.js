@@ -204,7 +204,7 @@ class Estudiantes {
         return `${this.#id}: ${this.#nombre},  ${this.#edad}`;
     }
 
-    matricular(asignatura) {
+    matricular(asignatura) {//introduces un objeto de la clase asignatura como parametro
         // Comprobar si la asignatura ya está matriculada por nombre
         if (this.#asignaturas.find(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase())) {
             throw new Error(`El estudiante ya está matriculado en ${asignatura.nombre}`);
@@ -255,6 +255,7 @@ class Estudiantes {
         }
 
         const asignaturaEncontrada = this.#asignaturas.find(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase());
+          //console.log(asignaturaEncontrada); devuelve un objeto {nombre:, nota:}
         //Con find recorre todo el array asignaturas y busca la coincidencia de nombre
         if (asignaturaEncontrada) {
             asignaturaEncontrada.nota = nota;
