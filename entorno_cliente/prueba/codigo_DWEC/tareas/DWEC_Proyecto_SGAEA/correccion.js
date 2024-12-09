@@ -958,11 +958,11 @@ try {
                 }
 
                 let N_asignatura = new Asignaturas(asignatura.trim());//nueva asignatura
-                //no se porque sale \&quot;
+                
 
                 listaAsignaturas.agregar_asignatura(N_asignatura);
 
-                console.log(`Asignatura "${asignatura}" creada y agregada con éxito.`);
+                console.log(`Asignatura ${asignatura} creada y agregada con éxito.`);
                 listaAsignaturas.listar_asignaturas(); // Mostrar todas las asignaturas
 
 
