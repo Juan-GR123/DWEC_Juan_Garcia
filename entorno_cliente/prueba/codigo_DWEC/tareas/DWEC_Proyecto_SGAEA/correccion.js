@@ -255,7 +255,7 @@ class Estudiantes {
         }
 
         const asignaturaEncontrada = this.#asignaturas.find(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase());
-          //console.log(asignaturaEncontrada); devuelve un objeto {nombre:, nota:}
+        //console.log(asignaturaEncontrada); devuelve un objeto {nombre:, nota:}
         //Con find recorre todo el array asignaturas y busca la coincidencia de nombre
         if (asignaturaEncontrada) {
             asignaturaEncontrada.nota = nota;
@@ -531,7 +531,7 @@ class GestorEs extends Gestores {
         for (let estudiante of elementos) {
 
             this.agregar_estudiante(estudiante);//agregamos a los estudiantes necesarios para que se puedan
-                                                //añadir automáticamente en el constructor
+            //añadir automáticamente en el constructor
 
         }
 
@@ -959,7 +959,7 @@ try {
                 }
 
                 let N_asignatura = new Asignaturas(asignatura.trim());//nueva asignatura
-                
+
 
                 listaAsignaturas.agregar_asignatura(N_asignatura);
 
@@ -1076,7 +1076,7 @@ try {
 
                 if (typeof elim_asig != "string" || elim_asig.trim() === "") {
                     throw new Error("Error: La asignatura no es valida");
-                   //break;
+                    //break;
                 }
 
 
