@@ -264,7 +264,7 @@ class Estudiantes {
         }
     }
 
-    asig_mostrar() {
+    asig_mostrar() {//muestra las asignaturas en las que esta matriculado el estudiante
         console.log(this.#asignaturas);
     }
     // Calcula el promedio de todas las calificaciones del estudiante.
@@ -384,7 +384,7 @@ class Asignaturas {
         this.#calificaciones.forEach((valor, clave) => {
             console.log(`Posicion:${clave} , valor:${valor} `);
         });
-    }
+    }//probar este método
 
     //calcular el promedio de las calificaciones de cada asignatura.
     calcular_promedio() {
@@ -612,7 +612,7 @@ class GestorEs extends Gestores {
     promedio_listas() {
         if (this._gestor.length === 0) {
             console.log("No hay estudiantes en la lista para calcular el promedio.");
-            return;
+            return 0;
         }
         let sumaPromedios = 0;
         let contador_Estudiantes = 0;
