@@ -319,10 +319,6 @@ tambien se contará con los getters de nombre y de calificaciones y con los sigu
 
         En otro caso se eliminará la calificación con el método splice()
 
-    mostrar():
-        Este método recorrera todo el array #calificaciones y mostrará la posición en el array de las calificaciones
-        y sus valores
-
     calcular_promedio():
         Si el array no tiene longitud lanza un error. 
 
@@ -379,12 +375,6 @@ class Asignaturas {
         //ejemplo: splice(posicion,numero_de_eliminaciones)
     }
 
-
-    mostrar() {//creamos este metodo para saber el indice de cada nota
-        this.#calificaciones.forEach((valor, clave) => {
-            console.log(`Posicion:${clave} , valor:${valor} `);
-        });
-    }//probar este método
 
     //calcular el promedio de las calificaciones de cada asignatura.
     calcular_promedio() {
@@ -772,7 +762,7 @@ class GestorAs extends Gestores {
                 console.log("La asignatura encontrada es " + elemento.toString());
             });
         } else {
-            throw new Error(`No se encontro ninguna asignatura con el nombre ${nombre}`);
+            throw new Error(`No se encontró ninguna asignatura con el nombre ${nombre}`);
         }
     }
 
