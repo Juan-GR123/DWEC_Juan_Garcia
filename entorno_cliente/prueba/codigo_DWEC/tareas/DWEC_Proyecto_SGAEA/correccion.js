@@ -19,7 +19,7 @@ Por último, contará con un constructor el cual se encargará de incializar los
 que el código postal solo contenga 5 digitos y los getters de cada uno de sus atributos en caso de que
 se les necesite en algun momento.
 
-También se contará con el método ToString() para mostrar todos los atributos por pantalla.
+También se contará con el método toString() para mostrar todos los atributos por pantalla.
 */
 class Direccion {
     #calle;
@@ -64,7 +64,7 @@ class Direccion {
         return this.#localidad;
     }
 
-    ToString() {
+    toString() {
         return this.#calle + " " + this.#numero + " " + this.#piso + "  " + this.#codigo_postal + " " + this.#localidad + " " + this.#provincia + " ";
     }
 
@@ -98,7 +98,7 @@ espacios y de asignar los valores introducidos por el usuario a sus atributos co
 También se dispondran de los getters necesarios en caso de necesitar un atributo en concreto y de los
 siguiente metodos:
 
-    ToString(): Se mostrará por pantalla el id del estudiante y su nombre y edad
+    toString(): Se mostrará por pantalla el id del estudiante y su nombre y edad
 
     matricular(asignatura): 
         En el método matricular, se introducirá un nombre de una asignatura indicada
@@ -200,7 +200,7 @@ class Estudiantes {
 
 
     //mostramos por pantalla el id del estudiante y su nombre y edad
-    ToString() {
+    toString() {
         return `${this.#id}: ${this.#nombre},  ${this.#edad}`;
     }
 
@@ -302,7 +302,7 @@ una asignatura concreta.
 Aparte del contructor que se ocupara de que el nombre solo contenga letras, numeros romanos y espacios
 tambien se contará con los getters de nombre y de calificaciones y con los siguientes metodos:
 
-    ToString(): 
+    toString(): 
         Se mostrará por pantalla el nombre de la asignatura
 
     agregar_calificacion(nota):
@@ -355,7 +355,7 @@ class Asignaturas {
         return [...this.#calificaciones];
     }
 
-    ToString() {
+    toString() {
         return `Asignatura: ${this.nombre}`;
     }
 
@@ -411,7 +411,7 @@ Ha sido creado como un atributo protegido para que las subclases tambien puedan 
 Además del costructor que se encargará de instanciar el array _gestores se contará en esta clase con
 un getter de gestor y con los metodos:
 
-    ToString():
+    toString():
     Devolverá la longitud del array _gestor
 */
 
@@ -426,7 +426,7 @@ class Gestores {
         return [...this._gestor];
     }
 
-    ToString() {
+    toString() {
         return `Lista con ${this._gestor.length} elementos.`;
     }
 
@@ -441,7 +441,7 @@ class Gestores {
     Sin embargo, su costructor será diferente ya que ademas de heredar los atributos de su clase madre
     con super() tambien se recorrerá todo el array y se realizará el método agregar_estudiante con 
     todos los elementos del array _gestor para que se puedan guardan en el array los estudiantes 
-    automaticamente y no se tengan que estar agregando al array uno por uno
+    automáticamente y no se tengan que estar agregando al array uno por uno
 
     Sin este método en el constructor no se podrían añadir estudiantes al inicializar la clase.
 
@@ -471,7 +471,7 @@ class Gestores {
 
     listar_estudiantes():
         Se recorrerá todo el array _gestores y los elementos que posea, en este caso estudiantes,
-        se mostrarán en pantalla mediante el metodo ToString de la clase Estudiantes
+        se mostrarán en pantalla mediante el metodo toString de la clase Estudiantes
 
     listar_informes():
 
@@ -516,8 +516,8 @@ class Gestores {
         de estudiantes existentes y entonces se obtendrá la media total de las notas de todos los estudiantes
 
     
-    ToString():
-        El metodo ToString servirá como una sobrecarga del metodo ToString de la clase Gestores y este 
+    toString():
+        El metodo toString servirá como una sobrecarga del metodo toString de la clase Gestores y este 
         mostrará la longitud del array _gestor pero indicando que la lista es una lista de estudiantes.
 
 */
@@ -530,7 +530,8 @@ class GestorEs extends Gestores {
 
         for (let estudiante of elementos) {
 
-            this.agregar_estudiante(estudiante);//agregamos a los estudiantes necesarios
+            this.agregar_estudiante(estudiante);//agregamos a los estudiantes necesarios para que se puedan
+                                                //añadir automáticamente en el constructor
 
         }
 
@@ -555,13 +556,13 @@ class GestorEs extends Gestores {
 
     listar_estudiantes() {//da una lista completa de cada estudiante
         for (let persona of this._gestor) {
-            console.log(persona.ToString());
+            console.log(persona.toString());//toString: método de estudiante
         }
     }
 
     listar_informes() {
         for (let informe of this._gestor) {
-            console.log(informe.ToString());
+            console.log(informe.toString());
 
             console.log("Direccion:");
             console.log("Calle: " + informe.direccion.calle);
@@ -599,7 +600,7 @@ class GestorEs extends Gestores {
         //filter() devuelve un array con todos los estudiantes que coincidan. Se podría haber utilizado find pero ese metodo solo devuelve un valor
         if (obtener.length > 0) {
             return obtener.forEach(elemento => {
-                console.log("El estudiante encontrado es " + elemento.ToString());
+                console.log("El estudiante encontrado es " + elemento.toString());
             });
 
         } else {
@@ -633,7 +634,7 @@ class GestorEs extends Gestores {
         return Number(promedioGeneral);
     }
 
-    ToString() {//sobrecarga
+    toString() {//sobrecarga
         return `Lista con ${this._gestor.length} estudiantes.`;
     }
 
@@ -683,7 +684,7 @@ class GestorEs extends Gestores {
     listar_asignaturas():
 
         Se recorrerá todo el array _gestores y los elementos que posea, en este caso asignaturas,
-        se mostrarán en pantalla mediante el metodo ToString de la clase Asignaturas, el cual
+        se mostrarán en pantalla mediante el metodo toString de la clase Asignaturas, el cual
         mostrará el nombre de cada asignatura.
 
     obtener_asignatura(nombre):
@@ -709,8 +710,8 @@ class GestorEs extends Gestores {
         Así este método, al contrario que el anterior, devolverá multiples resultados en vez de solamente
         una coincidencía.
 
-    ToString():
-        El método ToString servirá como una sobrecarga del metodo ToString de la clase Gestores y este 
+    toString():
+        El método toString servirá como una sobrecarga del metodo toString de la clase Gestores y este 
         mostrará la longitud del array _gestor pero indicando que la lista es una lista de asignaturas.
 
 
@@ -747,7 +748,7 @@ class GestorAs extends Gestores {
 
     listar_asignaturas() {
         for (let asignatura of this._gestor) {
-            console.log(asignatura.ToString());
+            console.log(asignatura.toString());
         }
     }
 
@@ -768,14 +769,14 @@ class GestorAs extends Gestores {
         //filter() devuelve un array con todas las asignaturas que coincidan. Se podría haber utilizado find pero ese método solo devuelve un valor.
         if (obtener_As.length > 0) {
             return obtener_As.forEach(elemento => {
-                console.log("La asignatura encontrada es " + elemento.ToString());
+                console.log("La asignatura encontrada es " + elemento.toString());
             });
         } else {
             throw new Error(`No se encontro ningún estudiante con el nombre ${nombre}`);
         }
     }
 
-    ToString() {//sobrecarga
+    toString() {//sobrecarga
         return `Lista con ${this._gestor.length} Asignaturas`;
     }
 
@@ -921,7 +922,7 @@ try {
 
                 if (calle === null || numero === null || piso === null || codigo_postal === null || provincia === null || localidad === null) {
                     throw new Error("Los datos no se han introducido correctamente, vuelve a intentarlo");
-                    break;
+                    //break;
                 }
 
                 let nuevaDireccion = new Direccion(calle, numero, piso, codigo_postal, provincia, localidad);
@@ -954,7 +955,7 @@ try {
 
                 if (typeof asignatura != "string" || asignatura.trim() === "") {
                     throw new Error("Error: La asignatura no es valida");
-                    break;
+                    //break;
                 }
 
                 let N_asignatura = new Asignaturas(asignatura.trim());//nueva asignatura
@@ -1049,7 +1050,7 @@ try {
 
                 if (isNaN(elim_estu) || elim_estu <= 0) {
                     throw new Error("El ID debe ser un número positivo.");
-                    break;
+                    //break;
                 }
 
                 //let obtener_E = listaEstudiantes.obtener_estudiante(elim_estu);
@@ -1075,7 +1076,7 @@ try {
 
                 if (typeof elim_asig != "string" || elim_asig.trim() === "") {
                     throw new Error("Error: La asignatura no es valida");
-                    break;
+                   //break;
                 }
 
 
@@ -1189,7 +1190,7 @@ try {
                     console.log(`Estudiante: ${elemento.nombre}, Promedio: ${elemento.promedio()}, Asignaturas: ${elemento.asig_mostrar()}`);
                 });
 
-                console.log("Ahora se calculara el promedio de notas de todos los estudiantes");
+                console.log("Ahora se calculará el promedio de notas de todos los estudiantes");
 
                 let promedio_total = listaEstudiantes.promedio_listas();
 
@@ -1214,7 +1215,7 @@ try {
 
                 if (isNaN(F_matricula) || F_matricula <= 0) {
                     throw new Error("El ID debe ser un número positivo.");
-                    break;
+                    //break;
                 }
                 let estudiante_fecha = listaEstudiantes.obtener_estudiante(F_matricula);
 
