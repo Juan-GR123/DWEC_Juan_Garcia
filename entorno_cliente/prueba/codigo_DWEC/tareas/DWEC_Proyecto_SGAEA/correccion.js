@@ -355,8 +355,6 @@ class Asignaturas {
         return `Asignatura: ${this.nombre}`;
     }
 
-
-
     //agrega la calificación a la asignatura elegida
     agregar_calificacion(nota) {
         if ((nota >= 0 && nota <= 10)) {
