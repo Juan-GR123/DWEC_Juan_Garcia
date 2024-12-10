@@ -772,7 +772,7 @@ class GestorAs extends Gestores {
                 console.log("La asignatura encontrada es " + elemento.toString());
             });
         } else {
-            throw new Error(`No se encontro ningún estudiante con el nombre ${nombre}`);
+            throw new Error(`No se encontro ninguna asignatura con el nombre ${nombre}`);
         }
     }
 
