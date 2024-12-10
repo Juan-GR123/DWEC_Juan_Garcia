@@ -781,6 +781,7 @@ try {
     const listaAsignaturas = new GestorAs();//inicializamos un objeto de la clase GestorAs que actuará como un array de asignaturas
     let listaDirecciones = [];//inicializamos un array para guardar las direcciones da cada estuadiante
 
+    //inicializamos una serie de valores que actuarán como valores por defecto para nuestros casos
     listaDirecciones.push(new Direccion("Calle pez", 5, "6ºA", 29005, "Malaga", "Malaga"));
     listaDirecciones.push(new Direccion("Calle Dolores", 10, "7ºC", 18210, "Granada", "Peligros"));
     listaDirecciones.push(new Direccion("Calle Sierpes ", 20, "10ºB", 41004., "Sevilla", "Sevilla"));
