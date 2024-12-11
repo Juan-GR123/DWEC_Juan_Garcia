@@ -151,7 +151,7 @@ class Estudiantes {
     #asignaturas;//{nombre: , nota: }
     #registros;//{nombre: , tipo: , fecha:}
 
-    static numeros = [];//Es estatico ya que servirá para almacenar en el constructor la id de cada estudiante
+    static numeros = [];//Es estático ya que servirá para almacenar en el constructor la id de cada estudiante
 
     constructor(N_nombre, N_edad, N_direc) {
         let patron = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;//que contenga letras y espacios 1 o mas veces
