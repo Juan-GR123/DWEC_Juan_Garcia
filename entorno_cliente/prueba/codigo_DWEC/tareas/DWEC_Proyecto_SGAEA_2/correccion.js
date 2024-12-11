@@ -758,7 +758,7 @@ class GestorAs extends Gestores {
         // Itera sobre los estudiantes y elimina la asignatura de ellos
         listaEstudiantes.gestor.forEach(estudiante => {
             // Busca si el estudiante está matriculado en la asignatura y la desmatricula
-            const asignatura = { nombre: nombre }; // Crea un objeto básico con el nombre de la asignatura
+            let asignatura = { nombre: nombre }; // Crea un objeto básico con el nombre de la asignatura
             estudiante.desmatricular(asignatura);
         });
 
@@ -1153,7 +1153,7 @@ try {
                 if (asignatura_N != false) {
                     let continuar = "";
                     let nota = 0;
-                    let calificacion_compr
+                    let calificacion_compr = null;
                     do {
                         nota = prompt("Introduce la nota de la asignatura a calificar");
                         nota = Number(nota);
