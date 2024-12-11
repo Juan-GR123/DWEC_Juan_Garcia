@@ -251,17 +251,22 @@ class Estudiantes {
     agregar_calificacion(asignatura, nota) {
         // Validar que la nota sea un número válido
         if (typeof nota != 'number' || nota < 0 || nota > 10) {
-            throw new Error('La nota debe ser un número entre 0 y 10.');
+            console.log('La nota debe ser un número entre 0 y 10.');
+            return false;
+        } else {
+            const asignaturaEncontrada = this.#asignaturas.find(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase());
+            //console.log(asignaturaEncontrada); devuelve un objeto {nombre:, nota:}
+            //Con find recorre todo el array asignaturas y busca la coincidencia de nombre
+            if (asignaturaEncontrada) {
+                asignaturaEncontrada.nota = nota;
+                return true;
+            } else {
+                console.log(`El estudiante no está matriculado en la asignatura ${asignatura.nombre.toLowerCase()}`);
+                return false;
+            }
         }
 
-        const asignaturaEncontrada = this.#asignaturas.find(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase());
-        //console.log(asignaturaEncontrada); devuelve un objeto {nombre:, nota:}
-        //Con find recorre todo el array asignaturas y busca la coincidencia de nombre
-        if (asignaturaEncontrada) {
-            asignaturaEncontrada.nota = nota;
-        } else {
-            console.log(`El estudiante no está matriculado en la asignatura ${asignatura.nombre.toLowerCase()}`);
-        }
+
     }
 
     asig_mostrar() {//muestra las asignaturas en las que esta matriculado el estudiante
@@ -270,7 +275,7 @@ class Estudiantes {
     // Calcula el promedio de todas las calificaciones del estudiante.
     promedio() {
         if (this.#asignaturas.length === 0) {
-            return "No tiene asignaturas matriculadas";
+            return 0;
         }
         let promedioF = 0;//se crean dos variables
         let contadorNotas = 0;
@@ -360,25 +365,31 @@ class Asignaturas {
     agregar_calificacion(nota) {
         if ((nota >= 0 && nota <= 10)) {
             this.#calificaciones.push(nota);
+            return true;
         } else {
-            throw new Error("La nota " + nota + " no es valida");
+            console.log("La nota " + nota + " no es valida");
+            return false;
         }
     }
 
     //Eliminar la calificación de la posición elegida 
     eliminar_calificacion(indice) {
         if (indice < 0 || indice >= this.#calificaciones.length) {
-            throw new Error("Índice fuera de rango.");
+            console.log("Índice fuera de rango.");
+            return false;
+        } else {
+            this.#calificaciones.splice(indice, 1);//splice es para eliminar o reemplazar un numero especifico de elementos en una posicion concreta. 
+            //ejemplo: splice(posicion,numero_de_eliminaciones)
+            return true;
         }
-        this.#calificaciones.splice(indice, 1);//splice es para eliminar o reemplazar un numero especifico de elementos en una posicion concreta. 
-        //ejemplo: splice(posicion,numero_de_eliminaciones)
+
     }
 
 
     //calcular el promedio de las calificaciones de cada asignatura.
     calcular_promedio() {
         if (this.#calificaciones.length === 0) {
-            return "No tiene calificaciones";
+            return 0;
         }
         let suma = 0;
         for (let calificacion of this.#calificaciones) {
@@ -528,7 +539,7 @@ class GestorEs extends Gestores {
 
     agregar_estudiante(estudiante) {//agrega un estudiante a la lista
         if (this._gestor.find(elemento => elemento.id === estudiante.id)) {//si se introduce un id que ya exista entonces no se podrá agregar al estudiante
-            throw new Error("Ya existe el estudiante.");
+            return "Ya existe el estudiante.";
 
         }
         this._gestor.push(estudiante);
@@ -538,9 +549,13 @@ class GestorEs extends Gestores {
         let eliminar = this._gestor.findIndex(elemento => elemento.id === id);
         //findIndex:devuelve el indice del primer elemento que cumpla la funcion definida
         if (eliminar === -1) {
-            throw new Error(`No se encontró ningún estudiante con ID ${id}.`);
+            console.log(`No se encontró ningún estudiante con ID ${id}.`);
+            return false;
+        } else {
+            this._gestor.splice(eliminar, 1);
+            return true;
         }
-        this._gestor.splice(eliminar, 1);
+
     }
 
     listar_estudiantes() {//da una lista completa de cada estudiante
@@ -733,6 +748,7 @@ class GestorAs extends Gestores {
         let eliminar = this._gestor.findIndex(elemento => elemento.nombre.toLowerCase() === nombre.toLowerCase());
         if (eliminar === -1) {
             console.log(`No se encontró ningúna asignatura con nombre ${nombre}.`);
+            return false;
         }
         this._gestor.splice(eliminar, 1);
         // Itera sobre los estudiantes y elimina la asignatura de ellos
@@ -742,7 +758,8 @@ class GestorAs extends Gestores {
             estudiante.desmatricular(asignatura);
         });
 
-        console.log(`La asignatura ${nombre} ha sido eliminada del gestor y de todos los estudiantes.`);
+        console.log(`La asignatura ${nombre} ha sido eliminada de la lista y de todos los estudiantes.`);
+        return true;
     } //Elimina una asignatura por nombre.
 
     listar_asignaturas() {
@@ -884,7 +901,7 @@ try {
         console.log("10 - Fechas de matriculacion");
         console.log("11 - Buscar");//buscar estudiantes o asignaturas por coincidencia parcial
         console.log("12 - Mostrar reporte");/* Muestra el reporte de todos los estudiantes y su información, tanto datos personales (nombre, edad y dirección) como calificaciones (asignaturas y promedio).*/
-        console.log("0- Salir");
+        console.log("13 - Salir");
 
 
 
@@ -892,13 +909,6 @@ try {
         pregunta = Number(pregunta);
 
         switch (pregunta) {
-            /*
-            En caso de que el usuario quiera salir del menú entonces solo tendrá que marcar 0 en la consola para activar está opción
-            */
-            case 0:
-                console.log("Adios");
-                break;
-
             /*
             Este caso se encargará de la creación de un estudiante y de agregarlo a la listaEstudiantes
             gracias al método agregar_estudiante.
@@ -914,7 +924,7 @@ try {
                 edad = Number(edad);
 
                 if (typeof edad != 'number' || edad <= 0) {
-                    console.log("La edad debe ser un número positivo.");
+                    console.log("La edad debe ser un número positivo.Vuelve a intentarlo");
                     break;
                 }
 
@@ -1072,10 +1082,13 @@ try {
 
                 //let obtener_E = listaEstudiantes.obtener_estudiante(elim_estu);
 
-                listaEstudiantes.eliminar_estudiante(elim_estu);//si el estudiante existe, entonces se elimina indicando su id
+                let comprobacion = listaEstudiantes.eliminar_estudiante(elim_estu);//si el estudiante existe, entonces se elimina indicando su id
 
-                console.log(`El estudiante con ID ${elim_estu} ha sido eliminado correctamente.`);
-                listaEstudiantes.listar_estudiantes();
+                if (comprobacion != false) {
+                    console.log(`El estudiante con ID ${elim_estu} ha sido eliminado correctamente.`);
+                    listaEstudiantes.listar_estudiantes();
+                }
+
 
                 break;
             /*
@@ -1097,10 +1110,13 @@ try {
                 }
 
 
-                listaAsignaturas.eliminar_asignatura(elim_asig, listaEstudiantes);
+                let comprobacion2 = listaAsignaturas.eliminar_asignatura(elim_asig, listaEstudiantes);
 
-                console.log(`La asignatura ha sido eliminada correctamente.`);
-                listaAsignaturas.listar_asignaturas();
+                if (comprobacion2 != false) {
+                    console.log(`La asignatura ha sido eliminada correctamente.`);
+                    listaAsignaturas.listar_asignaturas();
+                }
+
 
                 break;
             /*
@@ -1129,33 +1145,40 @@ try {
                 if (asignatura_N != false) {
                     let continuar = "";
                     let nota = 0;
+                    let calificacion_compr
                     do {
                         nota = prompt("Introduce la nota de la asignatura a calificar");
                         nota = Number(nota);
-                        asignatura_N.agregar_calificacion(nota);
-                        continuar = prompt("Quieres seguir agregando calificaciones a la asignatura? si/no");
-                        //Las validaciones ya las hace el metodo
+                        calificacion_compr = asignatura_N.agregar_calificacion(nota);
+                        if (calificacion_compr == true) {
+                            continuar = prompt("Quieres seguir agregando calificaciones a la asignatura? si/no");
+                        } else {
+                            continuar = "no";
+                        }
                     } while (continuar.toLowerCase() != "no");
 
-                    console.log("calculamos el promedio de las calificaciones de la asignatura elegida");
-                    let nota_promedio_calificaciones = asignatura_N.calcular_promedio();
+                    if (calificacion_compr == true) {
+                        console.log("calculamos el promedio de las calificaciones de la asignatura elegida");
+                        let nota_promedio_calificaciones = asignatura_N.calcular_promedio();
 
 
-                    // Listar estudiantes disponibles
-                    listaEstudiantes.listar_estudiantes();
-                    let id_Estudiante = prompt("Ahora, introduce el ID del estudiante que deseas calificar con el promedio de esas calificaciones:");
-                    id_Estudiante = Number(id_Estudiante);
-                    let estudiante = listaEstudiantes.obtener_estudiante(id_Estudiante);
+                        // Listar estudiantes disponibles
+                        listaEstudiantes.listar_estudiantes();
+                        let id_Estudiante = prompt("Ahora, introduce el ID del estudiante que deseas calificar con el promedio de esas calificaciones:");
+                        id_Estudiante = Number(id_Estudiante);
+                        let estudiante = listaEstudiantes.obtener_estudiante(id_Estudiante);
 
-                    if (estudiante != false) {
-                        console.log(`Asignaturas en las que está matriculado ${estudiante.nombre}`);
-                        estudiante.asignaturas.forEach((elemento, clave) => {
-                            console.log(`${clave}. ${elemento.nombre}`);
-                        });
+                        if (estudiante != false) {
+                            console.log(`Asignaturas en las que está matriculado ${estudiante.nombre}`);
+                            estudiante.asignaturas.forEach((elemento, clave) => {
+                                console.log(`${clave}. ${elemento.nombre}`);
+                            });
 
-                        console.log(`El promedio ${nota_promedio_calificaciones} de la asignatura ${asignatura_N.nombre} será asignado al estudiante ${estudiante.nombre}`);
-                        estudiante.agregar_calificacion(asignatura_N, nota_promedio_calificaciones);
+                            console.log(`El promedio ${nota_promedio_calificaciones} de la asignatura ${asignatura_N.nombre} será asignado al estudiante ${estudiante.nombre}`);
+                            estudiante.agregar_calificacion(asignatura_N, nota_promedio_calificaciones);
+                        }
                     }
+
 
 
 
@@ -1167,7 +1190,7 @@ try {
                         asignatura_N.eliminar_calificacion(i);
                     }
 
-                    console.log("Operación exitosa");
+                    console.log("Operación terminada");
                 }
 
 
@@ -1194,9 +1217,8 @@ try {
 
                 if (obtener_promedio != false) {
                     console.log("Ahora calcularemos el promedio de todas las notas del estudiante elegido");
-                    console.log(obtener_promedio.asignaturas);//se muestran las asignaturas con sus notas
                     let promedio = obtener_promedio.promedio();//se calcula el promedio
-
+                    console.log(obtener_promedio.asignaturas);//se muestran las asignaturas con sus notas
                     console.log(`El promedio de notas del estudiante ${obtener_promedio.nombre} es ${promedio}`);
                 }
 
@@ -1296,6 +1318,12 @@ try {
                 console.log("A continuación se mostrarán los informes de cada uno de los estudiantes: ");
                 listaEstudiantes.listar_informes();
                 break;
+            /*
+            En caso de que el usuario quiera salir del menú entonces solo tendrá que marcar 13 en la consola para activar está opción
+            */
+            case 13:
+                console.log("Adios");
+                break;
 
             default:
                 console.log("No se ha seleccionado la opcion correcta, vuelve a intentarlo");
@@ -1303,7 +1331,7 @@ try {
         }
 
 
-    } while (pregunta != 0);
+    } while (pregunta != 13);
 
 } catch (error) {
     console.error(error.message);
