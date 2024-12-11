@@ -201,7 +201,7 @@ class Estudiantes {
 
     //mostramos por pantalla el id del estudiante y su nombre y edad
     toString() {
-        return `${this.#id}: ${this.#nombre},  ${this.#edad}`;
+        return `${this.#id}: ${this.#nombre},  ${this.#edad}, ${this.#direccion}`;
     }
 
     matricular(asignatura) {//introduces un objeto de la clase asignatura como parametro
