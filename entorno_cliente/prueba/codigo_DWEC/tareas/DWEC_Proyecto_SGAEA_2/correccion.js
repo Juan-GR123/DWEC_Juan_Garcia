@@ -121,7 +121,7 @@ siguiente metodos:
         Es este método se introducirá como parametros un objeto de la clase Asignatura y una nota que se 
         quiera dar a esa asignatura para el estudiante.
 
-        Si la nota es mayor que 10 o menor que 0 o si no es del tipo 'number' entonces se lanzará un error.
+        Si la nota es mayor que 10 o menor que 0 o si no es del tipo 'number' entonces se mostrara un error.
 
         En caso de cumplirse las condiciones anteriores se buscará en el array asignaturas una asignatura
         con el nombre de la asignatura introducida y en caso de encontrarse se le asignará a la asignatura del 
@@ -208,6 +208,7 @@ class Estudiantes {
         // Comprobar si la asignatura ya está matriculada por nombre
         if (this.#asignaturas.find(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase())) {
             console.log(`El estudiante ya está matriculado en ${asignatura.nombre}`);
+            return false;
         } else {
             const asignaturaObj = { nombre: asignatura.nombre, nota: asignatura.nota };
             this.#asignaturas.push(asignaturaObj); // Agrega la asignatura a la lista
@@ -216,6 +217,7 @@ class Estudiantes {
                 tipo: 'Matrícula', // Crea el campo `tipo` con el valor "Matrícula"
                 fecha: new Date() // Crea el campo `fecha` con la fecha y hora actual
             });
+            return true;
         }
     }
 
@@ -230,8 +232,10 @@ class Estudiantes {
                 tipo: 'Desmatriculación', // Crea el campo `tipo` con el valor "Desmatriculación"
                 fecha: new Date()
             }); // Crea el campo `fecha` con la fecha y hora actual
+            return true;
         } else {
             console.log(`El estudiante no está matriculado en ${asignatura.nombre.toLowerCase()}`);
+            return false;
         }
     }
 
@@ -1009,9 +1013,11 @@ try {
                     //Buscamos el nombre de la asignatura en el array que hemos creado de Asignaturas
                     let encontrarA = listaAsignaturas.obtener_asignatura(asig);
                     if (encontrarA != false) {
-                        encontrarE.matricular(encontrarA);
-                        console.log(`${encontrarE.nombre} ha sido matriculado en ${encontrarA.nombre} con éxito.`);
-                        //mostramos al estudiante elegido y sus asignaturas matriculadas
+                        let matri = encontrarE.matricular(encontrarA);
+                        if (matri == true) {
+                            console.log(`${encontrarE.nombre} ha sido matriculado en ${encontrarA.nombre} con éxito.`);
+                            //mostramos al estudiante elegido y sus asignaturas matriculadas
+                        }
                     }
                     encontrarE.asignaturas.forEach((elemento, clave) => {//numero de asignaturas en las que esta matriculado el estudiante
                         console.log(`${clave}. ${elemento.nombre}`);
@@ -1049,8 +1055,10 @@ try {
                     let asig_estu = prompt("Ahora dime la asignatura de la cual quieres desmatricular al estudiante");
                     let asig_des = listaAsignaturas.obtener_asignatura(asig_estu);
                     if (asig_des != false) {
-                        estu_des.desmatricular(asig_des);
-                        console.log(`${estu_des.nombre} ha sido desmatriculado en ${asig_des.nombre} con éxito.`);
+                        let desma = estu_des.desmatricular(asig_des);
+                        if (desma == true) {
+                            console.log(`${estu_des.nombre} ha sido desmatriculado en ${asig_des.nombre} con éxito.`);
+                        }
                     }
 
 
