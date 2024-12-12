@@ -275,7 +275,7 @@ class Estudiantes {
     asig_mostrar() {//muestra las asignaturas en las que esta matriculado el estudiante
         console.log(this.#asignaturas);
     }
-    
+
     // Calcula el promedio de todas las calificaciones del estudiante.
     promedio() {
         if (this.#asignaturas.length === 0) {
@@ -748,7 +748,7 @@ class GestorAs extends Gestores {
         this._gestor.push(asignatura);
     } //Añade una asignatura.
 
-    eliminar_asignatura(nombre, listaEstudiantes) {
+    eliminar_asignatura(nombre, listaEstudiantes) {//parametro de listasEstudiantes
         let eliminar = this._gestor.findIndex(elemento => elemento.nombre.toLowerCase() === nombre.toLowerCase());
         if (eliminar === -1) {
             console.log(`No se encontró ningúna asignatura con nombre ${nombre}.`);
