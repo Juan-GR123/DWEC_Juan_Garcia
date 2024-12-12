@@ -242,12 +242,12 @@ class Estudiantes {
     //registrar la fecha de matriculación o desmatriculación
 
     get registros() {
-        const resultado = []; // Creamos una variable resultado que funcionará como un array vacío para almacenar los resultados
+        let resultado = []; // Creamos una variable resultado que funcionará como un array vacío para almacenar los resultados
         this.#registros.forEach(registro => { // Recorremos el array registros con forEach
             const fecha = registro.fecha.toLocaleDateString('es-ES'); //convertimos la fecha que le hemos introducido a registros en la matriculacion y desmatriculacion en el horario español
             resultado.push(`${registro.nombre} - ${registro.tipo}: ${fecha}`); // Agregamos el resultado al array creado anteriormente
         });
-        return resultado; // Retornamos el array con los valores transformados
+        return resultado; // devolvemos el array con los valores transformados
     }
 
     //cambiar la nota de calificacion si existe esta asignatura
@@ -755,8 +755,7 @@ class GestorAs extends Gestores {
         }
         this._gestor.splice(eliminar, 1);
         // Itera sobre los estudiantes y elimina la asignatura de ellos
-        listaEstudiantes.gestor.forEach(estudiante => {
-            // Busca si el estudiante está matriculado en la asignatura y la desmatricula
+        listaEstudiantes.gestor.forEach(estudiante => {//get de gestor
             let asignatura = { nombre: nombre }; // Crea un objeto básico con el nombre de la asignatura
             estudiante.desmatricular(asignatura);
         });
@@ -1083,8 +1082,8 @@ try {
                 elim_estu = Number(elim_estu);
 
                 if (isNaN(elim_estu) || elim_estu <= 0) {
-                    throw new Error("El ID debe ser un número positivo.");
-                    //break;
+                    console.log("El ID debe ser un número positivo.");
+                    break;
                 }
 
                 //let obtener_E = listaEstudiantes.obtener_estudiante(elim_estu);
@@ -1113,7 +1112,7 @@ try {
 
                 if (typeof elim_asig != "string" || elim_asig.trim() === "") {
                     console.log("La asignatura no es valida");
-                    //break;
+                    break;
                 }
 
 
@@ -1185,10 +1184,6 @@ try {
                             estudiante.agregar_calificacion(asignatura_N, nota_promedio_calificaciones);
                         }
                     }
-
-
-
-
 
                     //ahora eliminaremos las calificaciones que se han añadido a la asignatura elegida para que si se vuelve a este caso para añadir notas a
                     //la misma asignatura las notas de este estudiante no se interpongan las 
@@ -1271,8 +1266,8 @@ try {
                 F_matricula = Number(F_matricula);
 
                 if (isNaN(F_matricula) || F_matricula <= 0) {
-                    throw new Error("El ID debe ser un número positivo.");
-                    //break;
+                    console.log("El ID debe ser un número positivo.");
+                    break;
                 }
                 let estudiante_fecha = listaEstudiantes.obtener_estudiante(F_matricula);
 
