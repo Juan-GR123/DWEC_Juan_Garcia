@@ -192,7 +192,6 @@ class Estudiantes {
         return this.#direccion;
     }
 
-    //devolverá un array de cada asignatura
     get asignaturas() {
         return [...this.#asignaturas];
     }
