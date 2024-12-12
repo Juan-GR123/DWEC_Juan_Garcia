@@ -270,21 +270,18 @@ class Estudiantes {
     // Calcula el promedio de todas las calificaciones del estudiante.
     promedio() {
         if (this.#asignaturas.length === 0) {
-            return "No tiene asignaturas matriculadas";
-        }
-        let promedioF = 0;//se crean dos variables
-        let contadorNotas = 0;
-        for (let asig of this.#asignaturas) {//se recorre el array asignaturas
-            if (typeof asig.nota === 'number') {
-                promedioF += asig.nota;// si la nota es de tipo número se suma la nota de promedioF por la nueva nota para ir acumulando la suma de notas
-                contadorNotas++;
-            }
-        }
-        if (contadorNotas === 0) {
-            return 0; // Evitar dividir entre 0 si no hay notas válidas. Si no se hace da NaN
+            return 0;
         }
 
-        return Number((promedioF / contadorNotas).toFixed(2)); // toFixed(2): Redondea a 2 decimales.
+        let prom=this.#asignaturas.reduce((promedioF,asig)=>{
+            if(asig.nota==undefined){
+                asig.nota=0;
+            }
+             promedioF=promedioF+asig.nota;
+             return promedioF;
+        },0);
+
+        return Number(prom / this.#asignaturas.length).toFixed(2); // toFixed(2): Redondea a 2 decimales.
         //se devuelve la suma de notas dividido entre el numero de notas
     }
 
@@ -379,12 +376,9 @@ class Asignaturas {
         if (this.#calificaciones.length === 0) {
             return "No tiene calificaciones";
         }
-        let suma = 0;
-        for (let calificacion of this.#calificaciones) {
-            suma += calificacion;
-        }
-        suma = suma / (this.#calificaciones.length);
-        return Number(suma.toFixed(2));//toFixed es para que solo muestre un numero determinado de decimales
+        let prom_as= this.#calificaciones.reduce((suma, calificacion)=>suma+calificacion,0);
+       let suma_F = prom_as / (this.#calificaciones.length);
+        return Number(suma_F.toFixed(2));//toFixed es para que solo muestre un numero determinado de decimales
     }
 
 }
@@ -602,23 +596,10 @@ class GestorEs extends Gestores {
             console.log("No hay estudiantes en la lista para calcular el promedio.");
             return 0;
         }
-        let sumaPromedios = 0;
-        let contador_Estudiantes = 0;
 
-        for (let estudiante of this._gestor) {
-            let promedio_E = estudiante.promedio();//El promedio devuelve la media de cada estudiante
-
-            if (typeof promedio_E === "number") {//SI no son tipo number entonces significa que no estarán todavia calificados y por eso no se añaden en el calculo
-
-                sumaPromedios += promedio_E;
-                contador_Estudiantes++;
-            }
-        }
-        if (contador_Estudiantes === 0) {
-            throw new Error("Ningún estudiante tiene promedios válidos para calcular.");
-        }
-
-        let promedioGeneral = (sumaPromedios / contador_Estudiantes).toFixed(2);
+        let suma_Promedios= this._gestor.reduce((suma_pro,promedio_E) => suma_pro + Number(promedio_E.promedio()),0);
+        //console.log(suma_Promedios);
+        let promedioGeneral = (suma_Promedios / (this._gestor.length)).toFixed(2);
         return Number(promedioGeneral);
     }
 
@@ -846,6 +827,13 @@ try {
     listaEstudiantes.gestor[0].agregar_calificacion(listaAsignaturas.gestor[1], 10);
     listaEstudiantes.gestor[2].agregar_calificacion(listaAsignaturas.gestor[1], 9.3);
     listaEstudiantes.gestor[2].agregar_calificacion(listaAsignaturas.gestor[3], 9);
+    listaEstudiantes.gestor[0].agregar_calificacion(listaAsignaturas.gestor[2], 9);
+    listaEstudiantes.gestor[0].agregar_calificacion(listaAsignaturas.gestor[3], 9);
+    listaEstudiantes.gestor[0].agregar_calificacion(listaAsignaturas.gestor[4], 9);
+    listaEstudiantes.gestor[1].agregar_calificacion(listaAsignaturas.gestor[4], 9);
+    listaEstudiantes.gestor[3].agregar_calificacion(listaAsignaturas.gestor[4], 9);
+    listaEstudiantes.gestor[4].agregar_calificacion(listaAsignaturas.gestor[4], 9);
+
 
     //console.log(listaAsignaturas.obtener_asignatura("Fisica"));
 
@@ -1158,8 +1146,9 @@ try {
                 let obtener_promedio = listaEstudiantes.obtener_estudiante(promedio_Es);
 
                 console.log("Ahora calcularemos el promedio de todas las notas del estudiante elegido");
-                console.log(obtener_promedio.asignaturas);//se muestran las asignaturas con sus notas
+                
                 let promedio = obtener_promedio.promedio();//se calcula el promedio
+                console.log(obtener_promedio.asignaturas);//se muestran las asignaturas con sus notas
 
                 console.log(`El promedio de notas del estudiante ${obtener_promedio.nombre} es ${promedio}`);
 
