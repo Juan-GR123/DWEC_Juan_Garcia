@@ -423,3 +423,47 @@ try {
 } catch (error) {
   console.error(error.message);
 }
+
+/*// Modificación del método promedio en la clase Estudiantes
+promedio() {
+    if (this.#asignaturas.length === 0) {
+        return 0;
+    }
+    const sumaNotas = this.#asignaturas.reduce((suma, asig) => {
+        return suma + (asig.nota); 
+    }, 0);
+    const cantidadNotas = this.#asignaturas.length;
+    return Number((sumaNotas / cantidadNotas).toFixed(2));
+}
+
+// Modificación del método calcular_promedio en la clase Asignaturas
+calcular_promedio() {
+    if (this.#calificaciones.length === 0) {
+        return 0;
+    }
+    const suma = this.#calificaciones.reduce((suma, calificacion) => suma + calificacion, 0);
+    return Number((suma / this.#calificaciones.length).toFixed(2));
+}
+
+// Modificación del método promedio_listas en la clase GestorEs
+promedio_listas() {
+    if (this._gestor.length === 0) {
+        console.log("No hay estudiantes en la lista para calcular el promedio.");
+        return 0;
+    }
+
+    const sumaPromedios = this._gestor.reduce((suma, estudiante) => {
+        const promedioEstudiante = estudiante.promedio();
+        return suma + (typeof promedioEstudiante === "number" ? promedioEstudiante : 0);
+    }, 0);
+
+    const estudiantesConPromedio = this._gestor.filter(est => typeof est.promedio() === "number").length;
+
+    if (estudiantesConPromedio === 0) {
+        throw new Error("Ningún estudiante tiene promedios válidos para calcular.");
+    }
+
+    const promedioGeneral = (sumaPromedios / estudiantesConPromedio).toFixed(2);
+    return Number(promedioGeneral);
+}
+ */
