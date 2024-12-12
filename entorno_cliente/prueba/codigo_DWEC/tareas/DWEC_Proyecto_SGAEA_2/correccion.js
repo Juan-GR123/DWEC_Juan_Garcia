@@ -275,6 +275,7 @@ class Estudiantes {
     asig_mostrar() {//muestra las asignaturas en las que esta matriculado el estudiante
         console.log(this.#asignaturas);
     }
+    
     // Calcula el promedio de todas las calificaciones del estudiante.
     promedio() {
         if (this.#asignaturas.length === 0) {
