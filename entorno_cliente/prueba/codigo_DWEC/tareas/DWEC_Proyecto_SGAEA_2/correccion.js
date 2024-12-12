@@ -645,6 +645,7 @@ class GestorEs extends Gestores {
     }
 
     toString() {//sobrecarga
+        super.toString();
         return `Lista con ${this._gestor.length} estudiantes.`;
     }
 
@@ -798,6 +799,7 @@ class GestorAs extends Gestores {
     }
 
     toString() {//sobrecarga
+        super.toString();
         return `Lista con ${this._gestor.length} Asignaturas`;
     }
 
