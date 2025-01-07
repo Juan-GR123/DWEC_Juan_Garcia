@@ -13,6 +13,15 @@
                 "<node_internals>/**"
             ],
             "program": "${file}"
+        },
+        {
+            "type":"firefox",
+            "request": "launch",
+            "name":"Depurara con firefox",
+            "url":"http://localhost:3000",
+            "webRoot": "${file}",
+            "remote":true,
+            "port":3000
         }
     ]
 }
