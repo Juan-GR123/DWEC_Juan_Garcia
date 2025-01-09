@@ -84,7 +84,7 @@ iniciarConexion();
 /*
 mejor forma 1 o 2
     1. dentro de cada funcion donde se puedan producir
-    2. igual que la 1 le añado el código donde se llama al cofigo que puede dar error
+    2. igual que la 1 le añado el código donde se llama al codigo que puede dar error
     3. solo en el código que llama a el código donde se puede producir el error
     4. meter gran parte del código en un try..catch
 */
