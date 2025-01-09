@@ -28,6 +28,15 @@ También se contará con el método toString() para mostrar todos los atributos 
 */
 
 class Direccion {
+    /**
+     *  Crea una instancia de la clase Direccion.
+     * @param {string} calle - La calle de la dirección.
+     * @param {number} numero - El número de la dirección.
+     * @param {number} piso - El piso de la dirección.
+     * @param {string} codigo - El código postal de la dirección (debe tener 5 dígitos).
+     * @param {string} provincia - La provincia de la dirección.
+     * @param {string} localidad - La localidad de la dirección.
+     */
     #calle;
     #numero;
     #piso;
@@ -46,30 +55,57 @@ class Direccion {
         this.#provincia = provincia;
         this.#localidad = localidad;
     }
+    /**
+     *  Obtiene el nombre de la calle.
+     * @returns {string} El nombre de la calle.
+     */
     get calle() {
         return this.#calle;
     }
-
+    /**
+     * Obtiene el número de la dirección.
+     * @returns {number} El número de la dirección.
+     */
     get numero() {
         return this.#numero;
     }
 
+     /**
+     * Obtiene el piso de la dirección.
+     * @returns {string} El piso de la dirección.
+     */
     get piso() {
         return this.#piso;
     }
 
+     /**
+     * Obtiene el código postal de la dirección.
+     * @returns {string} El código postal de la dirección.
+     */
     get codigo_postal() {
         return this.#codigo_postal;
     }
 
+    /**
+     * Obtiene la provincia de la dirección.
+     * @returns {string} La provincia de la dirección.
+     */
     get provincia() {
         return this.#provincia;
     }
 
+    /**
+     * Obtiene la localidad de la dirección.
+     * @returns {string} La localidad de la dirección.
+     */
     get localidad() {
         return this.#localidad;
     }
-
+    
+    /**
+     * Convierte la dirección en una cadena legible.
+     * @returns {string} Una cadena con la dirección en formato "calle, número, piso, código postal, localidad, provincia".
+     */
     toString() {
         return this.#calle + " " + this.#numero + " " + this.#piso + "  " + this.#codigo_postal + " " + this.#localidad + " " + this.#provincia + " ";
     }
