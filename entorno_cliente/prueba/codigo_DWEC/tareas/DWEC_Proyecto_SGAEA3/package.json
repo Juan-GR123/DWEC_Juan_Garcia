@@ -1,0 +1,16 @@
+{
+  "name": "dwec_proyecto_sgaea3",
+  "version": "1.0.0",
+  "main": "correccion.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [  
+  "comentarios",
+  "jsdoc"],
+  "author": "juan",
+  "license": "ISC",
+  "devDependencies": {
+    "jsdoc": "^4.0.4"
+  }
+}

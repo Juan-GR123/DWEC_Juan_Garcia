@@ -1,0 +1,11 @@
+{
+    "source":{
+        "include":["fuente"],
+        "exclude":["node_modules"],
+        "includePattern":".*\\.js$",
+        "exludePattern":".*\\.test\\.js$"
+    },
+    "opts":{
+        "destination":"./documentacion"
+    }
+}
