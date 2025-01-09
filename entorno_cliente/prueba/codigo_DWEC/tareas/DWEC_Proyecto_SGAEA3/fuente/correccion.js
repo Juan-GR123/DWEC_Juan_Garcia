@@ -5,6 +5,11 @@
 //Todas las salidas serán por consola y todas las entradas por teclado
 //promt y console.log
 
+/**
+ * @module Proyecto3
+ * 
+ */
+
 //Creamos una clase para saber la dirección de cada estudiante
 /*
 La clase Direccion tendrá los siguiente Atributos:
@@ -21,6 +26,7 @@ se les necesite en algun momento.
 
 También se contará con el método toString() para mostrar todos los atributos por pantalla.
 */
+
 class Direccion {
     #calle;
     #numero;
