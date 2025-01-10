@@ -113,9 +113,7 @@ class Direccion {
 
 }
 
-
-
-///Hacemos una clase que representará a los estudiantes
+//Hacemos una clase que representará a los estudiantes
 /*
 La clase Estudiantes contará con los siguiente atributos:
 #id: El id se asignará automáticamente sin la necesidad de que el usuario lo introduzca
@@ -392,6 +390,7 @@ tambien se contará con los getters de nombre y de calificaciones y con los sigu
       que serán el número de notas de la asignatura.
  
 */
+//hacer try{ }catch
 class Asignaturas {
     nombre;
     #calificaciones;//[[10],[9]]
@@ -900,8 +899,35 @@ class GestorAs extends Gestores {
 
 }
 
+class ErrorPersonalizado extends Error {
+    constructor(mensaje) {
+        super(mensaje); 
+        this.name = "ErrorPersonalizado"; 
+    }
+}
 
 
+function validarEstudiante(estudiante) {
+    if (typeof estidiante.nombre!='string' || estudiante.nombre.trim() === "") {
+        throw new ErrorPersonalizado("El nombre es obligatorio.");
+    }
+    if (typeof estudiante.edad!='number' || estudiante.edad <= 0) {
+        throw new ErrorPersonalizado("La edad debe ser un número positivo.");
+    }
+    console.log("Estudiante validado con éxito:", estudiante);
+}
+
+// Ejemplo de uso
+try {
+    let estudiante0 = new Estudiantes("Estudiante ZERO", -5, new Direccion("Calle pez", 5, "6ºA", 29005, "Malaga", "Malaga")); 
+    validarEstudiante(estudiante0);
+} catch (error) {
+    if (error instanceof ErrorPersonalizado) {
+        console.log(`Error de validación en el campo: ${error.message}`);
+    } else {
+        console.log(`Ocurrió un error inesperado: ${error.message}`);
+    }
+}
 //////////////////////////////////////
 
 const listaEstudiantes = new GestorEs();//inicializamos un objeto de la clase GestorEs que actuará como un array de estudiantes
