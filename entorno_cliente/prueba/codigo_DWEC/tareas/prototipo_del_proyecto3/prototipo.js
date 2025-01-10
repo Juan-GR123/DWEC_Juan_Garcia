@@ -205,37 +205,48 @@ class Estudiantes {
 
     matricular(asignatura) {//introduces un objeto de la clase asignatura como parametro
         // Comprobar si la asignatura ya está matriculada por nombre
-        if (this.#asignaturas.find(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase())) {
-            console.log(`El estudiante ya está matriculado en ${asignatura.nombre}`);
+        try {
+            if (this.#asignaturas.find(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase())) {
+                throw new Error(`El estudiante ya está matriculado en ${asignatura.nombre}`);
+            } else {
+                const asignaturaObj = { nombre: asignatura.nombre, nota: asignatura.nota };
+                this.#asignaturas.push(asignaturaObj); // Agrega la asignatura a la lista
+                this.#registros.push({
+                    nombre: asignatura.nombre,//Crea el campo `nombre` con el valor nombre de la asignatura
+                    tipo: 'Matrícula', // Crea el campo `tipo` con el valor "Matrícula"
+                    fecha: new Date() // Crea el campo `fecha` con la fecha y hora actual
+                });
+                return true;
+            }
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
             return false;
-        } else {
-            const asignaturaObj = { nombre: asignatura.nombre, nota: asignatura.nota };
-            this.#asignaturas.push(asignaturaObj); // Agrega la asignatura a la lista
-            this.#registros.push({
-                nombre: asignatura.nombre,//Crea el campo `nombre` con el valor nombre de la asignatura
-                tipo: 'Matrícula', // Crea el campo `tipo` con el valor "Matrícula"
-                fecha: new Date() // Crea el campo `fecha` con la fecha y hora actual
-            });
-            return true;
         }
+
     }
 
 
     desmatricular(asignatura) {
         const indice = this.#asignaturas.findIndex(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase());//buscamos en el array una asignatura con el mismo nombre
-        if (indice !== -1) {//si no es valor negativo la asignatura existe ya que se encuentra en alguna posicion del array
-            let nombre = asignatura.nombre;
-            this.#asignaturas.splice(indice, 1);// Elimina la asignatura de la lista ej:splice(lugar_de_eliminacion,numero_de_elemento_a_eliminar)
-            this.#registros.push({
-                nombre: nombre,//Crea el campo `nombre` con el valor nombre de la asignatura
-                tipo: 'Desmatriculación', // Crea el campo `tipo` con el valor "Desmatriculación"
-                fecha: new Date()
-            }); // Crea el campo `fecha` con la fecha y hora actual
-            return true;
-        } else {
-            console.log(`El estudiante no está matriculado en ${asignatura.nombre.toLowerCase()}`);
+
+        try {
+            if (indice !== -1) {//si no es valor negativo la asignatura existe ya que se encuentra en alguna posicion del array
+                let nombre = asignatura.nombre;
+                this.#asignaturas.splice(indice, 1);// Elimina la asignatura de la lista ej:splice(lugar_de_eliminacion,numero_de_elemento_a_eliminar)
+                this.#registros.push({
+                    nombre: nombre,//Crea el campo `nombre` con el valor nombre de la asignatura
+                    tipo: 'Desmatriculación', // Crea el campo `tipo` con el valor "Desmatriculación"
+                    fecha: new Date()
+                }); // Crea el campo `fecha` con la fecha y hora actual
+                return true;
+            } else {
+                throw new Error(`El estudiante no está matriculado en ${asignatura.nombre.toLowerCase()}`);
+            }
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
             return false;
         }
+
     }
 
 
@@ -253,21 +264,26 @@ class Estudiantes {
     //cambiar la nota de calificacion si existe esta asignatura
     agregar_calificacion(asignatura, nota) {
         // Validar que la nota sea un número válido
-        if (typeof nota != 'number' || nota < 0 || nota > 10) {
-            console.log('La nota debe ser un número entre 0 y 10.');
-            return false;
-        } else {
-            const asignaturaEncontrada = this.#asignaturas.find(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase());
-            //console.log(asignaturaEncontrada); devuelve un objeto {nombre:, nota:}
-            //Con find recorre todo el array asignaturas y busca la coincidencia de nombre
-            if (asignaturaEncontrada) {
-                asignaturaEncontrada.nota = nota;
-                return true;
+
+        try {
+            if (typeof nota != 'number' || nota < 0 || nota > 10) {
+                throw new Error('La nota debe ser un número entre 0 y 10.');
             } else {
-                console.log(`El estudiante no está matriculado en la asignatura ${asignatura.nombre.toLowerCase()}`);
-                return false;
+                const asignaturaEncontrada = this.#asignaturas.find(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase());
+                //console.log(asignaturaEncontrada); devuelve un objeto {nombre:, nota:}
+                //Con find recorre todo el array asignaturas y busca la coincidencia de nombre
+                if (asignaturaEncontrada) {
+                    asignaturaEncontrada.nota = nota;
+                    return true;
+                } else {
+                    throw new Error(`El estudiante no está matriculado en la asignatura ${asignatura.nombre.toLowerCase()}`);
+                }
             }
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
+            return false;
         }
+
 
 
     }
@@ -334,6 +350,7 @@ tambien se contará con los getters de nombre y de calificaciones y con los sigu
       que serán el número de notas de la asignatura.
  
 */
+//hacer try{ }catch
 class Asignaturas {
     nombre;
     #calificaciones;//[[10],[9]]
@@ -362,26 +379,33 @@ class Asignaturas {
 
     //agrega la calificación a la asignatura elegida
     agregar_calificacion(nota) {
-        if ((nota >= 0 && nota <= 10)) {
-            this.#calificaciones.push(nota);
-            return true;
-        } else {
-            console.log("La nota " + nota + " no es valida");
+        try {
+            if ((nota >= 0 && nota <= 10)) {
+                this.#calificaciones.push(nota);
+                return true;
+            } else {
+                throw new Error("La nota " + nota + " no es valida");
+            }
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
             return false;
         }
     }
 
     //Eliminar la calificación de la posición elegida 
     eliminar_calificacion(indice) {
-        if (indice < 0 || indice >= this.#calificaciones.length) {
-            console.log("Índice fuera de rango.");
+        try {
+            if (indice < 0 || indice >= this.#calificaciones.length) {
+                throw new Error("Índice fuera de rango.");
+            } else {
+                this.#calificaciones.splice(indice, 1);//splice es para eliminar o reemplazar un numero especifico de elementos en una posicion concreta. 
+                //ejemplo: splice(posicion,numero_de_eliminaciones)
+                return true;
+            }
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
             return false;
-        } else {
-            this.#calificaciones.splice(indice, 1);//splice es para eliminar o reemplazar un numero especifico de elementos en una posicion concreta. 
-            //ejemplo: splice(posicion,numero_de_eliminaciones)
-            return true;
         }
-
     }
 
 
@@ -534,23 +558,35 @@ class GestorEs extends Gestores {
     }
 
     agregar_estudiante(estudiante) {//agrega un estudiante a la lista
-        if (this._gestor.find(elemento => elemento.id === estudiante.id)) {//si se introduce un id que ya exista entonces no se podrá agregar al estudiante
-            return "Ya existe el estudiante.";
 
+        try {
+            if (this._gestor.find(elemento => elemento.id === estudiante.id)) {//si se introduce un id que ya exista entonces no se podrá agregar al estudiante
+                throw new Error("Ya existe el estudiante.");
+            }
+            this._gestor.push(estudiante);
+            return true;
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
+            return false;
         }
-        this._gestor.push(estudiante);
+
     }
 
     eliminar_estudiante(id) {//elimina un estudiante de la lista
         let eliminar = this._gestor.findIndex(elemento => elemento.id === id);
         //findIndex:devuelve el indice del primer elemento que cumpla la funcion definida
-        if (eliminar === -1) {
-            console.log(`No se encontró ningún estudiante con ID ${id}.`);
+        try {
+            if (eliminar === -1) {
+                throw new Error(`No se encontró ningún estudiante con ID ${id}.`);
+            } else {
+                this._gestor.splice(eliminar, 1);
+                return true;
+            }
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
             return false;
-        } else {
-            this._gestor.splice(eliminar, 1);
-            return true;
         }
+
 
     }
 
@@ -604,27 +640,38 @@ class GestorEs extends Gestores {
         let obtener = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
         //includes: Se usa para verificar si el nombre parcial está contenido en el nombre completo del estudiante.
         //filter() devuelve un array con todos los estudiantes que coincidan. Se podría haber utilizado find pero ese metodo solo devuelve un valor
-        if (obtener.length > 0) {
-            return obtener.forEach(elemento => {
-                console.log("El estudiante encontrado es " + elemento.toString());
-            });
+        try {
+            if (obtener.length > 0) {
+                return obtener.forEach(elemento => {
+                    console.log("El estudiante encontrado es " + elemento.toString());
+                });
 
-        } else {
-            console.log(`No se encontro ningún estudiante con el nombre ${nombre}`);
+            } else {
+                throw new Error(`No se encontro ningún estudiante con el nombre ${nombre}`);
+            }
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
             return false;
         }
+
     }
 
     //Hacer un promedio del promedio de todos los estudiantes
     promedio_listas() {
-        if (this._gestor.length === 0) {
-            console.log("No hay estudiantes en la lista para calcular el promedio.");
+
+        try {
+            if (this._gestor.length === 0) {
+                throw new Error("No hay estudiantes en la lista para calcular el promedio.");
+            }
+            let suma_Promedios = this._gestor.reduce((suma_pro, promedio_E) => suma_pro + Number(promedio_E.promedio()), 0);
+            //console.log(suma_Promedios);
+            let promedioGeneral = (suma_Promedios / (this._gestor.length)).toFixed(2);
+            return Number(promedioGeneral);
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
             return 0;
         }
-        let suma_Promedios = this._gestor.reduce((suma_pro, promedio_E) => suma_pro + Number(promedio_E.promedio()), 0);
-        //console.log(suma_Promedios);
-        let promedioGeneral = (suma_Promedios / (this._gestor.length)).toFixed(2);
-        return Number(promedioGeneral);
+
     }
 
     toString() {//sobrecarga
@@ -726,27 +773,40 @@ class GestorAs extends Gestores {
     }
 
     agregar_asignatura(asignatura) {
-        if (this._gestor.find(elemento => elemento.nombre.toLowerCase() === asignatura.nombre.toLowerCase())) {
-            throw new Error("Ya existe la asignatura");
+        try {
+            if (this._gestor.find(elemento => elemento.nombre.toLowerCase() === asignatura.nombre.toLowerCase())) {
+                throw new Error("Ya existe la asignatura");
+            }
+            this._gestor.push(asignatura);
+            return true;
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
+            return false;
         }
-        this._gestor.push(asignatura);
+
     } //Añade una asignatura.
 
     eliminar_asignatura(nombre, listaEstudiantes) {//parametro de listasEstudiantes
         let eliminar = this._gestor.findIndex(elemento => elemento.nombre.toLowerCase() === nombre.toLowerCase());
-        if (eliminar === -1) {
-            console.log(`No se encontró ningúna asignatura con nombre ${nombre}.`);
+
+        try {
+            if (eliminar === -1) {
+                throw new Error(`No se encontró ningúna asignatura con nombre ${nombre}.`);
+            }
+            this._gestor.splice(eliminar, 1);
+            // Itera sobre los estudiantes y elimina la asignatura de ellos
+            listaEstudiantes.gestor.forEach(estudiante => {//get de gestor
+                let asignatura = { nombre: nombre }; // Crea un objeto básico con el nombre de la asignatura
+                estudiante.desmatricular(asignatura);
+            });
+
+            console.log(`La asignatura ${nombre} ha sido eliminada de la lista y de todos los estudiantes.`);
+            return true;
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
             return false;
         }
-        this._gestor.splice(eliminar, 1);
-        // Itera sobre los estudiantes y elimina la asignatura de ellos
-        listaEstudiantes.gestor.forEach(estudiante => {//get de gestor
-            let asignatura = { nombre: nombre }; // Crea un objeto básico con el nombre de la asignatura
-            estudiante.desmatricular(asignatura);
-        });
 
-        console.log(`La asignatura ${nombre} ha sido eliminada de la lista y de todos los estudiantes.`);
-        return true;
     } //Elimina una asignatura por nombre.
 
     listar_asignaturas() {
@@ -758,12 +818,17 @@ class GestorAs extends Gestores {
     obtener_asignatura(nombre) {//para que solo te devuelva una asignatura en concreto. 
         //Tiene que ser su nombre completo para que no haya errores. Esto es para métodos en concreto
         let obtener = this._gestor.find(elemento => elemento.nombre.toLowerCase() === nombre.toLowerCase());
-        if (obtener) {//si encuentra algun valor
-            return obtener;
-        } else {
-            console.log(`No se encontró ningúna asignatura con nombre ${nombre}.`);
+        try {
+            if (obtener) {//si encuentra algun valor
+                return obtener;
+            } else {
+                throw new Error(`No se encontró ningúna asignatura con nombre ${nombre}.`);
+            }
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
             return false;
         }
+
 
     }
 
@@ -771,14 +836,19 @@ class GestorAs extends Gestores {
         let obtener_As = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
         //includes: Se usa para verificar si el nombre parcial está contenido en el nombre completo de la asignatura.
         //filter() devuelve un array con todas las asignaturas que coincidan. Se podría haber utilizado find pero ese método solo devuelve un valor.
-        if (obtener_As.length > 0) {
-            return obtener_As.forEach(elemento => {
-                console.log("La asignatura encontrada es " + elemento.toString());
-            });
-        } else {
-            console.log(`No se encontró ninguna asignatura con el nombre ${nombre}`);
+        try {
+            if (obtener_As.length > 0) {
+                return obtener_As.forEach(elemento => {
+                    console.log("La asignatura encontrada es " + elemento.toString());
+                });
+            } else {
+                throw new Error(`No se encontró ninguna asignatura con el nombre ${nombre}`);
+            }
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
             return false;
         }
+
     }
 
     toString() {//sobrecarga
@@ -942,10 +1012,14 @@ do {
             let nuevoEstudiante = new Estudiantes(nombre, edad, nuevaDireccion);
 
             // Agregar el estudiante a la lista
-            listaEstudiantes.agregar_estudiante(nuevoEstudiante);
+            let comprobacion_es = listaEstudiantes.agregar_estudiante(nuevoEstudiante);
 
-            console.log("Estudiante creado y agregado con éxito:");
-            listaEstudiantes.listar_estudiantes();
+            if (comprobacion_es != false) {
+                console.log("Estudiante creado y agregado con éxito:");
+                listaEstudiantes.listar_estudiantes();
+            }
+
+
 
 
 
@@ -979,11 +1053,12 @@ do {
             let N_asignatura = new Asignaturas(asignatura.trim());//nueva asignatura
 
 
-            listaAsignaturas.agregar_asignatura(N_asignatura);
+            let comprobacion_as = listaAsignaturas.agregar_asignatura(N_asignatura);
 
-            console.log(`Asignatura ${asignatura} creada y agregada con éxito.`);
-            listaAsignaturas.listar_asignaturas(); // Mostrar todas las asignaturas
-
+            if (comprobacion_as != false) {
+                console.log(`Asignatura ${asignatura} creada y agregada con éxito.`);
+                listaAsignaturas.listar_asignaturas(); // Mostrar todas las asignaturas
+            }
 
             break;
 
@@ -1276,10 +1351,15 @@ do {
             let F_matricula = prompt("Dime el ID del estudiante del que quieras saber su fecha de matriculacion y fecha de desmatriculacion de sus asignaturas hasta el momento");
             F_matricula = Number(F_matricula);
 
-            if (isNaN(F_matricula) || F_matricula <= 0) {
-                console.log("El ID debe ser un número positivo.");
+            try {
+                if (isNaN(F_matricula) || F_matricula <= 0) {
+                    throw new Error("El ID debe ser un número positivo.");
+                }
+            } catch (error) {
+                console.log(`Error: ${error.message}`);
                 break;
             }
+
             let estudiante_fecha = listaEstudiantes.obtener_estudiante(F_matricula);
 
             if (estudiante_fecha != false) {
