@@ -155,13 +155,18 @@ class Estudiantes {
 
     constructor(N_nombre, N_edad, N_direc) {
         let patron = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;//que contenga letras y espacios 1 o mas veces
-        if (!patron.test(N_nombre)) {
-            throw new Error("Error solo pueden mostrase espacios o letras");
-        } else {
-            this.#nombre = N_nombre;
+        try {
+            if (!patron.test(N_nombre)) {
+                throw new Error("Error solo pueden mostrase espacios o letras");
+            } else {
+                this.#nombre = N_nombre;
+            }
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
         }
 
-        let ID = 1;//inicializamos el id a 1
+
+        let ID = 0;
 
         while (Estudiantes.numeros.includes(ID)) {//En caso de que el id actual se encuentre en el array
             //se le sumará al id un valor para poder darle el nuevo valor a un nuevo estudiante
@@ -284,8 +289,6 @@ class Estudiantes {
             return false;
         }
 
-
-
     }
 
     asig_mostrar() {//muestra las asignaturas en las que esta matriculado el estudiante
@@ -356,10 +359,14 @@ class Asignaturas {
     #calificaciones;//[[10],[9]]
     constructor(nombre1) {
         let patron = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;//que contenga letras y espacios 1 o mas veces
-        if (!patron.test(nombre1)) {
-            throw new Error("Error solo pueden mostrase espacios o letras");
-        } else {
-            this.nombre = nombre1;//se inicializa
+        try {
+            if (!patron.test(nombre1)) {
+                throw new Error("Error solo pueden mostrase espacios o letras");
+            } else {
+                this.nombre = nombre1;//se inicializa
+            }
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
         }
 
         this.#calificaciones = [];
@@ -861,33 +868,35 @@ class GestorAs extends Gestores {
 
 class ErrorPersonalizado extends Error {
     constructor(mensaje) {
-        super(mensaje); 
-        this.name = "ErrorPersonalizado"; 
+        super(mensaje);
+        this.name = "ErrorPersonalizado";
     }
 }
 
 
 function validarEstudiante(estudiante) {
-    if (typeof estidiante.nombre!='string' || estudiante.nombre.trim() === "") {
+    if (typeof estudiante.nombre != 'string' || estudiante.nombre.trim() === "") {
         throw new ErrorPersonalizado("El nombre es obligatorio.");
     }
-    if (typeof estudiante.edad!='number' || estudiante.edad <= 0) {
+    if (typeof estudiante.edad != 'number' || estudiante.edad <= 0) {
         throw new ErrorPersonalizado("La edad debe ser un número positivo.");
     }
-    console.log("Estudiante validado con éxito:", estudiante);
+    console.log("Estudiante validado con éxito:");
 }
 
 // Ejemplo de uso
-try {
-    let estudiante0 = new Estudiantes("Estudiante ZERO", -5, new Direccion("Calle pez", 5, "6ºA", 29005, "Malaga", "Malaga")); 
+try {//te hace un id nuevo
+    let estudiante0 = new Estudiantes("Estudiante ZERO", -5, new Direccion("Calle pex", 10, "12ºA", 29345, "Malaga", "Malaga"));
+    //console.log(estudiante0.nombre);
     validarEstudiante(estudiante0);
 } catch (error) {
-    if (error instanceof ErrorPersonalizado) {
-        console.log(`Error de validación en el campo: ${error.message}`);
+    if (error instanceof ErrorPersonalizado) {//instanceof te ayuda a saber si un objeto en su cadena de prototipos contiene la propiedad prototype de un constructor.
+        console.log(`Error de validación: ${error.message}`);
     } else {
         console.log(`Ocurrió un error inesperado: ${error.message}`);
     }
 }
+
 //////////////////////////////////////
 
 const listaEstudiantes = new GestorEs();//inicializamos un objeto de la clase GestorEs que actuará como un array de estudiantes
@@ -1003,6 +1012,8 @@ do {
         */
         case 1:
 
+            let patron1 = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;
+
             let nombre = prompt("Introduce el nombre del estudiante:");
             let edad = prompt("Introduce la edad del estudiante:");
             edad = Number(edad);
@@ -1016,7 +1027,7 @@ do {
 
             try {
 
-                if (nombre === "" || typeof edad != 'number' || edad <= 0) {
+                if (nombre === "" || !patron1.test(nombre) || typeof edad != 'number' || edad <= 0) {
                     throw new Error("El nombre o la edad no se han introducido correctamente. Vuelve a intentarlo")
                     // break;
                 }
@@ -1066,11 +1077,12 @@ do {
         */
         case 2:
 
+            let patron2 = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;
 
             let asignatura = prompt("Introduce el nombre de la asignatura:");
 
             try {
-                if (typeof asignatura != "string" || asignatura.trim() === "") {
+                if (!patron2.test(asignatura) || typeof asignatura != "string" || asignatura.trim() === "") {
                     throw new Error("Error: La asignatura no es valida");
                 }
             } catch (error) {
