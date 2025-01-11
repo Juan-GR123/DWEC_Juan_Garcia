@@ -187,25 +187,53 @@ siguiente metodos:
  * Clase que representa a un estudiante.
  */
 class Estudiantes {
-    /** @type {number} ID único del estudiante */
+    /** 
+     *  @type {number}  
+     *  
+    */
+    //ID único del estudiante
     #id;
 
-    /** @type {string} Nombre del estudiante */
+    /** 
+     *  @type {string} 
+     * 
+    */
+    //Nombre del estudiante 
     #nombre;
 
-    /** @type {number} Edad del estudiante */
+    /** 
+     *  @type {number} 
+     *  
+    */
+    //Edad del estudiante 
     #edad;
 
-    /** @type {Object} Dirección del estudiante, incluyendo calle, número, código postal, provincia y localidad */
+    /** 
+     * @type {Object} 
+     * 
+     */
+    //Dirección del estudiante, incluyendo calle, número, código postal, provincia y localidad
     #direccion;
 
-    /** @type {Array<Object>} Lista de asignaturas matriculadas, cada una con nombre y nota */
+    /**
+     *  @type {Array<Object>} 
+     * 
+    */
+    //Lista de asignaturas matriculadas, cada una con nombre y nota 
     #asignaturas;
 
-    /** @type {Array<Object>} Registro de acciones realizadas, incluyendo tipo y fecha */
+    /** 
+     * @type {Array<Object>} 
+     * 
+     */
+    //Registro de acciones realizadas, incluyendo tipo y fecha
     #registros;
 
-    /** @type {Array<number>} IDs de estudiantes generados */
+    /** 
+     * @type {Array<number>} 
+     * 
+    */
+    //IDs de estudiantes generados 
     static numeros = [];
 
     /**
@@ -284,7 +312,7 @@ class Estudiantes {
 
 
 
-    
+
     /**
      * mostramos por pantalla el id del estudiante y su nombre y edad
      * @returns {string} Información del estudiante.
@@ -322,11 +350,11 @@ class Estudiantes {
     }
 
 
-     /**
-     * Desmatricula al estudiante de una asignatura.
-     * @param {Object} asignatura - Objeto con el nombre de la asignatura.
-     * @returns {boolean} Indica si la operación fue exitosa.
-     */
+    /**
+    * Desmatricula al estudiante de una asignatura.
+    * @param {Object} asignatura - Objeto con el nombre de la asignatura.
+    * @returns {boolean} Indica si la operación fue exitosa.
+    */
     desmatricular(asignatura) {
         const indice = this.#asignaturas.findIndex(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase());//buscamos en el array una asignatura con el mismo nombre
 
@@ -351,7 +379,7 @@ class Estudiantes {
     }
 
 
-   
+
 
     /**
      * registra la fecha de matriculación o desmatriculación
@@ -366,14 +394,14 @@ class Estudiantes {
         return resultado; // devolvemos el array con los valores transformados
     }
 
-   
-     /**
-     * Agrega una calificación a una asignatura.
-     * Cambia la nota de calificacion si existe esta asignatura
-     * @param {Object} asignatura - Objeto con el nombre de la asignatura.
-     * @param {number} nota - Nota a asignar.
-     * @returns {boolean} Indica si la operación fue exitosa.
-     */
+
+    /**
+    * Agrega una calificación a una asignatura.
+    * Cambia la nota de calificacion si existe esta asignatura
+    * @param {Object} asignatura - Objeto con el nombre de la asignatura.
+    * @param {number} nota - Nota a asignar.
+    * @returns {boolean} Indica si la operación fue exitosa.
+    */
     agregar_calificacion(asignatura, nota) {
         // Validar que la nota sea un número válido
         try {
