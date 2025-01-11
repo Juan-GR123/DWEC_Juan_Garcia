@@ -10,32 +10,18 @@
  * 
  */
 
-//Creamos una clase para saber la dirección de cada estudiante
-/*
-La clase Direccion tendrá los siguiente Atributos:
-#calle: Indicará la calle en la que pertenece
-#numero: Indicará el número de calle
-#piso: Indicará el número de piso 
-#codigo_postal: Indicará el codigo postal (5 números, ni mas ni menos) 
-#provincia: Indicará la provincia
-#localidad: Indicará la localidad de dicha provincia
-
-Por último, contará con un constructor el cual se encargará de incializar los valores y de
-que el código postal solo contenga 5 digitos y los getters de cada uno de sus atributos en caso de que
-se les necesite en algun momento.
-
-También se contará con el método toString() para mostrar todos los atributos por pantalla.
-*/
-
+/**
+ * Creamos una clase para saber la dirección de cada estudiante
+ */
 class Direccion {
     /**
-     *  Crea una instancia de la clase Direccion.
-     * @param {string} calle - La calle de la dirección.
-     * @param {number} numero - El número de la dirección.
-     * @param {number} piso - El piso de la dirección.
-     * @param {string} codigo - El código postal de la dirección (debe tener 5 dígitos).
-     * @param {string} provincia - La provincia de la dirección.
-     * @param {string} localidad - La localidad de la dirección.
+     * ## Atributos privados
+     * - `#calle`: La calle de la dirección.
+     * - `#numero`: El número de la dirección.
+     * - `#piso`: El piso de la dirección.
+     * - `#codigo_postal`: El código postal de la dirección.
+     * - `#provincia`: La provincia de la dirección.
+     * - `#localidad`: La localidad de la dirección.
      */
     #calle;
     #numero;
@@ -43,6 +29,26 @@ class Direccion {
     #codigo_postal;
     #provincia;
     #localidad;
+
+    /*
+    Se contará con un constructor el cual se encargará de incializar los valores y de
+    que el código postal solo contenga 5 digitos y los getters de cada uno de sus atributos en caso de que
+    se les necesite en algun momento.
+    */
+
+     /**
+     * ## Constructor de la clase Dirección
+     * 
+     * Inicializa una nueva instancia de la clase Dirección.
+     * 
+     * ### Parámetros
+     * @param {string} calle - La calle de la dirección.
+     * @param {number} numero - El número de la calle.
+     * @param {number} piso - El número del piso.
+     * @param {string} codigo - El código postal de la dirección (debe tener 5 dígitos). Si no cumple el formato, se asignará `"Error"`.
+     * @param {string} provincia - La provincia.
+     * @param {string} localidad - La localidad de dicha provincia.
+     */
 
     constructor(calle, numero, piso, codigo, provincia, localidad) {
         let patron = /^[0-9]{5}$/;
@@ -56,30 +62,35 @@ class Direccion {
         this.#localidad = localidad;
     }
     /**
-     *  Obtiene el nombre de la calle.
+     * ## Métodos Getters
+     * Métodos para obtener los valores de los atributos privados.
+     */
+
+    /**
+     *  Indicará la calle en la que pertenece
      * @returns {string} El nombre de la calle.
      */
     get calle() {
         return this.#calle;
     }
     /**
-     * Obtiene el número de la dirección.
-     * @returns {number} El número de la dirección.
+     * Indicará el número de calle
+     * @returns {number} 
      */
     get numero() {
         return this.#numero;
     }
 
     /**
-    * Obtiene el piso de la dirección.
-    * @returns {string} El piso de la dirección.
+    * Indicará el número de piso 
+    * @returns {string} 
     */
     get piso() {
         return this.#piso;
     }
 
     /**
-    * Obtiene el código postal de la dirección.
+    * Indicará el codigo postal (5 números, ni mas ni menos) 
     * @returns {string} El código postal de la dirección.
     */
     get codigo_postal() {
@@ -87,23 +98,24 @@ class Direccion {
     }
 
     /**
-     * Obtiene la provincia de la dirección.
-     * @returns {string} La provincia de la dirección.
+     * Indicará la provincia
+     * @returns {string}
      */
     get provincia() {
         return this.#provincia;
     }
 
     /**
-     * Obtiene la localidad de la dirección.
-     * @returns {string} La localidad de la dirección.
+     * Indicará la localidad de dicha provincia
+     * @returns {string} 
      */
     get localidad() {
         return this.#localidad;
     }
 
     /**
-     * Convierte la dirección en una cadena legible.
+     * ## Método toString
+     * También se contará con el método toString() para mostrar todos los atributos por pantalla.
      * @returns {string} Una cadena con la dirección en formato "calle, número, piso, código postal, localidad, provincia".
      */
     toString() {
