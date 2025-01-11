@@ -75,9 +75,9 @@ function dividir(a, b) {
 }
 
 /*markdown
-    #
-    ##
-    ###
+    # -primer nivel
+    ## - segundo nivel
+    ### - tercer nivel
     **texto en negrita**
     *cursiva*
     [texto del enlace](https://www.duckgoduckgo.com)
