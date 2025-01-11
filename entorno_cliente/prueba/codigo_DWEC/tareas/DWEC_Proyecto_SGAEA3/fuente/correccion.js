@@ -182,26 +182,52 @@ siguiente metodos:
  
  
 */
+
+/**
+ * Clase que representa a un estudiante.
+ */
 class Estudiantes {
-
+    /** @type {number} ID único del estudiante */
     #id;
+
+    /** @type {string} Nombre del estudiante */
     #nombre;
+
+    /** @type {number} Edad del estudiante */
     #edad;
-    #direccion;//Tendra {calle,numero,posp,codigo postal,provincia y localidad}
-    #asignaturas;//{nombre: , nota: }
-    #registros;//{nombre: , tipo: , fecha:}
 
-    static numeros = [];//Es estático ya que servirá para almacenar en el constructor la id de cada estudiante
+    /** @type {Object} Dirección del estudiante, incluyendo calle, número, código postal, provincia y localidad */
+    #direccion;
 
+    /** @type {Array<Object>} Lista de asignaturas matriculadas, cada una con nombre y nota */
+    #asignaturas;
+
+    /** @type {Array<Object>} Registro de acciones realizadas, incluyendo tipo y fecha */
+    #registros;
+
+    /** @type {Array<number>} IDs de estudiantes generados */
+    static numeros = [];
+
+    /**
+     * Constructor de la clase Estudiantes.
+     * @param {string} N_nombre - Nombre del estudiante (solo letras y espacios).
+     * @param {number} N_edad - Edad del estudiante.
+     * @param {Object} N_direc - Dirección del estudiante.
+     */
     constructor(N_nombre, N_edad, N_direc) {
         let patron = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;//que contenga letras y espacios 1 o mas veces
-        if (!patron.test(N_nombre)) {
-            throw new Error("Error solo pueden mostrase espacios o letras");
-        } else {
-            this.#nombre = N_nombre;
+        try {
+            if (!patron.test(N_nombre)) {
+                throw new Error("Error solo pueden mostrase espacios o letras");
+            } else {
+                this.#nombre = N_nombre;
+            }
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
         }
 
-        let ID = 1;//inicializamos el id a 1
+
+        let ID = 0;
 
         while (Estudiantes.numeros.includes(ID)) {//En caso de que el id actual se encuentre en el array
             //se le sumará al id un valor para poder darle el nuevo valor a un nuevo estudiante
@@ -216,32 +242,62 @@ class Estudiantes {
         this.#registros = [];
     }
 
+    /**
+     * Obtiene el ID del estudiante.
+     * @returns {number} ID del estudiante.
+     */
     get id() {
         return this.#id;
     }
 
+    /**
+     * Obtiene el nombre del estudiante.
+     * @returns {string} Nombre del estudiante.
+     */
     get nombre() {
         return this.#nombre;
     }
 
+    /**
+     * Obtiene la edad del estudiante.
+     * @returns {number} Edad del estudiante.
+     */
     get edad() {
         return this.#edad;
     }
 
+    /**
+     * Obtiene la dirección del estudiante.
+     * @returns {Object} Dirección del estudiante.
+     */
     get direccion() {
         return this.#direccion;
     }
 
+    /**
+     * Obtiene las asignaturas del estudiante.
+     * @returns {Array<Object>} Lista de asignaturas.
+     */
     get asignaturas() {
         return [...this.#asignaturas];
     }
 
 
 
-    //mostramos por pantalla el id del estudiante y su nombre y edad
+    
+    /**
+     * mostramos por pantalla el id del estudiante y su nombre y edad
+     * @returns {string} Información del estudiante.
+     */
     toString() {
         return `${this.#id}: ${this.#nombre},  ${this.#edad}, ${this.#direccion}`;
     }
+
+    /**
+     * Matricula al estudiante en una asignatura.
+     * @param {Object} asignatura - Objeto con el nombre y nota de la asignatura.
+     * @returns {boolean} Indica si la operación fue exitosa.
+     */
 
     matricular(asignatura) {//introduces un objeto de la clase asignatura como parametro
         // Comprobar si la asignatura ya está matriculada por nombre
@@ -266,6 +322,11 @@ class Estudiantes {
     }
 
 
+     /**
+     * Desmatricula al estudiante de una asignatura.
+     * @param {Object} asignatura - Objeto con el nombre de la asignatura.
+     * @returns {boolean} Indica si la operación fue exitosa.
+     */
     desmatricular(asignatura) {
         const indice = this.#asignaturas.findIndex(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase());//buscamos en el array una asignatura con el mismo nombre
 
@@ -290,8 +351,12 @@ class Estudiantes {
     }
 
 
-    //registrar la fecha de matriculación o desmatriculación
+   
 
+    /**
+     * registra la fecha de matriculación o desmatriculación
+     * @returns {Array<string>} Lista de registros en formato legible.
+     */
     get registros() {
         let resultado = []; // Creamos una variable resultado que funcionará como un array vacío para almacenar los resultados
         this.#registros.forEach(registro => { // Recorremos el array registros con forEach
@@ -301,10 +366,16 @@ class Estudiantes {
         return resultado; // devolvemos el array con los valores transformados
     }
 
-    //cambiar la nota de calificacion si existe esta asignatura
+   
+     /**
+     * Agrega una calificación a una asignatura.
+     * Cambia la nota de calificacion si existe esta asignatura
+     * @param {Object} asignatura - Objeto con el nombre de la asignatura.
+     * @param {number} nota - Nota a asignar.
+     * @returns {boolean} Indica si la operación fue exitosa.
+     */
     agregar_calificacion(asignatura, nota) {
         // Validar que la nota sea un número válido
-
         try {
             if (typeof nota != 'number' || nota < 0 || nota > 10) {
                 throw new Error('La nota debe ser un número entre 0 y 10.');
@@ -324,15 +395,20 @@ class Estudiantes {
             return false;
         }
 
-
-
     }
 
-    asig_mostrar() {//muestra las asignaturas en las que esta matriculado el estudiante
+
+    /**
+     * Muestra las asignaturas en las que esta matriculado el estudiante
+     */
+    asig_mostrar() {
         console.log(this.#asignaturas);
     }
 
-    // Calcula el promedio de todas las calificaciones del estudiante.
+    /**
+     * Calcula el promedio de todas las calificaciones del estudiante.
+     * @returns {string} Promedio de las calificaciones, redondeado a 2 decimales.
+     */
     promedio() {
         if (this.#asignaturas.length === 0) {
             return 0;
@@ -396,10 +472,14 @@ class Asignaturas {
     #calificaciones;//[[10],[9]]
     constructor(nombre1) {
         let patron = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;//que contenga letras y espacios 1 o mas veces
-        if (!patron.test(nombre1)) {
-            throw new Error("Error solo pueden mostrase espacios o letras");
-        } else {
-            this.nombre = nombre1;//se inicializa
+        try {
+            if (!patron.test(nombre1)) {
+                throw new Error("Error solo pueden mostrase espacios o letras");
+            } else {
+                this.nombre = nombre1;//se inicializa
+            }
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
         }
 
         this.#calificaciones = [];
@@ -901,33 +981,35 @@ class GestorAs extends Gestores {
 
 class ErrorPersonalizado extends Error {
     constructor(mensaje) {
-        super(mensaje); 
-        this.name = "ErrorPersonalizado"; 
+        super(mensaje);
+        this.name = "ErrorPersonalizado";
     }
 }
 
 
 function validarEstudiante(estudiante) {
-    if (typeof estidiante.nombre!='string' || estudiante.nombre.trim() === "") {
+    if (typeof estudiante.nombre != 'string' || estudiante.nombre.trim() === "") {
         throw new ErrorPersonalizado("El nombre es obligatorio.");
     }
-    if (typeof estudiante.edad!='number' || estudiante.edad <= 0) {
+    if (typeof estudiante.edad != 'number' || estudiante.edad <= 0) {
         throw new ErrorPersonalizado("La edad debe ser un número positivo.");
     }
-    console.log("Estudiante validado con éxito:", estudiante);
+    console.log("Estudiante validado con éxito:");
 }
 
 // Ejemplo de uso
-try {
-    let estudiante0 = new Estudiantes("Estudiante ZERO", -5, new Direccion("Calle pez", 5, "6ºA", 29005, "Malaga", "Malaga")); 
+try {//te hace un id nuevo
+    let estudiante0 = new Estudiantes("Estudiante ZERO", -5, new Direccion("Calle pex", 10, "12ºA", 29345, "Malaga", "Malaga"));
+    //console.log(estudiante0.nombre);
     validarEstudiante(estudiante0);
 } catch (error) {
-    if (error instanceof ErrorPersonalizado) {
-        console.log(`Error de validación en el campo: ${error.message}`);
+    if (error instanceof ErrorPersonalizado) {//instanceof te ayuda a saber si un objeto en su cadena de prototipos contiene la propiedad prototype de un constructor.
+        console.log(`Error de validación: ${error.message}`);
     } else {
         console.log(`Ocurrió un error inesperado: ${error.message}`);
     }
 }
+
 //////////////////////////////////////
 
 const listaEstudiantes = new GestorEs();//inicializamos un objeto de la clase GestorEs que actuará como un array de estudiantes
@@ -1043,6 +1125,8 @@ do {
         */
         case 1:
 
+            let patron1 = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;
+
             let nombre = prompt("Introduce el nombre del estudiante:");
             let edad = prompt("Introduce la edad del estudiante:");
             edad = Number(edad);
@@ -1056,7 +1140,7 @@ do {
 
             try {
 
-                if (nombre === "" || typeof edad != 'number' || edad <= 0) {
+                if (nombre === "" || !patron1.test(nombre) || typeof edad != 'number' || edad <= 0) {
                     throw new Error("El nombre o la edad no se han introducido correctamente. Vuelve a intentarlo")
                     // break;
                 }
@@ -1106,11 +1190,12 @@ do {
         */
         case 2:
 
+            let patron2 = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;
 
             let asignatura = prompt("Introduce el nombre de la asignatura:");
 
             try {
-                if (typeof asignatura != "string" || asignatura.trim() === "") {
+                if (!patron2.test(asignatura) || typeof asignatura != "string" || asignatura.trim() === "") {
                     throw new Error("Error: La asignatura no es valida");
                 }
             } catch (error) {
