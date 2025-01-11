@@ -848,7 +848,7 @@ class GestorEs extends Gestores {
      * 
      * @param {string} nombre - El nombre o parte del nombre del estudiante.
      * @returns {void} Lista los estudiantes encontrados o un mensaje de error si no hay coincidencias.
-     * @throws {error} Si no existen coincidencias de estudiantes en el array
+     * @throws {error} Si no existen coincidencias de estudiantes en el array de listas
      */
     obtener_nombre_estudiante(nombre) {
         let obtener = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
@@ -915,62 +915,6 @@ class GestorEs extends Gestores {
 
 }
 
-
-/*
-
- 
-  agregar_asignatura(asignatura):
- 
-  eliminar_asignatura(nombre):
- 
-      Este método eliminará a una asignatura de la lista mediante el nombre que se la haya introducido como 
-      parametro.
- 
-      Se buscará la posición del array donde coincidan el nombre introducido con el nombre de una
-      asignatura
- 
-      En caso de que el nombre introducido exista en la lista se cogerá el número de la posición 
-      donde se encuentre la asignatura coincidente y se eliminará esa asignatura la cual posea el nombre
-      correspondiente mediante el metodo splice().
- 
-      En caso contrario, se lanzará un mensaje de error.
- 
-  listar_asignaturas():
- 
-      Se recorrerá todo el array _gestores y los elementos que posea, en este caso asignaturas,
-      se mostrarán en pantalla mediante el metodo toString de la clase Asignaturas, el cual
-      mostrará el nombre de cada asignatura.
- 
-  obtener_asignatura(nombre):
- 
-      Este método tratará de buscar en el array _gestor a una asignatura mediante su nombre.
- 
-      Esto se conseguirá mediante el método find() y en caso de que devuelva algo será la 
-      asignatura encontrada y en caso de que el método no devuelva nada entonces se lanzará un error.
- 
-  obtener_muchas_asignaturas(nombre):
- 
-      Este método tendrá la misma función que el método obtener_asignatura(nombre) 
-      con la única diferencia de que se buscará la asignatura por su nombre parcial en vez de la necesidad
-      de introducir el nombre exacto.
- 
-      Esto se conseguirá mediante el método filter() el cual filtrará las asignaturas cuyo nombre no
-      posea el string introducido como parametro en el método.
- 
-      Si existiese algun elemento en el nuevo array creado después de utilizar el método filter entonces
-      se recorrería el array y se mostrararían las asignaturas que coincidan con el nombre 
-      introducido como parametro.
- 
-      Así este método, al contrario que el anterior, devolverá multiples resultados en vez de solamente
-      una coincidencía.
- 
-  toString():
-      El método toString servirá como una sobrecarga del metodo toString de la clase Gestores y este 
-      mostrará la longitud del array _gestor pero indicando que la lista es una lista de asignaturas.
- 
- 
-*/
-
 /**
  * # Clase GestorAs
  *  La clase GestorAs es una subclase de Gestores y contará con los mismo atributos que la clase de la
@@ -1002,25 +946,25 @@ class GestorAs extends Gestores {
 
     }
 
-     /**
-     * ## Método: agregar_asignatura
-     * 
-     *
-     * Este método será el encargado de buscar dentro del array _gestor una coincidencia entre el nombre
-     * de la asignatura introducida como parametro y el nombre de alguna de las asignaturas contenidas en el
-     * array.
-     * 
-     * Para realizar esta funcionalidad se utilizara el método find() para que devuelva una coincidencia
-     * (la primera) en caso de que existiese el nombre de la asignatura en el array y de ser ese el caso
-     * se lanzaría un error diciendo que la asignatura ya existe en la lista.
-     * 
-     * Si no existiese se agregaría a la lista con el metodo push(), introduciendo el objeto de la
-     * clase asignatura en la última posición del array
-     * 
-     * @param {Object} asignatura - La asignatura a agregar.
-     * @returns {boolean} "true" si se agregó correctamente, "false" en caso de error.
-     * @throws {error} si la asignatura ya existe dentro de la lista
-     */
+    /**
+    * ## Método: agregar_asignatura
+    * 
+    *
+    * Este método será el encargado de buscar dentro del array _gestor una coincidencia entre el nombre
+    * de la asignatura introducida como parametro y el nombre de alguna de las asignaturas contenidas en el
+    * array.
+    * 
+    * Para realizar esta funcionalidad se utilizara el método find() para que devuelva una coincidencia
+    * (la primera) en caso de que existiese el nombre de la asignatura en el array y de ser ese el caso
+    * se lanzaría un error diciendo que la asignatura ya existe en la lista.
+    * 
+    * Si no existiese se agregaría a la lista con el metodo push(), introduciendo el objeto de la
+    * clase asignatura en la última posición del array
+    * 
+    * @param {Object} asignatura - La asignatura a agregar.
+    * @returns {boolean} "true" si se agregó correctamente, "false" en caso de error.
+    * @throws {error} si la asignatura ya existe dentro de la lista
+    */
     agregar_asignatura(asignatura) {
         try {
             if (this._gestor.find(elemento => elemento.nombre.toLowerCase() === asignatura.nombre.toLowerCase())) {
@@ -1033,9 +977,27 @@ class GestorAs extends Gestores {
             return false;
         }
 
-    } 
+    }
 
-    
+    /**
+     * ## Método: eliminar_asignatura
+     *
+     *  Este método eliminará a una asignatura de la lista mediante el nombre que se la haya introducido como 
+     *  parametro.
+     * 
+     * Se buscará la posición del array donde coincidan el nombre introducido con el nombre de una
+     * asignatura
+     * 
+     * En caso de que el nombre introducido exista en la lista se cogerá el número de la posición 
+     * donde se encuentre la asignatura coincidente y se eliminará esa asignatura la cual posea el nombre
+     * correspondiente mediante el metodo splice().
+     *
+     * 
+     * @param {string} nombre - El nombre de la asignatura a eliminar.
+     * @param {Object} listaEstudiantes - El gestor de estudiantes para actualizar su información.
+     * @returns {boolean} `true` si se eliminó correctamente, `false` en caso de error.
+     * @throws {error} En caso de que el nombre introducido como parametro no exista en la lista de asignaturas
+     */
     eliminar_asignatura(nombre, listaEstudiantes) {//parametro de listasEstudiantes
         let eliminar = this._gestor.findIndex(elemento => elemento.nombre.toLowerCase() === nombre.toLowerCase());
 
@@ -1057,7 +1019,15 @@ class GestorAs extends Gestores {
             return false;
         }
 
-    } //Elimina una asignatura por nombre.
+    }
+
+    /**
+     * ## Método: listar_asignaturas
+     * 
+     * Se recorrerá todo el array _gestores y los elementos que posea, en este caso asignaturas,
+     * se mostrarán en pantalla mediante el metodo toString de la clase Asignaturas, el cual
+     * mostrará el nombre de cada asignatura.
+     */
 
     listar_asignaturas() {
         for (let asignatura of this._gestor) {
@@ -1065,8 +1035,22 @@ class GestorAs extends Gestores {
         }
     }
 
-    obtener_asignatura(nombre) {//para que solo te devuelva una asignatura en concreto. 
-        //Tiene que ser su nombre completo para que no haya errores. Esto es para métodos en concreto
+    /**
+     * ## Método: obtener_asignatura
+     * 
+     * 
+     *  Este método tratará de buscar en el array _gestor a una asignatura mediante su nombre.
+     *  Buscará y devolverá una asignatura específica por su nombre.
+     * 
+     *  Esto se conseguirá mediante el método find() y en caso de que devuelva algo será la 
+     *  asignatura encontrada 
+     * 
+     * 
+     * @param {string} nombre - El nombre completo de la asignatura a buscar.
+     * @returns {Object|boolean} La asignatura encontrada o `false` si no existe.
+     * @throws {error} En caso de que el método no devuelva nada 
+     */
+    obtener_asignatura(nombre) { 
         let obtener = this._gestor.find(elemento => elemento.nombre.toLowerCase() === nombre.toLowerCase());
         try {
             if (obtener) {//si encuentra algun valor
@@ -1082,7 +1066,28 @@ class GestorAs extends Gestores {
 
     }
 
-    obtener_muchas_asignaturas(nombre) {//te devuleve muchos resultados dependiendo de lo que le introduzcas
+     /**
+     * ## Método: obtener_muchas_asignaturas
+     * 
+     *  Este método tendrá la misma función que el método obtener_asignatura(nombre) 
+     * con la única diferencia de que se buscará la asignatura por su nombre parcial en vez de la necesidad
+     *  de introducir el nombre exacto.
+     * 
+     *  Esto se conseguirá mediante el método filter() el cual filtrará las asignaturas cuyo nombre no
+     * posea el string introducido como parametro en el método.
+     * 
+     * Si existiese algun elemento en el nuevo array creado después de utilizar el método filter entonces
+     * se recorrería el array y se mostrararían las asignaturas que coincidan con el nombre 
+     * introducido como parametro.
+     * 
+     * Así este método, al contrario que el anterior, devolverá multiples resultados en vez de solamente
+     * una coincidencía.
+     * 
+     * @param {string} nombre - El texto parcial o completo del nombre de la asignatura.
+     * @returns {void} Muestra en consola las asignaturas encontradas o un mensaje de error.
+     * @throws {error} En caso de que no se encuentre ninguna asignatura que coincida con el parametro nombre introducido
+     */
+    obtener_muchas_asignaturas(nombre) {
         let obtener_As = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
         //includes: Se usa para verificar si el nombre parcial está contenido en el nombre completo de la asignatura.
         //filter() devuelve un array con todas las asignaturas que coincidan. Se podría haber utilizado find pero ese método solo devuelve un valor.
@@ -1101,6 +1106,14 @@ class GestorAs extends Gestores {
 
     }
 
+    /**
+     * ## Método: toString
+     * 
+     *  El método toString servirá como una sobrecarga del metodo toString de la clase Gestores y este 
+     *  mostrará la longitud del array _gestor pero indicando que la lista es una lista de asignaturas.
+     * 
+     * @returns {string}
+     */
     toString() {//sobrecarga
         super.toString();
         return `Lista con ${this._gestor.length} Asignaturas`;
@@ -1109,13 +1122,36 @@ class GestorAs extends Gestores {
 
 }
 
+/**
+ * # Clase ErrorPersonalizado
+ * 
+ * Extiende de la clase "Error" para crear un tipo de error personalizado que puede ser utilizado en validaciones específicas.
+ */
+
 class ErrorPersonalizado extends Error {
+      /**
+     * ## Constructor
+     * 
+     * 
+     * @param {string} mensaje - El mensaje de error que describe el problema.
+     */
     constructor(mensaje) {
         super(mensaje);
         this.name = "ErrorPersonalizado";
     }
 }
 
+
+/**
+ * # Función: validarEstudiante
+ * 
+ * Valida los datos de un estudiante y lanza un error personalizado si no cumple con las condiciones.
+ * 
+ * @param {Object} estudiante - El objeto que representa al estudiante.
+ * @param {string} estudiante.nombre - El nombre del estudiante. Debe ser una cadena no vacía.
+ * @param {number} estudiante.edad - La edad del estudiante. Debe ser un número positivo.
+ * @throws {ErrorPersonalizado} Si el nombre o la edad no son validos
+ */
 
 function validarEstudiante(estudiante) {
     if (typeof estudiante.nombre != 'string' || estudiante.nombre.trim() === "") {
@@ -1141,6 +1177,7 @@ try {//te hace un id nuevo
 }
 
 //////////////////////////////////////
+
 
 const listaEstudiantes = new GestorEs();//inicializamos un objeto de la clase GestorEs que actuará como un array de estudiantes
 const listaAsignaturas = new GestorAs();//inicializamos un objeto de la clase GestorAs que actuará como un array de asignaturas
@@ -1219,7 +1256,6 @@ listaEstudiantes.gestor[4].agregar_calificacion(listaAsignaturas.gestor[1], 10);
 
 let pregunta = 0;
 
-//Hacemos un do{}while() en el que si el valor es 0 salga del menu
 do {
 
 
@@ -1244,14 +1280,16 @@ do {
     pregunta = Number(pregunta);
 
     switch (pregunta) {
-        /*
-        Este caso se encargará de la creación de un estudiante y de agregarlo a la listaEstudiantes
-        gracias al método agregar_estudiante.
- 
-        Antes de agregar a un estudiante a la lista se comprobará si los valores introducidos por el usuario
-        son validos y en caso de que sean validos se agregarán como un nuevo estudiante.
- 
-        En caso de no ser validos saltará un error por pantalla.
+        /**
+         * ## Caso 1: Creación de un estudiante y adición a la lista de estudiantes
+         * 
+         * Este caso se encargará de la creación de un estudiante y de agregarlo a la listaEstudiantes
+         * gracias al método agregar_estudiante.
+         * 
+         * Antes de agregar a un estudiante a la lista se comprobará si los valores introducidos por el usuario
+         * son validos y en caso de que sean validos se agregarán como un nuevo estudiante.
+         * 
+         * @throws {Error} Si alguno de los datos no es válido.
         */
         case 1:
 
@@ -1287,12 +1325,10 @@ do {
                 break;
             }
 
-
             let nuevaDireccion = new Direccion(calle, numero, piso, codigo_postal, provincia, localidad);
 
             let nuevoEstudiante = new Estudiantes(nombre, edad, nuevaDireccion);
 
-            // Agregar el estudiante a la lista
             let comprobacion_es = listaEstudiantes.agregar_estudiante(nuevoEstudiante);
 
             if (comprobacion_es != false) {
@@ -1300,23 +1336,22 @@ do {
                 listaEstudiantes.listar_estudiantes();
             }
 
-
-
-
-
             break;
 
-        /*
-        Este caso se encargará de la creación de una Asignatura y de agregarla a la listaAsignaturas.
- 
-        En este caso también se validarán los valores antes de agregarlos y se utilizará el método
-        trim() para eliminar cualquier espacio en blanco que se haya podido dejar en el nombre
-        de asignatura introducido por el usuario.
- 
-        cuando el valor haya sido validado, se creará un objeto de la clase asignaturas con el
-        nombre introducido como valor y se agregará a listaAsignaturas con el método agregar_asignatura
- 
-        En caso de que el valor introducido no fuese valido saltaría un error en consola.
+
+        /**
+         * ## Caso 2: Creación de una asignatura y adición a la lista de asignaturas
+         *
+         *  Este caso se encargará de la creación de una Asignatura y de agregarla a la listaAsignaturas.
+         * 
+         * En este caso también se validarán los valores antes de agregarlos y se utilizará el método
+         * trim() para eliminar cualquier espacio en blanco que se haya podido dejar en el nombre
+         * de asignatura introducido por el usuario.
+         * 
+         * Cuando el valor haya sido validado, se creará un objeto de la clase asignaturas con el
+         *  nombre introducido como valor y se agregará a listaAsignaturas con el método agregar_asignatura
+         * 
+         *  @throws {Error} Si el nombre de la asignatura no es válido.
         */
         case 2:
 
@@ -1344,17 +1379,20 @@ do {
 
             break;
 
-        /*
-        En este caso se matriculará a un estudiante mediante los métodos obtener_estudiante(id) y
-        matricular(asignatura).
- 
-        Se le pedirá al usuario el id del estudiante que quiera matricular y el nombre de la asignatura
-        en la cual quiera matricular al estudiante.
- 
-        Entonces se pasará el string con el id introducido a Number y se realizará el metodo
-        matricular para que la asignatura introducida aparezca en el array de asignaturas del estudiante
-        y que se registre así como una asignatura matriculada
-        */
+       /**
+         * ## Caso 3: Matricular a un estudiante en una asignatura
+         *
+         *  En este caso se matriculará a un estudiante mediante los métodos obtener_estudiante(id) y
+         *  matricular(asignatura).
+         * 
+         *  Se le pedirá al usuario el id del estudiante que quiera matricular y el nombre de la asignatura
+         *  en la cual quiera matricular al estudiante.
+         * 
+         * Entonces se pasará el string con el id introducido a Number y se realizará el metodo
+         * matricular para que la asignatura introducida aparezca en el array de asignaturas del estudiante
+         * y que se registre así como una asignatura matriculada
+         * 
+         */
         case 3:
 
             listaEstudiantes.listar_estudiantes();
