@@ -1770,8 +1770,8 @@ do {
          * a elegir dentro de listaEstudaintes, obtener_estudiante(id) para que se devuelva un estudiante
          * concreto del que mostrar sus registros y por ultimo el getter de registros de la clase estudiante
          * el cual se utilizara en el estudiante que nos devuelva obtener_estudiante y nos mostrará las 
-         * fechas de las matriculaciones y desmatriculaciones. 
-         * <br>
+         * fechas de las matriculaciones y desmatriculaciones.<br> 
+         * 
          * @throws {error} si el id del estudiante no es un número o si es menor que 0
          */
         case 10:
