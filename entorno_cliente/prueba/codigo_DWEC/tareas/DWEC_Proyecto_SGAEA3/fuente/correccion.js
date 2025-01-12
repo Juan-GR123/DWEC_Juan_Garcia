@@ -1331,11 +1331,7 @@ listaEstudiantes.gestor[4].agregar_calificacion(listaAsignaturas.gestor[1], 10);
 //console.log(listaAsignaturas.obtener_asignatura("Fisica"));
 
 
-/**
- * El programa principal comienza aqui <br>
- * # Casos personalizados
- * 
- */
+
 
 let pregunta = 0;
 
@@ -1362,7 +1358,11 @@ do {
     pregunta = prompt("Dime la opción que desees realizar");
     pregunta = Number(pregunta);
 
-
+    /**
+     * 
+     * # Gestionar las acciones del menú principal según la opción seleccionada.
+     *  @param {number} pregunta - La opción seleccionada por el usuario.
+     */
     switch (pregunta) {
         /**
          * ## Caso 1: Creación de un estudiante y adición a la lista de estudiantes
