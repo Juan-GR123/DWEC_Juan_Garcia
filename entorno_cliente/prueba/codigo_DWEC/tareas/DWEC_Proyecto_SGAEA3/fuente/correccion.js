@@ -16,12 +16,21 @@
 class Direccion {
     /**
      * ## Atributos privados
-     * - `#calle`: La calle de la dirección.
-     * - `#numero`: El número de la dirección.
-     * - `#piso`: El piso de la dirección.
-     * - `#codigo_postal`: El código postal de la dirección.
-     * - `#provincia`: La provincia de la dirección.
-     * - `#localidad`: La localidad de la dirección.
+     * 
+     * @private
+     * @property {string} #calle - La calle de la dirección.
+     * @private
+     * @property {number} #numero -  El número de la calle.
+     * @private
+     * @property {string} #piso - El número del piso.
+     * @private
+     * @property {string} #codigo_postal - El código postal de la dirección.
+     * @private
+     * @property {string} #provincia - La provincia.
+     * @private
+     * @property {string} #localidad - La localidad  de dicha provincia.
+     * 
+     * 
      */
     #calle;
     #numero;
@@ -29,12 +38,6 @@ class Direccion {
     #codigo_postal;
     #provincia;
     #localidad;
-
-    /*
-    Se contará con un constructor el cual se encargará de incializar los valores y de
-    que el código postal solo contenga 5 digitos y los getters de cada uno de sus atributos en caso de que
-    se les necesite en algun momento.
-    */
 
     /**
     * ## Constructor de la clase Dirección
@@ -145,6 +148,7 @@ class Estudiantes {
     */
     //Nombre del estudiante 
     //El nombre indicará el nombre del estudiante
+    
     #nombre;
 
     /** 
@@ -286,6 +290,10 @@ class Estudiantes {
      * #asignaturas y además se crearía un registro de la fecha de matriculación de esa asignatura y se 
      * guardaría en el array #registros
      * 
+     * @typedef {Object} asignatura - Objeto con el nombre y nota de la asignatura.
+     * @property {string} nombre - el nombre de la asignatura
+     * @property {number} nota - La nota de la asignatura
+     * 
      * @param {Object} asignatura - Objeto con el nombre y nota de la asignatura.
      * @returns {boolean} Indica si la operación fue exitosa.
      * @throws {error}  Si en el array #asignaturas se encuentra alguna coincidencia en el nombre con la
@@ -324,7 +332,11 @@ class Estudiantes {
     * splice() (el cual cambia el contenido de un array eliminando elementos existentes) y se añadirá un 
     * registro de la desmatriculacion de esa asignatura.
     * 
-    * @param {Object} asignatura - Objeto con el nombre de la asignatura.
+    * @typedef {Object} asignatura - Objeto con el nombre y nota de la asignatura.
+    * @property {string} nombre - el nombre de la asignatura
+    * @property {number} nota - La nota de la asignatura
+    * 
+    * @param {Object} asignatura - Objeto con el nombre y nota de la asignatura.
     * @returns {boolean} Indica si la operación fue exitosa.
     * @throws {error} Si no se encuentra ninguna coincidencia del nombre de la asignatura en el array #asignaturas se lanzará un error
     */
@@ -377,9 +389,13 @@ class Estudiantes {
     * En caso de cumplirse las condiciones anteriores se buscará en el array asignaturas una asignatura
     * con el nombre de la asignatura introducida y en caso de encontrarse se le asignará a la asignatura del 
     * array asignaturas la nota introducida por el usuario
-     
-    * @param {Object} asignatura - Objeto con el nombre de la asignatura.
-    * @param {number} nota - Nota a asignar.
+    * 
+    * @typedef {Object} asignatura - Objeto con el nombre y nota de la asignatura.
+    * @property {string} nombre - el nombre de la asignatura
+    * @property {number} nota - La nota de la asignatura
+    * 
+    * @param {Object} asignatura - Objeto con el nombre y la nota de la asignatura
+    * @param {number} nota - Nota a asignar por el usuario.
     * @returns {boolean} Indica si la operación fue exitosa.
     * @throws {error} Si la nota es mayor que 10 o menor que 0 o si no es del tipo 'number' entonces se mostrara un error.
     */
@@ -695,7 +711,13 @@ class GestorEs extends Gestores {
      * Si no existiese se agregaría a la lista con el metodo push, introduciendo el elemento en la última
      * posición del array
      * 
-     * @param {Object} estudiante - El estudiante a agregar.
+     * @typedef {Object} estudiante - El estudiante a agregar.
+     * @property {number} id - El id del estudiante
+     * @property {string} nombre - el nombre del estudiante
+     * @property {number} edad - La edad del estudiante
+     * @property {Object} direccion - La direccion del estudiante
+     * 
+     * @param {Object} estudiante - El estudiante que se agrega como parametro
      * @returns {boolean} `true` si se agregó correctamente, `false` en caso de error.
      * @throws {error} Cuando exista el id del estudiante que se quiera agregar en la lista
      */
@@ -961,6 +983,10 @@ class GestorAs extends Gestores {
     * Si no existiese se agregaría a la lista con el metodo push(), introduciendo el objeto de la
     * clase asignatura en la última posición del array
     * 
+    * @typedef {Object} asignatura - La asignatura a agregar.
+    * @property {string} nombre - el nombre de la asignatura
+    * @property {number} nota - La nota de la asignatura
+    * 
     * @param {Object} asignatura - La asignatura a agregar.
     * @returns {boolean} "true" si se agregó correctamente, "false" en caso de error.
     * @throws {error} si la asignatura ya existe dentro de la lista
@@ -1129,7 +1155,7 @@ class GestorAs extends Gestores {
  */
 
 class ErrorPersonalizado extends Error {
-      /**
+    /**
      * ## Constructor
      * 
      * 
@@ -1147,9 +1173,11 @@ class ErrorPersonalizado extends Error {
  * 
  * Valida los datos de un estudiante y lanza un error personalizado si no cumple con las condiciones.
  * 
+ * @typedef {Object} estudiante - El objeto que representa al estudiante.
+ * @property {string} estudiante.nombre - El nombre del estudiante. Debe ser una cadena no vacía.
+ * @property {number} estudiante.edad - La edad del estudiante. Debe ser un número positivo.
+ * 
  * @param {Object} estudiante - El objeto que representa al estudiante.
- * @param {string} estudiante.nombre - El nombre del estudiante. Debe ser una cadena no vacía.
- * @param {number} estudiante.edad - La edad del estudiante. Debe ser un número positivo.
  * @throws {ErrorPersonalizado} Si el nombre o la edad no son validos
  */
 
