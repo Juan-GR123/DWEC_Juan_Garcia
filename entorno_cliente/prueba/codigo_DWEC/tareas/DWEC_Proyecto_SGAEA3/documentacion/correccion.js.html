@@ -1463,19 +1463,25 @@ do {
             break;
 
         /*
-        En este caso se desmatriculará a un estudiante de una asignatura gracias a los métodos 
-        obtener_estudiante(id) y desmatricular(asignatura).
- 
-        Se le pedirá al usuario el id del estudiante que quiera desmatricular y el nombre de la 
-        asignatura en la cual quiera desmatricular al estudiante.
- 
-        Entonces se pasará el string con el id introducido a Number y se realizará el metodo
-        desmatricular para que la asignatura introducida desaparezca del array de asignaturas 
-        del estudiante y que se registre como desmatriculada en en array de registros.
- 
-        En caso de que el nombre de la asignatura no exista en el array de asignaturas dentro de
-        estudiante se lanzará un error como hemos explicado en el metodo desmatricular
+        
         */
+        /**
+         * ## Caso 4: Desmatricular a un estudiante de una asignatura
+         *
+         * En este caso se desmatriculará a un estudiante de una asignatura gracias a los 
+         * métodos obtener_estudiante(id) y desmatricular(asignatura).
+         * 
+         * Se le pedirá al usuario el id del estudiante que quiera desmatricular y el nombre de la 
+         * asignatura en la cual quiera desmatricular al estudiante.
+         *  
+         * Entonces se pasará el string con el id introducido a Number y se realizará el metodo
+         * desmatricular para que la asignatura introducida desaparezca del array de asignaturas 
+         * del estudiante y que se registre como desmatriculada en en array de registros.
+         * 
+         * En caso de que el nombre de la asignatura no exista en el array de asignaturas dentro de
+         * estudiante se lanzará un error como hemos explicado en el metodo desmatricular
+         */
+
         case 4:
             listaEstudiantes.listar_estudiantes();
             let id2 = prompt("Dime la id del estudiante que quieras desmatricular");
@@ -1505,13 +1511,20 @@ do {
 
             break;
         /*
-        En el caso 5 se tratará de eliminar un estudiante de la listaEstudiantes.
- 
-        Esto se logrará gracias a los métodos listar_estudiantes() para mostrar antes y después que
-        estudiantes están introducidos en la lista y  eliminar_estudiante(id) el cual se encargara
-        de buscar un estudiante con el mismo id que el introducido en listaEstudiantes.
-        
-        Si lo encuentra lo eliminará de la lista y si no lo encuentra se lanzará un error por pantalla
+       
+        */
+       /**
+        * ## Caso 5: Eliminar un estudiante de la lista
+        * 
+        * En el caso 5 se tratará de eliminar un estudiante de la listaEstudiantes.
+        * 
+        * Esto se logrará gracias a los métodos listar_estudiantes() para mostrar antes y después que
+        * estudiantes están introducidos en la lista y  eliminar_estudiante(id) el cual se encargará
+        * de buscar un estudiante con el mismo id que el introducido en listaEstudiantes.
+        * 
+        * Si lo encuentra lo eliminará de la lista y si no lo encuentra se lanzará un error por pantalla
+        * 
+        * @throws {error} Si el id del estudiante no es un número o si es menor que 0
         */
         case 5:
             listaEstudiantes.listar_estudiantes();
@@ -1540,12 +1553,19 @@ do {
 
             break;
         /*
-        El caso 6 se encargará de eliminar una asignatura elegida por el usuario del array listaAsignaturas
- 
-        Este caso se conseguira con la ayuda de los métodos listar_asignaturas() para mostrar las 
-        asignaturas de la lista antes y después de la eliminación y eliminar_asignatura(nombre)
-        que si no encuentra ninguna coincidencia con el nombre de la asignatura introducido entonces
-        se mostrará un error y si lo encuentra, eliminará esa asignatura de la listaAsignaturas
+
+        */
+       /**
+        * ## Caso 6: Eliminar una asignatura elegida
+        * 
+        * El caso 6 se encargará de eliminar una asignatura elegida por el usuario del array listaAsignaturas
+        * 
+        * Este caso se conseguira con la ayuda de los métodos listar_asignaturas() para mostrar las 
+        * asignaturas de la lista antes y después de la eliminación y eliminar_asignatura(nombre)
+        * que si no encuentra ninguna coincidencia con el nombre de la asignatura introducido entonces
+        * se mostrará un error y si lo encuentra, eliminará esa asignatura de la listaAsignaturas.
+        * 
+        * @throws {error} si el nombre introducido como parametro no es un string o si esta vacio
         */
         case 6:
             listaAsignaturas.listar_asignaturas();//muestra las asignaturas antes de eliminarlas
@@ -1574,24 +1594,28 @@ do {
 
 
             break;
-        /*
-            En el caso 7 se califican las asignaturas con las notas que un estudiante haya estado 
-            sacando con el método agregar_calificacion(nota) de la clase Asignaturas y al final de todo 
-            se hace el promedio de esas notas con el método calcular_promedio() 
-            y se le asigna ese promedio a la asignatura con esas notas.
- 
-            Después se pide indicar el id del estudiante al que se le asignará ese promedio de notas
-            como su calificacion en esa asignatura.
- 
-            Ese estudiante se encontrará con el método obtener_estudiante(id) y una vez encontrado
-            se le asignará ese promedio de la asignatura como su nota final de esa asignatura elegida
-            con el método agregar_calificacion(asignatura,nota) de la clase estudiantes.
- 
-            Por último, una vez añadido el promedio de la asignatura a un estudiante, se eliminarán las 
-            notas introducidas a esa asignatura para que en caso de que se quieran añadir notas para un 
-            nuevo estudiante de la misma asignatura, las notas del anterior estudiante no influyan en el
-            promedio del nuevo estudiante.
-        */
+
+        /**
+         * ## Caso 7: Calificar asignaturas y estudiantes
+         * 
+         *  En el caso 7 se califican las asignaturas con las notas que un estudiante haya estado 
+         *  sacando con el método agregar_calificacion(nota) de la clase Asignaturas y al final de todo 
+         *  se hace el promedio de esas notas con el método calcular_promedio() 
+         *  y se le asigna ese promedio a la asignatura con esas notas.
+         * 
+         *  Después se pide indicar el id del estudiante al que se le asignará ese promedio de notas
+         *  como su calificacion en esa asignatura.
+         * 
+         *  Ese estudiante se encontrará con el método obtener_estudiante(id) y una vez encontrado
+         *  se le asignará ese promedio de la asignatura como su nota final de esa asignatura elegida
+         *  con el método agregar_calificacion(asignatura,nota) de la clase estudiantes.
+         * 
+         *  Por último, una vez añadido el promedio de la asignatura a un estudiante, se eliminarán las 
+         *  notas introducidas a esa asignatura para que en caso de que se quieran añadir notas para un 
+         *  nuevo estudiante de la misma asignatura, las notas del anterior estudiante no influyan en el
+         *  promedio del nuevo estudiante.
+         * 
+         */
         case 7:
             //se califican asignaturas y el promedio de esas notas seran la nota final del estudiantes
             let nombre_asig = prompt("Introduce el nombre de la asignatura que desees calificar");
@@ -1647,17 +1671,19 @@ do {
 
 
             break;
-        /*
-        En el caso 8 se hará el promedio entre todas las calificaciones de un estudiante.
- 
-        Este promedio se logrará con los métodos obtener_estudiante(id) para encontrar a un estudiante
-        en concreto al que hacer su promedio y una vez encontrado se utilizará el método promedio()
-        de la clase Estudiantes explicado anteriormente el cual se encargará de sumar todas las notas
-        del estudiante y dividirlas por el numero de notas en las que este matriculado.
- 
-        Por último, se mostrará la media de todas las calificaciones del estudiante elegido y el nombre
-        de dicho estudiante por pantalla.
-        
+       /**
+        * ## Caso 8: Promedio de un estudiante
+        * 
+        * En el caso 8 se hará el promedio entre todas las calificaciones de un estudiante.
+        * 
+        * Este promedio se logrará con los métodos obtener_estudiante(id) para encontrar a un estudiante
+        * en concreto al que hacer su promedio y una vez encontrado se utilizará el método promedio()
+        * de la clase Estudiantes explicado anteriormente el cual se encargará de sumar todas las notas
+        * del estudiante y dividirlas por el numero de notas en las que este matriculado.
+        *  
+        * Por último, se mostrará la media de todas las calificaciones del estudiante elegido y el nombre
+        * de dicho estudiante por pantalla.
+        * 
         */
         case 8:
             // Listar estudiantes disponibles
@@ -1675,15 +1701,17 @@ do {
             }
             break;
 
-        /*
-        En el caso 9 se mostrará el promedio de todas las notas de todos los estudiante en conjunto.
-        
-        Esto se logrará con el método promedio_lista(), el cual se encargará de recorrer todo el 
-        array de _gestor y hacer el promedio de todos los estudiantes de listaEstidiantes 
-        para luego ir sumandolos dentro de una variable y dividir ese total por el número de 
-        veces que se han ido sumando las notas para que asi de el promedio total entre todos los 
-        estudiantes de listaEstudiantes.
-        */
+        /**
+         * ## Caso 9: Promedio de todos los estudiantes
+         * 
+         * En el caso 9 se mostrará el promedio de todas las notas de todos los estudiante en conjunto.
+         * 
+         * Esto se logrará con el método promedio_lista(), el cual se encargará de recorrer todo el 
+         * array de _gestor y hacer el promedio de todos los estudiantes de listaEstidiantes 
+         * para luego ir sumandolos dentro de una variable y dividir ese total por el número de 
+         * veces que se han ido sumando las notas para que asi de el promedio total entre todos los 
+         * estudiantes de listaEstudiantes.
+         */
         case 9:
             listaEstudiantes.gestor.forEach(elemento => {
                 console.log(`Estudiante: ${elemento.nombre}, Promedio: ${elemento.promedio()}, Asignaturas: ${elemento.asig_mostrar()}`);
@@ -1697,16 +1725,20 @@ do {
 
             break;
 
-        /*
-        En el caso 10 se mostrarán las fechas de matriculación y desmatriculación de un estudiante
-        que se busque.
- 
-        Esto se realizará con los métodos listar_estudiantes() para mostrar todos los estudiantes
-        a elegir dentro de listaEstudaintes, obtener_estudiante(id) para que se devuelva un estudiante
-        concreto del que mostrar sus registros y por ultimo el getter de registros de la clase estudiante
-        el cual se utilizara en el estudiante que nos devuelva obtener_estudiante y nos mostrará las 
-        fechas de las matriculaciones y desmatriculaciones. 
-        */
+        /**
+         * ## Caso 10: Fechas de matriculacion
+         * 
+         * En el caso 10 se mostrarán las fechas de matriculación y desmatriculación de un estudiante
+         * que se busque.
+         *  
+         * Esto se realizará con los métodos listar_estudiantes() para mostrar todos los estudiantes
+         * a elegir dentro de listaEstudaintes, obtener_estudiante(id) para que se devuelva un estudiante
+         * concreto del que mostrar sus registros y por ultimo el getter de registros de la clase estudiante
+         * el cual se utilizara en el estudiante que nos devuelva obtener_estudiante y nos mostrará las 
+         * fechas de las matriculaciones y desmatriculaciones. 
+         * 
+         * @throws {error} si el id del estudiante no es un número o si es menor que 0
+         */
         case 10:
             listaEstudiantes.listar_estudiantes();
             let F_matricula = prompt("Dime el ID del estudiante del que quieras saber su fecha de matriculacion y fecha de desmatriculacion de sus asignaturas hasta el momento");
@@ -1731,18 +1763,20 @@ do {
 
             break;
 
-        /*
-        En este caso 11 se buscarán estudiantes o asignaturas por su nombre parcial o completo
- 
-        Primero se pedirá al usuario que introduzca 1 para buscar estudiantes o 2 para 
-        buscar asignaturas.
- 
-        En cualquiera de los dos casos se le volverá a pedir que introduzca un nombre de un estudiante
-        o asignatura para luego devolver un array de los nombres coincidentes con uno de los métodos
-        creados los cuales son obtener_nombre_estudiante(nombre) u obtener_muchas_asignaturas(nombre)
-        los cuales devolveran un array con los nombre que sean parcialmente coincidentes con el nombre
-        introducido por el usuario.
-        */
+        /**
+         * ## Caso 11: Buscar
+         * 
+         * En este caso 11 se buscarán estudiantes o asignaturas por su nombre parcial o completo
+         *  
+         * Primero se pedirá al usuario que introduzca 1 para buscar estudiantes o 2 para 
+         * buscar asignaturas.
+         *  
+         * En cualquiera de los dos casos se le volverá a pedir que introduzca un nombre de un estudiante
+         * o asignatura para luego devolver un array de los nombres coincidentes con uno de los métodos
+         * creados los cuales son obtener_nombre_estudiante(nombre) u obtener_muchas_asignaturas(nombre)
+         * los cuales devolveran un array con los nombre que sean parcialmente coincidentes con el nombre
+         * introducido por el usuario.
+         */
         case 11:
             let buscar = prompt("Si quieres buscar un estudiante marca 1 y si quieres buscar una asignatura marca 2: ");
             buscar = Number(buscar);
@@ -1764,16 +1798,22 @@ do {
             }
 
             break;
-        /*
-        Por último, llegamos al caso 12 el cual deberá de mostrarnos una lista de informes de cada uno de 
-        los estudiantes contenidos en listaEstudiantes. 
+       /**
+        *  ## Caso 12: Mostrar reporte
+        * 
+        *  Por último, llegamos al caso 12 el cual deberá de mostrarnos una lista de informes de cada uno de 
+        *  los estudiantes contenidos en listaEstudiantes. 
+        * 
         */
         case 12:
             console.log("A continuación se mostrarán los informes de cada uno de los estudiantes: ");
             listaEstudiantes.listar_informes();
             break;
-        /*
-        En caso de que el usuario quiera salir del menú entonces solo tendrá que marcar 13 en la consola para activar está opción
+
+       /**
+        *  ## Caso 13: Salir
+        * 
+        *  En caso de que el usuario quiera salir del menú entonces solo tendrá que marcar 13 en la consola para activar está opción
         */
         case 13:
             console.log("Adios");
@@ -1797,7 +1837,7 @@ do {
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Sat Jan 11 2025 21:54:43 GMT+0100 (hora estándar de Europa central) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Sun Jan 12 2025 13:20:17 GMT+0100 (hora estándar de Europa central) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
