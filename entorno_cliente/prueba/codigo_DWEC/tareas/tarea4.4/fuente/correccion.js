@@ -46,8 +46,6 @@ class Direccion {
     * 
     * Se inicializa una nueva instancia de la clase Dirección.<br>
     * 
-    * 
-    * 
     * ### Parámetros
     * @param {string} calle - La calle de la dirección.
     * @param {number} numero - El número de la calle.
