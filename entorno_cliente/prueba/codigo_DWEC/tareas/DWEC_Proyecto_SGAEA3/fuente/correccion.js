@@ -290,9 +290,6 @@ class Estudiantes {
      * #asignaturas y además se crearía un registro de la fecha de matriculación de esa asignatura y se 
      * guardaría en el array #registros
      * 
-     * @typedef {Object} asignatura - Objeto con el nombre y nota de la asignatura.
-     * @property {string} nombre - el nombre de la asignatura
-     * @property {number} nota - La nota de la asignatura
      * 
      * @param {Object} asignatura - Objeto con el nombre y nota de la asignatura.
      * @returns {boolean} Indica si la operación fue exitosa.
@@ -332,9 +329,6 @@ class Estudiantes {
     * splice() (el cual cambia el contenido de un array eliminando elementos existentes) y se añadirá un 
     * registro de la desmatriculacion de esa asignatura.
     * 
-    * @typedef {Object} asignatura - Objeto con el nombre y nota de la asignatura.
-    * @property {string} nombre - el nombre de la asignatura
-    * @property {number} nota - La nota de la asignatura
     * 
     * @param {Object} asignatura - Objeto con el nombre y nota de la asignatura.
     * @returns {boolean} Indica si la operación fue exitosa.
@@ -379,20 +373,25 @@ class Estudiantes {
         return resultado; // devolvemos el array con los valores transformados
     }
 
+
+    /**
+    * Esto no se porque no se muestra 
+    * @typedef {Object} asignatura - Objeto con el nombre y nota de la asignatura.
+    * @property {string} nombre - el nombre de la asignatura
+    * @property {number} nota - La nota de la asignatura
+    */
+
     /**
     * Agrega una calificación a una asignatura.
     * Cambia la nota de calificacion si existe esta asignatura.
     *  
-    *  En este método se introducirá como parametros un objeto de la clase Asignatura y una nota que se 
-    *  quiera dar a esa asignatura para el estudiante.
+    * En este método se introducirá como parametros un objeto de la clase Asignatura y una nota que se 
+    * quiera dar a esa asignatura para el estudiante.
     *
     * En caso de cumplirse las condiciones anteriores se buscará en el array asignaturas una asignatura
     * con el nombre de la asignatura introducida y en caso de encontrarse se le asignará a la asignatura del 
     * array asignaturas la nota introducida por el usuario
-    * 
-    * @typedef {Object} asignatura - Objeto con el nombre y nota de la asignatura.
-    * @property {string} nombre - el nombre de la asignatura
-    * @property {number} nota - La nota de la asignatura
+    *
     * 
     * @param {Object} asignatura - Objeto con el nombre y la nota de la asignatura
     * @param {number} nota - Nota a asignar por el usuario.
@@ -474,8 +473,9 @@ class Asignaturas {
     nombre;
 
     /**
-     * @type {number[]}
+     * @type {number[]} 
      */
+
     //#calificaciones: Calificaciones será un array que contenga las calificaciones que se le irán añadiendo a
     //una asignatura concreta.
     #calificaciones;//[[10],[9]]
@@ -517,6 +517,7 @@ class Asignaturas {
      * 
      * @returns {number[]} Una copia del array de calificaciones.
      */
+    
     get calificaciones() {
         return [...this.#calificaciones];
     }
@@ -711,11 +712,6 @@ class GestorEs extends Gestores {
      * Si no existiese se agregaría a la lista con el metodo push, introduciendo el elemento en la última
      * posición del array
      * 
-     * @typedef {Object} estudiante - El estudiante a agregar.
-     * @property {number} id - El id del estudiante
-     * @property {string} nombre - el nombre del estudiante
-     * @property {number} edad - La edad del estudiante
-     * @property {Object} direccion - La direccion del estudiante
      * 
      * @param {Object} estudiante - El estudiante que se agrega como parametro
      * @returns {boolean} `true` si se agregó correctamente, `false` en caso de error.
@@ -983,9 +979,6 @@ class GestorAs extends Gestores {
     * Si no existiese se agregaría a la lista con el metodo push(), introduciendo el objeto de la
     * clase asignatura en la última posición del array
     * 
-    * @typedef {Object} asignatura - La asignatura a agregar.
-    * @property {string} nombre - el nombre de la asignatura
-    * @property {number} nota - La nota de la asignatura
     * 
     * @param {Object} asignatura - La asignatura a agregar.
     * @returns {boolean} "true" si se agregó correctamente, "false" en caso de error.
@@ -1173,12 +1166,15 @@ class ErrorPersonalizado extends Error {
  * 
  * Valida los datos de un estudiante y lanza un error personalizado si no cumple con las condiciones.
  * 
+ * @param {Object} estudiante - El objeto que representa al estudiante.
+ * @throws {ErrorPersonalizado} Si el nombre o la edad no son validos
+ */
+
+/**
  * @typedef {Object} estudiante - El objeto que representa al estudiante.
  * @property {string} estudiante.nombre - El nombre del estudiante. Debe ser una cadena no vacía.
  * @property {number} estudiante.edad - La edad del estudiante. Debe ser un número positivo.
  * 
- * @param {Object} estudiante - El objeto que representa al estudiante.
- * @throws {ErrorPersonalizado} Si el nombre o la edad no son validos
  */
 
 function validarEstudiante(estudiante) {
