@@ -15,7 +15,7 @@
  */
 class Direccion {
     /**
-     * ## Atributos privados
+     * ## Atributos privados<br>
      * 
      * @private
      * @property {string} #calle - La calle de la dirección.
@@ -40,7 +40,7 @@ class Direccion {
     #localidad;
 
     /**
-    * ## Constructor de la clase Dirección<br>
+    * ## Constructor de la clase Direcciónn<br>
     * 
     * Se inicializa una nueva instancia de la clase Dirección.<br>
     * 
