@@ -42,6 +42,7 @@ class Direccion {
     /**
     * ## Constructor de la clase Dirección<br>
     * 
+    * Inicializacion comprobamos
     * 
     * Inicializa una nueva instancia de la clase Dirección.<br>
     * 
