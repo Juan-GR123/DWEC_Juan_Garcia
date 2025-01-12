@@ -40,7 +40,7 @@ class Direccion {
     #localidad;
 
     /**
-    * ## Constructor de la clase Direcciónn<br>
+    * ## Constructor de la clase Dirección<br>
     * 
     * Se inicializa una nueva instancia de la clase Dirección.<br>
     * 
