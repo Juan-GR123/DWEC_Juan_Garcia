@@ -1332,7 +1332,6 @@ listaEstudiantes.gestor[4].agregar_calificacion(listaAsignaturas.gestor[1], 10);
 
 
 
-
 let pregunta = 0;
 
 do {
@@ -1506,9 +1505,6 @@ do {
 
             break;
 
-        /*
-        
-        */
         /**
          * ## Caso 4: Desmatricular a un estudiante de una asignatura
          * <br>
@@ -1554,9 +1550,6 @@ do {
 
 
             break;
-        /*
-       
-        */
         /**
          * ## Caso 5: Eliminar un estudiante de la lista
          * <br>
@@ -1596,9 +1589,6 @@ do {
 
 
             break;
-        /*
-
-        */
         /**
          * ## Caso 6: Eliminar una asignatura elegida
          * <br>
