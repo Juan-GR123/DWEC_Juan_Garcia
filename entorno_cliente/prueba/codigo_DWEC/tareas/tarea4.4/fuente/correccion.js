@@ -69,7 +69,7 @@ function validarEstudiante(estudiante) {
 
 // Ejemplo de uso
 try {//te hace un id nuevo
-    let estudiante0 = new Estudiantes("Estudiante ZERO", -5, new Direccion("Calle pex", 10, "12ºA", 29345, "Malaga", "Malaga"));
+    let estudiante0 = new estudiante_1.Estudiantes("Estudiante ZERO", -5, new Direccion("Calle pex", 10, "12ºA", 29345, "Malaga", "Malaga"));
     //console.log(estudiante0.nombre);
     validarEstudiante(estudiante0);
 } catch (error) {
@@ -83,48 +83,48 @@ try {//te hace un id nuevo
 //////////////////////////////////////
 
 
-const listaEstudiantes = new GestorEs();//inicializamos un objeto de la clase GestorEs que actuará como un array de estudiantes
-const listaAsignaturas = new GestorAs();//inicializamos un objeto de la clase GestorAs que actuará como un array de asignaturas
+const listaEstudiantes = new gestor_1.GestorEs();//inicializamos un objeto de la clase GestorEs que actuará como un array de estudiantes
+const listaAsignaturas = new gestor_1.GestorAs();//inicializamos un objeto de la clase GestorAs que actuará como un array de asignaturas
 let listaDirecciones = [];//inicializamos un array para guardar las direcciones da cada estuadiante
 
 //inicializamos una serie de valores que actuarán como valores por defecto para nuestros casos
-listaDirecciones.push(new Direccion("Calle pez", 5, "6ºA", 29005, "Malaga", "Malaga"));
-listaDirecciones.push(new Direccion("Calle Dolores", 10, "7ºC", 18210, "Granada", "Peligros"));
-listaDirecciones.push(new Direccion("Calle Sierpes ", 20, "10ºB", 41004., "Sevilla", "Sevilla"));
-listaDirecciones.push(new Direccion("Calle Cabezas", 1, "4ºD", 14003, "Cordoba", "Cordoba"));
-listaDirecciones.push(new Direccion("Calle Aleatoria", 23, "8ºA", 32123, "Aleatoria", "Aleatoria"));
+listaDirecciones.push(new direccion_1.Direccion("Calle pez", 5, "6ºA", 29005, "Malaga", "Malaga"));
+listaDirecciones.push(new direccion_1.Direccion("Calle Dolores", 10, "7ºC", 18210, "Granada", "Peligros"));
+listaDirecciones.push(new direccion_1.Direccion("Calle Sierpes ", 20, "10ºB", 41004., "Sevilla", "Sevilla"));
+listaDirecciones.push(new direccion_1.Direccion("Calle Cabezas", 1, "4ºD", 14003, "Cordoba", "Cordoba"));
+listaDirecciones.push(new direccion_1.Direccion("Calle Aleatoria", 23, "8ºA", 32123, "Aleatoria", "Aleatoria"));
 
 // Creación de Estudiantes
-let estudiante1 = new Estudiantes("Estudiante A", 10, listaDirecciones[0]);
-let estudiante2 = new Estudiantes("Estudiante B", 12, listaDirecciones[1]);
-let estudiante3 = new Estudiantes("Estudiante C", 20, listaDirecciones[2]);
-let estudiante4 = new Estudiantes("Estudiante D", 19, listaDirecciones[3]);
-let estudiante5 = new Estudiantes("Estudiante E", 16, listaDirecciones[4]);
+let estudiante1 = new estudiante_1.Estudiantes("Estudiante A", 10, listaDirecciones[0]);
+let estudiante2 = new estudiante_1.Estudiantes("Estudiante B", 12, listaDirecciones[1]);
+let estudiante3 = new estudiante_1.Estudiantes("Estudiante C", 20, listaDirecciones[2]);
+let estudiante4 = new estudiante_1.Estudiantes("Estudiante D", 19, listaDirecciones[3]);
+let estudiante5 = new estudiante_1.Estudiantes("Estudiante E", 16, listaDirecciones[4]);
 
 
 //añadimos los estudiantes
-listaEstudiantes.agregar_estudiante(estudiante1);
-listaEstudiantes.agregar_estudiante(estudiante2);
-listaEstudiantes.agregar_estudiante(estudiante3);
-listaEstudiantes.agregar_estudiante(estudiante4);
-listaEstudiantes.agregar_estudiante(estudiante5);
+listaEstudiantes.gestor_1.agregar_estudiante(estudiante1);
+listaEstudiantes.gestor_1.agregar_estudiante(estudiante2);
+listaEstudiantes.gestor_1.agregar_estudiante(estudiante3);
+listaEstudiantes.gestor_1.agregar_estudiante(estudiante4);
+listaEstudiantes.gestor_1.agregar_estudiante(estudiante5);
 
 //console.log(listaEstudiantes.listar_estudiantes())
 
 // Creación de Asignaturas
-let mates = new Asignaturas("Matematicas");
-let fisica = new Asignaturas("Fisica");
-let lengua = new Asignaturas("Lengua");
-let biologia = new Asignaturas("Biologia");
-let dibujo = new Asignaturas("Dibujo");
+let mates = new asignatura_1.Asignaturas("Matematicas");
+let fisica = new asignatura_1.Asignaturas("Fisica");
+let lengua = new asignatura_1.Asignaturas("Lengua");
+let biologia = new asignatura_1.Asignaturas("Biologia");
+let dibujo = new asignatura_1.Asignaturas("Dibujo");
 
 
 //Añadimos las asignaturas a la lista. Las asignaturas tienen que ser objetos para poder implementar más facilmente sus metodos agregar calificación y eliminar calificación
-listaAsignaturas.agregar_asignatura(mates);
-listaAsignaturas.agregar_asignatura(fisica);
-listaAsignaturas.agregar_asignatura(lengua);
-listaAsignaturas.agregar_asignatura(biologia);
-listaAsignaturas.agregar_asignatura(dibujo);
+listaAsignaturas.gestor_1.agregar_asignatura(mates);
+listaAsignaturas.gestor_1.agregar_asignatura(fisica);
+listaAsignaturas.gestor_1.agregar_asignatura(lengua);
+listaAsignaturas.gestor_1.agregar_asignatura(biologia);
+listaAsignaturas.gestor_1.agregar_asignatura(dibujo);
 
 //console.log(listaAsignaturas.listar_asignaturas());
 
@@ -133,26 +133,26 @@ listaAsignaturas.agregar_asignatura(dibujo);
 
 
 for (let i = 0; i < listaEstudiantes.gestor.length; i++) {
-    listaEstudiantes.gestor[i].matricular(listaAsignaturas.gestor[0]);
-    listaEstudiantes.gestor[i].matricular(listaAsignaturas.gestor[1]);
-    listaEstudiantes.gestor[i].matricular(listaAsignaturas.gestor[2]);
-    listaEstudiantes.gestor[i].matricular(listaAsignaturas.gestor[3]);
-    listaEstudiantes.gestor[i].matricular(listaAsignaturas.gestor[4]);
+    listaEstudiantes.gestor[i].estudiante_1.matricular(listaAsignaturas.gestor[0]);
+    listaEstudiantes.gestor[i].estudiante_1.matricular(listaAsignaturas.gestor[1]);
+    listaEstudiantes.gestor[i].estudiante_1.matricular(listaAsignaturas.gestor[2]);
+    listaEstudiantes.gestor[i].estudiante_1.matricular(listaAsignaturas.gestor[3]);
+    listaEstudiantes.gestor[i].estudiante_1.matricular(listaAsignaturas.gestor[4]);
 }
 
 // Desmatriculaciones de Estudiantes
 
-listaEstudiantes.gestor[0].desmatricular(listaAsignaturas.gestor[0]);
-listaEstudiantes.gestor[1].desmatricular(listaAsignaturas.gestor[0]);
-listaEstudiantes.gestor[2].desmatricular(listaAsignaturas.gestor[0]);
-listaEstudiantes.gestor[3].desmatricular(listaAsignaturas.gestor[0]);
+listaEstudiantes.gestor[0].estudiante_1.desmatricular(listaAsignaturas.gestor[0]);
+listaEstudiantes.gestor[1].estudiante_1.desmatricular(listaAsignaturas.gestor[0]);
+listaEstudiantes.gestor[2].estudiante_1.desmatricular(listaAsignaturas.gestor[0]);
+listaEstudiantes.gestor[3].estudiante_1.desmatricular(listaAsignaturas.gestor[0]);
 
 // Calificación de Estudiantes
-listaEstudiantes.gestor[0].agregar_calificacion(listaAsignaturas.gestor[1], 10);
-listaEstudiantes.gestor[1].agregar_calificacion(listaAsignaturas.gestor[1], 10);
-listaEstudiantes.gestor[2].agregar_calificacion(listaAsignaturas.gestor[1], 10);
-listaEstudiantes.gestor[3].agregar_calificacion(listaAsignaturas.gestor[1], 10);
-listaEstudiantes.gestor[4].agregar_calificacion(listaAsignaturas.gestor[1], 10);
+listaEstudiantes.gestor[0].estudiante_1.agregar_calificacion(listaAsignaturas.gestor[1], 10);
+listaEstudiantes.gestor[1].estudiante_1.agregar_calificacion(listaAsignaturas.gestor[1], 10);
+listaEstudiantes.gestor[2].estudiante_1.agregar_calificacion(listaAsignaturas.gestor[1], 10);
+listaEstudiantes.gestor[3].estudiante_1.agregar_calificacion(listaAsignaturas.gestor[1], 10);
+listaEstudiantes.gestor[4].estudiante_1.agregar_calificacion(listaAsignaturas.gestor[1], 10);
 
 
 
@@ -237,15 +237,15 @@ do {
                 break;
             }
 
-            let nuevaDireccion = new Direccion(calle, numero, piso, codigo_postal, provincia, localidad);
+            let nuevaDireccion = new direccion_1.Direccion(calle, numero, piso, codigo_postal, provincia, localidad);
 
-            let nuevoEstudiante = new Estudiantes(nombre, edad, nuevaDireccion);
+            let nuevoEstudiante = new estudiante_1.Estudiantes(nombre, edad, nuevaDireccion);
 
-            let comprobacion_es = listaEstudiantes.agregar_estudiante(nuevoEstudiante);
+            let comprobacion_es = listaEstudiantes.gestor_1.gregar_estudiante(nuevoEstudiante);
 
             if (comprobacion_es != false) {
                 console.log("Estudiante creado y agregado con éxito:");
-                listaEstudiantes.listar_estudiantes();
+                listaEstudiantes.gestor_1.listar_estudiantes();
             }
 
             break;
@@ -279,14 +279,14 @@ do {
                 console.log(error.message);
                 break;
             }
-            let N_asignatura = new Asignaturas(asignatura.trim());//nueva asignatura
+            let N_asignatura = new asignatura_1.Asignaturas(asignatura.trim());//nueva asignatura
 
 
-            let comprobacion_as = listaAsignaturas.agregar_asignatura(N_asignatura);
+            let comprobacion_as = listaAsignaturas.gestor_1.agregar_asignatura(N_asignatura);
 
             if (comprobacion_as != false) {
                 console.log(`Asignatura ${asignatura} creada y agregada con éxito.`);
-                listaAsignaturas.listar_asignaturas(); // Mostrar todas las asignaturas
+                listaAsignaturas.gestor_1.listar_asignaturas(); // Mostrar todas las asignaturas
             }
 
             break;
@@ -307,19 +307,19 @@ do {
           */
         case 3:
 
-            listaEstudiantes.listar_estudiantes();
+            listaEstudiantes.gestor_1.listar_estudiantes();
             let id = prompt("Dime el id del estudiante que quieras matricular");
 
             id = Number(id);
             //Buscamos el id del estudiante en el array que hemos creado de estudiantes
-            let encontrarE = listaEstudiantes.obtener_estudiante(id);
+            let encontrarE = listaEstudiantes.gestor_1.obtener_estudiante(id);
             if (encontrarE != false) {
 
                 let asig = prompt("Ahora dime el nombre de la asignatura");
                 //Buscamos el nombre de la asignatura en el array que hemos creado de Asignaturas
-                let encontrarA = listaAsignaturas.obtener_asignatura(asig);
+                let encontrarA = listaAsignaturas.gestor_1.obtener_asignatura(asig);
                 if (encontrarA != false) {
-                    let matri = encontrarE.matricular(encontrarA);
+                    let matri = encontrarE.estudiante_1.matricular(encontrarA);
                     if (matri == true) {
                         console.log(`${encontrarE.nombre} ha sido matriculado en ${encontrarA.nombre} con éxito.`);
                         //mostramos al estudiante elegido y sus asignaturas matriculadas
@@ -351,20 +351,20 @@ do {
          */
 
         case 4:
-            listaEstudiantes.listar_estudiantes();
+            listaEstudiantes.gestor_1.listar_estudiantes();
             let id2 = prompt("Dime la id del estudiante que quieras desmatricular");
 
             id2 = Number(id2);
             //Buscamos el id del estudiante en el array que hemos creado de estudiantes
-            let estu_des = listaEstudiantes.obtener_estudiante(id2);
+            let estu_des = listaEstudiantes.gestor_1.obtener_estudiante(id2);
             if (estu_des != false) {
                 estu_des.asignaturas.forEach((elemento, clave) => {//muestro las asignaturas en las que esta matriculado el estudiante
                     console.log(`${clave}. ${elemento.nombre}`);
                 });
                 let asig_estu = prompt("Ahora dime la asignatura de la cual quieres desmatricular al estudiante");
-                let asig_des = listaAsignaturas.obtener_asignatura(asig_estu);
+                let asig_des = listaAsignaturas.gestor_1.obtener_asignatura(asig_estu);
                 if (asig_des != false) {
-                    let desma = estu_des.desmatricular(asig_des);
+                    let desma = estu_des.estudiante_1.desmatricular(asig_des);
                     if (desma == true) {
                         console.log(`${estu_des.nombre} ha sido desmatriculado en ${asig_des.nombre} con éxito.`);
                     }
@@ -392,7 +392,7 @@ do {
          * @throws {error} Si el id del estudiante no es un número o si es menor que 0
          */
         case 5:
-            listaEstudiantes.listar_estudiantes();
+            listaEstudiantes.gestor_1.listar_estudiantes();
             let elim_estu = prompt("Dime el id del estudiante que quieras eliminar");
             elim_estu = Number(elim_estu);
 
@@ -408,11 +408,11 @@ do {
 
             //let obtener_E = listaEstudiantes.obtener_estudiante(elim_estu);
 
-            let comprobacion = listaEstudiantes.eliminar_estudiante(elim_estu);//si el estudiante existe, entonces se elimina indicando su id
+            let comprobacion = listaEstudiantes.gestor_1.eliminar_estudiante(elim_estu);//si el estudiante existe, entonces se elimina indicando su id
 
             if (comprobacion != false) {
                 console.log(`El estudiante con ID ${elim_estu} ha sido eliminado correctamente.`);
-                listaEstudiantes.listar_estudiantes();
+                listaEstudiantes.gestor_1.listar_estudiantes();
             }
 
 
@@ -430,7 +430,7 @@ do {
          * @throws {error} si el nombre introducido como parametro no es un string o si esta vacio
          */
         case 6:
-            listaAsignaturas.listar_asignaturas();//muestra las asignaturas antes de eliminarlas
+            listaAsignaturas.gestor_1.listar_asignaturas();//muestra las asignaturas antes de eliminarlas
 
             let elim_asig = prompt("Dime el nombre de la asignatura que quieres eliminar");
 
@@ -447,11 +447,11 @@ do {
 
 
 
-            let comprobacion2 = listaAsignaturas.eliminar_asignatura(elim_asig, listaEstudiantes);
+            let comprobacion2 = listaAsignaturas.gestor_1.eliminar_asignatura(elim_asig, listaEstudiantes);
 
             if (comprobacion2 != false) {
                 console.log(`La asignatura ha sido eliminada correctamente.`);
-                listaAsignaturas.listar_asignaturas();
+                listaAsignaturas.gestor_1.listar_asignaturas();
             }
 
 
@@ -481,7 +481,7 @@ do {
         case 7:
             //se califican asignaturas y el promedio de esas notas seran la nota final del estudiantes
             let nombre_asig = prompt("Introduce el nombre de la asignatura que desees calificar");
-            let asignatura_N = listaAsignaturas.obtener_asignatura(nombre_asig);
+            let asignatura_N = listaAsignaturas.gestor_1.obtener_asignatura(nombre_asig);
 
             if (asignatura_N != false) {
                 let continuar = "";
@@ -490,7 +490,7 @@ do {
                 do {
                     nota = prompt("Introduce la nota de la asignatura a calificar");
                     nota = Number(nota);
-                    calificacion_compr = asignatura_N.agregar_calificacion(nota);
+                    calificacion_compr = asignatura_N.asignatura_1.agregar_calificacion(nota);
                     if (calificacion_compr == true) {
                         continuar = prompt("Quieres seguir agregando calificaciones a la asignatura? si/no");
                     } else {
@@ -500,14 +500,14 @@ do {
 
                 if (calificacion_compr == true) {
                     console.log("calculamos el promedio de las calificaciones de la asignatura elegida");
-                    let nota_promedio_calificaciones = asignatura_N.calcular_promedio();
+                    let nota_promedio_calificaciones = asignatura_N.asignatura_1.calcular_promedio();
 
 
                     // Listar estudiantes disponibles
-                    listaEstudiantes.listar_estudiantes();
+                    listaEstudiantes.gestor_1.listar_estudiantes();
                     let id_Estudiante = prompt("Ahora, introduce el ID del estudiante que deseas calificar con el promedio de esas calificaciones:");
                     id_Estudiante = Number(id_Estudiante);
-                    let estudiante = listaEstudiantes.obtener_estudiante(id_Estudiante);
+                    let estudiante = listaEstudiantes.gestor_1.obtener_estudiante(id_Estudiante);
 
                     if (estudiante != false) {
                         console.log(`Asignaturas en las que está matriculado ${estudiante.nombre}`);
@@ -516,7 +516,7 @@ do {
                         });
 
                         console.log(`El promedio ${nota_promedio_calificaciones} de la asignatura ${asignatura_N.nombre} será asignado al estudiante ${estudiante.nombre}`);
-                        estudiante.agregar_calificacion(asignatura_N, nota_promedio_calificaciones);
+                        estudiante.estudiante_1.agregar_calificacion(asignatura_N, nota_promedio_calificaciones);
                     }
                 }
 
@@ -524,7 +524,7 @@ do {
                 //la misma asignatura las notas de este estudiante no se interpongan las 
                 //notas del nuevo estudiante
                 for (let i = 0; i < asignatura_N.calificaciones.length; i++) {
-                    asignatura_N.eliminar_calificacion(i);
+                    asignatura_N.asignatura_1.eliminar_calificacion(i);
                 }
 
                 console.log("Operación terminada");
@@ -549,15 +549,15 @@ do {
          */
         case 8:
             // Listar estudiantes disponibles
-            listaEstudiantes.listar_estudiantes();
+            listaEstudiantes.gestor_1.listar_estudiantes();
             let promedio_Es = prompt("Introduce el ID del estudiante del cual deseas hacer su promedio: ");
             promedio_Es = Number(promedio_Es);
-            let obtener_promedio = listaEstudiantes.obtener_estudiante(promedio_Es);
+            let obtener_promedio = listaEstudiantes.gestor_1.obtener_estudiante(promedio_Es);
 
 
             if (obtener_promedio != false) {
                 console.log("Ahora calcularemos el promedio de todas las notas del estudiante elegido");
-                let promedio = obtener_promedio.promedio();//se calcula el promedio
+                let promedio = obtener_promedio.estudiante_1.promedio();//se calcula el promedio
                 console.log(obtener_promedio.asignaturas);//se muestran las asignaturas con sus notas
                 console.log(`El promedio de notas del estudiante ${obtener_promedio.nombre} es ${promedio}`);
             }
@@ -577,12 +577,12 @@ do {
          * */
         case 9:
             listaEstudiantes.gestor.forEach(elemento => {
-                console.log(`Estudiante: ${elemento.nombre}, Promedio: ${elemento.promedio()}, Asignaturas: ${elemento.asig_mostrar()}`);
+                console.log(`Estudiante: ${elemento.nombre}, Promedio: ${elemento.estudiante_1.promedio()}, Asignaturas: ${elemento.asig_mostrar()}`);
             });
 
             console.log("Ahora se calculará el promedio de notas de todos los estudiantes");
 
-            let promedio_total = listaEstudiantes.promedio_listas();
+            let promedio_total = listaEstudiantes.gestor_1.promedio_listas();
 
             console.log(`El promedio de todos los estudiantes será ${promedio_total}`);
 
@@ -603,7 +603,7 @@ do {
          * @throws {error} si el id del estudiante no es un número o si es menor que 0
          */
         case 10:
-            listaEstudiantes.listar_estudiantes();
+            listaEstudiantes.gestor_1.listar_estudiantes();
             let F_matricula = prompt("Dime el ID del estudiante del que quieras saber su fecha de matriculacion y fecha de desmatriculacion de sus asignaturas hasta el momento");
             F_matricula = Number(F_matricula);
 
@@ -616,7 +616,7 @@ do {
                 break;
             }
 
-            let estudiante_fecha = listaEstudiantes.obtener_estudiante(F_matricula);
+            let estudiante_fecha = listaEstudiantes.gestor_1.obtener_estudiante(F_matricula);
 
             if (estudiante_fecha != false) {
                 console.log("Las asignaturas de las que se ha matriculado y desmatriculado hasta el momento son: ");
@@ -646,16 +646,16 @@ do {
             buscar = Number(buscar);
 
             if (buscar == 1) {
-                listaEstudiantes.listar_estudiantes();
+                listaEstudiantes.gestor_1.listar_estudiantes();
                 let buscar_E = prompt("Dime el nombre del estudiante al que estas buscando");
 
-                listaEstudiantes.obtener_nombre_estudiante(buscar_E);
+                listaEstudiantes.gestor_1.obtener_nombre_estudiante(buscar_E);
 
             } else if (buscar == 2) {
-                listaAsignaturas.listar_asignaturas();
+                listaAsignaturas.gestor_1.listar_asignaturas();
                 let buscar_A = prompt("Dime el nombre de la asignatura que estas buscando");
 
-                listaAsignaturas.obtener_muchas_asignaturas(buscar_A);
+                listaAsignaturas.gestor_1.obtener_muchas_asignaturas(buscar_A);
 
 
 
@@ -671,7 +671,7 @@ do {
          */
         case 12:
             console.log("A continuación se mostrarán los informes de cada uno de los estudiantes: ");
-            listaEstudiantes.listar_informes();
+            listaEstudiantes.gestor_1.listar_informes();
             break;
 
         /**
