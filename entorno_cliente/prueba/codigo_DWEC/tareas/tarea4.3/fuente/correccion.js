@@ -784,7 +784,7 @@ class GestorEs extends Gestores {
      * 
      * @param {number} id - *El ID del estudiante a eliminar.*
      * @returns {boolean} `true` si se eliminó correctamente, `false` en caso de error.
-     * @throws {error} **En caso de que el id introducido no exista en la lista se lanzará un mensaje de error. **
+     * @throws {error} **En caso de que el id introducido no exista en la lista se lanzará un mensaje de error.**
      */
     eliminar_estudiante(id) {
         let eliminar = this._gestor.findIndex(elemento => elemento.id === id);
@@ -1117,7 +1117,7 @@ class GestorAs extends Gestores {
      * 
      * @param {string} nombre - *El nombre completo de la asignatura a buscar.*
      * @returns {Object|boolean} La asignatura encontrada o `false` si no existe.
-     * @throws {error} **En caso de que el método no devuelva nada **
+     * @throws {error} **En caso de que el método no devuelva nada**
      */
     obtener_asignatura(nombre) {
         let obtener = this._gestor.find(elemento => elemento.nombre.toLowerCase() === nombre.toLowerCase());

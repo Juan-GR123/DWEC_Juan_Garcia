@@ -201,7 +201,7 @@ do {
          * Antes de agregar a un estudiante a la lista se comprobará si los valores introducidos por el usuario
          * son validos y en caso de que sean validos se agregarán como un nuevo estudiante.
          * <br>
-         * @throws {Error} Si alguno de los datos no es válido.
+         * @throws {error} **Si alguno de los datos no es válido.**
         */
         case 1:
 
@@ -263,7 +263,7 @@ do {
          * Cuando el valor haya sido validado, se creará un objeto de la clase asignaturas con el
          *  nombre introducido como valor y se agregará a listaAsignaturas con el método agregar_asignatura
          * <br>
-         *  @throws {Error} Si el nombre de la asignatura no es válido.
+         *  @throws {error} **Si el nombre de la asignatura no es válido.**
         */
         case 2:
 
@@ -389,7 +389,7 @@ do {
          * <br>
          * Si lo encuentra lo eliminará de la lista y si no lo encuentra se lanzará un error por pantalla
          * <br>
-         * @throws {error} Si el id del estudiante no es un número o si es menor que 0
+         * @throws {error} **Si el id del estudiante no es un número o si es menor que 0**
          */
         case 5:
             listaEstudiantes.gestor_1.listar_estudiantes();
@@ -427,7 +427,7 @@ do {
          * que si no encuentra ninguna coincidencia con el nombre de la asignatura introducido entonces
          * se mostrará un error y si lo encuentra, eliminará esa asignatura de la listaAsignaturas.
          * <br>
-         * @throws {error} si el nombre introducido como parametro no es un string o si esta vacio
+         * @throws {error} **si el nombre introducido como parametro no es un string o si esta vacio**
          */
         case 6:
             listaAsignaturas.gestor_1.listar_asignaturas();//muestra las asignaturas antes de eliminarlas
@@ -600,7 +600,7 @@ do {
          * el cual se utilizara en el estudiante que nos devuelva obtener_estudiante y nos mostrará las 
          * fechas de las matriculaciones y desmatriculaciones.<br> 
          * 
-         * @throws {error} si el id del estudiante no es un número o si es menor que 0
+         * @throws {error} **si el id del estudiante no es un número o si es menor que 0**
          */
         case 10:
             listaEstudiantes.gestor_1.listar_estudiantes();
