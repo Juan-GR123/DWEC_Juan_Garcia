@@ -2,6 +2,7 @@
   "name": "tarea4_4",
   "version": "1.0.0",
   "main": "correccion.js",
+  "type": "module",
   "scripts": {
     "documenta": "npx jsdoc -c jsdoc.json",
     "limpia": "rimraf documentacion",
