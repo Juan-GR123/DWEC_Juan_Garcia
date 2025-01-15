@@ -203,7 +203,7 @@ class Estudiantes {
      * @param {string} N_nombre - *Nombre del estudiante (solo letras y espacios).*
      * @param {number} N_edad - *Edad del estudiante.*
      * @param {Object} N_direc - *Dirección del estudiante.*
-     * @throws {error} Si el nombre del estudiante contiene algo mas que letras o espacios
+     * @throws {error} **Si el nombre del estudiante contiene algo mas que letras o espacios**
      */
     constructor(N_nombre, N_edad, N_direc) {
         let patron = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;//que contenga letras y espacios 1 o mas veces
@@ -303,9 +303,9 @@ class Estudiantes {
      * 
      * @param {Object} asignatura - *Objeto con el nombre y nota de la asignatura.*
      * @returns {boolean} Indica si la operación fue exitosa.
-     * @throws {error}  Si en el array #asignaturas se encuentra alguna coincidencia en el nombre con la
+     * @throws {error}  **Si en el array #asignaturas se encuentra alguna coincidencia en el nombre con la
      * asignatura indicada esto dará un error debido a que en caso de estar en el array #asignaturas
-     * el estudiante ya estaría matriculado en esa asignatura.
+     * el estudiante ya estaría matriculado en esa asignatura.**
      */
 
 
@@ -341,7 +341,7 @@ class Estudiantes {
 
     /**
     * ## Desmatricula al estudiante de una asignatura.<br>
-    * ###desmatricular(asignatura)<br>
+    * ### desmatricular(asignatura)<br>
     * En el método desmatricular, se introducirá de nuevo como valor el nombre de una asignatura indicada
     * por el usuario y si se encuentra el indice de la coincidencia del nombre 
     * de esa asignatura en el array #asignaturas entonces se eliminará la asignatura del array con el método
@@ -351,7 +351,7 @@ class Estudiantes {
     * 
     * @param {Object} asignatura - *Objeto con el nombre y nota de la asignatura.*
     * @returns {boolean} Indica si la operación fue exitosa.
-    * @throws {error} Si no se encuentra ninguna coincidencia del nombre de la asignatura en el array #asignaturas se lanzará un error
+    * @throws {error} **Si no se encuentra ninguna coincidencia del nombre de la asignatura en el array #asignaturas se lanzará un error**
     */
 
     desmatricular(asignatura) {
@@ -397,9 +397,9 @@ class Estudiantes {
 
 
     /**
-   * @typedef {Object} asignatura - Objeto con el nombre y nota de la asignatura.
-   * @property {string} nombre - el nombre de la asignatura
-   * @property {number} nota - La nota de la asignatura
+   * @typedef {Object} asignatura - **Objeto con el nombre y nota de la asignatura.**
+   * @property {string} nombre - *El nombre de la asignatura*
+   * @property {number} nota - *La nota de la asignatura*
    */
 
     /**
@@ -419,7 +419,7 @@ class Estudiantes {
     * @param {Object} asignatura - *Objeto con el nombre y la nota de la asignatura*
     * @param {number} nota - *Nota a asignar por el usuario.*
     * @returns {boolean} Indica si la operación fue exitosa.
-    * @throws {error} Si la nota es mayor que 10 o menor que 0 o si no es del tipo 'number' entonces se mostrara un error.
+    * @throws {error} vvSi la nota es mayor que 10 o menor que 0 o si no es del tipo 'number' entonces se mostrara un error.**
     */
 
 
@@ -1366,7 +1366,7 @@ do {
     /**
      * 
      * # Gestionar las acciones del menú principal según la opción seleccionada.
-     *  @param {number} pregunta - La opción seleccionada por el usuario.
+     *  @param {number} pregunta - *La opción seleccionada por el usuario.*
      */
     switch (pregunta) {
         /**
@@ -1379,7 +1379,7 @@ do {
          * Antes de agregar a un estudiante a la lista se comprobará si los valores introducidos por el usuario
          * son validos y en caso de que sean validos se agregarán como un nuevo estudiante.
          * <br>
-         * @throws {Error} Si alguno de los datos no es válido.
+         * @throws {Error} **Si alguno de los datos no es válido.**
         */
         case 1:
 
@@ -1441,7 +1441,7 @@ do {
          * Cuando el valor haya sido validado, se creará un objeto de la clase asignaturas con el
          *  nombre introducido como valor y se agregará a listaAsignaturas con el método agregar_asignatura
          * <br>
-         *  @throws {Error} Si el nombre de la asignatura no es válido.
+         *  @throws {Error} **Si el nombre de la asignatura no es válido.**
         */
         case 2:
 
@@ -1567,7 +1567,7 @@ do {
          * <br>
          * Si lo encuentra lo eliminará de la lista y si no lo encuentra se lanzará un error por pantalla
          * <br>
-         * @throws {error} Si el id del estudiante no es un número o si es menor que 0
+         * @throws {error} **Si el id del estudiante no es un número o si es menor que 0**
          */
         case 5:
             listaEstudiantes.listar_estudiantes();
@@ -1605,7 +1605,7 @@ do {
          * que si no encuentra ninguna coincidencia con el nombre de la asignatura introducido entonces
          * se mostrará un error y si lo encuentra, eliminará esa asignatura de la listaAsignaturas.
          * <br>
-         * @throws {error} si el nombre introducido como parametro no es un string o si esta vacio
+         * @throws {error} **si el nombre introducido como parametro no es un string o si esta vacio**
          */
         case 6:
             listaAsignaturas.listar_asignaturas();//muestra las asignaturas antes de eliminarlas
@@ -1778,7 +1778,7 @@ do {
          * el cual se utilizara en el estudiante que nos devuelva obtener_estudiante y nos mostrará las 
          * fechas de las matriculaciones y desmatriculaciones.<br> 
          * 
-         * @throws {error} si el id del estudiante no es un número o si es menor que 0
+         * @throws {error} **si el id del estudiante no es un número o si es menor que 0**
          */
         case 10:
             listaEstudiantes.listar_estudiantes();

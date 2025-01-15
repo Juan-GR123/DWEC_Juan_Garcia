@@ -166,7 +166,7 @@
             
 
             <td class="description last">
-                <p>Nombre del estudiante (solo letras y espacios).</p>
+                <p><em>Nombre del estudiante (solo letras y espacios).</em></p>
                 
             </td>
         </tr>
@@ -192,7 +192,7 @@
             
 
             <td class="description last">
-                <p>Edad del estudiante.</p>
+                <p><em>Edad del estudiante.</em></p>
                 
             </td>
         </tr>
@@ -218,7 +218,7 @@
             
 
             <td class="description last">
-                <p>Dirección del estudiante.</p>
+                <p><em>Dirección del estudiante.</em></p>
                 
             </td>
         </tr>
@@ -246,7 +246,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        <p>Si el nombre del estudiante contiene algo mas que letras o espacios</p>
+        <p><strong>Si el nombre del estudiante contiene algo mas que letras o espacios</strong></p>
         </div>
     </dt>
     <dd></dd>
@@ -690,7 +690,7 @@
 
 
 <div class="description">
-    <p>registra la fecha de matriculación o desmatriculación</p>
+    <h2>Registra la fecha de matriculación o desmatriculación</h2>
 </div>
 
 
@@ -726,7 +726,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line386">line 386</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line387">line 387</a>
     </li></ul></dd>
     
 
@@ -765,6 +765,7 @@
 
 <div class="description">
     <h2>Agrega una calificación a una asignatura.<br></h2>
+<h3>agregar_calificacion(asignatura,nota)<br></h3>
 <p>Cambia la nota de calificacion si existe esta asignatura.<br></p>
 <p>En este método se introducirá como parametros un objeto de la clase Asignatura y una nota que se
 quiera dar a esa asignatura para el estudiante.<br></p>
@@ -806,7 +807,7 @@ array asignaturas la nota introducida por el usuario. <br></p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line423">line 423</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line426">line 426</a>
     </li></ul></dd>
     
 
@@ -867,7 +868,7 @@ array asignaturas la nota introducida por el usuario. <br></p>
             
 
             <td class="description last">
-                <p>Objeto con el nombre y la nota de la asignatura</p>
+                <p><em>Objeto con el nombre y la nota de la asignatura</em></p>
                 
             </td>
         </tr>
@@ -893,7 +894,7 @@ array asignaturas la nota introducida por el usuario. <br></p>
             
 
             <td class="description last">
-                <p>Nota a asignar por el usuario.</p>
+                <p><em>Nota a asignar por el usuario.</em></p>
                 
             </td>
         </tr>
@@ -921,7 +922,7 @@ array asignaturas la nota introducida por el usuario. <br></p>
 <dl>
     <dt>
         <div class="param-desc">
-        <p>Si la nota es mayor que 10 o menor que 0 o si no es del tipo 'number' entonces se mostrara un error.</p>
+        <p>vvSi la nota es mayor que 10 o menor que 0 o si no es del tipo 'number' entonces se mostrara un error.**</p>
         </div>
     </dt>
     <dd></dd>
@@ -1026,7 +1027,7 @@ En este método se mostrarán por consola las asignaturas y las notas del estudi
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line452">line 452</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line455">line 455</a>
     </li></ul></dd>
     
 
@@ -1074,6 +1075,7 @@ En este método se mostrarán por consola las asignaturas y las notas del estudi
 
 <div class="description">
     <h2>Desmatricula al estudiante de una asignatura.<br></h2>
+<h3>desmatricular(asignatura)<br></h3>
 <p>En el método desmatricular, se introducirá de nuevo como valor el nombre de una asignatura indicada
 por el usuario y si se encuentra el indice de la coincidencia del nombre
 de esa asignatura en el array #asignaturas entonces se eliminará la asignatura del array con el método
@@ -1114,7 +1116,7 @@ registro de la desmatriculacion de esa asignatura.<br></p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line356">line 356</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line357">line 357</a>
     </li></ul></dd>
     
 
@@ -1175,7 +1177,7 @@ registro de la desmatriculacion de esa asignatura.<br></p>
             
 
             <td class="description last">
-                <p>Objeto con el nombre y nota de la asignatura.</p>
+                <p><em>Objeto con el nombre y nota de la asignatura.</em></p>
                 
             </td>
         </tr>
@@ -1203,7 +1205,7 @@ registro de la desmatriculacion de esa asignatura.<br></p>
 <dl>
     <dt>
         <div class="param-desc">
-        <p>Si no se encuentra ninguna coincidencia del nombre de la asignatura en el array #asignaturas se lanzará un error</p>
+        <p><strong>Si no se encuentra ninguna coincidencia del nombre de la asignatura en el array #asignaturas se lanzará un error</strong></p>
         </div>
     </dt>
     <dd></dd>
@@ -1271,6 +1273,7 @@ registro de la desmatriculacion de esa asignatura.<br></p>
 
 <div class="description">
     <h2>Matricula al estudiante en una asignatura.<br></h2>
+<h3>matricular(asignatura)<br></h3>
 <p>En el método matricular, se introducirá un nombre de una asignatura indicada
 por el usuario.
 <br>
@@ -1374,7 +1377,7 @@ guardaría en el array #registros.
             
 
             <td class="description last">
-                <p>Objeto con el nombre y nota de la asignatura.</p>
+                <p><em>Objeto con el nombre y nota de la asignatura.</em></p>
                 
             </td>
         </tr>
@@ -1402,9 +1405,9 @@ guardaría en el array #registros.
 <dl>
     <dt>
         <div class="param-desc">
-        <p>Si en el array #asignaturas se encuentra alguna coincidencia en el nombre con la
+        <p><strong>Si en el array #asignaturas se encuentra alguna coincidencia en el nombre con la
 asignatura indicada esto dará un error debido a que en caso de estar en el array #asignaturas
-el estudiante ya estaría matriculado en esa asignatura.</p>
+el estudiante ya estaría matriculado en esa asignatura.</strong></p>
         </div>
     </dt>
     <dd></dd>
@@ -1472,6 +1475,7 @@ el estudiante ya estaría matriculado en esa asignatura.</p>
 
 <div class="description">
     <h2>Calculará el promedio de todas las calificaciones del estudiante.<br></h2>
+<h3>promedio()<br></h3>
 <p>En este método se contará si el array #asignaturas contiene asignaturas. <br>
 En el caso de que las contenga y de que su longitud sea mayor que 0 entonces se recorrerá la totalidad del array y si las notas de
 las asignaturas son numericas se sumarán esas notas a una variable en la que se almacenará la suma
@@ -1513,7 +1517,7 @@ de todas las notas de cada asignatura.<br></p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line470">line 470</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line474">line 474</a>
     </li></ul></dd>
     
 
@@ -1699,7 +1703,7 @@ de todas las notas de cada asignatura.<br></p>
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Wed Jan 15 2025 18:46:18 GMT+0100 (hora estándar de Europa central) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Wed Jan 15 2025 19:14:36 GMT+0100 (hora estándar de Europa central) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
