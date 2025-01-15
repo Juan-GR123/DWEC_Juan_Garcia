@@ -1,9 +1,10 @@
 /**
- * # Creamos una clase para saber la dirección de cada estudiante
+ * # Creamos una clase para saber la dirección de cada <br>estudiante
+ * 
  */
 export class Direccion {
     /**
-     * ## Atributos privados<br>
+     * ## Atributos privados
      * 
      * @private
      * @property {string} #calle - La calle de la dirección.
@@ -30,19 +31,15 @@ export class Direccion {
     /**
     * ## Constructor de la clase Dirección<br>
     * 
-    * 
-    * 
-    * Se inicializará una nueva instancia de la clase Dirección.<br>
-    * 
-    * 
+    * Se inicializa una nueva instancia de la clase Dirección.<br>
     * 
     * ### Parámetros
-    * @param {string} calle - La calle de la dirección.
-    * @param {number} numero - El número de la calle.
-    * @param {number} piso - El número del piso.
-    * @param {string} codigo - El código postal de la dirección (debe tener 5 dígitos). Si no cumple el formato, se asignará `"Error"`.
-    * @param {string} provincia - La provincia.
-    * @param {string} localidad - La localidad de dicha provincia.
+    * @param {string} calle - *La calle de la dirección.*
+    * @param {number} numero - *El número de la calle.*
+    * @param {number} piso - *El número del piso.*
+    * @param {string} codigo - *El código postal de la dirección (debe tener 5 dígitos). Si no cumple el formato, se asignará `"Error"`*.
+    * @param {string} provincia - *La provincia.*
+    * @param {string} localidad - *La localidad de dicha provincia.*
     */
 
     constructor(calle, numero, piso, codigo, provincia, localidad) {

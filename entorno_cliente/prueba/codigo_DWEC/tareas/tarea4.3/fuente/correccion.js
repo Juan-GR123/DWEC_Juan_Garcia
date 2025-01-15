@@ -617,11 +617,6 @@ class Asignaturas {
     }
 
 
-    /*
-   
- 
-     
-    */
     /**
     * ## Calcula el promedio de las calificaciones de la asignatura.<br>
     * ### calcular_promedio() <br>

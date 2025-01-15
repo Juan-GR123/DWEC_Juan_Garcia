@@ -3,7 +3,6 @@
 /**
  * # Clase que representa a un estudiante.
  */
-
 export class Estudiantes {
     /** 
      *  @type {number}  
@@ -70,10 +69,10 @@ export class Estudiantes {
     */
     /**
      * Constructor de la clase Estudiantes.
-     * @param {string} N_nombre - Nombre del estudiante (solo letras y espacios).
-     * @param {number} N_edad - Edad del estudiante.
-     * @param {Object} N_direc - Dirección del estudiante.
-     * @throws {error} Si el nombre del estudiante contiene algo mas que letras o espacios
+     * @param {string} N_nombre - *Nombre del estudiante (solo letras y espacios).*
+     * @param {number} N_edad - *Edad del estudiante.*
+     * @param {Object} N_direc - *Dirección del estudiante.*
+     * @throws {error} **Si el nombre del estudiante contiene algo mas que letras o espacios**
      */
     constructor(N_nombre, N_edad, N_direc) {
         let patron = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;//que contenga letras y espacios 1 o mas veces
@@ -156,13 +155,13 @@ export class Estudiantes {
     }
 
     /**
-    * @typedef {Object} asignatura - Objeto con el nombre y nota de la asignatura.
-    * @property {string} nombre - el nombre de la asignatura
-    * @property {number} nota - La nota de la asignatura
+    * @typedef {Object} asignatura - **Objeto con el nombre y nota de la asignatura.**
+    * @property {string} nombre - *El nombre de la asignatura*
+    * @property {number} nota - *La nota de la asignatura*
     */
     /**
      * ## Matricula al estudiante en una asignatura.<br>
-     *
+     * ### matricular(asignatura)<br>
      * En el método matricular, se introducirá un nombre de una asignatura indicada
      * por el usuario.
      * <br>
@@ -171,11 +170,11 @@ export class Estudiantes {
      * guardaría en el array #registros.
      * <br>
      * 
-     * @param {Object} asignatura - Objeto con el nombre y nota de la asignatura.
+     * @param {Object} asignatura - *Objeto con el nombre y nota de la asignatura.*
      * @returns {boolean} Indica si la operación fue exitosa.
-     * @throws {error}  Si en el array #asignaturas se encuentra alguna coincidencia en el nombre con la
+     * @throws {error}  **Si en el array #asignaturas se encuentra alguna coincidencia en el nombre con la
      * asignatura indicada esto dará un error debido a que en caso de estar en el array #asignaturas
-     * el estudiante ya estaría matriculado en esa asignatura.
+     * el estudiante ya estaría matriculado en esa asignatura.**
      */
 
 
@@ -204,13 +203,14 @@ export class Estudiantes {
 
 
     /**
-    * @typedef {Object} asignatura - Objeto con el nombre y nota de la asignatura.
-    * @property {string} nombre - el nombre de la asignatura
-    * @property {number} nota - La nota de la asignatura
+    * @typedef {Object} asignatura - **Objeto con el nombre y nota de la asignatura.**
+    * @property {string} nombre - *El nombre de la asignatura*
+    * @property {number} nota - *La nota de la asignatura*
     */
 
     /**
     * ## Desmatricula al estudiante de una asignatura.<br>
+    * ### desmatricular(asignatura)<br>
     * En el método desmatricular, se introducirá de nuevo como valor el nombre de una asignatura indicada
     * por el usuario y si se encuentra el indice de la coincidencia del nombre 
     * de esa asignatura en el array #asignaturas entonces se eliminará la asignatura del array con el método
@@ -218,9 +218,9 @@ export class Estudiantes {
     * registro de la desmatriculacion de esa asignatura.<br>
     * 
     * 
-    * @param {Object} asignatura - Objeto con el nombre y nota de la asignatura.
+    * @param {Object} asignatura - *Objeto con el nombre y nota de la asignatura.*
     * @returns {boolean} Indica si la operación fue exitosa.
-    * @throws {error} Si no se encuentra ninguna coincidencia del nombre de la asignatura en el array #asignaturas se lanzará un error
+    * @throws {error} **Si no se encuentra ninguna coincidencia del nombre de la asignatura en el array #asignaturas se lanzará un error**
     */
 
     desmatricular(asignatura) {
@@ -250,7 +250,7 @@ export class Estudiantes {
 
 
     /**
-     * registra la fecha de matriculación o desmatriculación
+     * ## Registra la fecha de matriculación o desmatriculación
      * @returns {Array<string>} Lista de registros en formato legible.
      */
     get registros() {
@@ -266,13 +266,15 @@ export class Estudiantes {
 
 
     /**
-   * @typedef {Object} asignatura - Objeto con el nombre y nota de la asignatura.
-   * @property {string} nombre - el nombre de la asignatura
-   * @property {number} nota - La nota de la asignatura
+   * @typedef {Object} asignatura - **Objeto con el nombre y nota de la asignatura.**
+   * @property {string} nombre - *El nombre de la asignatura*
+   * @property {number} nota - *La nota de la asignatura*
    */
 
     /**
     * ## Agrega una calificación a una asignatura.<br>
+    * ### agregar_calificacion(asignatura,nota)<br>
+    * 
     * Cambia la nota de calificacion si existe esta asignatura.<br>
     *  
     * En este método se introducirá como parametros un objeto de la clase Asignatura y una nota que se 
@@ -283,10 +285,10 @@ export class Estudiantes {
     * array asignaturas la nota introducida por el usuario. <br>
     *
     * 
-    * @param {Object} asignatura - Objeto con el nombre y la nota de la asignatura
-    * @param {number} nota - Nota a asignar por el usuario.
+    * @param {Object} asignatura - *Objeto con el nombre y la nota de la asignatura*
+    * @param {number} nota - *Nota a asignar por el usuario.*
     * @returns {boolean} Indica si la operación fue exitosa.
-    * @throws {error} Si la nota es mayor que 10 o menor que 0 o si no es del tipo 'number' entonces se mostrara un error.
+    * @throws {error} vvSi la nota es mayor que 10 o menor que 0 o si no es del tipo 'number' entonces se mostrara un error.**
     */
 
 
@@ -326,6 +328,7 @@ export class Estudiantes {
     /**
      * 
      *    ## Calculará el promedio de todas las calificaciones del estudiante.<br>
+     *    ### promedio()<br>
      *
      *    En este método se contará si el array #asignaturas contiene asignaturas. <br>
      *    En el caso de que las contenga y de que su longitud sea mayor que 0 entonces se recorrerá la totalidad del array y si las notas de 

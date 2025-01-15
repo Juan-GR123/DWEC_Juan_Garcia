@@ -1,7 +1,6 @@
 /**
- * # Clase que representa una asignatura con su nombre y calificaciones.
+ * # Clase que representa una asignatura con su nombre y <br> calificaciones.
  */
-
 
 export class Asignaturas {
     /**
@@ -21,9 +20,9 @@ export class Asignaturas {
     /**
      * Constructor de la clase Asignaturas.
      * 
-     * @param {string} nombre1 - El nombre de la asignatura. Debe contener solo letras, espacios y números romanos.
+     * @param {string} nombre1 - *El nombre de la asignatura. Debe contener solo letras, espacios y números romanos.*
      * 
-     * @throws {error} Si el nombre no cumple con el patrón, se lanza un error y se registra en la consola.
+     * @throws {error} **Si el nombre no cumple con el patrón, se lanza un error y se registra en la consola.**
      */
     constructor(nombre1) {
         let patron = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;//que contenga letras y espacios 1 o mas veces
@@ -61,7 +60,8 @@ export class Asignaturas {
     }
 
     /**
-     * ## Se mostrará por pantalla el nombre de la asignatura
+     * ## Se mostrará por pantalla el nombre de la asignatura<br>
+     * ### toString()<br>
      * 
      * @returns {string} El nombre de la asignatura en formato "Asignatura: [nombre]".
      */
@@ -72,15 +72,15 @@ export class Asignaturas {
 
     /**
      * ## Agrega una calificación a la asignatura elegida.<br>
-     * 
+     * ###  agregar_calificacion(nota) <br>
      * En este método se introducirá una nota que se le quiera añadir a una asignatura. Si la nota esta entre
      * 0 y 10 entonces se añadira al array #calificaciones. <br>
      * 
-     * @param {number} nota - La nota a añadir. Debe estar entre 0 y 10.
+     * @param {number} nota - *La nota a añadir. Debe estar entre 0 y 10.*
      * 
      * @returns {boolean} `true` si la nota es válida y se añade correctamente, `false` en caso contrario.
      * 
-     * @throws {error} Si no cumple con esas condiciones se mostrará un error. 
+     * @throws {error} **Si no cumple con esas condiciones se mostrará un error.** 
     */
     agregar_calificacion(nota) {
         try {
@@ -98,16 +98,16 @@ export class Asignaturas {
 
     /**
     * ## Elimina una calificación de la asignatura en la posición especificada.<br>
-    * 
+    * ### eliminar_calificacion(indice)<br>
     * En caso de que el indice especificado este dentro de rango del array #calificaciones
     * se eliminará la calificación con el método splice().
     * <br>
     * 
-    * @param {number} indice - El índice de la calificación a eliminar.
+    * @param {number} indice - *El índice de la calificación a eliminar.*
     * 
     * @returns {boolean} `true` si la calificación se elimina correctamente, `false` si ocurre un error.
     * 
-    * @throws {Error} Si el índice está fuera del rango válido.
+    * @throws {error} **Si el índice está fuera del rango válido.**
     *
     */
     eliminar_calificacion(indice) {
@@ -124,27 +124,20 @@ export class Asignaturas {
             return false;
         }
     }
-
-
-    /*
-   
- 
-     
-    */
     /**
-    * ## Calcula el promedio de las calificaciones de la asignatura.<br>
-    * 
-    *  En este caso se recorre todo el array #calificaciones y se van sumando todas las calificaciones
-    *  que el estudiante ha ido sacando en la asignatura.<br>
-    * 
-    *  Por último, se dividirá la suma de todas las calificaciones por la longitud del array de calificaciones
-    *  que serán el número de notas de la asignatura.<br>
-    * 
-    * @returns {number} El promedio de las calificaciones, redondeado a dos decimales. 
-    *                   devuelve `0` si no hay calificaciones.
-    * 
-    * @throws {error} Si el array no tiene longitud lanza un error.
-    */
+       * ## Calcula el promedio de las calificaciones de la asignatura.<br>
+       * ### calcular_promedio() <br>
+       *  En este caso se recorre todo el array #calificaciones y se van sumando todas las calificaciones
+       *  que el estudiante ha ido sacando en la asignatura.<br>
+       * 
+       *  Por último, se dividirá la suma de todas las calificaciones por la longitud del array de calificaciones
+       *  que serán el número de notas de la asignatura.<br>
+       * 
+       * @returns {number} El promedio de las calificaciones, redondeado a dos decimales. 
+       *                   devuelve `0` si no hay calificaciones.
+       * 
+       * @throws {error} **Si el array no tiene longitud lanza un error.**
+       */
     calcular_promedio() {
         if (this.#calificaciones.length === 0) {
             return 0;

@@ -3,7 +3,6 @@
  * Clase que representa un gestor de elementos almacenados en un array.<br>
  * El atributo principal es protegido para permitir el acceso en subclases. <br>
  */
-
 export class Gestores {
     /**
      * @type {Object[]} 
@@ -37,7 +36,7 @@ export class Gestores {
     }
 
     /**
-     * ## Método: toString
+     * ## Método: toString <br>
      * Devuelve la longitud del array `_gestor` en forma de cadena.
      * 
      * @returns {string} Un mensaje indicando la cantidad de elementos en la lista.
@@ -67,7 +66,7 @@ export class GestorEs extends Gestores {
      * Sin este método en el constructor no se podrían añadir estudiantes al inicializar la clase.
      * <br>
      * 
-     * @param {...Object} elementos - Estudiantes iniciales a agregar en el gestor.
+     * @param {...Object} elementos - *Estudiantes iniciales a agregar en el gestor.*
      */
     constructor(...elementos) {
         super();
@@ -82,11 +81,11 @@ export class GestorEs extends Gestores {
     }
 
     /**
-   * @typedef {Object} estudiante - Objeto con el nombre y nota del estudiante
-   * @property {number} id - El id del estudiante 
-   * @property {string} nombre- el nombre del estudiante
-   * @property {number} edad - La edad del estudiante
-   * @property {Object} direccion - la dirección del estudiante
+   * @typedef {Object} estudiante - **Objeto con el nombre y nota del estudiante**
+   * @property {number} id - *El id del estudiante* 
+   * @property {string} nombre- *El nombre del estudiante*
+   * @property {number} edad - *La edad del estudiante*
+   * @property {Object} direccion - *La dirección del estudiante*
    */
 
     /**
@@ -103,9 +102,9 @@ export class GestorEs extends Gestores {
      * posición del array
      * <br>
      * 
-     * @param {Object} estudiante - El estudiante que se agrega como parametro
+     * @param {Object} estudiante - *El estudiante que se agrega como parametro*
      * @returns {boolean} `true` si se agregó correctamente, `false` en caso de error.
-     * @throws {error} Cuando exista el id del estudiante que se quiera agregar en la lista
+     * @throws {error} **Cuando exista el id del estudiante que se quiera agregar en la lista**
      */
 
 
@@ -138,9 +137,9 @@ export class GestorEs extends Gestores {
      * el metodo splice().
      * <br>
      * 
-     * @param {number} id - El ID del estudiante a eliminar.
+     * @param {number} id - *El ID del estudiante a eliminar.*
      * @returns {boolean} `true` si se eliminó correctamente, `false` en caso de error.
-     * @throws {error} En caso de que el id introducido no exista en la lista se lanzará un mensaje de error. 
+     * @throws {error} **En caso de que el id introducido no exista en la lista se lanzará un mensaje de error. **
      */
     eliminar_estudiante(id) {
         let eliminar = this._gestor.findIndex(elemento => elemento.id === id);
@@ -219,9 +218,9 @@ export class GestorEs extends Gestores {
      * estudiante encontrado y en caso de que el método no devuelva nada entonces se lanzará un error.
      * <br>
      * 
-     * @param {number} id - El ID del estudiante a buscar.
+     * @param {number} id - *El ID del estudiante a buscar.*
      * @returns {Object|boolean} El estudiante encontrado o en caso de que no exista en la lista será "false".
-     * @throws {error} Si el metodo no devuelve ningun estudiante
+     * @throws {error} **Si el metodo no devuelve ningun estudiante**
     */
     obtener_estudiante(id) {
         let obtener = this._gestor.find(elemento => elemento.id === id);
@@ -259,9 +258,9 @@ export class GestorEs extends Gestores {
      * introducido como parametro.
      * <br>
      * 
-     * @param {string} nombre - El nombre o parte del nombre del estudiante.
+     * @param {string} nombre - *El nombre o parte del nombre del estudiante.*
      * @returns {void} Lista los estudiantes encontrados o un mensaje de error si no hay coincidencias.
-     * @throws {error} Si no existen coincidencias de estudiantes en el array de listas
+     * @throws {error} **Si no existen coincidencias de estudiantes en el array de listas**
      */
     obtener_nombre_estudiante(nombre) {
         let obtener = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
@@ -294,7 +293,7 @@ export class GestorEs extends Gestores {
      * <br>
      * 
      * @returns {number} El promedio general
-     * @throws {error} si devuelve 0 la longitud del array
+     * @throws {error} **si devuelve 0 la longitud del array**
      */
     promedio_listas() {
 
@@ -346,7 +345,7 @@ export class GestorAs extends Gestores {
      * <br>
      * Sin este método en el constructor no se podrían añadir asignaturas al inicializar la clase.
      * <br>
-     * @param {...Object} elementos
+     * @param {...Object} elementos - *Asignaturas iniciales a agregar en el gestor.*
      */
 
     constructor(...elementos) {
@@ -383,9 +382,9 @@ export class GestorAs extends Gestores {
     * clase asignatura en la última posición del array
     * <br>
     * 
-    * @param {Object} asignatura - La asignatura a agregar.
+    * @param {Object} asignatura - *La asignatura a agregar.*
     * @returns {boolean} "true" si se agregó correctamente, "false" en caso de error.
-    * @throws {error} si la asignatura ya existe dentro de la lista
+    * @throws {error} **si la asignatura ya existe dentro de la lista**
     */
 
 
@@ -417,10 +416,10 @@ export class GestorAs extends Gestores {
      * correspondiente mediante el metodo splice().
      * <br>
      * 
-     * @param {string} nombre - El nombre de la asignatura a eliminar.
-     * @param {Object} listaEstudiantes - El gestor de estudiantes para actualizar su información.
+     * @param {string} nombre - *El nombre de la asignatura a eliminar.*
+     * @param {Object} listaEstudiantes - *El gestor de estudiantes para actualizar su información.*
      * @returns {boolean} `true` si se eliminó correctamente, `false` en caso de error.
-     * @throws {error} En caso de que el nombre introducido como parametro no exista en la lista de asignaturas
+     * @throws {error} **En caso de que el nombre introducido como parametro no exista en la lista de asignaturas**
      */
     eliminar_asignatura(nombre, listaEstudiantes) {//parametro de listasEstudiantes
         let eliminar = this._gestor.findIndex(elemento => elemento.nombre.toLowerCase() === nombre.toLowerCase());
@@ -471,9 +470,9 @@ export class GestorAs extends Gestores {
      *  asignatura encontrada.
      * <br>
      * 
-     * @param {string} nombre - El nombre completo de la asignatura a buscar.
+     * @param {string} nombre - *El nombre completo de la asignatura a buscar.*
      * @returns {Object|boolean} La asignatura encontrada o `false` si no existe.
-     * @throws {error} En caso de que el método no devuelva nada 
+     * @throws {error} **En caso de que el método no devuelva nada **
      */
     obtener_asignatura(nombre) {
         let obtener = this._gestor.find(elemento => elemento.nombre.toLowerCase() === nombre.toLowerCase());
@@ -508,9 +507,9 @@ export class GestorAs extends Gestores {
     * Así este método, al contrario que el anterior, devolverá multiples resultados en vez de solamente
     * una coincidencía.
     * <br>
-    * @param {string} nombre - El texto parcial o completo del nombre de la asignatura.
+    * @param {string} nombre - *El texto parcial o completo del nombre de la asignatura.*
     * @returns {void} Muestra en consola las asignaturas encontradas o un mensaje de error.
-    * @throws {error} En caso de que no se encuentre ninguna asignatura que coincida con el parametro nombre introducido
+    * @throws {error} **En caso de que no se encuentre ninguna asignatura que coincida con el parametro nombre introducido**
     */
     obtener_muchas_asignaturas(nombre) {
         let obtener_As = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
@@ -543,6 +542,4 @@ export class GestorAs extends Gestores {
         super.toString();
         return `Lista con ${this._gestor.length} Asignaturas`;
     }
-
-
 }
