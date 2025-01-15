@@ -47,7 +47,9 @@
         GestorEs
         </h2>
         
-            <div class="class-description"># Clase GestorEs <br>La clase GestorEs es una subclase de Gestores y contará con los mismo atributos que la clase de laque hereda, en este caso, Gestores.<br></div>
+            <div class="class-description"><h1>Clase GestorEs <br></h1>
+<p>La clase GestorEs es una subclase de Gestores y contará con los mismo atributos que la clase de la
+que hereda, en este caso, Gestores.<br></p></div>
         
     
 </header>
@@ -69,7 +71,13 @@
 
 
 <div class="description">
-    ## Constructor<br>Su costructor será diferente ya que ademas de heredar los atributos de su clase madrecon super() tambien se recorrerá todo el array y se realizará el método agregar_estudiante con todos los elementos del array _gestor para que se puedan guardan en el array los estudiantes automáticamente y no se tengan que estar agregando al array uno por uno.<br>Sin este método en el constructor no se podrían añadir estudiantes al inicializar la clase.<br>
+    <h2>Constructor<br></h2>
+<p>Su costructor será diferente ya que ademas de heredar los atributos de su clase madre
+con super() tambien se recorrerá todo el array y se realizará el método agregar_estudiante con
+todos los elementos del array _gestor para que se puedan guardan en el array los estudiantes
+automáticamente y no se tengan que estar agregando al array uno por uno.<br></p>
+<p>Sin este método en el constructor no se podrían añadir estudiantes al inicializar la clase.
+<br></p>
 </div>
 
 
@@ -105,7 +113,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line701">line 701</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line702">line 702</a>
     </li></ul></dd>
     
 
@@ -178,7 +186,7 @@
             
 
             <td class="description last">
-                Estudiantes iniciales a agregar en el gestor.
+                <p>Estudiantes iniciales a agregar en el gestor.</p>
                 
             </td>
         </tr>
@@ -234,7 +242,17 @@
 
 
 <div class="description">
-    ## Método: agregar_estudiante <br>### agregar_estudiante(estudiante): <br>Con este método se agregará un objeto de la clase estudiante a la lista introduciendolo como valor.<br>Antes de agregar al estudiante se buscará en la lista un estudiante con el mismo id que el que se quiere agregar y en caso de existir lanzará un error indicando que el estudiante ya ha sido agregadoanteriormente a la lista.<br>Si no existiese se agregaría a la lista con el metodo push, introduciendo el elemento en la últimaposición del array<br>
+    <h2>Método: agregar_estudiante <br></h2>
+<h3>agregar_estudiante(estudiante): <br></h3>
+<p>Con este método se agregará un objeto de la clase estudiante a la lista introduciendolo como valor.
+<br>
+Antes de agregar al estudiante se buscará en la lista un estudiante con el mismo id que el que
+se quiere agregar y en caso de existir lanzará un error indicando que el estudiante ya ha sido agregado
+anteriormente a la lista.
+<br>
+Si no existiese se agregaría a la lista con el metodo push, introduciendo el elemento en la última
+posición del array
+<br></p>
 </div>
 
 
@@ -270,7 +288,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line755">line 755</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line756">line 756</a>
     </li></ul></dd>
     
 
@@ -331,7 +349,7 @@
             
 
             <td class="description last">
-                El estudiante que se agrega como parametro
+                <p>El estudiante que se agrega como parametro</p>
                 
             </td>
         </tr>
@@ -359,7 +377,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        Cuando exista el id del estudiante que se quiera agregar en la lista
+        <p>Cuando exista el id del estudiante que se quiera agregar en la lista</p>
         </div>
     </dt>
     <dd></dd>
@@ -404,7 +422,7 @@
 
 
 <div class="param-desc">
-    `true` si se agregó correctamente, `false` en caso de error.
+    <p><code>true</code> si se agregó correctamente, <code>false</code> en caso de error.</p>
 </div>
 
     
@@ -426,7 +444,16 @@
 
 
 <div class="description">
-    ## Método: eliminar_estudiante <br>### eliminar_estudiante(id):<br>Este método eliminará a un estudiante de la lista mediante el id que se la haya introducido como parametro.<br>Se buscará la posición del array donde coincidan el id introducido con el id de un estudiante<br>En caso de que el id introducido exista en la lista se cogerá el número de la posición donde se encuentre el estudiante coincidente y se eliminará al estudiante que posea ese id medianteel metodo splice().<br>
+    <h2>Método: eliminar_estudiante <br></h2>
+<h3>eliminar_estudiante(id):<br></h3>
+<p>Este método eliminará a un estudiante de la lista mediante el id que se la haya introducido como
+parametro.<br></p>
+<p>Se buscará la posición del array donde coincidan el id introducido con el id de un estudiante
+<br>
+En caso de que el id introducido exista en la lista se cogerá el número de la posición
+donde se encuentre el estudiante coincidente y se eliminará al estudiante que posea ese id mediante
+el metodo splice().
+<br></p>
 </div>
 
 
@@ -462,7 +489,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line788">line 788</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line789">line 789</a>
     </li></ul></dd>
     
 
@@ -523,7 +550,7 @@
             
 
             <td class="description last">
-                El ID del estudiante a eliminar.
+                <p>El ID del estudiante a eliminar.</p>
                 
             </td>
         </tr>
@@ -551,7 +578,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        En caso de que el id introducido no exista en la lista se lanzará un mensaje de error.
+        <p>En caso de que el id introducido no exista en la lista se lanzará un mensaje de error.</p>
         </div>
     </dt>
     <dd></dd>
@@ -596,7 +623,7 @@
 
 
 <div class="param-desc">
-    `true` si se eliminó correctamente, `false` en caso de error.
+    <p><code>true</code> si se eliminó correctamente, <code>false</code> en caso de error.</p>
 </div>
 
     
@@ -618,7 +645,9 @@
 
 
 <div class="description">
-    ## Método: listar_estudiantes<br>Se recorrerá todo el array _gestores y los elementos que posea, en este caso estudiantes,se mostrarán en pantalla mediante el metodo toString de la clase Estudiantes. <br>
+    <h2>Método: listar_estudiantes<br></h2>
+<p>Se recorrerá todo el array _gestores y los elementos que posea, en este caso estudiantes,
+se mostrarán en pantalla mediante el metodo toString de la clase Estudiantes. <br></p>
 </div>
 
 
@@ -654,7 +683,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line812">line 812</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line813">line 813</a>
     </li></ul></dd>
     
 
@@ -701,7 +730,13 @@
 
 
 <div class="description">
-    ## Método: listar_informes<br> Este método generará un informe con la direccion de cada estudiante,  sus asignaturas junto a sus calificaciones, sus matriculaciones y sus promedios.<br> Esto se conseguirá recorriendo todo el array _gestor y accediendo a los getters y metodos de  los objetos pertenecientes a la clase Estudiantes.<br>
+    <h2>Método: listar_informes<br></h2>
+<p>Este método generará un informe con la direccion de cada estudiante,
+sus asignaturas junto a sus calificaciones, sus matriculaciones y sus
+promedios.<br></p>
+<p>Esto se conseguirá recorriendo todo el array _gestor y accediendo a los getters y metodos de
+los objetos pertenecientes a la clase Estudiantes.
+<br></p>
 </div>
 
 
@@ -737,7 +772,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line831">line 831</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line832">line 832</a>
     </li></ul></dd>
     
 
@@ -784,7 +819,13 @@
 
 
 <div class="description">
-    ## Método: obtener_estudiante <br>### obtener_estudiante(id):<br> Este método tratará de buscar en el array _gestor a un estudiante mediante su id.<br>Esto se conseguirá mediante el método find() y en caso de que devuelva algo se devolverá al estudiante encontrado y en caso de que el método no devuelva nada entonces se lanzará un error.<br>
+    <h2>Método: obtener_estudiante <br></h2>
+<h3>obtener_estudiante(id):<br></h3>
+<p>Este método tratará de buscar en el array _gestor a un estudiante mediante su id.
+<br>
+Esto se conseguirá mediante el método find() y en caso de que devuelva algo se devolverá al
+estudiante encontrado y en caso de que el método no devuelva nada entonces se lanzará un error.
+<br></p>
 </div>
 
 
@@ -820,7 +861,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line869">line 869</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line870">line 870</a>
     </li></ul></dd>
     
 
@@ -881,7 +922,7 @@
             
 
             <td class="description last">
-                El ID del estudiante a buscar.
+                <p>El ID del estudiante a buscar.</p>
                 
             </td>
         </tr>
@@ -909,7 +950,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        Si el metodo no devuelve ningun estudiante
+        <p>Si el metodo no devuelve ningun estudiante</p>
         </div>
     </dt>
     <dd></dd>
@@ -957,7 +998,7 @@
 
 
 <div class="param-desc">
-    El estudiante encontrado o en caso de que no exista en la lista será "false".
+    <p>El estudiante encontrado o en caso de que no exista en la lista será &quot;false&quot;.</p>
 </div>
 
     
@@ -979,7 +1020,19 @@
 
 
 <div class="description">
-    ## Método: obtener_nombre_estudiante<br>### obtener_nombre_estudiante(nombre):<br> Este método tendrá la misma función que el método obtener_estudiante(id) con la única diferencia de  que se buscará al estudiante por su nombre (aunque este se haya introducido solo parcialmente)en vez de por su id.<br>Esto se conseguirá mediante el método filter() el cual filtrará los estudiantes cuyo nombre noposea el string introducido como parametro en el método.<br>Si existiese algun elemento en el nuevo array creado después de utilizar el método filter entoncesse recorrería el array y se mostrararía a los estudiante que coincidan con el nombre introducido como parametro.<br>
+    <h2>Método: obtener_nombre_estudiante<br></h2>
+<h3>obtener_nombre_estudiante(nombre):<br></h3>
+<p>Este método tendrá la misma función que el método obtener_estudiante(id) con la única diferencia de
+que se buscará al estudiante por su nombre (aunque este se haya introducido solo parcialmente)
+en vez de por su id.
+<br></p>
+<p>Esto se conseguirá mediante el método filter() el cual filtrará los estudiantes cuyo nombre no
+posea el string introducido como parametro en el método.
+<br></p>
+<p>Si existiese algun elemento en el nuevo array creado después de utilizar el método filter entonces
+se recorrería el array y se mostrararía a los estudiante que coincidan con el nombre
+introducido como parametro.
+<br></p>
 </div>
 
 
@@ -1015,7 +1068,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line909">line 909</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line910">line 910</a>
     </li></ul></dd>
     
 
@@ -1076,7 +1129,7 @@
             
 
             <td class="description last">
-                El nombre o parte del nombre del estudiante.
+                <p>El nombre o parte del nombre del estudiante.</p>
                 
             </td>
         </tr>
@@ -1104,7 +1157,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        Si no existen coincidencias de estudiantes en el array de listas
+        <p>Si no existen coincidencias de estudiantes en el array de listas</p>
         </div>
     </dt>
     <dd></dd>
@@ -1149,7 +1202,7 @@
 
 
 <div class="param-desc">
-    Lista los estudiantes encontrados o un mensaje de error si no hay coincidencias.
+    <p>Lista los estudiantes encontrados o un mensaje de error si no hay coincidencias.</p>
 </div>
 
     
@@ -1171,7 +1224,13 @@
 
 
 <div class="description">
-    ## Método: promedio_listas<br>Calcula el promedio de los promedios de todos los estudiantes en el gestor.<br>Cuando se tenga la suma total de todos los promedios de cada estudiante entonces se dividirá esta suma entre la cantidad de veces que se haya sumado a la variable, es decir, el numerode estudiantes existentes y entonces se obtendrá la media total de las notas de todos los estudiantes<br>
+    <h2>Método: promedio_listas<br></h2>
+<p>Calcula el promedio de los promedios de todos los estudiantes en el gestor.
+<br>
+Cuando se tenga la suma total de todos los promedios de cada estudiante entonces se dividirá
+esta suma entre la cantidad de veces que se haya sumado a la variable, es decir, el numero
+de estudiantes existentes y entonces se obtendrá la media total de las notas de todos los estudiantes
+<br></p>
 </div>
 
 
@@ -1207,7 +1266,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line942">line 942</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line943">line 943</a>
     </li></ul></dd>
     
 
@@ -1244,7 +1303,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        si devuelve 0 la longitud del array
+        <p>si devuelve 0 la longitud del array</p>
         </div>
     </dt>
     <dd></dd>
@@ -1289,7 +1348,7 @@
 
 
 <div class="param-desc">
-    El promedio general
+    <p>El promedio general</p>
 </div>
 
     
@@ -1311,7 +1370,10 @@
 
 
 <div class="description">
-    ## Método: toString<br>El metodo toString servirá como una sobrecarga del metodo toString de la clase Gestores y este mostrará la longitud del array _gestor pero indicando que la lista es una lista de estudiantes.<br>
+    <h2>Método: toString<br></h2>
+<p>El metodo toString servirá como una sobrecarga del metodo toString de la clase Gestores y este
+mostrará la longitud del array _gestor pero indicando que la lista es una lista de estudiantes.
+<br></p>
 </div>
 
 
@@ -1347,7 +1409,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line967">line 967</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line968">line 968</a>
     </li></ul></dd>
     
 
@@ -1420,7 +1482,7 @@
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Sun Jan 12 2025 20:42:33 GMT+0100 (hora estándar de Europa central) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Wed Jan 15 2025 18:46:18 GMT+0100 (hora estándar de Europa central) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

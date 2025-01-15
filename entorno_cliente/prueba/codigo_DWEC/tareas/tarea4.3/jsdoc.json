@@ -8,5 +8,6 @@
     "opts":{
         "destination":"./documentacion",
         "template":"node_modules/minami"
-    }
+    },
+    "plugins":["plugins/markdown"]
 }

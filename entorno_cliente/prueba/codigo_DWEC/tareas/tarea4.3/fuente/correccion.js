@@ -11,7 +11,8 @@
  */
 
 /**
- * # Creamos una clase para saber la dirección de cada estudiante
+ * # Creamos una clase para saber la dirección de cada <br>estudiante
+ * 
  */
 class Direccion {
     /**
@@ -45,12 +46,12 @@ class Direccion {
     * Se inicializa una nueva instancia de la clase Dirección.<br>
     * 
     * ### Parámetros
-    * @param {string} calle - La calle de la dirección.
-    * @param {number} numero - El número de la calle.
-    * @param {number} piso - El número del piso.
-    * @param {string} codigo - El código postal de la dirección (debe tener 5 dígitos). Si no cumple el formato, se asignará `"Error"`.
-    * @param {string} provincia - La provincia.
-    * @param {string} localidad - La localidad de dicha provincia.
+    * @param {string} calle - *La calle de la dirección.*
+    * @param {number} numero - *El número de la calle.*
+    * @param {number} piso - *El número del piso.*
+    * @param {string} codigo - *El código postal de la dirección (debe tener 5 dígitos). Si no cumple el formato, se asignará `"Error"`*.
+    * @param {string} provincia - *La provincia.*
+    * @param {string} localidad - *La localidad de dicha provincia.*
     */
 
     constructor(calle, numero, piso, codigo, provincia, localidad) {
@@ -199,9 +200,9 @@ class Estudiantes {
     */
     /**
      * Constructor de la clase Estudiantes.
-     * @param {string} N_nombre - Nombre del estudiante (solo letras y espacios).
-     * @param {number} N_edad - Edad del estudiante.
-     * @param {Object} N_direc - Dirección del estudiante.
+     * @param {string} N_nombre - *Nombre del estudiante (solo letras y espacios).*
+     * @param {number} N_edad - *Edad del estudiante.*
+     * @param {Object} N_direc - *Dirección del estudiante.*
      * @throws {error} Si el nombre del estudiante contiene algo mas que letras o espacios
      */
     constructor(N_nombre, N_edad, N_direc) {
@@ -285,13 +286,13 @@ class Estudiantes {
     }
 
     /**
-    * @typedef {Object} asignatura - Objeto con el nombre y nota de la asignatura.
-    * @property {string} nombre - el nombre de la asignatura
-    * @property {number} nota - La nota de la asignatura
+    * @typedef {Object} asignatura - **Objeto con el nombre y nota de la asignatura.**
+    * @property {string} nombre - *El nombre de la asignatura*
+    * @property {number} nota - *La nota de la asignatura*
     */
     /**
      * ## Matricula al estudiante en una asignatura.<br>
-     *
+     * ### matricular(asignatura)<br>
      * En el método matricular, se introducirá un nombre de una asignatura indicada
      * por el usuario.
      * <br>
@@ -300,7 +301,7 @@ class Estudiantes {
      * guardaría en el array #registros.
      * <br>
      * 
-     * @param {Object} asignatura - Objeto con el nombre y nota de la asignatura.
+     * @param {Object} asignatura - *Objeto con el nombre y nota de la asignatura.*
      * @returns {boolean} Indica si la operación fue exitosa.
      * @throws {error}  Si en el array #asignaturas se encuentra alguna coincidencia en el nombre con la
      * asignatura indicada esto dará un error debido a que en caso de estar en el array #asignaturas
@@ -333,13 +334,14 @@ class Estudiantes {
 
 
     /**
-    * @typedef {Object} asignatura - Objeto con el nombre y nota de la asignatura.
-    * @property {string} nombre - el nombre de la asignatura
-    * @property {number} nota - La nota de la asignatura
+    * @typedef {Object} asignatura - **Objeto con el nombre y nota de la asignatura.**
+    * @property {string} nombre - *El nombre de la asignatura*
+    * @property {number} nota - *La nota de la asignatura*
     */
 
     /**
     * ## Desmatricula al estudiante de una asignatura.<br>
+    * ###desmatricular(asignatura)<br>
     * En el método desmatricular, se introducirá de nuevo como valor el nombre de una asignatura indicada
     * por el usuario y si se encuentra el indice de la coincidencia del nombre 
     * de esa asignatura en el array #asignaturas entonces se eliminará la asignatura del array con el método
@@ -347,7 +349,7 @@ class Estudiantes {
     * registro de la desmatriculacion de esa asignatura.<br>
     * 
     * 
-    * @param {Object} asignatura - Objeto con el nombre y nota de la asignatura.
+    * @param {Object} asignatura - *Objeto con el nombre y nota de la asignatura.*
     * @returns {boolean} Indica si la operación fue exitosa.
     * @throws {error} Si no se encuentra ninguna coincidencia del nombre de la asignatura en el array #asignaturas se lanzará un error
     */
@@ -379,7 +381,7 @@ class Estudiantes {
 
 
     /**
-     * registra la fecha de matriculación o desmatriculación
+     * ## Registra la fecha de matriculación o desmatriculación
      * @returns {Array<string>} Lista de registros en formato legible.
      */
     get registros() {
@@ -402,6 +404,8 @@ class Estudiantes {
 
     /**
     * ## Agrega una calificación a una asignatura.<br>
+    * ### agregar_calificacion(asignatura,nota)<br>
+    * 
     * Cambia la nota de calificacion si existe esta asignatura.<br>
     *  
     * En este método se introducirá como parametros un objeto de la clase Asignatura y una nota que se 
@@ -412,8 +416,8 @@ class Estudiantes {
     * array asignaturas la nota introducida por el usuario. <br>
     *
     * 
-    * @param {Object} asignatura - Objeto con el nombre y la nota de la asignatura
-    * @param {number} nota - Nota a asignar por el usuario.
+    * @param {Object} asignatura - *Objeto con el nombre y la nota de la asignatura*
+    * @param {number} nota - *Nota a asignar por el usuario.*
     * @returns {boolean} Indica si la operación fue exitosa.
     * @throws {error} Si la nota es mayor que 10 o menor que 0 o si no es del tipo 'number' entonces se mostrara un error.
     */
@@ -455,6 +459,7 @@ class Estudiantes {
     /**
      * 
      *    ## Calculará el promedio de todas las calificaciones del estudiante.<br>
+     *    ### promedio()<br>
      *
      *    En este método se contará si el array #asignaturas contiene asignaturas. <br>
      *    En el caso de que las contenga y de que su longitud sea mayor que 0 entonces se recorrerá la totalidad del array y si las notas de 
@@ -485,7 +490,7 @@ class Estudiantes {
 }
 
 /**
- * # Clase que representa una asignatura con su nombre y calificaciones.
+ * # Clase que representa una asignatura con su nombre y <br> calificaciones.
  */
 
 class Asignaturas {
@@ -506,9 +511,9 @@ class Asignaturas {
     /**
      * Constructor de la clase Asignaturas.
      * 
-     * @param {string} nombre1 - El nombre de la asignatura. Debe contener solo letras, espacios y números romanos.
+     * @param {string} nombre1 - *El nombre de la asignatura. Debe contener solo letras, espacios y números romanos.*
      * 
-     * @throws {error} Si el nombre no cumple con el patrón, se lanza un error y se registra en la consola.
+     * @throws {error} **Si el nombre no cumple con el patrón, se lanza un error y se registra en la consola.**
      */
     constructor(nombre1) {
         let patron = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;//que contenga letras y espacios 1 o mas veces
@@ -546,7 +551,8 @@ class Asignaturas {
     }
 
     /**
-     * ## Se mostrará por pantalla el nombre de la asignatura
+     * ## Se mostrará por pantalla el nombre de la asignatura<br>
+     * ### toString()<br>
      * 
      * @returns {string} El nombre de la asignatura en formato "Asignatura: [nombre]".
      */
@@ -557,15 +563,15 @@ class Asignaturas {
 
     /**
      * ## Agrega una calificación a la asignatura elegida.<br>
-     * 
+     * ###  agregar_calificacion(nota) <br>
      * En este método se introducirá una nota que se le quiera añadir a una asignatura. Si la nota esta entre
      * 0 y 10 entonces se añadira al array #calificaciones. <br>
      * 
-     * @param {number} nota - La nota a añadir. Debe estar entre 0 y 10.
+     * @param {number} nota - *La nota a añadir. Debe estar entre 0 y 10.*
      * 
      * @returns {boolean} `true` si la nota es válida y se añade correctamente, `false` en caso contrario.
      * 
-     * @throws {error} Si no cumple con esas condiciones se mostrará un error. 
+     * @throws {error} **Si no cumple con esas condiciones se mostrará un error.** 
     */
     agregar_calificacion(nota) {
         try {
@@ -583,16 +589,16 @@ class Asignaturas {
 
     /**
     * ## Elimina una calificación de la asignatura en la posición especificada.<br>
-    * 
+    * ### eliminar_calificacion(indice)<br>
     * En caso de que el indice especificado este dentro de rango del array #calificaciones
     * se eliminará la calificación con el método splice().
     * <br>
     * 
-    * @param {number} indice - El índice de la calificación a eliminar.
+    * @param {number} indice - *El índice de la calificación a eliminar.*
     * 
     * @returns {boolean} `true` si la calificación se elimina correctamente, `false` si ocurre un error.
     * 
-    * @throws {Error} Si el índice está fuera del rango válido.
+    * @throws {error} **Si el índice está fuera del rango válido.**
     *
     */
     eliminar_calificacion(indice) {
@@ -618,7 +624,7 @@ class Asignaturas {
     */
     /**
     * ## Calcula el promedio de las calificaciones de la asignatura.<br>
-    * 
+    * ### calcular_promedio() <br>
     *  En este caso se recorre todo el array #calificaciones y se van sumando todas las calificaciones
     *  que el estudiante ha ido sacando en la asignatura.<br>
     * 
@@ -628,7 +634,7 @@ class Asignaturas {
     * @returns {number} El promedio de las calificaciones, redondeado a dos decimales. 
     *                   devuelve `0` si no hay calificaciones.
     * 
-    * @throws {error} Si el array no tiene longitud lanza un error.
+    * @throws {error} **Si el array no tiene longitud lanza un error.**
     */
     calcular_promedio() {
         if (this.#calificaciones.length === 0) {
@@ -680,7 +686,7 @@ class Gestores {
     }
 
     /**
-     * ## Método: toString
+     * ## Método: toString <br>
      * Devuelve la longitud del array `_gestor` en forma de cadena.
      * 
      * @returns {string} Un mensaje indicando la cantidad de elementos en la lista.
@@ -710,7 +716,7 @@ class GestorEs extends Gestores {
      * Sin este método en el constructor no se podrían añadir estudiantes al inicializar la clase.
      * <br>
      * 
-     * @param {...Object} elementos - Estudiantes iniciales a agregar en el gestor.
+     * @param {...Object} elementos - *Estudiantes iniciales a agregar en el gestor.*
      */
     constructor(...elementos) {
         super();
@@ -725,11 +731,11 @@ class GestorEs extends Gestores {
     }
 
     /**
-   * @typedef {Object} estudiante - Objeto con el nombre y nota del estudiante
-   * @property {number} id - El id del estudiante 
-   * @property {string} nombre- el nombre del estudiante
-   * @property {number} edad - La edad del estudiante
-   * @property {Object} direccion - la dirección del estudiante
+   * @typedef {Object} estudiante - **Objeto con el nombre y nota del estudiante**
+   * @property {number} id - *El id del estudiante* 
+   * @property {string} nombre- *El nombre del estudiante*
+   * @property {number} edad - *La edad del estudiante*
+   * @property {Object} direccion - *La dirección del estudiante*
    */
 
     /**
@@ -746,9 +752,9 @@ class GestorEs extends Gestores {
      * posición del array
      * <br>
      * 
-     * @param {Object} estudiante - El estudiante que se agrega como parametro
+     * @param {Object} estudiante - *El estudiante que se agrega como parametro*
      * @returns {boolean} `true` si se agregó correctamente, `false` en caso de error.
-     * @throws {error} Cuando exista el id del estudiante que se quiera agregar en la lista
+     * @throws {error} **Cuando exista el id del estudiante que se quiera agregar en la lista**
      */
 
 
@@ -781,9 +787,9 @@ class GestorEs extends Gestores {
      * el metodo splice().
      * <br>
      * 
-     * @param {number} id - El ID del estudiante a eliminar.
+     * @param {number} id - *El ID del estudiante a eliminar.*
      * @returns {boolean} `true` si se eliminó correctamente, `false` en caso de error.
-     * @throws {error} En caso de que el id introducido no exista en la lista se lanzará un mensaje de error. 
+     * @throws {error} **En caso de que el id introducido no exista en la lista se lanzará un mensaje de error. **
      */
     eliminar_estudiante(id) {
         let eliminar = this._gestor.findIndex(elemento => elemento.id === id);
@@ -862,9 +868,9 @@ class GestorEs extends Gestores {
      * estudiante encontrado y en caso de que el método no devuelva nada entonces se lanzará un error.
      * <br>
      * 
-     * @param {number} id - El ID del estudiante a buscar.
+     * @param {number} id - *El ID del estudiante a buscar.*
      * @returns {Object|boolean} El estudiante encontrado o en caso de que no exista en la lista será "false".
-     * @throws {error} Si el metodo no devuelve ningun estudiante
+     * @throws {error} **Si el metodo no devuelve ningun estudiante**
     */
     obtener_estudiante(id) {
         let obtener = this._gestor.find(elemento => elemento.id === id);
@@ -902,9 +908,9 @@ class GestorEs extends Gestores {
      * introducido como parametro.
      * <br>
      * 
-     * @param {string} nombre - El nombre o parte del nombre del estudiante.
+     * @param {string} nombre - *El nombre o parte del nombre del estudiante.*
      * @returns {void} Lista los estudiantes encontrados o un mensaje de error si no hay coincidencias.
-     * @throws {error} Si no existen coincidencias de estudiantes en el array de listas
+     * @throws {error} **Si no existen coincidencias de estudiantes en el array de listas**
      */
     obtener_nombre_estudiante(nombre) {
         let obtener = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
@@ -937,7 +943,7 @@ class GestorEs extends Gestores {
      * <br>
      * 
      * @returns {number} El promedio general
-     * @throws {error} si devuelve 0 la longitud del array
+     * @throws {error} **si devuelve 0 la longitud del array**
      */
     promedio_listas() {
 
@@ -989,7 +995,7 @@ class GestorAs extends Gestores {
      * <br>
      * Sin este método en el constructor no se podrían añadir asignaturas al inicializar la clase.
      * <br>
-     * @param {...Object} elementos
+     * @param {...Object} elementos - *Asignaturas iniciales a agregar en el gestor.*
      */
 
     constructor(...elementos) {
@@ -1026,9 +1032,9 @@ class GestorAs extends Gestores {
     * clase asignatura en la última posición del array
     * <br>
     * 
-    * @param {Object} asignatura - La asignatura a agregar.
+    * @param {Object} asignatura - *La asignatura a agregar.*
     * @returns {boolean} "true" si se agregó correctamente, "false" en caso de error.
-    * @throws {error} si la asignatura ya existe dentro de la lista
+    * @throws {error} **si la asignatura ya existe dentro de la lista**
     */
 
 
@@ -1060,10 +1066,10 @@ class GestorAs extends Gestores {
      * correspondiente mediante el metodo splice().
      * <br>
      * 
-     * @param {string} nombre - El nombre de la asignatura a eliminar.
-     * @param {Object} listaEstudiantes - El gestor de estudiantes para actualizar su información.
+     * @param {string} nombre - *El nombre de la asignatura a eliminar.*
+     * @param {Object} listaEstudiantes - *El gestor de estudiantes para actualizar su información.*
      * @returns {boolean} `true` si se eliminó correctamente, `false` en caso de error.
-     * @throws {error} En caso de que el nombre introducido como parametro no exista en la lista de asignaturas
+     * @throws {error} **En caso de que el nombre introducido como parametro no exista en la lista de asignaturas**
      */
     eliminar_asignatura(nombre, listaEstudiantes) {//parametro de listasEstudiantes
         let eliminar = this._gestor.findIndex(elemento => elemento.nombre.toLowerCase() === nombre.toLowerCase());
@@ -1114,9 +1120,9 @@ class GestorAs extends Gestores {
      *  asignatura encontrada.
      * <br>
      * 
-     * @param {string} nombre - El nombre completo de la asignatura a buscar.
+     * @param {string} nombre - *El nombre completo de la asignatura a buscar.*
      * @returns {Object|boolean} La asignatura encontrada o `false` si no existe.
-     * @throws {error} En caso de que el método no devuelva nada 
+     * @throws {error} **En caso de que el método no devuelva nada **
      */
     obtener_asignatura(nombre) {
         let obtener = this._gestor.find(elemento => elemento.nombre.toLowerCase() === nombre.toLowerCase());
@@ -1151,9 +1157,9 @@ class GestorAs extends Gestores {
     * Así este método, al contrario que el anterior, devolverá multiples resultados en vez de solamente
     * una coincidencía.
     * <br>
-    * @param {string} nombre - El texto parcial o completo del nombre de la asignatura.
+    * @param {string} nombre - *El texto parcial o completo del nombre de la asignatura.*
     * @returns {void} Muestra en consola las asignaturas encontradas o un mensaje de error.
-    * @throws {error} En caso de que no se encuentre ninguna asignatura que coincida con el parametro nombre introducido
+    * @throws {error} **En caso de que no se encuentre ninguna asignatura que coincida con el parametro nombre introducido**
     */
     obtener_muchas_asignaturas(nombre) {
         let obtener_As = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
@@ -1212,9 +1218,9 @@ class ErrorPersonalizado extends Error {
 
 
 /**
- * @typedef {Object} estudiante - El objeto que representa al estudiante.
- * @property {string} estudiante.nombre - El nombre del estudiante. Debe ser una cadena no vacía.
- * @property {number} estudiante.edad - La edad del estudiante. Debe ser un número positivo.
+ * @typedef {Object} estudiante - **El objeto que representa al estudiante.**
+ * @property {string} estudiante.nombre - *El nombre del estudiante. Debe ser una cadena no vacía.*
+ * @property {number} estudiante.edad - *La edad del estudiante. Debe ser un número positivo.*
  * 
  */
 
@@ -1223,8 +1229,8 @@ class ErrorPersonalizado extends Error {
  * 
  * Valida los datos de un estudiante y lanza un error personalizado si no cumple con las condiciones.
  * <br>
- * @param {Object} estudiante - El objeto que representa al estudiante.
- * @throws {ErrorPersonalizado} Si el nombre o la edad no son validos
+ * @param {Object} estudiante - *El objeto que representa al estudiante.*
+ * @throws {ErrorPersonalizado} **Si el nombre o la edad no son validos**
  */
 
 

@@ -47,7 +47,10 @@
         GestorAs
         </h2>
         
-            <div class="class-description"># Clase GestorAs <br> La clase GestorAs es una subclase de Gestores y contará con los mismo atributos que la clase de la que hereda, en este caso, Gestores.<br></div>
+            <div class="class-description"><h1>Clase GestorAs <br></h1>
+<p>La clase GestorAs es una subclase de Gestores y contará con los mismo atributos que la clase de la
+que hereda, en este caso, Gestores.
+<br></p></div>
         
     
 </header>
@@ -69,7 +72,14 @@
 
 
 <div class="description">
-    ## Constructor <br> Sin embargo, su costructor será diferente al de "Gestores" ya que ademas de heredar los atributos de su clase madrecon super() tambien se recorrerá todo el array y se realizará el método agregar_asignatura con todos los elementos del array _gestor para que se puedan guardan en el array las asignaturas automáticamente y no se tengan que estar agragando al array uno por uno.<br>Sin este método en el constructor no se podrían añadir asignaturas al inicializar la clase.<br>
+    <h2>Constructor <br></h2>
+<p>Sin embargo, su costructor será diferente al de &quot;Gestores&quot; ya que ademas de heredar los atributos de su clase madre
+con super() tambien se recorrerá todo el array y se realizará el método agregar_asignatura con
+todos los elementos del array _gestor para que se puedan guardan en el array las asignaturas
+automáticamente y no se tengan que estar agragando al array uno por uno.
+<br>
+Sin este método en el constructor no se podrían añadir asignaturas al inicializar la clase.
+<br></p>
 </div>
 
 
@@ -105,7 +115,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line981">line 981</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line982">line 982</a>
     </li></ul></dd>
     
 
@@ -234,7 +244,17 @@
 
 
 <div class="description">
-    ## Método: agregar_asignatura<br>Este método será el encargado de buscar dentro del array _gestor una coincidencia entre el nombrede la asignatura introducida como parametro y el nombre de alguna de las asignaturas contenidas en elarray.<br>Para realizar esta funcionalidad se utilizara el método find() para que devuelva una coincidencia(la primera) en caso de que existiese el nombre de la asignatura en el array y de ser ese el casose lanzaría un error diciendo que la asignatura ya existe en la lista.<br>Si no existiese se agregaría a la lista con el metodo push(), introduciendo el objeto de laclase asignatura en la última posición del array<br>
+    <h2>Método: agregar_asignatura<br></h2>
+<p>Este método será el encargado de buscar dentro del array _gestor una coincidencia entre el nombre
+de la asignatura introducida como parametro y el nombre de alguna de las asignaturas contenidas en el
+array.<br></p>
+<p>Para realizar esta funcionalidad se utilizara el método find() para que devuelva una coincidencia
+(la primera) en caso de que existiese el nombre de la asignatura en el array y de ser ese el caso
+se lanzaría un error diciendo que la asignatura ya existe en la lista.
+<br>
+Si no existiese se agregaría a la lista con el metodo push(), introduciendo el objeto de la
+clase asignatura en la última posición del array
+<br></p>
 </div>
 
 
@@ -270,7 +290,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line1035">line 1035</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line1036">line 1036</a>
     </li></ul></dd>
     
 
@@ -331,7 +351,7 @@
             
 
             <td class="description last">
-                La asignatura a agregar.
+                <p>La asignatura a agregar.</p>
                 
             </td>
         </tr>
@@ -359,7 +379,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        si la asignatura ya existe dentro de la lista
+        <p>si la asignatura ya existe dentro de la lista</p>
         </div>
     </dt>
     <dd></dd>
@@ -404,7 +424,7 @@
 
 
 <div class="param-desc">
-    "true" si se agregó correctamente, "false" en caso de error.
+    <p>&quot;true&quot; si se agregó correctamente, &quot;false&quot; en caso de error.</p>
 </div>
 
     
@@ -426,7 +446,15 @@
 
 
 <div class="description">
-    ## Método: eliminar_asignatura<br> Este método eliminará a una asignatura de la lista mediante el nombre que se la haya introducido como  parametro.<br>Se buscará la posición del array donde coincidan el nombre introducido con el nombre de unaasignatura.<br>En caso de que el nombre introducido exista en la lista se cogerá el número de la posición donde se encuentre la asignatura coincidente y se eliminará esa asignatura la cual posea el nombrecorrespondiente mediante el metodo splice().<br>
+    <h2>Método: eliminar_asignatura<br></h2>
+<p>Este método eliminará a una asignatura de la lista mediante el nombre que se la haya introducido como
+parametro.<br></p>
+<p>Se buscará la posición del array donde coincidan el nombre introducido con el nombre de una
+asignatura.<br></p>
+<p>En caso de que el nombre introducido exista en la lista se cogerá el número de la posición
+donde se encuentre la asignatura coincidente y se eliminará esa asignatura la cual posea el nombre
+correspondiente mediante el metodo splice().
+<br></p>
 </div>
 
 
@@ -462,7 +490,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line1068">line 1068</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line1069">line 1069</a>
     </li></ul></dd>
     
 
@@ -523,7 +551,7 @@
             
 
             <td class="description last">
-                El nombre de la asignatura a eliminar.
+                <p>El nombre de la asignatura a eliminar.</p>
                 
             </td>
         </tr>
@@ -549,7 +577,7 @@
             
 
             <td class="description last">
-                El gestor de estudiantes para actualizar su información.
+                <p>El gestor de estudiantes para actualizar su información.</p>
                 
             </td>
         </tr>
@@ -577,7 +605,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        En caso de que el nombre introducido como parametro no exista en la lista de asignaturas
+        <p>En caso de que el nombre introducido como parametro no exista en la lista de asignaturas</p>
         </div>
     </dt>
     <dd></dd>
@@ -622,7 +650,7 @@
 
 
 <div class="param-desc">
-    `true` si se eliminó correctamente, `false` en caso de error.
+    <p><code>true</code> si se eliminó correctamente, <code>false</code> en caso de error.</p>
 </div>
 
     
@@ -644,7 +672,11 @@
 
 
 <div class="description">
-    ## Método: listar_asignaturas <br>Se recorrerá todo el array _gestores y los elementos que posea, en este caso asignaturas,se mostrarán en pantalla mediante el metodo toString de la clase Asignaturas, el cualmostrará el nombre de cada asignatura.<br>
+    <h2>Método: listar_asignaturas <br></h2>
+<p>Se recorrerá todo el array _gestores y los elementos que posea, en este caso asignaturas,
+se mostrarán en pantalla mediante el metodo toString de la clase Asignaturas, el cual
+mostrará el nombre de cada asignatura.
+<br></p>
 </div>
 
 
@@ -680,7 +712,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line1100">line 1100</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line1101">line 1101</a>
     </li></ul></dd>
     
 
@@ -727,7 +759,14 @@
 
 
 <div class="description">
-    ## Método: obtener_asignatura<br> Este método tratará de buscar en el array _gestor a una asignatura mediante su nombre. Buscará y devolverá una asignatura específica por su nombre.<br> Esto se conseguirá mediante el método find() y en caso de que devuelva algo será la  asignatura encontrada.<br>
+    <h2>Método: obtener_asignatura</h2>
+<br>
+<p>Este método tratará de buscar en el array _gestor a una asignatura mediante su nombre.
+Buscará y devolverá una asignatura específica por su nombre.
+<br>
+Esto se conseguirá mediante el método find() y en caso de que devuelva algo será la
+asignatura encontrada.
+<br></p>
 </div>
 
 
@@ -763,7 +802,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line1121">line 1121</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line1122">line 1122</a>
     </li></ul></dd>
     
 
@@ -824,7 +863,7 @@
             
 
             <td class="description last">
-                El nombre completo de la asignatura a buscar.
+                <p>El nombre completo de la asignatura a buscar.</p>
                 
             </td>
         </tr>
@@ -852,7 +891,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        En caso de que el método no devuelva nada
+        <p>En caso de que el método no devuelva nada</p>
         </div>
     </dt>
     <dd></dd>
@@ -900,7 +939,7 @@
 
 
 <div class="param-desc">
-    La asignatura encontrada o `false` si no existe.
+    <p>La asignatura encontrada o <code>false</code> si no existe.</p>
 </div>
 
     
@@ -922,7 +961,20 @@
 
 
 <div class="description">
-    ## Método: obtener_muchas_asignaturas<br> Este método tendrá la misma función que el método obtener_asignatura(nombre) con la única diferencia de que se buscará la asignatura por su nombre parcial en vez de la necesidad de introducir el nombre exacto.<br> Esto se conseguirá mediante el método filter() el cual filtrará las asignaturas cuyo nombre noposea el string introducido como parametro en el método.<br>Si existiese algun elemento en el nuevo array creado después de utilizar el método filter entoncesse recorrería el array y se mostrararían las asignaturas que coincidan con el nombre introducido como parametro.<br>Así este método, al contrario que el anterior, devolverá multiples resultados en vez de solamenteuna coincidencía.<br>
+    <h2>Método: obtener_muchas_asignaturas<br></h2>
+<p>Este método tendrá la misma función que el método obtener_asignatura(nombre)
+con la única diferencia de que se buscará la asignatura por su nombre parcial en vez de la necesidad
+de introducir el nombre exacto.<br></p>
+<p>Esto se conseguirá mediante el método filter() el cual filtrará las asignaturas cuyo nombre no
+posea el string introducido como parametro en el método.
+<br>
+Si existiese algun elemento en el nuevo array creado después de utilizar el método filter entonces
+se recorrería el array y se mostrararían las asignaturas que coincidan con el nombre
+introducido como parametro.
+<br>
+Así este método, al contrario que el anterior, devolverá multiples resultados en vez de solamente
+una coincidencía.
+<br></p>
 </div>
 
 
@@ -958,7 +1010,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line1158">line 1158</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line1159">line 1159</a>
     </li></ul></dd>
     
 
@@ -1019,7 +1071,7 @@
             
 
             <td class="description last">
-                El texto parcial o completo del nombre de la asignatura.
+                <p>El texto parcial o completo del nombre de la asignatura.</p>
                 
             </td>
         </tr>
@@ -1047,7 +1099,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        En caso de que no se encuentre ninguna asignatura que coincida con el parametro nombre introducido
+        <p>En caso de que no se encuentre ninguna asignatura que coincida con el parametro nombre introducido</p>
         </div>
     </dt>
     <dd></dd>
@@ -1092,7 +1144,7 @@
 
 
 <div class="param-desc">
-    Muestra en consola las asignaturas encontradas o un mensaje de error.
+    <p>Muestra en consola las asignaturas encontradas o un mensaje de error.</p>
 </div>
 
     
@@ -1114,7 +1166,10 @@
 
 
 <div class="description">
-    ## Método: toString<br> El método toString servirá como una sobrecarga del metodo toString de la clase Gestores y este  mostrará la longitud del array _gestor pero indicando que la lista es una lista de asignaturas.<br>
+    <h2>Método: toString<br></h2>
+<p>El método toString servirá como una sobrecarga del metodo toString de la clase Gestores y este
+mostrará la longitud del array _gestor pero indicando que la lista es una lista de asignaturas.
+<br></p>
 </div>
 
 
@@ -1150,7 +1205,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line1185">line 1185</a>
+        <a href="correccion.js.html">correccion.js</a>, <a href="correccion.js.html#line1186">line 1186</a>
     </li></ul></dd>
     
 
@@ -1223,7 +1278,7 @@
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Sun Jan 12 2025 20:42:33 GMT+0100 (hora estándar de Europa central) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Wed Jan 15 2025 18:46:18 GMT+0100 (hora estándar de Europa central) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
