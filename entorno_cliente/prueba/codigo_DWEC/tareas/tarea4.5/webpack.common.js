@@ -12,4 +12,4 @@ export default{
         //Ej: minifying, optimizacion de código
     },
     mode:process.env.modo,//de que modo quiero que compile
-}
+} 

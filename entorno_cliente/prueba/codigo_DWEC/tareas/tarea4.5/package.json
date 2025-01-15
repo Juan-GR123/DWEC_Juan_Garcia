@@ -5,19 +5,35 @@
   "scripts": {
     "documenta": "npx jsdoc -c jsdoc.json",
     "limpia": "rimraf documentacion",
-    "todo": "npm-run-all limpia documenta"
+    "todo": "npm-run-all limpia documenta",
+    "antiguo": "webpack --config webpack.legacy.js --mode $variable",
+    "moderno": "webpack --config webpack.modern.js --mode $variable",
+    "des": "cross-env variable=development npm-run-all antiguo moderno",
+    "prod": "cross-env variable=production npm-run-all antiguo moderno",
+    "limpia2": "rimraf compilado",
+    "todo2": "npm-run-all rimraf compilado des"
   },
   "keywords": [
     "comentarios",
-    "jsdoc"
+    "jsdoc",
+    "polyfill"
   ],
   "author": "juan",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "babel-loader": "^9.2.1",
+    "core-js": "^3.40.0",
+    "cross-env": "^7.0.3",
     "jsdoc": "^4.0.4",
     "minami": "^1.2.3",
     "npm-run-all": "^4.1.5",
+    "regenerator-runtime": "^0.14.1",
     "rimraf": "^6.0.1",
-    "taffydb": "^2.7.3"
+    "taffydb": "^2.7.3",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-merge": "^6.0.1"
   }
 }
