@@ -2,6 +2,7 @@
   "name": "tarea4_5",
   "version": "1.0.0",
   "main": "correccion.js",
+  "type": "module",
   "scripts": {
     "documenta": "npx jsdoc -c jsdoc.json",
     "limpia": "rimraf documentacion",
@@ -10,8 +11,8 @@
     "moderno": "webpack --config webpack.modern.js --mode $variable",
     "des": "cross-env variable=development npm-run-all antiguo moderno",
     "prod": "cross-env variable=production npm-run-all antiguo moderno",
-    "limpia2": "rimraf compilado",
-    "todo2": "npm-run-all rimraf compilado des"
+    "limpia2": "rimraf compilado2",
+    "todo2": "npm-run-all rimraf compilado2 des"
   },
   "keywords": [
     "comentarios",

@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "main": "temp.js",
   "scripts": {
-    "antiguo": "webpack --config webpack.legacy.js --mode $variable",
-    "moderno": "webpack --config webpack.modern.js --mode $variable",
-    "des": "cross-env variable=development npm-run-all antiguo moderno",
-    "prod": "cross-env variable=production npm-run-all antiguo moderno",
+    "compilar:antiguo": "webpack --config webpack.legacy.js --mode $variable",
+    "compilar:moderno": "webpack --config webpack.modern.js --mode $variable",
+    "des": "cross-env variable=development run-s compilar:antiguo compilar:moderno",
+    "prod": "cross-env variable=production run-s compilar:antiguo compilar:moderno",
     "limpia": "rimraf compilado",
-    "todo": "npm-run-all rimraf compilado des"
+    "todo": "run-s limpia des"
   },
   "keywords": [
     "polyfill"

@@ -5,7 +5,7 @@ export default{
     entry: './fuente/js/index.js',//entrada
     //es ./fuente/index.js ??
     output:{
-        path: path.resolve(process.cwd(), 'compilado',process.env.modo),//donde lo va ha guardar
+        path: path.resolve(process.cwd(), 'compilado2',process.env.modo),//donde lo va ha guardar
         
         //dos modos de "compilacion": desarrollo y producción
         //desarrollo se interesa que sea rapido y por tanto una serie de optimizaciones que se realizan en produccion no se realizan en desarrollo
