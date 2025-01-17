@@ -7,12 +7,12 @@
     "documenta": "npx jsdoc -c jsdoc.json",
     "limpia": "rimraf documentacion",
     "todo": "npm-run-all limpia documenta",
-    "antiguo": "webpack --config webpack.legacy.js --mode $variable",
-    "moderno": "webpack --config webpack.modern.js --mode $variable",
-    "des": "cross-env variable=development npm-run-all antiguo moderno",
-    "prod": "cross-env variable=production npm-run-all antiguo moderno",
+    "compilar:antiguo": "webpack --config webpack.legacy.js --mode $variable",
+    "compilar:moderno": "webpack --config webpack.modern.js --mode $variable",
+    "des": "cross-env variable=development run-s compilar:antiguo compilar:moderno",
+    "prod": "cross-env variable=production run-s compilar:antiguo compilar:moderno",
     "limpia2": "rimraf compilado2",
-    "todo2": "npm-run-all rimraf compilado2 des"
+    "todo2": "npm-run-all limpia2 des"
   },
   "keywords": [
     "comentarios",
