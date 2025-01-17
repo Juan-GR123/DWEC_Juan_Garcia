@@ -10,13 +10,13 @@
  * 
  */
 
-import {Direccion} from './direccion.js';
+import {Direccion}  from './direccion.js';
 
 import {Estudiantes} from './estudiantes.js';
 
 import {Asignaturas} from './asignaturas.js';
 
-import {Gestores, GestorAs, GestorEs} from './gestores.js';
+import {GestorAs,GestorEs} from './gestores.js';
 
 /**
  * # Clase ErrorPersonalizado<br>
