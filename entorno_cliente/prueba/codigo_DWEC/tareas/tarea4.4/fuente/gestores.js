@@ -1,4 +1,9 @@
 /**
+ * @module Gestores_modulo
+ * 
+ */
+
+/**
  * # Clase Gestores <br>
  * Clase que representa un gestor de elementos almacenados en un array.<br>
  * El atributo principal es protegido para permitir el acceso en subclases. <br>

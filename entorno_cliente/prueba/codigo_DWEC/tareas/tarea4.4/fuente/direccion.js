@@ -1,4 +1,9 @@
 /**
+ * @module Direccion_modulo
+ * 
+ */
+
+/**
  * # Creamos una clase para saber la dirección de cada <br>estudiante
  * 
  */

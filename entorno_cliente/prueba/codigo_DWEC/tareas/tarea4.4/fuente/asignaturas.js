@@ -1,4 +1,9 @@
 /**
+ * @module Asignaturas_modulo
+ * 
+ */
+
+/**
  * # Clase que representa una asignatura con su nombre y <br> calificaciones.
  */
 

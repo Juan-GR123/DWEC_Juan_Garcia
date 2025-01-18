@@ -6,7 +6,7 @@
 //promt y console.log
 
 /**
- * @module Proyecto3
+ * @module Proyecto_Corregido
  * 
  */
 
