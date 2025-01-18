@@ -1,8 +1,4 @@
 /**
- * @module Error
- * 
- */
-/**
  * # Clase ErrorPersonalizado<br>
  * 
  * Extiende de la clase "Error" para crear un tipo de error personalizado que puede ser utilizado en validaciones específicas.

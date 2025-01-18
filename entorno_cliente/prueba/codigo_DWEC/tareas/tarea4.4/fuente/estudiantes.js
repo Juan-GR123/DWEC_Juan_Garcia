@@ -1,9 +1,5 @@
 //Hacemos una clase que representará a los estudiantes
 /**
- * @module Estudiantes_modulo
- * 
- */
-/**
  * # Clase que representa a un estudiante.
  */
 export class Estudiantes {
