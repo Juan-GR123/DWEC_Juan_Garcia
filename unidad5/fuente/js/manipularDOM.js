@@ -80,6 +80,7 @@ lista2[0].innerText="<p>hola</p>";
 lista2[1].outerText="<p>hola</p>";
 lista2[2].textContent="hola";
 
+
 //
 
 let imagen=document.getElementsByTagName("img");
