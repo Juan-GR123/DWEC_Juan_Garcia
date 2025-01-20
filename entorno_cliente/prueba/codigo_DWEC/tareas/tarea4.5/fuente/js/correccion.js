@@ -6,19 +6,19 @@
 //promt y console.log
 
 /**
- * @module Proyecto3
+ * @module Proyecto_Corregido
  * 
  */
 
-import {Direccion} from './direccion.js';
+import { Direccion } from './direccion.js';
 
-import {Estudiantes} from './estudiantes.js';
+import { Estudiantes } from './estudiantes.js';
 
-import {Asignaturas} from './asignaturas.js';
+import { Asignaturas } from './asignaturas.js';
 
-import {GestorAs, GestorEs} from './gestores.js';
+import { GestorAs, GestorEs } from './gestores.js';
 
-import {ErrorPersonalizado,validarEstudiante} from './Error.js';
+import { ErrorPersonalizado, validarEstudiante } from './Error.js';
 
 // Ejemplo de uso
 try {//te hace un id nuevo
