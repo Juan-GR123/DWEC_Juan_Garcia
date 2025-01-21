@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "temp.js",
   "scripts": {
-    "compilar:antiguo": "webpack --config webpack.legacy.js --mode $variable",
-    "compilar:moderno": "webpack --config webpack.modern.js --mode $variable",
+    "compilar:antiguo": "webpack --config webpack.legacy.js --mode %variable%",
+    "compilar:moderno": "webpack --config webpack.modern.js --mode %variable%",
     "des": "cross-env variable=development run-s compilar:antiguo compilar:moderno",
     "prod": "cross-env variable=production run-s compilar:antiguo compilar:moderno",
     "limpia": "rimraf compilado",
