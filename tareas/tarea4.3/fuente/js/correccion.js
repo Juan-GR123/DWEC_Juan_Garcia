@@ -1,14 +1,17 @@
 //Este proyecto esta disponible en mi github
-//El enlace es: https://github.com/Juan-GR123/git_cliente/blob/main/entorno_cliente/prueba/codigo_DWEC/tareas/tarea4.3/fuente/correccion.js
+//El enlace es: https://github.com/Juan-GR123/DWEC_Juan_Garcia/blob/main/tareas/tarea4.3/fuente/js/correccion.js
 
 
 //Todas las salidas serán por consola y todas las entradas por teclado
 //promt y console.log
 
+
+
 /**
  * @module Proyecto3
  * 
  */
+
 
 /**
  * # Creamos una clase para saber la dirección de cada <br>estudiante

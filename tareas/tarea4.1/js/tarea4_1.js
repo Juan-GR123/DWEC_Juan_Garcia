@@ -1,5 +1,5 @@
 //Este proyecto esta disponible en mi github
-//El enlace es: https://github.com/Juan-GR123/DWEC_Juan_Garcia/blob/main/codigo_DWEC/tareas/tarea4.1/js/tarea4_1.js
+//El enlace es: https://github.com/Juan-GR123/DWEC_Juan_Garcia/blob/main/tareas/tarea4.1/js/tarea4_1.js
 
 
 //Todas las salidas serán por consola y todas las entradas por teclado

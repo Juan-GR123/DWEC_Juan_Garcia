@@ -1,6 +1,6 @@
 {
     "source":{
-        "include":["fuente"],
+        "include":["fuente/js"],
         "exclude":["node_modules"],
         "includePattern":".*\\.js$",
         "exludePattern":".*\\.test\\.js$"
