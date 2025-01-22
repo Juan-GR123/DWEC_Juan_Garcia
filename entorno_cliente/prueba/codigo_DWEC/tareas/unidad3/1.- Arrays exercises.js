@@ -1,7 +1,7 @@
 ////////////////////////
 ////simple exercises////
 ////////////////////////
-
+//hola 
 //1. Creating arrays
 
 //Exercise 1: Create an empty array and then add numbers from 1 to 5.
