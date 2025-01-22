@@ -1,5 +1,5 @@
 //Este proyecto esta disponible en mi github
-//El enlace es: https://github.com/Virtual-Truck/git_cliente/blob/main/entorno_cliente/prueba/codigo_DWEC/tareas/DWEC_Proyecto_SGAEA/correccion.js
+//El enlace es: https://github.com/Juan-GR123/DWEC_Juan_Garcia/blob/main/entorno_cliente/prueba/codigo_DWEC/tareas/DWEC_Proyecto_SGAEA/correccion.js
 
 
 //Todas las salidas serán por consola y todas las entradas por teclado
