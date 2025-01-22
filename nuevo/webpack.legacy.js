@@ -3,7 +3,6 @@ import { merge } from 'webpack-merge';
 import common from './webpack.common.js';
 
 export default merge(common,{
-   target: ['web','es5'], //navegadores de 2015 y anteriores
    output:{
     filename:'bundle.legacy.js',
    },

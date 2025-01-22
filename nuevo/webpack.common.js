@@ -1,6 +1,7 @@
 import path from 'path';
 
 
+
 export default{
     entry: './fuente/js/index.js',//entrada
     //es ./fuente/index.js ??
