@@ -1,33 +1,61 @@
 //Este proyecto esta disponible en mi github
-//El enlace es: https://github.com/Juan-GR123/DWEC_Juan_Garcia/blob/main/tareas/tarea4.1/js/tarea4_1.js
+//El enlace es: https://github.com/Juan-GR123/DWEC_Juan_Garcia/blob/main/tareas_y_proyectos/tarea4.3/fuente/js/correccion.js
 
 
 //Todas las salidas serán por consola y todas las entradas por teclado
 //promt y console.log
 
-//Creamos una clase para saber la dirección de cada estudiante
-/*
-La clase Direccion tendrá los siguiente Atributos:
-#calle: Indicará la calle en la que pertenece
-#numero: Indicará el número de calle
-#piso: Indicará el número de piso 
-#codigo_postal: Indicará el codigo postal (5 números, ni mas ni menos) 
-#provincia: Indicará la provincia
-#localidad: Indicará la localidad de dicha provincia
 
-Por último, contará con un constructor el cual se encargará de incializar los valores y de
-que el código postal solo contenga 5 digitos y los getters de cada uno de sus atributos en caso de que
-se les necesite en algun momento.
 
-También se contará con el método toString() para mostrar todos los atributos por pantalla.
-*/
+/**
+ * @module Proyecto3
+ * 
+ */
+
+
+/**
+ * # Creamos una clase para saber la dirección de cada <br>estudiante
+ * 
+ */
 class Direccion {
+    /**
+     * ## Atributos privados
+     * 
+     * @private
+     * @property {string} #calle - La calle de la dirección.
+     * @private
+     * @property {number} #numero -  El número de la calle.
+     * @private
+     * @property {string} #piso - El número del piso.
+     * @private
+     * @property {string} #codigo_postal - El código postal de la dirección.
+     * @private
+     * @property {string} #provincia - La provincia.
+     * @private
+     * @property {string} #localidad - La localidad  de dicha provincia.
+     * 
+     * 
+     */
     #calle;
     #numero;
     #piso;
     #codigo_postal;
     #provincia;
     #localidad;
+
+    /**
+    * ## Constructor de la clase Dirección<br>
+    * 
+    * Se inicializa una nueva instancia de la clase Dirección.<br>
+    * 
+    * ### Parámetros
+    * @param {string} calle - *La calle de la dirección.*
+    * @param {number} numero - *El número de la calle.*
+    * @param {number} piso - *El número del piso.*
+    * @param {string} codigo - *El código postal de la dirección (debe tener 5 dígitos). Si no cumple el formato, se asignará `"Error"`*.
+    * @param {string} provincia - *La provincia.*
+    * @param {string} localidad - *La localidad de dicha provincia.*
+    */
 
     constructor(calle, numero, piso, codigo, provincia, localidad) {
         let patron = /^[0-9]{5}$/;
@@ -40,30 +68,63 @@ class Direccion {
         this.#provincia = provincia;
         this.#localidad = localidad;
     }
+    /**
+     * ## Métodos Getters<br>
+     * Métodos para obtener los valores de los atributos privados.
+     */
+
+    /**
+     *  Indicará la calle en la que pertenece<br>
+     * @returns {string} El nombre de la calle.
+     */
     get calle() {
         return this.#calle;
     }
-
+    /**
+     * Indicará el número de calle
+     * @returns {number} 
+     */
     get numero() {
         return this.#numero;
     }
 
+    /**
+    * Indicará el número de piso 
+    * @returns {string} 
+    */
     get piso() {
         return this.#piso;
     }
 
+    /**
+    * Indicará el codigo postal (5 números, ni mas ni menos) 
+    * @returns {string} El código postal de la dirección.
+    */
     get codigo_postal() {
         return this.#codigo_postal;
     }
 
+    /**
+     * Indicará la provincia
+     * @returns {string}
+     */
     get provincia() {
         return this.#provincia;
     }
 
+    /**
+     * Indicará la localidad de dicha provincia
+     * @returns {string} 
+     */
     get localidad() {
         return this.#localidad;
     }
 
+    /**
+     * ## Método toString<br>
+     * También se contará con el método toString() para mostrar todos los atributos por pantalla.<br>
+     * @returns {string} Una cadena con la dirección en formato "calle, número, piso, código postal, localidad, provincia".
+     */
     toString() {
         return this.#calle + " " + this.#numero + " " + this.#piso + "  " + this.#codigo_postal + " " + this.#localidad + " " + this.#provincia + " ";
     }
@@ -71,88 +132,82 @@ class Direccion {
 
 }
 
-
-
 //Hacemos una clase que representará a los estudiantes
-/*
-La clase Estudiantes contará con los siguiente atributos:
-#id: El id se asignará automáticamente sin la necesidad de que el usuario lo introduzca
- 
-#nombre: El nombre indicará el nombre del estudiante
- 
-#edad: La edad indicará la edad del estudiante
- 
-#direccion: El atributo dirección contará con todos los valores de la clase dirección ya que se le pasará
-como parametro un objeto de esa clase
- 
-#asignaturas: El atributo asignaturas será un array asociativo el cual contará por cada
-elemento con dos valores, nombre de asignatura y nota de asignatura.
- 
-#registros: El atributo registros también será un array asociativo el cual contará por cada elemento
-con tres valores, nombre de la asignatura, tipo de registro (matriculación/desmatriculación) y 
-fecha de matriculación/desmatriculación
- 
-Esta clase contará con un constructor el cual se encargará de que el nombre contenga solo letras y 
-espacios y de asignar los valores introducidos por el usuario a sus atributos correspondientes.
- 
-También se dispondran de los getters necesarios en caso de necesitar un atributo en concreto y de los
-siguiente metodos:
- 
-  toString(): Se mostrará por pantalla el id del estudiante y su nombre y edad
- 
-  matricular(asignatura): 
-      En el método matricular, se introducirá un nombre de una asignatura indicada
-      por el usuario. Si en el array #asignaturas se encuentra alguna coincidencia en el nombre con la 
-      asignatura indicada esto dará un error debido a que en caso de estar en el array #asignaturas
-      el estudiante ya estaría matriculado en esa asignatura.
- 
-      En caso de no estar se haria un objeto con los atributos nombre y nota y se guardarian en el array
-      #asignaturas y además se crearía un registro de la fecha de matriculación de esa asignatura y se 
-      guardaría en el array #registros
- 
-  desmatricular(asignatura): 
-      En el método desmatricular, se introducirá de nuevo como valor el nombre de una asignatura indicada
-      por el usuario y si se encuentra el indice de la coincidencia del nombre 
-      de esa asignatura en el array #asignaturas entonces se eliminará la asignatura del array con el método
-      splice() (el cual cambia el contenido de un array eliminando elementos existentes) y se añadirá un 
-      registro de la desmatriculacion de esa asignatura.
- 
-  agregar_calificacion(asignatura,nota): 
-      Es este método se introducirá como parametros un objeto de la clase Asignatura y una nota que se 
-      quiera dar a esa asignatura para el estudiante.
- 
-      Si la nota es mayor que 10 o menor que 0 o si no es del tipo 'number' entonces se mostrara un error.
- 
-      En caso de cumplirse las condiciones anteriores se buscará en el array asignaturas una asignatura
-      con el nombre de la asignatura introducida y en caso de encontrarse se le asignará a la asignatura del 
-      array asignaturas la nota introducida por el usuario
- 
-  asig_mostrar():
-      En este método se mostrarán por consola las asignaturas y sus notas del estudiante
- 
-  promedio():
-      Calculará el promedio de todas las calificaciones del estudiante.
- 
-      En este método se contará si el array #asignaturas contiene asignaturas. En el caso de que las contenga
-      y de que su longitud sea mayor que 0 entonces se recorrerá la totalidad del array y si las notas de 
-      las asignaturas son numericas se sumarán esas notas a una variable en la que se almacenará la suma
-      de todas las notas de cada asignatura.
- 
-      Por ultimo la suma de todas las asignaturas se dividirá por el número de notas que se hayan sumado
- 
- 
-*/
+
+/**
+ * # Clase que representa a un estudiante.
+ */
 class Estudiantes {
-
+    /** 
+     *  @type {number}  
+     *  
+    */
+    //ID único del estudiante
+    //El id se asignará automáticamente sin la necesidad de que el usuario lo introduzca
     #id;
+
+    /** 
+     *  @type {string} 
+     * 
+    */
+    //Nombre del estudiante 
+    //El nombre indicará el nombre del estudiante
+
     #nombre;
+
+    /** 
+     *  @type {number} 
+     *  
+    */
+    //Edad del estudiante 
     #edad;
-    #direccion;//Tendra {calle,numero,posp,codigo postal,provincia y localidad}
-    #asignaturas;//{nombre: , nota: }
-    #registros;//{nombre: , tipo: , fecha:}
 
-    static numeros = [];//Es estático ya que servirá para almacenar en el constructor la id de cada estudiante
+    /** 
+     * @type {Object} 
+     * 
+     */
+    //Dirección del estudiante, incluyendo calle, número, código postal, provincia y localidad
+    #direccion;
 
+    /**
+     *  @type {Array<Object>} 
+     * 
+    */
+    //Lista de asignaturas matriculadas, cada una con nombre y nota 
+    //El atributo #asignaturas será un array asociativo el cual contará por cada
+    //elemento con dos valores, nombre de asignatura y nota de asignatura.
+
+
+
+    #asignaturas;
+
+    /** 
+     * @type {Array<Object>} 
+     * 
+     */
+    //El atributo #registros también será un array asociativo el cual contará por cada elemento
+    //con tres valores, nombre de la asignatura, tipo de registro (matriculación/desmatriculación) y 
+    //fecha de matriculación/desmatriculación
+    #registros;
+
+    /** 
+     * @type {Array<number>} 
+     * 
+    */
+    //IDs de estudiantes generados 
+    static numeros = [];
+
+    /*
+    Esta clase contará con un constructor el cual se encargará de que el nombre contenga solo letras y 
+    espacios y de asignar los valores introducidos por el usuario a sus atributos correspondientes.
+    */
+    /**
+     * Constructor de la clase Estudiantes.
+     * @param {string} N_nombre - *Nombre del estudiante (solo letras y espacios).*
+     * @param {number} N_edad - *Edad del estudiante.*
+     * @param {Object} N_direc - *Dirección del estudiante.*
+     * @throws {error} **Si el nombre del estudiante contiene algo mas que letras o espacios**
+     */
     constructor(N_nombre, N_edad, N_direc) {
         let patron = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;//que contenga letras y espacios 1 o mas veces
         try {
@@ -181,32 +236,82 @@ class Estudiantes {
         this.#registros = [];
     }
 
+    /**
+     * ## Obtiene el ID del estudiante.
+     * @returns {number} ID del estudiante.
+     */
     get id() {
         return this.#id;
     }
 
+    /**
+     * ## Obtiene el nombre del estudiante.
+     * @returns {string} Nombre del estudiante.
+     */
     get nombre() {
         return this.#nombre;
     }
 
+    /**
+     * ## Obtiene la edad del estudiante.
+     * @returns {number} Edad del estudiante.
+     */
     get edad() {
         return this.#edad;
     }
 
+    /**
+     * ## Obtiene la dirección del estudiante.
+     * @returns {Object} Dirección del estudiante.
+     */
     get direccion() {
         return this.#direccion;
     }
 
+    /**
+     * ## Obtiene las asignaturas del estudiante.
+     * @returns {Array<Object>} Lista de asignaturas.
+     */
     get asignaturas() {
         return [...this.#asignaturas];
     }
 
 
 
-    //mostramos por pantalla el id del estudiante y su nombre y edad
+    /**
+     * ## Método toString()<br>
+     * mostramos por pantalla el id del estudiante y su nombre y edad
+     * 
+     * @returns {string} Información del estudiante.
+     */
     toString() {
         return `${this.#id}: ${this.#nombre},  ${this.#edad}, ${this.#direccion}`;
     }
+
+    /**
+    * @typedef {Object} asignatura - **Objeto con el nombre y nota de la asignatura.**
+    * @property {string} nombre - *El nombre de la asignatura*
+    * @property {number} nota - *La nota de la asignatura*
+    */
+    /**
+     * ## Matricula al estudiante en una asignatura.<br>
+     * ### matricular(asignatura)<br>
+     * En el método matricular, se introducirá un nombre de una asignatura indicada
+     * por el usuario.
+     * <br>
+     * En caso de no estar se crearía un objeto con los atributos nombre y nota y se guardarian en el array
+     * #asignaturas y además se crearía un registro de la fecha de matriculación de esa asignatura y se 
+     * guardaría en el array #registros.
+     * <br>
+     * 
+     * @param {Object} asignatura - *Objeto con el nombre y nota de la asignatura.*
+     * @returns {boolean} Indica si la operación fue exitosa.
+     * @throws {error}  **Si en el array #asignaturas se encuentra alguna coincidencia en el nombre con la
+     * asignatura indicada esto dará un error debido a que en caso de estar en el array #asignaturas
+     * el estudiante ya estaría matriculado en esa asignatura.**
+     */
+
+
 
     matricular(asignatura) {//introduces un objeto de la clase asignatura como parametro
         // Comprobar si la asignatura ya está matriculada por nombre
@@ -230,6 +335,27 @@ class Estudiantes {
 
     }
 
+
+    /**
+    * @typedef {Object} asignatura - **Objeto con el nombre y nota de la asignatura.**
+    * @property {string} nombre - *El nombre de la asignatura*
+    * @property {number} nota - *La nota de la asignatura*
+    */
+
+    /**
+    * ## Desmatricula al estudiante de una asignatura.<br>
+    * ### desmatricular(asignatura)<br>
+    * En el método desmatricular, se introducirá de nuevo como valor el nombre de una asignatura indicada
+    * por el usuario y si se encuentra el indice de la coincidencia del nombre 
+    * de esa asignatura en el array #asignaturas entonces se eliminará la asignatura del array con el método
+    * splice() (el cual cambia el contenido de un array eliminando elementos existentes) y se añadirá un 
+    * registro de la desmatriculacion de esa asignatura.<br>
+    * 
+    * 
+    * @param {Object} asignatura - *Objeto con el nombre y nota de la asignatura.*
+    * @returns {boolean} Indica si la operación fue exitosa.
+    * @throws {error} **Si no se encuentra ninguna coincidencia del nombre de la asignatura en el array #asignaturas se lanzará un error**
+    */
 
     desmatricular(asignatura) {
         const indice = this.#asignaturas.findIndex(asig => asig.nombre.toLowerCase() === asignatura.nombre.toLowerCase());//buscamos en el array una asignatura con el mismo nombre
@@ -255,8 +381,12 @@ class Estudiantes {
     }
 
 
-    //registrar la fecha de matriculación o desmatriculación
 
+
+    /**
+     * ## Registra la fecha de matriculación o desmatriculación
+     * @returns {Array<string>} Lista de registros en formato legible.
+     */
     get registros() {
         let resultado = []; // Creamos una variable resultado que funcionará como un array vacío para almacenar los resultados
         this.#registros.forEach(registro => { // Recorremos el array registros con forEach
@@ -266,10 +396,38 @@ class Estudiantes {
         return resultado; // devolvemos el array con los valores transformados
     }
 
-    //cambiar la nota de calificacion si existe esta asignatura
+
+
+
+    /**
+   * @typedef {Object} asignatura - **Objeto con el nombre y nota de la asignatura.**
+   * @property {string} nombre - *El nombre de la asignatura*
+   * @property {number} nota - *La nota de la asignatura*
+   */
+
+    /**
+    * ## Agrega una calificación a una asignatura.<br>
+    * ### agregar_calificacion(asignatura,nota)<br>
+    * 
+    * Cambia la nota de calificacion si existe esta asignatura.<br>
+    *  
+    * En este método se introducirá como parametros un objeto de la clase Asignatura y una nota que se 
+    * quiera dar a esa asignatura para el estudiante.<br>
+    *
+    * En caso de cumplirse las condiciones anteriores se buscará en el array asignaturas una asignatura
+    * con el nombre de la asignatura introducida y en caso de encontrarse se le asignará a la asignatura del 
+    * array asignaturas la nota introducida por el usuario. <br>
+    *
+    * 
+    * @param {Object} asignatura - *Objeto con el nombre y la nota de la asignatura*
+    * @param {number} nota - *Nota a asignar por el usuario.*
+    * @returns {boolean} Indica si la operación fue exitosa.
+    * @throws {error} vvSi la nota es mayor que 10 o menor que 0 o si no es del tipo 'number' entonces se mostrara un error.**
+    */
+
+
     agregar_calificacion(asignatura, nota) {
         // Validar que la nota sea un número válido
-
         try {
             if (typeof nota != 'number' || nota < 0 || nota > 10) {
                 throw new Error('La nota debe ser un número entre 0 y 10.');
@@ -291,11 +449,31 @@ class Estudiantes {
 
     }
 
-    asig_mostrar() {//muestra las asignaturas en las que esta matriculado el estudiante
+
+    /**
+     * ## método asig_mostrar()
+     * <br>
+     * En este método se mostrarán por consola las asignaturas y las notas del estudiante
+     */
+    asig_mostrar() {
         console.log(this.#asignaturas);
     }
 
-    // Calcula el promedio de todas las calificaciones del estudiante.
+    /**
+     * 
+     *    ## Calculará el promedio de todas las calificaciones del estudiante.<br>
+     *    ### promedio()<br>
+     *
+     *    En este método se contará si el array #asignaturas contiene asignaturas. <br>
+     *    En el caso de que las contenga y de que su longitud sea mayor que 0 entonces se recorrerá la totalidad del array y si las notas de 
+     *    las asignaturas son numericas se sumarán esas notas a una variable en la que se almacenará la suma
+     *    de todas las notas de cada asignatura.<br>
+     *
+     *    Por ultimo la suma de todas las asignaturas se dividirá por el número de notas que se hayan sumado
+     *    <br>
+     * 
+     * @returns {string} Promedio de las calificaciones, redondeado a 2 decimales.
+     */
     promedio() {
         if (this.#asignaturas.length === 0) {
             return 0;
@@ -314,49 +492,32 @@ class Estudiantes {
 
 }
 
+/**
+ * # Clase que representa una asignatura con su nombre y <br> calificaciones.
+ */
 
-/*
-La clase Asignaturas contará con los siguiente atributos:
-nombre: Será el nombre de la asignatura
-(No lo hago privado para que pueda ser utilizado por metodos de la clase estudiante)
- 
-#calificaciones: Calificaciones será un array que contenga las calificaciones que se le irán añadiendo a
-una asignatura concreta.
- 
-Aparte del contructor que se ocupara de que el nombre solo contenga letras, numeros romanos y espacios
-tambien se contará con los getters de nombre y de calificaciones y con los siguientes metodos:
- 
-  toString(): 
-      Se mostrará por pantalla el nombre de la asignatura
- 
-  agregar_calificacion(nota):
-      En este método se introducirá una nota que se le quiera añadir a una asignatura. Si la nota esta entre
-      0 y 10 entonces se añadira al array #calificaciones. 
- 
-      Si no cumple con esas condiciones se mostrará un error.
- 
-      eliminar_calificacion(indice):
-      En este método se introducirá un número que indicará la posicion de la nota que se quierá eliminar.
-      
-      Si el número es menor que 0 o es mayor que la longitud del array calificaciones entonces se lanzará
-      un error.
- 
-      En otro caso se eliminará la calificación con el método splice()
- 
-  calcular_promedio():
-      Si el array no tiene longitud lanza un error. 
- 
-      En otro caso se recorre todo el array #calificaciones y se van sumando todas las calificaciones
-      que el estudiante ha ido sacando en la asignatura.
- 
-      Por último, se dividirá la suma de todas las calificaciones por la longitud del array de calificaciones
-      que serán el número de notas de la asignatura.
- 
-*/
-//hacer try{ }catch
 class Asignaturas {
+    /**
+    * @type {string} 
+    */
+    //El nombre de la asignatura. (No es privado para ser usado por métodos de la clase Estudiante).
     nombre;
+
+    /**
+     * @type {number[]} 
+     */
+
+    //#calificaciones: Calificaciones será un array que contenga las calificaciones que se le irán añadiendo a
+    //una asignatura concreta.
     #calificaciones;//[[10],[9]]
+
+    /**
+     * Constructor de la clase Asignaturas.
+     * 
+     * @param {string} nombre1 - *El nombre de la asignatura. Debe contener solo letras, espacios y números romanos.*
+     * 
+     * @throws {error} **Si el nombre no cumple con el patrón, se lanza un error y se registra en la consola.**
+     */
     constructor(nombre1) {
         let patron = /^[a-zA-ZáéíóúüÁÉÍÓÚÜ ]+$/;//que contenga letras y espacios 1 o mas veces
         try {
@@ -372,19 +533,49 @@ class Asignaturas {
         this.#calificaciones = [];
     }
 
+    /**
+    * ## Getter para obtener el nombre de la asignatura.
+    * 
+    * @returns {string} El nombre de la asignatura.
+    */
+
     get nombre_A() {
         return this.nombre;
     }
+
+    /**
+     * ## Getter para obtener las calificaciones de la asignatura.
+     * 
+     * @returns {number[]} Una copia del array de calificaciones.
+     */
 
     get calificaciones() {
         return [...this.#calificaciones];
     }
 
+    /**
+     * ## Se mostrará por pantalla el nombre de la asignatura<br>
+     * ### toString()<br>
+     * 
+     * @returns {string} El nombre de la asignatura en formato "Asignatura: [nombre]".
+     */
     toString() {
         return `Asignatura: ${this.nombre}`;
     }
 
-    //agrega la calificación a la asignatura elegida
+
+    /**
+     * ## Agrega una calificación a la asignatura elegida.<br>
+     * ###  agregar_calificacion(nota) <br>
+     * En este método se introducirá una nota que se le quiera añadir a una asignatura. Si la nota esta entre
+     * 0 y 10 entonces se añadira al array #calificaciones. <br>
+     * 
+     * @param {number} nota - *La nota a añadir. Debe estar entre 0 y 10.*
+     * 
+     * @returns {boolean} `true` si la nota es válida y se añade correctamente, `false` en caso contrario.
+     * 
+     * @throws {error} **Si no cumple con esas condiciones se mostrará un error.** 
+    */
     agregar_calificacion(nota) {
         try {
             if ((nota >= 0 && nota <= 10)) {
@@ -399,7 +590,20 @@ class Asignaturas {
         }
     }
 
-    //Eliminar la calificación de la posición elegida 
+    /**
+    * ## Elimina una calificación de la asignatura en la posición especificada.<br>
+    * ### eliminar_calificacion(indice)<br>
+    * En caso de que el indice especificado este dentro de rango del array #calificaciones
+    * se eliminará la calificación con el método splice().
+    * <br>
+    * 
+    * @param {number} indice - *El índice de la calificación a eliminar.*
+    * 
+    * @returns {boolean} `true` si la calificación se elimina correctamente, `false` si ocurre un error.
+    * 
+    * @throws {error} **Si el índice está fuera del rango válido.**
+    *
+    */
     eliminar_calificacion(indice) {
         try {
             if (indice < 0 || indice >= this.#calificaciones.length) {
@@ -416,7 +620,20 @@ class Asignaturas {
     }
 
 
-    //calcular el promedio de las calificaciones de cada asignatura.
+    /**
+    * ## Calcula el promedio de las calificaciones de la asignatura.<br>
+    * ### calcular_promedio() <br>
+    *  En este caso se recorre todo el array #calificaciones y se van sumando todas las calificaciones
+    *  que el estudiante ha ido sacando en la asignatura.<br>
+    * 
+    *  Por último, se dividirá la suma de todas las calificaciones por la longitud del array de calificaciones
+    *  que serán el número de notas de la asignatura.<br>
+    * 
+    * @returns {number} El promedio de las calificaciones, redondeado a dos decimales. 
+    *                   devuelve `0` si no hay calificaciones.
+    * 
+    * @throws {error} **Si el array no tiene longitud lanza un error.**
+    */
     calcular_promedio() {
         if (this.#calificaciones.length === 0) {
             return 0;
@@ -428,31 +645,50 @@ class Asignaturas {
 
 }
 
-/*
-La clase Gestores contará con los siguiente atributos:
- 
-_gestor: 
-Será un array de objetos instanciados como clases-
-Ha sido creado como un atributo protegido para que las subclases tambien puedan acceder a él.
- 
-Además del costructor que se encargará de instanciar el array _gestores se contará en esta clase con
-un getter de gestor y con los metodos:
- 
-  toString():
-  Devolverá la longitud del array _gestor
-*/
 
+/**
+ * # Clase Gestores <br>
+ * Clase que representa un gestor de elementos almacenados en un array.<br>
+ * El atributo principal es protegido para permitir el acceso en subclases. <br>
+ */
 class Gestores {
+    /**
+     * @type {Object[]} 
+     *
+     */
+
+    /*
+        Array protegido que almacena objetos instanciados como clases
+        Ha sido creado como un atributo protegido para que las subclases tambien puedan acceder a él.
+     */
     _gestor;
 
+    /**
+     * ## Constructor de la clase Gestores.
+     * 
+     * Inicializa el atributo `_gestor` como un array vacío.
+     * 
+     */
     constructor() {
         this._gestor = [];
     }
 
+    /**
+     * ## Getter: gestor<br>
+     * Getter para obtener una copia del array `_gestor`.
+     * 
+     * @returns {Object[]} 
+     */
     get gestor() {
         return [...this._gestor];
     }
 
+    /**
+     * ## Método: toString <br>
+     * Devuelve la longitud del array `_gestor` en forma de cadena.
+     * 
+     * @returns {string} Un mensaje indicando la cantidad de elementos en la lista.
+     */
     toString() {
         return `Lista con ${this._gestor.length} elementos.`;
     }
@@ -460,98 +696,26 @@ class Gestores {
 }
 
 
-
-/*
-  La clase GestorEs es una subclase de Gestores y contará con los mismo atributos que la clase de la
-  que hereda, en este caso, Gestores.
- 
-  Sin embargo, su costructor será diferente ya que ademas de heredar los atributos de su clase madre
-  con super() tambien se recorrerá todo el array y se realizará el método agregar_estudiante con 
-  todos los elementos del array _gestor para que se puedan guardan en el array los estudiantes 
-  automáticamente y no se tengan que estar agregando al array uno por uno
- 
-  Sin este método en el constructor no se podrían añadir estudiantes al inicializar la clase.
- 
-  Además del constructor, también se contará en la clase GestorEs con los siguientes métodos:
- 
-  agregar_estudiante(estudiante):
-      Con este método se agregará un objeto de la clase estudiante a la lista introduciendolo como valor.
- 
-      Antes de agregar al estudiante se buscará en la lista un estudiante con el mismo id que el que 
-      se quiere agregar y en caso de existir lanzará un error indicando que el estudiante ya ha sido agregado
-      anteriormente a la lista.
- 
-      Si no existiese se agregaría a la lista con el metodo push, introduciendo el elemento en la última
-      posición del array
- 
-  eliminar_estudiante(id):
-      Este método eliminará a un estudiante de la lista mediante el id que se la haya introducido como 
-      parametro.
- 
-      Se buscara la posición del array donde coincidan el id introducido con el id de un estudiante
- 
-      En caso de que el id introducido exista en la lista se cogerá el número de la posición 
-      donde se encuentre el estudiante coincidente y se eliminará al estudiante que posea ese id mediante
-      el metodo splice().
- 
-      En caso contrario, se lanzará un mensaje de error.
- 
-  listar_estudiantes():
-      Se recorrerá todo el array _gestores y los elementos que posea, en este caso estudiantes,
-      se mostrarán en pantalla mediante el metodo toString de la clase Estudiantes
- 
-  listar_informes():
- 
-      Este método generará un informe con la direccion de cada estudiante, 
-      sus asignaturas junto a sus calificaciones, sus matriculaciones y sus
-      promedios.
- 
-      Esto se conseguirá recorriendo todo el array _gestor y accediendo a los getters y metodos de 
-      los objetos pertenecientes a la clase Estudiantes.
- 
-  obtener_estudiante(id):
- 
-      Este método tratará de buscar en el array _gestor a un estudiante mediante su id.
- 
-      Esto se conseguirá mediante el método find() y en caso de que devuelva algo se devolverá al 
-      estudiante encontrado y en caso de que el método no devuelva nada entonces se lanzará un error.
- 
- 
-  obtener_nombre_estudiante(nombre):
- 
-      Este método tendrá la misma función que el método obtener_estudiante(id) con la única diferencia de 
-      que se buscará al estudiante por su nombre (aunque este se haya introducido solo parcialmente)
-      en vez de por su id.
- 
-      Esto se conseguirá mediante el método filter() el cual filtrará los estudiantes cuyo nombre no
-      posea el string introducido como parametro en el método.
- 
-      Si existiese algun elemento en el nuevo array creado después de utilizar el método filter entonces
-      se recorrería el array y se mostrararía a los estudiante que coincidan con el nombre 
-      introducido como parametro.
- 
-  promedio_listas():
- 
-      El método promedio_listas() tratará de hacer un promedio entre las notas de todos los estudiantes.
- 
-      Para hacer esto, se comprobará que el array _gestor contenga al menos un elemento y si ese es el 
-      caso se recorrerá el array completo y se hara el promedio de todas las asignaturas de cada estudiante
-      y ese promedio se irá sumando en una variable.
- 
-      Cuando se tenga la suma total de todos los promedios de cada estudiante entonces se dividirá 
-      esta suma entre la cantidad de veces que se haya sumado a la variable, es decir, el numero
-      de estudiantes existentes y entonces se obtendrá la media total de las notas de todos los estudiantes
- 
-  
-  toString():
-      El metodo toString servirá como una sobrecarga del metodo toString de la clase Gestores y este 
-      mostrará la longitud del array _gestor pero indicando que la lista es una lista de estudiantes.
- 
-*/
-
+/**
+ * # Clase GestorEs <br>
+ * 
+ * La clase GestorEs es una subclase de Gestores y contará con los mismo atributos que la clase de la
+ * que hereda, en este caso, Gestores.<br>
+ */
 class GestorEs extends Gestores {
-
-
+    /**
+     * ## Constructor<br>
+     * 
+     * Su costructor será diferente ya que ademas de heredar los atributos de su clase madre
+     * con super() tambien se recorrerá todo el array y se realizará el método agregar_estudiante con 
+     * todos los elementos del array _gestor para que se puedan guardan en el array los estudiantes 
+     * automáticamente y no se tengan que estar agregando al array uno por uno.<br>
+     * 
+     * Sin este método en el constructor no se podrían añadir estudiantes al inicializar la clase.
+     * <br>
+     * 
+     * @param {...Object} elementos - *Estudiantes iniciales a agregar en el gestor.*
+     */
     constructor(...elementos) {
         super();
 
@@ -563,6 +727,34 @@ class GestorEs extends Gestores {
         }
 
     }
+
+    /**
+   * @typedef {Object} estudiante - **Objeto con el nombre y nota del estudiante**
+   * @property {number} id - *El id del estudiante* 
+   * @property {string} nombre- *El nombre del estudiante*
+   * @property {number} edad - *La edad del estudiante*
+   * @property {Object} direccion - *La dirección del estudiante*
+   */
+
+    /**
+     * ## Método: agregar_estudiante <br>
+     * 
+     * ### agregar_estudiante(estudiante): <br>
+     * Con este método se agregará un objeto de la clase estudiante a la lista introduciendolo como valor.
+     * <br>
+     * Antes de agregar al estudiante se buscará en la lista un estudiante con el mismo id que el que 
+     * se quiere agregar y en caso de existir lanzará un error indicando que el estudiante ya ha sido agregado
+     * anteriormente a la lista.
+     * <br>
+     * Si no existiese se agregaría a la lista con el metodo push, introduciendo el elemento en la última
+     * posición del array
+     * <br>
+     * 
+     * @param {Object} estudiante - *El estudiante que se agrega como parametro*
+     * @returns {boolean} `true` si se agregó correctamente, `false` en caso de error.
+     * @throws {error} **Cuando exista el id del estudiante que se quiera agregar en la lista**
+     */
+
 
     agregar_estudiante(estudiante) {//agrega un estudiante a la lista
 
@@ -579,7 +771,25 @@ class GestorEs extends Gestores {
 
     }
 
-    eliminar_estudiante(id) {//elimina un estudiante de la lista
+    /**
+     * ## Método: eliminar_estudiante <br>
+     * 
+     * ### eliminar_estudiante(id):<br>
+     * Este método eliminará a un estudiante de la lista mediante el id que se la haya introducido como 
+     * parametro.<br>
+     * 
+     * Se buscará la posición del array donde coincidan el id introducido con el id de un estudiante
+     * <br>
+     * En caso de que el id introducido exista en la lista se cogerá el número de la posición 
+     * donde se encuentre el estudiante coincidente y se eliminará al estudiante que posea ese id mediante
+     * el metodo splice().
+     * <br>
+     * 
+     * @param {number} id - *El ID del estudiante a eliminar.*
+     * @returns {boolean} `true` si se eliminó correctamente, `false` en caso de error.
+     * @throws {error} **En caso de que el id introducido no exista en la lista se lanzará un mensaje de error.**
+     */
+    eliminar_estudiante(id) {
         let eliminar = this._gestor.findIndex(elemento => elemento.id === id);
         //findIndex:devuelve el indice del primer elemento que cumpla la funcion definida
         try {
@@ -597,11 +807,30 @@ class GestorEs extends Gestores {
 
     }
 
+    /**
+     * ## Método: listar_estudiantes<br>
+     * 
+     * Se recorrerá todo el array _gestores y los elementos que posea, en este caso estudiantes,
+     * se mostrarán en pantalla mediante el metodo toString de la clase Estudiantes. <br>
+     */
     listar_estudiantes() {//da una lista completa de cada estudiante
         for (let persona of this._gestor) {
             console.log(persona.toString());//toString: método de estudiante
         }
     }
+
+
+    /**
+     * ## Método: listar_informes<br>
+     * 
+     *  Este método generará un informe con la direccion de cada estudiante, 
+     *  sus asignaturas junto a sus calificaciones, sus matriculaciones y sus
+     *  promedios.<br>
+     * 
+     *  Esto se conseguirá recorriendo todo el array _gestor y accediendo a los getters y metodos de 
+     *  los objetos pertenecientes a la clase Estudiantes.
+     * <br>
+     */
 
     listar_informes() {
         for (let informe of this._gestor) {
@@ -626,8 +855,22 @@ class GestorEs extends Gestores {
         }
     }
 
-
-    obtener_estudiante(id) {//busca un estudiante en la lista por id
+    /**
+     * 
+     * ## Método: obtener_estudiante <br>
+     * 
+     * ### obtener_estudiante(id):<br>
+     *  Este método tratará de buscar en el array _gestor a un estudiante mediante su id.
+     * <br>
+     * Esto se conseguirá mediante el método find() y en caso de que devuelva algo se devolverá al 
+     * estudiante encontrado y en caso de que el método no devuelva nada entonces se lanzará un error.
+     * <br>
+     * 
+     * @param {number} id - *El ID del estudiante a buscar.*
+     * @returns {Object|boolean} El estudiante encontrado o en caso de que no exista en la lista será "false".
+     * @throws {error} **Si el metodo no devuelve ningun estudiante**
+    */
+    obtener_estudiante(id) {
         let obtener = this._gestor.find(elemento => elemento.id === id);
         //find:devuelve el valor del primer elemento que cumpla la funcion definida
         try {
@@ -643,6 +886,30 @@ class GestorEs extends Gestores {
 
 
     }
+
+    /**
+     * 
+     * ## Método: obtener_nombre_estudiante<br>
+     * 
+     * ### obtener_nombre_estudiante(nombre):<br>
+     *  Este método tendrá la misma función que el método obtener_estudiante(id) con la única diferencia de 
+     *  que se buscará al estudiante por su nombre (aunque este se haya introducido solo parcialmente)
+     * en vez de por su id.
+     * <br>
+     * 
+     * Esto se conseguirá mediante el método filter() el cual filtrará los estudiantes cuyo nombre no
+     * posea el string introducido como parametro en el método.
+     * <br>
+     * 
+     * Si existiese algun elemento en el nuevo array creado después de utilizar el método filter entonces
+     * se recorrería el array y se mostrararía a los estudiante que coincidan con el nombre 
+     * introducido como parametro.
+     * <br>
+     * 
+     * @param {string} nombre - *El nombre o parte del nombre del estudiante.*
+     * @returns {void} Lista los estudiantes encontrados o un mensaje de error si no hay coincidencias.
+     * @throws {error} **Si no existen coincidencias de estudiantes en el array de listas**
+     */
     obtener_nombre_estudiante(nombre) {
         let obtener = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
         //includes: Se usa para verificar si el nombre parcial está contenido en el nombre completo del estudiante.
@@ -663,7 +930,19 @@ class GestorEs extends Gestores {
 
     }
 
-    //Hacer un promedio del promedio de todos los estudiantes
+    /**
+     * ## Método: promedio_listas<br>
+     * 
+     * Calcula el promedio de los promedios de todos los estudiantes en el gestor.
+     * <br>
+     * Cuando se tenga la suma total de todos los promedios de cada estudiante entonces se dividirá 
+     * esta suma entre la cantidad de veces que se haya sumado a la variable, es decir, el numero
+     * de estudiantes existentes y entonces se obtendrá la media total de las notas de todos los estudiantes
+     * <br>
+     * 
+     * @returns {number} El promedio general
+     * @throws {error} **si devuelve 0 la longitud del array**
+     */
     promedio_listas() {
 
         try {
@@ -681,6 +960,14 @@ class GestorEs extends Gestores {
 
     }
 
+    /**
+     * ## Método: toString<br>
+     * 
+     * El metodo toString servirá como una sobrecarga del metodo toString de la clase Gestores y este 
+     * mostrará la longitud del array _gestor pero indicando que la lista es una lista de estudiantes.
+     * <br>
+     * @returns {string}
+     */
     toString() {//sobrecarga
         super.toString();
         return `Lista con ${this._gestor.length} estudiantes.`;
@@ -688,85 +975,26 @@ class GestorEs extends Gestores {
 
 }
 
-
-/*
-  La clase GestorAs es una subclase de Gestores y contará con los mismo atributos que la clase de la
-  que hereda, en este caso, Gestores.
- 
-  Sin embargo, su costructor será diferente ya que ademas de heredar los atributos de su clase madre
-  con super() tambien se recorrerá todo el array y se realizará el método agregar_asignatura con 
-  todos los elementos del array _gestor para que se puedan guardan en el array las asignaturas 
-  automáticamente y no se tengan que estar agragando al array uno por uno.
- 
-  Sin este método en el constructor no se podrían añadir asignaturas al inicializar la clase.
- 
-  Además del constructor, también se contará en la clase GestorAs con los siguientes métodos:
- 
-  agregar_asignatura(asignatura):
- 
-      Este método será el encargado de buscar dentro del array _gestor una coincidencia entre el nombre
-      de la asignatura introducida como parametro y el nombre de alguna de las asignaturas contenidas en el
-      array.
- 
-      Para realizar esta funcionalidad se utilizara el método find() para que devuelva una coincidencia
-      (la primera) en caso de que existiese el nombre de la asignatura en el array y de ser ese el caso
-      se lanzaría un error diciendo que la asignatura ya existe en la lista.
- 
-      Si no existiese se agregaría a la lista con el metodo push(), introduciendo el objeto de la
-      clase asignatura en la última posición del array
- 
-  eliminar_asignatura(nombre):
- 
-      Este método eliminará a una asignatura de la lista mediante el nombre que se la haya introducido como 
-      parametro.
- 
-      Se buscará la posición del array donde coincidan el nombre introducido con el nombre de una
-      asignatura
- 
-      En caso de que el nombre introducido exista en la lista se cogerá el número de la posición 
-      donde se encuentre la asignatura coincidente y se eliminará esa asignatura la cual posea el nombre
-      correspondiente mediante el metodo splice().
- 
-      En caso contrario, se lanzará un mensaje de error.
- 
-  listar_asignaturas():
- 
-      Se recorrerá todo el array _gestores y los elementos que posea, en este caso asignaturas,
-      se mostrarán en pantalla mediante el metodo toString de la clase Asignaturas, el cual
-      mostrará el nombre de cada asignatura.
- 
-  obtener_asignatura(nombre):
- 
-      Este método tratará de buscar en el array _gestor a una asignatura mediante su nombre.
- 
-      Esto se conseguirá mediante el método find() y en caso de que devuelva algo será la 
-      asignatura encontrada y en caso de que el método no devuelva nada entonces se lanzará un error.
- 
-  obtener_muchas_asignaturas(nombre):
- 
-      Este método tendrá la misma función que el método obtener_asignatura(nombre) 
-      con la única diferencia de que se buscará la asignatura por su nombre parcial en vez de la necesidad
-      de introducir el nombre exacto.
- 
-      Esto se conseguirá mediante el método filter() el cual filtrará las asignaturas cuyo nombre no
-      posea el string introducido como parametro en el método.
- 
-      Si existiese algun elemento en el nuevo array creado después de utilizar el método filter entonces
-      se recorrería el array y se mostrararían las asignaturas que coincidan con el nombre 
-      introducido como parametro.
- 
-      Así este método, al contrario que el anterior, devolverá multiples resultados en vez de solamente
-      una coincidencía.
- 
-  toString():
-      El método toString servirá como una sobrecarga del metodo toString de la clase Gestores y este 
-      mostrará la longitud del array _gestor pero indicando que la lista es una lista de asignaturas.
- 
- 
-*/
+/**
+ * # Clase GestorAs <br>
+ *  La clase GestorAs es una subclase de Gestores y contará con los mismo atributos que la clase de la
+ *  que hereda, en este caso, Gestores.
+ * <br>
+ * */
 
 class GestorAs extends Gestores {
-
+    /**
+     * ## Constructor <br>
+     * 
+     *  Sin embargo, su costructor será diferente al de "Gestores" ya que ademas de heredar los atributos de su clase madre
+     * con super() tambien se recorrerá todo el array y se realizará el método agregar_asignatura con 
+     * todos los elementos del array _gestor para que se puedan guardan en el array las asignaturas 
+     * automáticamente y no se tengan que estar agragando al array uno por uno.
+     * <br>
+     * Sin este método en el constructor no se podrían añadir asignaturas al inicializar la clase.
+     * <br>
+     * @param {...Object} elementos - *Asignaturas iniciales a agregar en el gestor.*
+     */
 
     constructor(...elementos) {
         super();
@@ -778,6 +1006,35 @@ class GestorAs extends Gestores {
         }
 
     }
+
+
+    /**
+    * @typedef {Object} asignatura- Objeto con el nombre y nota de la asignatura.
+    * @property {string} nombre- el nombre de la asignatura
+    * @property {number} nota - La nota de la asigunatura
+    */
+
+    /**
+    * ## Método: agregar_asignatura<br>
+    * 
+    *
+    * Este método será el encargado de buscar dentro del array _gestor una coincidencia entre el nombre
+    * de la asignatura introducida como parametro y el nombre de alguna de las asignaturas contenidas en el
+    * array.<br>
+    * 
+    * Para realizar esta funcionalidad se utilizara el método find() para que devuelva una coincidencia
+    * (la primera) en caso de que existiese el nombre de la asignatura en el array y de ser ese el caso
+    * se lanzaría un error diciendo que la asignatura ya existe en la lista.
+    * <br>
+    * Si no existiese se agregaría a la lista con el metodo push(), introduciendo el objeto de la
+    * clase asignatura en la última posición del array
+    * <br>
+    * 
+    * @param {Object} asignatura - *La asignatura a agregar.*
+    * @returns {boolean} "true" si se agregó correctamente, "false" en caso de error.
+    * @throws {error} **si la asignatura ya existe dentro de la lista**
+    */
+
 
     agregar_asignatura(asignatura) {
         try {
@@ -791,8 +1048,27 @@ class GestorAs extends Gestores {
             return false;
         }
 
-    } //Añade una asignatura.
+    }
 
+    /**
+     * ## Método: eliminar_asignatura<br>
+     *
+     *  Este método eliminará a una asignatura de la lista mediante el nombre que se la haya introducido como 
+     *  parametro.<br>
+     * 
+     * Se buscará la posición del array donde coincidan el nombre introducido con el nombre de una
+     * asignatura.<br>
+     * 
+     * En caso de que el nombre introducido exista en la lista se cogerá el número de la posición 
+     * donde se encuentre la asignatura coincidente y se eliminará esa asignatura la cual posea el nombre
+     * correspondiente mediante el metodo splice().
+     * <br>
+     * 
+     * @param {string} nombre - *El nombre de la asignatura a eliminar.*
+     * @param {Object} listaEstudiantes - *El gestor de estudiantes para actualizar su información.*
+     * @returns {boolean} `true` si se eliminó correctamente, `false` en caso de error.
+     * @throws {error} **En caso de que el nombre introducido como parametro no exista en la lista de asignaturas**
+     */
     eliminar_asignatura(nombre, listaEstudiantes) {//parametro de listasEstudiantes
         let eliminar = this._gestor.findIndex(elemento => elemento.nombre.toLowerCase() === nombre.toLowerCase());
 
@@ -814,7 +1090,16 @@ class GestorAs extends Gestores {
             return false;
         }
 
-    } //Elimina una asignatura por nombre.
+    }
+
+    /**
+     * ## Método: listar_asignaturas <br>
+     * 
+     * Se recorrerá todo el array _gestores y los elementos que posea, en este caso asignaturas,
+     * se mostrarán en pantalla mediante el metodo toString de la clase Asignaturas, el cual
+     * mostrará el nombre de cada asignatura.
+     * <br>
+     */
 
     listar_asignaturas() {
         for (let asignatura of this._gestor) {
@@ -822,8 +1107,22 @@ class GestorAs extends Gestores {
         }
     }
 
-    obtener_asignatura(nombre) {//para que solo te devuelva una asignatura en concreto. 
-        //Tiene que ser su nombre completo para que no haya errores. Esto es para métodos en concreto
+    /**
+     * ## Método: obtener_asignatura
+     * <br>
+     * 
+     *  Este método tratará de buscar en el array _gestor a una asignatura mediante su nombre.
+     *  Buscará y devolverá una asignatura específica por su nombre.
+     * <br>
+     *  Esto se conseguirá mediante el método find() y en caso de que devuelva algo será la 
+     *  asignatura encontrada.
+     * <br>
+     * 
+     * @param {string} nombre - *El nombre completo de la asignatura a buscar.*
+     * @returns {Object|boolean} La asignatura encontrada o `false` si no existe.
+     * @throws {error} **En caso de que el método no devuelva nada**
+     */
+    obtener_asignatura(nombre) {
         let obtener = this._gestor.find(elemento => elemento.nombre.toLowerCase() === nombre.toLowerCase());
         try {
             if (obtener) {//si encuentra algun valor
@@ -839,7 +1138,28 @@ class GestorAs extends Gestores {
 
     }
 
-    obtener_muchas_asignaturas(nombre) {//te devuleve muchos resultados dependiendo de lo que le introduzcas
+    /**
+    * ## Método: obtener_muchas_asignaturas<br>
+    * 
+    *  Este método tendrá la misma función que el método obtener_asignatura(nombre) 
+    * con la única diferencia de que se buscará la asignatura por su nombre parcial en vez de la necesidad
+    *  de introducir el nombre exacto.<br>
+    * 
+    *  Esto se conseguirá mediante el método filter() el cual filtrará las asignaturas cuyo nombre no
+    * posea el string introducido como parametro en el método.
+    * <br>
+    * Si existiese algun elemento en el nuevo array creado después de utilizar el método filter entonces
+    * se recorrería el array y se mostrararían las asignaturas que coincidan con el nombre 
+    * introducido como parametro.
+    * <br>
+    * Así este método, al contrario que el anterior, devolverá multiples resultados en vez de solamente
+    * una coincidencía.
+    * <br>
+    * @param {string} nombre - *El texto parcial o completo del nombre de la asignatura.*
+    * @returns {void} Muestra en consola las asignaturas encontradas o un mensaje de error.
+    * @throws {error} **En caso de que no se encuentre ninguna asignatura que coincida con el parametro nombre introducido**
+    */
+    obtener_muchas_asignaturas(nombre) {
         let obtener_As = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
         //includes: Se usa para verificar si el nombre parcial está contenido en el nombre completo de la asignatura.
         //filter() devuelve un array con todas las asignaturas que coincidan. Se podría haber utilizado find pero ese método solo devuelve un valor.
@@ -858,6 +1178,14 @@ class GestorAs extends Gestores {
 
     }
 
+    /**
+     * ## Método: toString<br>
+     * 
+     *  El método toString servirá como una sobrecarga del metodo toString de la clase Gestores y este 
+     *  mostrará la longitud del array _gestor pero indicando que la lista es una lista de asignaturas.
+     * <br>
+     * @returns {string}
+     */
     toString() {//sobrecarga
         super.toString();
         return `Lista con ${this._gestor.length} Asignaturas`;
@@ -866,12 +1194,43 @@ class GestorAs extends Gestores {
 
 }
 
+/**
+ * # Clase ErrorPersonalizado<br>
+ * 
+ * Extiende de la clase "Error" para crear un tipo de error personalizado que puede ser utilizado en validaciones específicas.
+ * <br>
+ * */
+
 class ErrorPersonalizado extends Error {
+    /**
+     * ## Constructor<br>
+     * 
+     * 
+     * @param {string} mensaje - El mensaje de error que describe el problema.
+     */
     constructor(mensaje) {
         super(mensaje);
         this.name = "ErrorPersonalizado";
     }
 }
+
+
+/**
+ * @typedef {Object} estudiante - **El objeto que representa al estudiante.**
+ * @property {string} estudiante.nombre - *El nombre del estudiante. Debe ser una cadena no vacía.*
+ * @property {number} estudiante.edad - *La edad del estudiante. Debe ser un número positivo.*
+ * 
+ */
+
+/**
+ * # Función: validarEstudiante <br>
+ * 
+ * Valida los datos de un estudiante y lanza un error personalizado si no cumple con las condiciones.
+ * <br>
+ * @param {Object} estudiante - *El objeto que representa al estudiante.*
+ * @throws {ErrorPersonalizado} **Si el nombre o la edad no son validos**
+ */
+
 
 
 function validarEstudiante(estudiante) {
@@ -898,6 +1257,7 @@ try {//te hace un id nuevo
 }
 
 //////////////////////////////////////
+
 
 const listaEstudiantes = new GestorEs();//inicializamos un objeto de la clase GestorEs que actuará como un array de estudiantes
 const listaAsignaturas = new GestorAs();//inicializamos un objeto de la clase GestorAs que actuará como un array de asignaturas
@@ -974,9 +1334,10 @@ listaEstudiantes.gestor[4].agregar_calificacion(listaAsignaturas.gestor[1], 10);
 
 //console.log(listaAsignaturas.obtener_asignatura("Fisica"));
 
+
+
 let pregunta = 0;
 
-//Hacemos un do{}while() en el que si el valor es 0 salga del menu
 do {
 
 
@@ -1000,15 +1361,23 @@ do {
     pregunta = prompt("Dime la opción que desees realizar");
     pregunta = Number(pregunta);
 
+    /**
+     * 
+     * # Gestionar las acciones del menú principal según la opción seleccionada.
+     *  @param {number} pregunta - *La opción seleccionada por el usuario.*
+     */
     switch (pregunta) {
-        /*
-        Este caso se encargará de la creación de un estudiante y de agregarlo a la listaEstudiantes
-        gracias al método agregar_estudiante.
- 
-        Antes de agregar a un estudiante a la lista se comprobará si los valores introducidos por el usuario
-        son validos y en caso de que sean validos se agregarán como un nuevo estudiante.
- 
-        En caso de no ser validos saltará un error por pantalla.
+        /**
+         * ## Caso 1: Creación de un estudiante y adición a la lista de estudiantes
+         * <br>
+         * 
+         * Este caso se encargará de la creación de un estudiante y de agregarlo a la listaEstudiantes
+         * gracias al método agregar_estudiante.
+         * <br>
+         * Antes de agregar a un estudiante a la lista se comprobará si los valores introducidos por el usuario
+         * son validos y en caso de que sean validos se agregarán como un nuevo estudiante.
+         * <br>
+         * @throws {Error} **Si alguno de los datos no es válido.**
         */
         case 1:
 
@@ -1044,12 +1413,10 @@ do {
                 break;
             }
 
-
             let nuevaDireccion = new Direccion(calle, numero, piso, codigo_postal, provincia, localidad);
 
             let nuevoEstudiante = new Estudiantes(nombre, edad, nuevaDireccion);
 
-            // Agregar el estudiante a la lista
             let comprobacion_es = listaEstudiantes.agregar_estudiante(nuevoEstudiante);
 
             if (comprobacion_es != false) {
@@ -1057,23 +1424,22 @@ do {
                 listaEstudiantes.listar_estudiantes();
             }
 
-
-
-
-
             break;
 
-        /*
-        Este caso se encargará de la creación de una Asignatura y de agregarla a la listaAsignaturas.
- 
-        En este caso también se validarán los valores antes de agregarlos y se utilizará el método
-        trim() para eliminar cualquier espacio en blanco que se haya podido dejar en el nombre
-        de asignatura introducido por el usuario.
- 
-        cuando el valor haya sido validado, se creará un objeto de la clase asignaturas con el
-        nombre introducido como valor y se agregará a listaAsignaturas con el método agregar_asignatura
- 
-        En caso de que el valor introducido no fuese valido saltaría un error en consola.
+
+        /**
+         * ## Caso 2: Creación de una asignatura y adición a la lista de asignaturas
+         * <br>
+         *  Este caso se encargará de la creación de una Asignatura y de agregarla a la listaAsignaturas.
+         * <br>
+         * En este caso también se validarán los valores antes de agregarlos y se utilizará el método
+         * trim() para eliminar cualquier espacio en blanco que se haya podido dejar en el nombre
+         * de asignatura introducido por el usuario.
+         * <br>
+         * Cuando el valor haya sido validado, se creará un objeto de la clase asignaturas con el
+         *  nombre introducido como valor y se agregará a listaAsignaturas con el método agregar_asignatura
+         * <br>
+         *  @throws {Error} **Si el nombre de la asignatura no es válido.**
         */
         case 2:
 
@@ -1101,17 +1467,20 @@ do {
 
             break;
 
-        /*
-        En este caso se matriculará a un estudiante mediante los métodos obtener_estudiante(id) y
-        matricular(asignatura).
- 
-        Se le pedirá al usuario el id del estudiante que quiera matricular y el nombre de la asignatura
-        en la cual quiera matricular al estudiante.
- 
-        Entonces se pasará el string con el id introducido a Number y se realizará el metodo
-        matricular para que la asignatura introducida aparezca en el array de asignaturas del estudiante
-        y que se registre así como una asignatura matriculada
-        */
+        /**
+          * ## Caso 3: Matricular a un estudiante en una asignatura
+          * <br>
+          *  En este caso se matriculará a un estudiante mediante los métodos obtener_estudiante(id) y
+          *  matricular(asignatura).
+          * <br>
+          *  Se le pedirá al usuario el id del estudiante que quiera matricular y el nombre de la asignatura
+          *  en la cual quiera matricular al estudiante.
+          * <br>
+          * Entonces se pasará el string con el id introducido a Number y se realizará el metodo
+          * matricular para que la asignatura introducida aparezca en el array de asignaturas del estudiante
+          * y que se registre así como una asignatura matriculada
+          * <br>
+          */
         case 3:
 
             listaEstudiantes.listar_estudiantes();
@@ -1140,20 +1509,23 @@ do {
 
             break;
 
-        /*
-        En este caso se desmatriculará a un estudiante de una asignatura gracias a los métodos 
-        obtener_estudiante(id) y desmatricular(asignatura).
- 
-        Se le pedirá al usuario el id del estudiante que quiera desmatricular y el nombre de la 
-        asignatura en la cual quiera desmatricular al estudiante.
- 
-        Entonces se pasará el string con el id introducido a Number y se realizará el metodo
-        desmatricular para que la asignatura introducida desaparezca del array de asignaturas 
-        del estudiante y que se registre como desmatriculada en en array de registros.
- 
-        En caso de que el nombre de la asignatura no exista en el array de asignaturas dentro de
-        estudiante se lanzará un error como hemos explicado en el metodo desmatricular
-        */
+        /**
+         * ## Caso 4: Desmatricular a un estudiante de una asignatura
+         * <br>
+         * En este caso se desmatriculará a un estudiante de una asignatura gracias a los 
+         * métodos obtener_estudiante(id) y desmatricular(asignatura).
+         * <br>
+         * Se le pedirá al usuario el id del estudiante que quiera desmatricular y el nombre de la 
+         * asignatura en la cual quiera desmatricular al estudiante.
+         *  <br>
+         * Entonces se pasará el string con el id introducido a Number y se realizará el metodo
+         * desmatricular para que la asignatura introducida desaparezca del array de asignaturas 
+         * del estudiante y que se registre como desmatriculada en en array de registros.
+         * <br>
+         * En caso de que el nombre de la asignatura no exista en el array de asignaturas dentro de
+         * estudiante se lanzará un error como hemos explicado en el metodo desmatricular
+         */
+
         case 4:
             listaEstudiantes.listar_estudiantes();
             let id2 = prompt("Dime la id del estudiante que quieras desmatricular");
@@ -1182,15 +1554,19 @@ do {
 
 
             break;
-        /*
-        En el caso 5 se tratará de eliminar un estudiante de la listaEstudiantes.
- 
-        Esto se logrará gracias a los métodos listar_estudiantes() para mostrar antes y después que
-        estudiantes están introducidos en la lista y  eliminar_estudiante(id) el cual se encargara
-        de buscar un estudiante con el mismo id que el introducido en listaEstudiantes.
-        
-        Si lo encuentra lo eliminará de la lista y si no lo encuentra se lanzará un error por pantalla
-        */
+        /**
+         * ## Caso 5: Eliminar un estudiante de la lista
+         * <br>
+         * En el caso 5 se tratará de eliminar un estudiante de la listaEstudiantes.
+         * <br>
+         * Esto se logrará gracias a los métodos listar_estudiantes() para mostrar antes y después que
+         * estudiantes están introducidos en la lista y  eliminar_estudiante(id) el cual se encargará
+         * de buscar un estudiante con el mismo id que el introducido en listaEstudiantes.
+         * <br>
+         * Si lo encuentra lo eliminará de la lista y si no lo encuentra se lanzará un error por pantalla
+         * <br>
+         * @throws {error} **Si el id del estudiante no es un número o si es menor que 0**
+         */
         case 5:
             listaEstudiantes.listar_estudiantes();
             let elim_estu = prompt("Dime el id del estudiante que quieras eliminar");
@@ -1217,14 +1593,18 @@ do {
 
 
             break;
-        /*
-        El caso 6 se encargará de eliminar una asignatura elegida por el usuario del array listaAsignaturas
- 
-        Este caso se conseguira con la ayuda de los métodos listar_asignaturas() para mostrar las 
-        asignaturas de la lista antes y después de la eliminación y eliminar_asignatura(nombre)
-        que si no encuentra ninguna coincidencia con el nombre de la asignatura introducido entonces
-        se mostrará un error y si lo encuentra, eliminará esa asignatura de la listaAsignaturas
-        */
+        /**
+         * ## Caso 6: Eliminar una asignatura elegida
+         * <br>
+         * El caso 6 se encargará de eliminar una asignatura elegida por el usuario del array listaAsignaturas
+         * <br>
+         * Este caso se conseguira con la ayuda de los métodos listar_asignaturas() para mostrar las 
+         * asignaturas de la lista antes y después de la eliminación y eliminar_asignatura(nombre)
+         * que si no encuentra ninguna coincidencia con el nombre de la asignatura introducido entonces
+         * se mostrará un error y si lo encuentra, eliminará esa asignatura de la listaAsignaturas.
+         * <br>
+         * @throws {error} **si el nombre introducido como parametro no es un string o si esta vacio**
+         */
         case 6:
             listaAsignaturas.listar_asignaturas();//muestra las asignaturas antes de eliminarlas
 
@@ -1252,24 +1632,28 @@ do {
 
 
             break;
-        /*
-            En el caso 7 se califican las asignaturas con las notas que un estudiante haya estado 
-            sacando con el método agregar_calificacion(nota) de la clase Asignaturas y al final de todo 
-            se hace el promedio de esas notas con el método calcular_promedio() 
-            y se le asigna ese promedio a la asignatura con esas notas.
- 
-            Después se pide indicar el id del estudiante al que se le asignará ese promedio de notas
-            como su calificacion en esa asignatura.
- 
-            Ese estudiante se encontrará con el método obtener_estudiante(id) y una vez encontrado
-            se le asignará ese promedio de la asignatura como su nota final de esa asignatura elegida
-            con el método agregar_calificacion(asignatura,nota) de la clase estudiantes.
- 
-            Por último, una vez añadido el promedio de la asignatura a un estudiante, se eliminarán las 
-            notas introducidas a esa asignatura para que en caso de que se quieran añadir notas para un 
-            nuevo estudiante de la misma asignatura, las notas del anterior estudiante no influyan en el
-            promedio del nuevo estudiante.
-        */
+
+        /**
+         * ## Caso 7: Calificar asignaturas y estudiantes
+         * <br>
+         *  En el caso 7 se califican las asignaturas con las notas que un estudiante haya estado 
+         *  sacando con el método agregar_calificacion(nota) de la clase Asignaturas y al final de todo 
+         *  se hace el promedio de esas notas con el método calcular_promedio() 
+         *  y se le asigna ese promedio a la asignatura con esas notas.
+         * <br>
+         *  Después se pide indicar el id del estudiante al que se le asignará ese promedio de notas
+         *  como su calificacion en esa asignatura.
+         * <br>
+         *  Ese estudiante se encontrará con el método obtener_estudiante(id) y una vez encontrado
+         *  se le asignará ese promedio de la asignatura como su nota final de esa asignatura elegida
+         *  con el método agregar_calificacion(asignatura,nota) de la clase estudiantes.
+         * <br>
+         *  Por último, una vez añadido el promedio de la asignatura a un estudiante, se eliminarán las 
+         *  notas introducidas a esa asignatura para que en caso de que se quieran añadir notas para un 
+         *  nuevo estudiante de la misma asignatura, las notas del anterior estudiante no influyan en el
+         *  promedio del nuevo estudiante.
+         * <br>
+         */
         case 7:
             //se califican asignaturas y el promedio de esas notas seran la nota final del estudiantes
             let nombre_asig = prompt("Introduce el nombre de la asignatura que desees calificar");
@@ -1325,18 +1709,20 @@ do {
 
 
             break;
-        /*
-        En el caso 8 se hará el promedio entre todas las calificaciones de un estudiante.
- 
-        Este promedio se logrará con los métodos obtener_estudiante(id) para encontrar a un estudiante
-        en concreto al que hacer su promedio y una vez encontrado se utilizará el método promedio()
-        de la clase Estudiantes explicado anteriormente el cual se encargará de sumar todas las notas
-        del estudiante y dividirlas por el numero de notas en las que este matriculado.
- 
-        Por último, se mostrará la media de todas las calificaciones del estudiante elegido y el nombre
-        de dicho estudiante por pantalla.
-        
-        */
+        /**
+         * ## Caso 8: Promedio de un estudiante
+         * <br>
+         * En el caso 8 se hará el promedio entre todas las calificaciones de un estudiante.
+         * <br>
+         * Este promedio se logrará con los métodos obtener_estudiante(id) para encontrar a un estudiante
+         * en concreto al que hacer su promedio y una vez encontrado se utilizará el método promedio()
+         * de la clase Estudiantes explicado anteriormente el cual se encargará de sumar todas las notas
+         * del estudiante y dividirlas por el numero de notas en las que este matriculado.
+         *  <br>
+         * Por último, se mostrará la media de todas las calificaciones del estudiante elegido y el nombre
+         * de dicho estudiante por pantalla.
+         * <br>
+         */
         case 8:
             // Listar estudiantes disponibles
             listaEstudiantes.listar_estudiantes();
@@ -1353,15 +1739,18 @@ do {
             }
             break;
 
-        /*
-        En el caso 9 se mostrará el promedio de todas las notas de todos los estudiante en conjunto.
-        
-        Esto se logrará con el método promedio_lista(), el cual se encargará de recorrer todo el 
-        array de _gestor y hacer el promedio de todos los estudiantes de listaEstidiantes 
-        para luego ir sumandolos dentro de una variable y dividir ese total por el número de 
-        veces que se han ido sumando las notas para que asi de el promedio total entre todos los 
-        estudiantes de listaEstudiantes.
-        */
+        /**
+         * ## Caso 9: Promedio de todos los estudiantes
+         * <br>
+         * En el caso 9 se mostrará el promedio de todas las notas de todos los estudiante en conjunto.
+         * <br>
+         * Esto se logrará con el método promedio_lista(), el cual se encargará de recorrer todo el 
+         * array de _gestor y hacer el promedio de todos los estudiantes de listaEstidiantes 
+         * para luego ir sumandolos dentro de una variable y dividir ese total por el número de 
+         * veces que se han ido sumando las notas para que asi de el promedio total entre todos los 
+         * estudiantes de listaEstudiantes.
+         * <br>
+         * */
         case 9:
             listaEstudiantes.gestor.forEach(elemento => {
                 console.log(`Estudiante: ${elemento.nombre}, Promedio: ${elemento.promedio()}, Asignaturas: ${elemento.asig_mostrar()}`);
@@ -1375,16 +1764,20 @@ do {
 
             break;
 
-        /*
-        En el caso 10 se mostrarán las fechas de matriculación y desmatriculación de un estudiante
-        que se busque.
- 
-        Esto se realizará con los métodos listar_estudiantes() para mostrar todos los estudiantes
-        a elegir dentro de listaEstudaintes, obtener_estudiante(id) para que se devuelva un estudiante
-        concreto del que mostrar sus registros y por ultimo el getter de registros de la clase estudiante
-        el cual se utilizara en el estudiante que nos devuelva obtener_estudiante y nos mostrará las 
-        fechas de las matriculaciones y desmatriculaciones. 
-        */
+        /**
+         * ## Caso 10: Fechas de matriculacion
+         * <br>
+         * En el caso 10 se mostrarán las fechas de matriculación y desmatriculación de un estudiante
+         * que se busque.
+         *  <br>
+         * Esto se realizará con los métodos listar_estudiantes() para mostrar todos los estudiantes
+         * a elegir dentro de listaEstudaintes, obtener_estudiante(id) para que se devuelva un estudiante
+         * concreto del que mostrar sus registros y por ultimo el getter de registros de la clase estudiante
+         * el cual se utilizara en el estudiante que nos devuelva obtener_estudiante y nos mostrará las 
+         * fechas de las matriculaciones y desmatriculaciones.<br> 
+         * 
+         * @throws {error} **si el id del estudiante no es un número o si es menor que 0**
+         */
         case 10:
             listaEstudiantes.listar_estudiantes();
             let F_matricula = prompt("Dime el ID del estudiante del que quieras saber su fecha de matriculacion y fecha de desmatriculacion de sus asignaturas hasta el momento");
@@ -1409,18 +1802,21 @@ do {
 
             break;
 
-        /*
-        En este caso 11 se buscarán estudiantes o asignaturas por su nombre parcial o completo
- 
-        Primero se pedirá al usuario que introduzca 1 para buscar estudiantes o 2 para 
-        buscar asignaturas.
- 
-        En cualquiera de los dos casos se le volverá a pedir que introduzca un nombre de un estudiante
-        o asignatura para luego devolver un array de los nombres coincidentes con uno de los métodos
-        creados los cuales son obtener_nombre_estudiante(nombre) u obtener_muchas_asignaturas(nombre)
-        los cuales devolveran un array con los nombre que sean parcialmente coincidentes con el nombre
-        introducido por el usuario.
-        */
+        /**
+         * ## Caso 11: Buscar
+         * <br>
+         * En este caso 11 se buscarán estudiantes o asignaturas por su nombre parcial o completo
+         *  <br>
+         * Primero se pedirá al usuario que introduzca 1 para buscar estudiantes o 2 para 
+         * buscar asignaturas.
+         *  <br>
+         * En cualquiera de los dos casos se le volverá a pedir que introduzca un nombre de un estudiante
+         * o asignatura para luego devolver un array de los nombres coincidentes con uno de los métodos
+         * creados los cuales son obtener_nombre_estudiante(nombre) u obtener_muchas_asignaturas(nombre)
+         * los cuales devolveran un array con los nombre que sean parcialmente coincidentes con el nombre
+         * introducido por el usuario.
+         * <br>
+         */
         case 11:
             let buscar = prompt("Si quieres buscar un estudiante marca 1 y si quieres buscar una asignatura marca 2: ");
             buscar = Number(buscar);
@@ -1442,17 +1838,23 @@ do {
             }
 
             break;
-        /*
-        Por último, llegamos al caso 12 el cual deberá de mostrarnos una lista de informes de cada uno de 
-        los estudiantes contenidos en listaEstudiantes. 
-        */
+        /**
+         *  ## Caso 12: Mostrar reporte
+         * <br>
+         *  Por último, llegamos al caso 12 el cual deberá de mostrarnos una lista de informes de cada uno de 
+         *  los estudiantes contenidos en listaEstudiantes. 
+         * <br>
+         */
         case 12:
             console.log("A continuación se mostrarán los informes de cada uno de los estudiantes: ");
             listaEstudiantes.listar_informes();
             break;
-        /*
-        En caso de que el usuario quiera salir del menú entonces solo tendrá que marcar 13 en la consola para activar está opción
-        */
+
+        /**
+         *  ## Caso 13: Salir
+         * <br>
+         *  En caso de que el usuario quiera salir del menú entonces solo tendrá que marcar 13 en la consola para activar está opción
+         */
         case 13:
             console.log("Adios");
             break;

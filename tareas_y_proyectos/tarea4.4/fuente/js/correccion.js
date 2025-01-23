@@ -1,5 +1,5 @@
 //Este proyecto esta disponible en mi github
-//El enlace es: https://github.com/Juan-GR123/git_cliente/blob/main/entorno_cliente/prueba/codigo_DWEC/tareas/tarea4.5/fuente/js/correccion.js
+//El enlace es: https://github.com/Juan-GR123/DWEC_Juan_Garcia/blob/main/tareas_y_proyectos/tarea4.4/fuente/correccion.js
 
 
 //Todas las salidas serán por consola y todas las entradas por teclado
@@ -10,15 +10,17 @@
  * 
  */
 
-import { Direccion } from './direccion.js';
+import {Direccion}  from './direccion.js';
 
-import { Estudiantes } from './estudiantes.js';
+import {Estudiantes} from './estudiantes.js';
 
-import { Asignaturas } from './asignaturas.js';
+import {Asignaturas} from './asignaturas.js';
 
-import { GestorAs, GestorEs } from './gestores.js';
+import {GestorAs,GestorEs} from './gestores.js';
 
-import { ErrorPersonalizado, validarEstudiante } from './Error.js';
+import {ErrorPersonalizado,validarEstudiante} from './Error.js';
+
+
 
 // Ejemplo de uso
 try {//te hace un id nuevo
@@ -32,7 +34,6 @@ try {//te hace un id nuevo
         console.log(`Ocurrió un error inesperado: ${error.message}`);
     }
 }
-
 //////////////////////////////////////
 
 
