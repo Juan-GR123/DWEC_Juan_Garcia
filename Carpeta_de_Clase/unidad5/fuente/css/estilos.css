@@ -1,5 +1,5 @@
-#rojo{
-    color: red;
+.rojo{
+   background-color: red;
 }
 
 .una_clase_nueva{
@@ -13,4 +13,12 @@
 }
 .fondoRojo{
     background-color: red;
+}
+
+p.informacion{
+    background-color: beige;
+    width: 200px;    
+    height: 200px;
+    border: 3px solid brown;
+
 }

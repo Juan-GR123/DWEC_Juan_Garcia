@@ -136,27 +136,49 @@ puntoInsercion2.insertAdjacentHTML("afterend",cadena);
 
 //limpiar las cadena que leamos de fuentes desconocidas //docs/3- modifying.MD markdown
 */
-
+/*
 //reemplazamos
 // NODE API:
 // nodoReferencia.replaceChild(newNode, oldNode);
 let nodoReferencia=document.querySelector("ul");
 let nodoViejo= document.querySelector("ul>li:nth-of-type(3)>ul");
 const nodoNuevo=document.createComment("comentario dentro de una lista");
+const comentarioNuevo=document.createComment("comentario dentro de una lista");
+const elementoNuevo= document.createTextNode("esto es un texto");
 //nodoReferencia.replaceChild(nodoNuevo,nodoViejo);antiguo
 
 
 //Element API:
-// oldNode.replaceWith(newNode)
-// replaceChildren
+// oldNode.replaceWith(newNode) -> todos los hijos del nodo Y EL PROPIO NODO
+// replaceChildren -> todos los hijos del nodo PERO NO EL PROPIO NODO
 //Revisar
-nodoViejo.replaceWith(nodoNuevo);
-
+//nodoReferencia.replaceWith(nodoNuevo);
+nodoReferencia.replaceChildren(comentarioNuevo,elementoNuevo,"<p>Esto es un texto introducido directamente</p>");
+*/
 
 
 //eliminarlos
+//Node API: nodoPadre.removeChild(nodoAEliminar);
+//nodoPadre.firstChild;
+let padre=document.querySelector("#lista>ul");
+//let padre= document.querySelector("#lista").removeChild(document.querySelector("#lista>ul"));
 
 
-//Elemento API ->
+//padre.removeChild(padre.querySelector("li:nth-of-type(1)"));
+let elementoQuitado=padre.removeChild(padre.querySelector("li:nth-of-type(1)"));
+console.log(elementoQuitado.isConnected);
+document.body.appendChild(elementoQuitado);
+
+
+//Elemento API -> nodoAEliminar.remove();
+padre.remove();
+
+
+
+
+
+
+
+
 
 
