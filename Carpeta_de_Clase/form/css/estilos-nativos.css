@@ -1,0 +1,15 @@
+/*si se cumplen las restr. segun val nativa*/
+input:valid{
+    background-color: #dbf7db;
+    border-color: green;
+}
+
+/*NO cumplen */
+input:invalid{
+    background-color: #fdd;
+    border-color: red;
+}
+
+input:invalid:focus{
+    font-size: 1.15rem;
+}

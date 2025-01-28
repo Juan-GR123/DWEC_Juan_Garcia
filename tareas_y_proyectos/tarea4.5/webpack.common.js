@@ -1,5 +1,5 @@
 import path from 'path';
-
+import HtmlWebpackPlugin from 'html-webpack-plugin'; // Importamos el plugin
 
 export default{
     entry: './fuente/js/correccion.js',//entrada
@@ -12,4 +12,27 @@ export default{
         //Ej: minifying, optimizacion de código
     },
     mode:process.env.modo,//de que modo quiero que compile
+    plugins: [
+        new HtmlWebpackPlugin({
+          template: './fuente/index.html', // Ruta al archivo HTML de entrada
+          filename: 'index.html', // Nombre del archivo HTML generado
+        }),
+      ],
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: 'babel-loader',
+          },
+          {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader'],
+          },
+          {
+            test: /\.(png|jpg|gif|svg)$/,
+            type: 'asset/resource',
+          },
+        ],
+      },
 }
