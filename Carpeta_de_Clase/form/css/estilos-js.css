@@ -1,0 +1,9 @@
+.valida{
+    background-color: #dbf7db;
+    border-color: green;
+}
+
+.no-valida{
+    background-color: #fdd;
+    border-color: red;
+}

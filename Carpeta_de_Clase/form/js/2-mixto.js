@@ -10,19 +10,36 @@ const validarCampo=campo=>{
     //si yo le doy un valor, el validador considera el campo no válido
 
     if (campo.name=="nombre"){
-        if (campo.required && !campo.value.trim()) {
+        if (campo.required) {
             campo.setCustomValidity("Este campo es obligatorio y no puede estar en blanco");
         }
     }
+
+    if(campo.name="teléfono"){
+        if(campo.required){
+            campo.setCustomValidity("Este campo es obligatorio y no puede estar en blacnp")
+        }
+    }
+
+    if(!campo.validity.valid){
+        campo.setCustomValidity("Este campo es obligatorio y no puede estar en blanco")
+    }
+    campo.reportValidity(); //muestra el mensaje inmediatamente
 }
 
 const formulario= document.getElementsByTagName("form")[0];
 const campo=document.querySelectorAll("input");
 
-campos.forEach(campo => {
+/*campos.forEach(campo => {
     campo.addEventListener('input', ()=>{
        validarCampo(campo) 
     });
+});*/
+
+formulario.addEventListener('input', evento => {
+    if (evento.target.tagName=='INPUT'){
+        validarCampo(evento.target);
+    }
 });
 
 formulario.addEventListener('submit', function(evento){
