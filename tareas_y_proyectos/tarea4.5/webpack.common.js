@@ -1,5 +1,6 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin'; // Importamos el plugin
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 export default{
     entry: './fuente/js/correccion.js',//entrada
@@ -17,8 +18,12 @@ export default{
           template: './fuente/index.html', // Ruta al archivo HTML de entrada
           filename: 'index.html', // Nombre del archivo HTML generado
         }),
+        new MiniCssExtractPlugin({
+          filename: '[name].css', // Nombre del archivo CSS generado
+          chunkFilename: '[id].css', // id del archivo CSS
+        }),
       ],
-      module: {
+      module: { 
         rules: [
           {
             test: /\.js$/,
@@ -27,7 +32,10 @@ export default{
           },
           {
             test: /\.css$/,
-            use: ['style-loader', 'css-loader'],
+            use: [
+              MiniCssExtractPlugin.loader, // Extrae el CSS en un archivo separado
+              'css-loader', // Convierte CSS en módulos que Webpack puede entender
+            ],
           },
           {
             test: /\.(png|jpg|gif|svg)$/,
