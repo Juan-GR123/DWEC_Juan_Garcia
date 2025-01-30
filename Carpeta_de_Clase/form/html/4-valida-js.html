@@ -4,32 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/estilos-js.css" type="text/css">
-    <script src="../js/3-valida-js-y-html-formatea-js.js" defer></script>
+    <link rel="stylesheet" href="../css/estilos-nativos.css" type="text/css">
+    <script src="../js/4-valida-js.js" defer></script>
 </head>
 <body>
     <header>
         <h3>Validación de formularios nativa + JS (mensajes de error)</h3>
     </header>
     <main>
-        <form action="#" method="POST">
+        <form action="#" method="POST" novalidate>
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre" required minlength="8">
+            <p id="errornombre" class="oculto error"></p>
 
             <label for="correo">Email</label>
             <input type="email" id="correo" name="correo" autocomplete="new-password">
+            <p id="errorcorreo" class="oculto error"></p>
 
             <label for="password">Contraseña</label>
             <input type="password" id="password" name="password">
+            <p id="errorpassword" class="oculto error"></p>
             
             <label for="confirm-password">Repita clave</label>
             <input type="password" id="confirm-password" name="confirm-password">
+            <p id="errorconfirm-password" class="oculto error"></p>
 
             <label for="telefono">Teléfono</label>
             <input type="text" id="telefono" name="telefono" required pattern="\d{3} \d{3} \d{3}">
+            <p id="errortelefono" class="oculto error"></p>
 
             <label for="edad">Edad</label>
             <input type="text" id="edad" name="edad" min="18" max="90">
+            <p id="erroredad" class="oculto error"></p>
 
             <button type="submit">Enviar</button>
         </form>
