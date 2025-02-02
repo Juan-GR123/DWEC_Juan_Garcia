@@ -5,13 +5,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!--<script type="module" src="../fuente/js/correccion.js" defer></script>-->
+    <link rel="stylesheet" href="../fuente/css/estilos.css">
 </head>
 
 <body>
     <h1>Abra la consola del navegador e introduzca el siguiente enlace comentado mientras el live
         server esta operativo:</h1>
-    <!--http://127.0.0.7:5500/tareas_y_proyectos/tarea4.4/fuente/index.html-->
+    <!--http://127.0.0.7:5500/tareas_y_proyectos/tarea5/fuente/index.html-->
+    <!--Crear una interfaz grafica por pantalla que te diga las opciones que puedes realizar-->
     <br>
-    <script type="module" src="../fuente/js/correccion.js"></script>
+    <main>
+
+    <p>Dime la opción que quieres realizar</p>
+    
+        <button id="1">1 - Crear estudiante</button>
+        <div class="opcion1">
+            <h2>Registro de Estudiantes</h2>
+            <label>Nombre: <input type="text" id="nombre"></label>
+            <label>Edad: <input type="number" id="edad"></label>
+            <h3>Dirección</h3>
+            <label>Calle: <input type="text" id="calle"></label>
+            <label>Número: <input type="number" id="numero"></label>
+            <label>Piso: <input type="text" id="piso"></label>
+            <label>Código Postal: <input type="number" id="codigo_postal"></label>
+            <label>Provincia: <input type="text" id="provincia"></label>
+            <label>Localidad: <input type="text" id="localidad"></label>
+    
+            <button>Registrar Estudiante</button>
+        </div>
+        <button id="2">2 - Crear Asignatura</button>
+        <button id="3">3 - Matricular estudiante</button>
+        <button id="4">4 - Desmatricular estudiante</button>
+        <button id="5">5 - Eliminar estudiante de la lista</button>
+        <button id="6">6 - Eliminar asignatura de la lista</button>
+        <button id="7">7 - Calificar asignaturas y estudiantes</button>
+        <button id="8">8 - Promedio de un estudiante</button>
+        <button id="9">9 - Promedio de todos los estudiantes</button>
+        <button id="10">10 - Fechas de matriculacion</button>
+        <button id="11">11 - Buscar</button>
+        <button id="12">12 - Mostrar reporte</button>
+        <button id="13">13 - Salir</button>
+        
+    </main>
 </body>
+
 </html>
