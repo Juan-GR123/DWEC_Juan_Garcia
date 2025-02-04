@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!--<script type="module" src="../fuente/js/correccion.js" defer></script>-->
+    <script type="module" src="../fuente/js/modificarDOM.js" defer></script>
     <link rel="stylesheet" href="../fuente/css/estilos.css">
 </head>
 
@@ -16,27 +17,27 @@
     <!--Crear una interfaz grafica por pantalla que te diga las opciones que puedes realizar-->
     <br>
     <main>
-
+ 
     <p>Dime la opción que quieres realizar</p>
     
         <button id="1">1 - Crear estudiante</button>
-        <div class="opcion1">
+        <section class="opcion1">
             <h2>Registro de Estudiantes</h2>
-            <form action="" method="post">
-                <label>Nombre: <input type="text" id="nombre"></label>
-                <label>Edad: <input type="number" id="edad"></label>
+            <form action="#" method="get">
+                <label>Nombre: <input type="text" id="nombre" required></label>
+                <label>Edad: <input type="number" id="edad" required></label>
                 <h3>Dirección</h3>
-                <label>Calle: <input type="text" id="calle"></label>
-                <label>Número: <input type="number" id="numero"></label>
-                <label>Piso: <input type="text" id="piso"></label>
-                <label>Código Postal: <input type="number" id="codigo_postal"></label>
-                <label>Provincia: <input type="text" id="provincia"></label>
-                <label>Localidad: <input type="text" id="localidad"></label>
-        
-                <button type="submit">Registrar Estudiante</button>
+                <label>Calle: <input type="text" id="calle" required></label>
+                <label>Número: <input type="number" id="numero" required></label>
+                <label>Piso: <input type="text" id="piso" required></label>
+                <label>Código Postal: <input type="text" id="codigo_postal" required pattern="\d{5}"></label>
+                <label>Provincia: <input type="text" id="provincia" required></label>
+                <label>Localidad: <input type="text" id="localidad" required></label>
+
+                <button id="submit" type="submit">Registrar Estudiante</button>
             </form>
             
-        </div>
+        </section>
         <button id="2">2 - Crear Asignatura</button>
         <button id="3">3 - Matricular estudiante</button>
         <button id="4">4 - Desmatricular estudiante</button>
