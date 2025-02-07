@@ -104,8 +104,8 @@ listaEstudiantes.gestor[4].agregar_calificacion(listaAsignaturas.gestor[1], 10);
 document.addEventListener("DOMContentLoaded", function () {
     const boton = document.getElementById("1");
     const articulo = document.querySelector(".opcion1");
-    const inputs = document.querySelectorAll("input");
     const form = document.querySelector("form");
+    const inputs = form.querySelectorAll("input");
     const mostrar = document.getElementById("output"); // Añadido
 
     // Ocultar el articulo al cargar la página
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        if (!valido) {
+        if (!valido) { //En verdad no hace falta validarlo ya que todos los campos son obligatorios por el html
             event.preventDefault(); // Evita el envío del articulo
             alert("Por favor, completa todos los campos antes de continuar.");
         } else {
@@ -190,7 +190,95 @@ document.addEventListener("DOMContentLoaded", function () {
 
 ///caso 2
 
+document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded se utiliza para asegurarse de que el DOM esté listo antes de intentar manipularlo
+    const boton = document.getElementById("2");
+    const articulo = document.querySelector(".opcion2");
+    const form = document.querySelector(".opcion2 form");
+    const inputs = form.querySelectorAll("input");
+    const mostrar = document.getElementById("mostrar2"); // Añadido
 
+    // Ocultar el articulo al cargar la página
+    articulo.style.display = "none";
+
+    function mostrarAsignaturas() {
+        mostrar.innerHTML = ""; // Limpiar el contenido del div
+        listaAsignaturas.gestor.forEach(asignatura => {
+            const asignaturaInfo = `Nombre: ${asignatura.nombre}`;
+            const p = document.createElement("p");// crea la etiqueta p
+            p.textContent = asignaturaInfo;//pone la etiqueta al principio
+            mostrar.appendChild(p);//pone la etiqueta al final
+        });
+    }
+
+
+    // Mostrar el articulo al hacer clic en el botón
+    boton.addEventListener("click", function () {
+        articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
+    });
+
+
+     // Cargar datos guardados en localStorage
+     inputs.forEach(input => {
+        const valor = localStorage.getItem(input.id);
+        if (valor) {
+            input.value = valor;
+        }
+
+        // Guardar cambios en localStorage cada vez que se edite un input
+        input.addEventListener("input", function () {
+            localStorage.setItem(input.id, input.value);
+        });
+    });
+
+    // Validar articulo antes de enviarlo
+    form.addEventListener("submit", function (evento) {
+        evento.preventDefault(); // Evita el envío del articulo
+
+        let valido = true;
+        let nombre = document.getElementById("nombreA").value.trim(); // Obtener el valor del input
+
+        inputs.forEach(input => {
+            if (input.value.trim() === "") {
+                valido = false;
+                input.style.border = "2px solid red"; // Resalta el input vacío
+            } else {
+                input.style.border = ""; // Elimina el borde rojo si se completa
+                input.value = '';
+            }
+        });
+
+
+        if (!valido) {
+            alert("Por favor, completa todos los campos antes de continuar.");
+            return;
+        } else {
+
+            console.log("articulo enviado correctamente");
+
+            let N_asignatura = new Asignaturas(nombre.trim());//nueva asignatura
+
+
+            let comprobacion_as = listaAsignaturas.agregar_asignatura(N_asignatura);
+
+            if (comprobacion_as != false) {
+                console.log(`Asignatura ${nombre} creada y agregada con éxito.`);
+                listaAsignaturas.listar_asignaturas(); // Mostrar todas las asignaturas
+                mostrarAsignaturas(); // Llamada a la función para mostrar estudiantes
+                articulo.style.display = "none"; // Ocultar el articulo
+            }
+
+            // Limpiar el campo de entrada después de registrar
+            inputs.forEach(input => {
+                input.value = '';
+            });
+
+
+
+        }
+    });
+
+
+});
 ///caso 3
 
 
@@ -209,7 +297,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const boton = document.getElementById("13");
     const articulo = document.querySelector(".opcion13");
     const mostrar = document.getElementById("mostrar"); // Añadido
-    
+
     // Ocultar el articulo al cargar la página
     articulo.style.display = "none";
 

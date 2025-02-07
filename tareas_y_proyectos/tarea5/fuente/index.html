@@ -13,7 +13,7 @@
 <body>
     <h1>Abra la consola del navegador e introduzca el siguiente enlace comentado mientras el live
         server esta operativo:</h1>
-    <!--http://127.0.0.7:5500/tareas_y_proyectos/tarea5/fuente/index.html-->
+   
     <!--Crear una interfaz grafica por pantalla que te diga las opciones que puedes realizar-->
     <br>
     <main>
@@ -44,9 +44,25 @@
             <h2>Regitro de las asignaturas</h2>
             <form action="#" method="get">
                 <label>Nombre de la asignatura: <input type="text" id="nombreA" required></label>
+                
+                <button id="submit2" type="submit">Registrar Asignatura</button>
             </form>
         </section>
+        <section id="mostrar2"></section>
+
+
         <button id="3">3 - Matricular estudiante</button>
+        <section class="opcion3">
+            <h2>Matriculación de estudiantes</h2>
+            <form action="#" method="get">
+                <label>id del estudiante a matricular: <input type="text" id="ID" required></label>
+                <label>Nombre de la asignatura: <input type="text" id="nombreA2" required></label>
+
+                <button id="submit3" type="submit">Matricular Estudiante</button>
+            </form>
+        </section>
+        <section id="mostrar3"></section>
+
         <button id="4">4 - Desmatricular estudiante</button>
         <button id="5">5 - Eliminar estudiante de la lista</button>
         <button id="6">6 - Eliminar asignatura de la lista</button>
