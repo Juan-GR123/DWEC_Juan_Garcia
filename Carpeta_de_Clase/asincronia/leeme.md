@@ -72,3 +72,69 @@ flujo de trabajo:
 
 Sintaxis nueva: ES8 (2017) await/async desaparecen then y catch
 
+
+- async -> antepone a la función -> func asinc dev promesa
+- await -> esperar a que la prom se resuleva -> SOLO en func. con async
+
+async function conexion(){
+    let respuesta = await fetch("http://www.miapi.com/dameFoto");
+    if(respuesta.ok){ //ok significa que devuelve datos si es true
+        let datos = await respuesta.json();
+        console.log(datos.nombre, datos.apellidos);
+    }else{
+        throw new Error("error");
+    }
+}
+
+conexion();
+
+
+//trabajadores web
+(web workers)
+
+//hilo ejecución 
+
+//SE ejecuta en el hilo principal
+//hilo principal -> por defecto todo el cod JS y el renderizado del DOM
+código síncrono -> pila de ejecución -> console.log(for);
+código asíncrono -> cola de microtareas -> (más prioridad) promesas NO SE PUEDE INTERRUMPIR
+codigo asíncrono -> cola de tareas -> eventos (menos prioridad tiene) SE PUEDE INTERRUMPIR
+
+
+//web workers -> mandan código sinc a un hilo secundario
+
+//métodos 
+
+trabajador.postMessage("msj"); --> hilo principal
+
+self.postMessage("msj") -> msj del trabaj. al hilo princi
+
+const traba = new Worker();
+
+traba.terminate(); //--> en el hilo principal
+self.close(); //->trabajador
+
+
+self.importScripts(url)
+
+
+//eventos
+
+-message
+
+    trabajador.addEventListener("message", (evento) =>{
+        console.log("he recibido" + evento.message)
+    });
+
+  trabajador.onmessage =(evento) =>{
+        console.log("he recibido" + evento.message)
+    };
+
+
+-messageerror
+
+-error 
+    trabajador.onerror=()=>{
+        console.log("ocurrío un error")
+    }
+

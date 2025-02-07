@@ -4,15 +4,15 @@
  */
 
 
-import {Direccion}  from './direccion.js';
+import { Direccion } from './direccion.js';
 
-import {Estudiantes} from './estudiantes.js';
+import { Estudiantes } from './estudiantes.js';
 
-import {Asignaturas} from './asignaturas.js';
+import { Asignaturas } from './asignaturas.js';
 
-import {GestorAs,GestorEs} from './gestores.js';
+import { GestorAs, GestorEs } from './gestores.js';
 
-import {ErrorPersonalizado,validarEstudiante} from './Error.js';
+import { ErrorPersonalizado, validarEstudiante } from './Error.js';
 
 //////////////////////////////////////
 
@@ -20,6 +20,8 @@ import {ErrorPersonalizado,validarEstudiante} from './Error.js';
 const listaEstudiantes = new GestorEs();//inicializamos un objeto de la clase GestorEs que actuará como un array de estudiantes
 const listaAsignaturas = new GestorAs();//inicializamos un objeto de la clase GestorAs que actuará como un array de asignaturas
 let listaDirecciones = [];//inicializamos un array para guardar las direcciones da cada estuadiante
+
+//como hacer que estas variables se guarden en local storage????
 
 //inicializamos una serie de valores que actuarán como valores por defecto para nuestros casos
 listaDirecciones.push(new Direccion("Calle pez", 5, "6ºA", 29005, "Malaga", "Malaga"));
@@ -96,20 +98,34 @@ listaEstudiantes.gestor[4].agregar_calificacion(listaAsignaturas.gestor[1], 10);
 ///////////////////////////////////////////////////
 
 
+
 /////caso 1
 
 document.addEventListener("DOMContentLoaded", function () {
     const boton = document.getElementById("1");
-    const formulario = document.querySelector(".opcion1");
+    const articulo = document.querySelector(".opcion1");
     const inputs = document.querySelectorAll("input");
     const form = document.querySelector("form");
+    const mostrar = document.getElementById("output"); // Añadido
 
-    // Ocultar el formulario al cargar la página
-    formulario.style.display = "none";
+    // Ocultar el articulo al cargar la página
+    articulo.style.display = "none";
 
-    // Mostrar el formulario al hacer clic en el botón
+
+    function mostrarEstudiantes() {
+        mostrar.innerHTML = ""; // Limpiar el contenido del div
+        listaEstudiantes.gestor.forEach(estudiante => {
+            const estudianteInfo = `Nombre: ${estudiante.nombre}, Edad: ${estudiante.edad}, Dirección: ${estudiante.direccion.calle}, ${estudiante.direccion.numero}, ${estudiante.direccion.piso}, ${estudiante.direccion.codigo_postal}, ${estudiante.direccion.provincia}, ${estudiante.direccion.localidad}`;
+            const p = document.createElement("p");// crea la etiqueta p
+            p.textContent = estudianteInfo;//pone la etiqueta al principio
+            mostrar.appendChild(p);//pone la etiqueta al final
+        });
+    }
+
+
+    // Mostrar el articulo al hacer clic en el botón
     boton.addEventListener("click", function () {
-        formulario.style.display = (formulario.style.display === "none") ? "block" : "none";
+        articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
     });
 
     // Cargar datos guardados en localStorage
@@ -125,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Validar formulario antes de enviarlo
+    // Validar articulo antes de enviarlo
     form.addEventListener("submit", function (event) {
         let valido = true;
 
@@ -140,21 +156,21 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (!valido) {
-            event.preventDefault(); // Evita el envío del formulario
+            event.preventDefault(); // Evita el envío del articulo
             alert("Por favor, completa todos los campos antes de continuar.");
         } else {
-            console.log("formulario enviado correctamente");
+            console.log("articulo enviado correctamente");
 
             let nombre = localStorage.getItem("nombre");
             let edad = localStorage.getItem("edad");
             let calle = localStorage.getItem("calle");
             let numero = localStorage.getItem("numero");
-            let piso= localStorage.getItem("piso");
+            let piso = localStorage.getItem("piso");
             let codigo_postal = localStorage.getItem("codigo_postal");
             let provincia = localStorage.getItem("provincia");
             let localidad = localStorage.getItem("localidad");
 
-            let nuevaDireccion = new Direccion(calle,numero, piso, codigo_postal, provincia, localidad);
+            let nuevaDireccion = new Direccion(calle, numero, piso, codigo_postal, provincia, localidad);
 
             let nuevoEstudiante = new Estudiantes(nombre, edad, nuevaDireccion);
 
@@ -162,11 +178,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (comprobacion_es != false) {
                 console.log("Estudiante creado y agregado con éxito:");
-                //listaEstudiantes.listar_estudiantes(); como mostrar esto en pantalla?????
+                listaEstudiantes.listar_estudiantes(); //como mostrar esto en pantalla?????
+                mostrarEstudiantes(); // Llamada a la función para mostrar estudiantes
+                articulo.style.display = "none"; // Ocultar el articulo
             }
 
-            localStorage.clear(); // como borrar los datos de los input sin eliminarlos del local
-            //  ??????????????
+
         }
+    });
+});
+
+///caso 2
+
+
+///caso 3
+
+
+///caso 4
+
+
+///caso 5
+
+
+///caso 6
+
+
+
+/////caso 13
+document.addEventListener("DOMContentLoaded", function () {
+    const boton = document.getElementById("13");
+    const articulo = document.querySelector(".opcion13");
+    const mostrar = document.getElementById("mostrar"); // Añadido
+    
+    // Ocultar el articulo al cargar la página
+    articulo.style.display = "none";
+
+
+    function Adios() {
+        mostrar.innerHTML = "";
+        const elemento = document.createElement("p");
+        elemento.textContent = "Adios";
+        mostrar.appendChild(elemento);
+    }
+
+
+    boton.addEventListener("click", function () {
+        articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
+        Adios();
+        localStorage.clear(); //te limpia local storage
+        window.location.reload();
     });
 });
