@@ -130,10 +130,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Cargar datos guardados en localStorage
     inputs.forEach(input => {
-        const valor = localStorage.getItem(input.id);
+        /*const valor = localStorage.getItem(input.id);
         if (valor) {
             input.value = valor;
-        }
+        }*/
 
         // Guardar cambios en localStorage cada vez que se edite un input
         input.addEventListener("input", function () {
@@ -219,10 +219,10 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
     // Cargar datos guardados en localStorage
     inputs.forEach(input => {
-        const valor = localStorage.getItem(input.id);
+        /*const valor = localStorage.getItem(input.id);
         if (valor) {
             input.value = valor;
-        }
+        }*/
 
         // Guardar cambios en localStorage cada vez que se edite un input
         input.addEventListener("input", function () {
@@ -302,10 +302,10 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
     // Cargar datos guardados en localStorage
     inputs.forEach(input => {
-        const valor = localStorage.getItem(input.id);
+        /*const valor = localStorage.getItem(input.id);
         if (valor) {
             input.value = valor;
-        }
+        }*/
 
         // Guardar cambios en localStorage cada vez que se edite un input
         input.addEventListener("input", function () {
@@ -398,10 +398,10 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
     // Cargar datos guardados en localStorage
     inputs.forEach(input => {
-        const valor = localStorage.getItem(input.id);
+        /*const valor = localStorage.getItem(input.id);
         if (valor) {
             input.value = valor;
-        }
+        }*/
 
         // Guardar cambios en localStorage cada vez que se edite un input
         input.addEventListener("input", function () {
@@ -500,10 +500,10 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
     // Cargar datos guardados en localStorage
     inputs.forEach(input => {
-        const valor = localStorage.getItem(input.id);
+        /*const valor = localStorage.getItem(input.id);
         if (valor) {
             input.value = valor;
-        }
+        }*/
 
         // Guardar cambios en localStorage cada vez que se edite un input
         input.addEventListener("input", function () {
@@ -603,10 +603,10 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
     // Cargar datos guardados en localStorage
     inputs.forEach(input => {
-        const valor = localStorage.getItem(input.id);
+       /* const valor = localStorage.getItem(input.id);
         if (valor) {
             input.value = valor;
-        }
+        }*/
 
         // Guardar cambios en localStorage cada vez que se edite un input
         input.addEventListener("input", function () {
@@ -701,10 +701,10 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
     // Cargar datos guardados en localStorage
     inputs.forEach(input => {
-        const valor = localStorage.getItem(input.id);
+        /*const valor = localStorage.getItem(input.id);
         if (valor) {
             input.value = valor;
-        }
+        }*/
 
         // Guardar cambios en localStorage cada vez que se edite un input
         input.addEventListener("input", function () {
@@ -814,7 +814,99 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 });
 
 ///caso 8
+document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded se utiliza para asegurarse de que el DOM esté listo antes de intentar manipularlo
+    const boton = document.getElementById("8");
+    const articulo = document.querySelector(".opcion8");
+    const form = document.querySelector(".opcion8 form");
+    const inputs = form.querySelectorAll("input");
+    const mostrar = document.getElementById("mostrar8"); // Añadido
 
+    function mostrarTexto(texto) {
+        const p = document.createElement("p");// crea la etiqueta p
+        p.textContent = texto;//pone la etiqueta al principio
+        mostrar.appendChild(p);//pone la etiqueta al final
+    }
+
+    // Ocultar el articulo al cargar la página
+    articulo.style.display = "none";
+
+    // Mostrar el articulo al hacer clic en el botón
+    boton.addEventListener("click", function () {
+        articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
+    });
+
+
+    // Cargar datos guardados en localStorage
+    inputs.forEach(input => {
+        /*const valor = localStorage.getItem(input.id);
+        if (valor) {
+            input.value = valor; //pone en los inputs los valores que tienen sus localstorage
+        }*/
+
+        // Guardar cambios en localStorage cada vez que se edite un input
+        input.addEventListener("input", function () {
+            localStorage.setItem(input.id, input.value);
+        });
+    });
+
+    form.addEventListener("submit", function (evento) {
+        let valido = true;
+
+        inputs.forEach(input => {
+            if (input.value.trim() === "") {
+                valido = false;
+                input.style.border = "2px solid red"; // Resalta el input vacío
+            } else {
+                input.style.border = ""; // Elimina el borde rojo si se completa
+                input.value = '';
+            }
+        });
+
+        if (!valido) {
+            evento.preventDefault(); // Evita el envío del articulo
+            alert("Por favor, completa todos los campos antes de continuar.");
+        } else {
+            mostrar.innerHTML = ""; // Limpiar el contenido del section
+            listaEstudiantes.listar_estudiantes();
+            let mostrar_Estu3 = `Estudiantes en la lista:`;
+
+            mostrarTexto(mostrar_Estu3);
+
+            for (let persona of listaEstudiantes.gestor) {
+                let personas = `${persona.id}, ${persona.nombre}, ${persona.edad}, ${persona.direccion} `;
+                mostrarTexto(personas);
+            }
+            let promedio_Es = localStorage.getItem("ID_8");
+            promedio_Es = Number(promedio_Es);
+            let obtener_promedio = listaEstudiantes.obtener_estudiante(promedio_Es);
+
+            if (obtener_promedio != false) {
+                console.log("Ahora calcularemos el promedio de todas las notas del estudiante elegido");
+                let calculamos = "Ahora calcularemos el promedio de todas las notas del estudiante elegido";
+                mostrarTexto(calculamos);
+
+               
+                let promedio = obtener_promedio.promedio();//se calcula el promedio
+                
+                obtener_promedio.asignaturas.forEach(asignatura => {
+                    let textoAsignatura = `Asignatura: ${asignatura.nombre}, Nota: ${asignatura.nota}`;
+                    mostrarTexto(textoAsignatura);
+                });
+                mostrarTexto(`El promedio de notas del estudiante ${obtener_promedio.nombre} es ${promedio}`);
+               
+
+                console.log(obtener_promedio.asignaturas);//se muestran las asignaturas con sus notas
+                console.log(`El promedio de notas del estudiante ${obtener_promedio.nombre} es ${promedio}`);
+            }else{
+                mostrar.innerHTML = "";
+                let error = "El estudiante no existe";
+                mostrarTexto(error);
+            }
+
+        }
+    });
+
+});
 
 ///caso 9
 
