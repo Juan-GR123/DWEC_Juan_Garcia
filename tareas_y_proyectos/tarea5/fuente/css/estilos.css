@@ -77,3 +77,10 @@ label{
     align-self: center;
     background-color: aquamarine;    
 }
+
+#submit7{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    background-color: aquamarine;    
+}

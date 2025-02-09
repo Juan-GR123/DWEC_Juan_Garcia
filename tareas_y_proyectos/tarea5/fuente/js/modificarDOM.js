@@ -327,7 +327,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             }
         });
 
-        if (!valido) { //En verdad no hace falta validarlo ya que todos los campos son obligatorios por el html
+        if (!valido) {
             evento.preventDefault(); // Evita el envío del articulo
             alert("Por favor, completa todos los campos antes de continuar.");
         } else {
@@ -422,7 +422,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             }
         });
 
-        if (!valido) { //En verdad no hace falta validarlo ya que todos los campos son obligatorios por el html
+        if (!valido) {
             evento.preventDefault(); // Evita el envío del articulo
             alert("Por favor, completa todos los campos antes de continuar.");
         } else {
@@ -524,7 +524,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             }
         });
 
-        if (!valido) { //En verdad no hace falta validarlo ya que todos los campos son obligatorios por el html
+        if (!valido) {
             evento.preventDefault(); // Evita el envío del articulo
             alert("Por favor, completa todos los campos antes de continuar.");
         } else {
@@ -627,7 +627,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             }
         });
 
-        if (!valido) { //En verdad no hace falta validarlo ya que todos los campos son obligatorios por el html
+        if (!valido) {
             evento.preventDefault(); // Evita el envío del articulo
             alert("Por favor, completa todos los campos antes de continuar.");
         } else {
@@ -677,7 +677,141 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 });
 
 ///caso 7
+document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded se utiliza para asegurarse de que el DOM esté listo antes de intentar manipularlo
+    const boton = document.getElementById("7");
+    const articulo = document.querySelector(".opcion7");
+    const form = document.querySelector(".opcion7 form");
+    const inputs = form.querySelectorAll("input");
+    const mostrar = document.getElementById("mostrar7"); // Añadido
 
+    function mostrarTexto(texto) {
+        const p = document.createElement("p");// crea la etiqueta p
+        p.textContent = texto;//pone la etiqueta al principio
+        mostrar.appendChild(p);//pone la etiqueta al final
+    }
+
+    // Ocultar el articulo al cargar la página
+    articulo.style.display = "none";
+
+    // Mostrar el articulo al hacer clic en el botón
+    boton.addEventListener("click", function () {
+        articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
+    });
+
+
+    // Cargar datos guardados en localStorage
+    inputs.forEach(input => {
+        const valor = localStorage.getItem(input.id);
+        if (valor) {
+            input.value = valor;
+        }
+
+        // Guardar cambios en localStorage cada vez que se edite un input
+        input.addEventListener("input", function () {
+            localStorage.setItem(input.id, input.value);
+        });
+    });
+
+    form.addEventListener("submit", function (evento) {
+        let valido = true;
+
+        inputs.forEach(input => {
+            if (input.value.trim() === "") {
+                valido = false;
+                input.style.border = "2px solid red"; // Resalta el input vacío
+            } else {
+                input.style.border = ""; // Elimina el borde rojo si se completa
+                input.value = '';
+            }
+        });
+
+        if (!valido) {
+            evento.preventDefault(); // Evita el envío del articulo
+            alert("Por favor, completa todos los campos antes de continuar.");
+        } else {
+            //se califican asignaturas y el promedio de esas notas seran la nota final del estudiantes
+            let nombre_asig = localStorage.getItem("nombre_Asig");
+            let asignatura_N = listaAsignaturas.obtener_asignatura(nombre_asig);
+
+            if (asignatura_N != false) {
+                //let continuar = "";
+                let nota = 0;
+                let calificacion_compr = null;
+
+                nota = localStorage.getItem("nota_Asig");
+                nota = Number(nota);
+                calificacion_compr = asignatura_N.agregar_calificacion(nota);
+
+                if (calificacion_compr == true) {
+                    mostrar.innerHTML = "";
+                    let calcular = "calculamos el promedio de las calificaciones de la asignatura elegida";
+                    mostrarTexto(calcular);
+                    let nota_promedio_calificaciones = asignatura_N.calcular_promedio();
+
+                    // Listar estudiantes disponibles
+                    listaEstudiantes.listar_estudiantes();
+
+                    let mostrar_Estu2 = `Estudiantes en la lista:`;
+
+                    mostrarTexto(mostrar_Estu2);
+
+                    for (let persona of listaEstudiantes.gestor) {
+                        let personas = `${persona.id}, ${persona.nombre}, ${persona.edad}, ${persona.direccion} `;
+                        mostrarTexto(personas);
+                    }
+
+                    let id_Estudiante = localStorage.getItem("Agregar_ID");
+                    id_Estudiante = Number(id_Estudiante);
+                    let estudiante = listaEstudiantes.obtener_estudiante(id_Estudiante);
+
+                    if (estudiante != false) {
+                        let estudiante_asig = `Asignaturas en las que está matriculado ${estudiante.nombre}`;
+                        mostrarTexto(estudiante_asig);
+
+                        estudiante.asignaturas.forEach((elemento, clave) => {
+                            let mostrar_consola = `${clave}. ${elemento.nombre}`;
+                            mostrarTexto(mostrar_consola);
+                            console.log(`${clave}. ${elemento.nombre}`);
+                        });
+                        let promedio_Nuevo = `El promedio ${nota_promedio_calificaciones} de la asignatura ${asignatura_N.nombre} será asignado al estudiante ${estudiante.nombre}`;
+                        mostrarTexto(promedio_Nuevo);
+                        console.log(`El promedio ${nota_promedio_calificaciones} de la asignatura ${asignatura_N.nombre} será asignado al estudiante ${estudiante.nombre}`);
+                        estudiante.agregar_calificacion(asignatura_N, nota_promedio_calificaciones);
+                    } else {
+                        mostrar.innerHTML = "";
+                        let error1 = "El estudiante no existe";
+                        mostrarTexto(error1);
+                    }
+
+                } else {
+                    mostrar.innerHTML = "";
+                    let error2 = "No se ha podido añadir la calificación a la asignatura.";
+                    mostrarTexto(error2);
+                }
+
+
+                //ahora eliminaremos las calificaciones que se han añadido a la asignatura elegida para que si se vuelve a este caso para añadir notas a
+                //la misma asignatura las notas de este estudiante no se interpongan las 
+                //notas del nuevo estudiante
+                for (let i = 0; i < asignatura_N.calificaciones.length; i++) {
+                    asignatura_N.eliminar_calificacion(i);
+                }
+
+                let operacion = "Operación terminada";
+                mostrarTexto(operacion);
+                console.log("Operación terminada");
+
+
+            } else {
+                mostrar.innerHTML = "";
+                let error = "La asignatura no existe";
+                mostrarTexto(error);
+            }
+
+        }
+    });
+
+});
 
 ///caso 8
 
