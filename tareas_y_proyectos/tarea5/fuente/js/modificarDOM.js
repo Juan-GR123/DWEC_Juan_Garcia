@@ -476,11 +476,219 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 });
 
 ///caso 5
+document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded se utiliza para asegurarse de que el DOM esté listo antes de intentar manipularlo
+    const boton = document.getElementById("5");
+    const articulo = document.querySelector(".opcion5");
+    const form = document.querySelector(".opcion5 form");
+    const inputs = form.querySelectorAll("input");
+    const mostrar = document.getElementById("mostrar5"); // Añadido
 
+    function mostrarTexto(texto) {
+        const p = document.createElement("p");// crea la etiqueta p
+        p.textContent = texto;//pone la etiqueta al principio
+        mostrar.appendChild(p);//pone la etiqueta al final
+    }
+
+    // Ocultar el articulo al cargar la página
+    articulo.style.display = "none";
+
+    // Mostrar el articulo al hacer clic en el botón
+    boton.addEventListener("click", function () {
+        articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
+    });
+
+
+    // Cargar datos guardados en localStorage
+    inputs.forEach(input => {
+        const valor = localStorage.getItem(input.id);
+        if (valor) {
+            input.value = valor;
+        }
+
+        // Guardar cambios en localStorage cada vez que se edite un input
+        input.addEventListener("input", function () {
+            localStorage.setItem(input.id, input.value);
+        });
+    });
+
+    form.addEventListener("submit", function (evento) {
+        let valido = true;
+
+        inputs.forEach(input => {
+            if (input.value.trim() === "") {
+                valido = false;
+                input.style.border = "2px solid red"; // Resalta el input vacío
+            } else {
+                input.style.border = ""; // Elimina el borde rojo si se completa
+                input.value = '';
+            }
+        });
+
+        if (!valido) { //En verdad no hace falta validarlo ya que todos los campos son obligatorios por el html
+            evento.preventDefault(); // Evita el envío del articulo
+            alert("Por favor, completa todos los campos antes de continuar.");
+        } else {
+            console.log("articulo enviado correctamente");
+
+            mostrar.innerHTML = ""; // Limpiar el contenido del section
+
+            let mostrar_Estu = `Estudiantes en la lista:`;
+
+            mostrarTexto(mostrar_Estu);
+
+            for (let persona of listaEstudiantes.gestor) {
+                let personas = `${persona.id}, ${persona.nombre}, ${persona.edad}, ${persona.direccion} `;
+                mostrarTexto(personas);
+            }
+            listaEstudiantes.listar_estudiantes(); //lo muestra en consola
+
+
+
+            let elim_estu = localStorage.getItem("ID_Eli");
+            elim_estu = Number(elim_estu);
+
+            if (isNaN(elim_estu) || elim_estu <= 0) {
+                const error = `El ID introducido debe ser un número positivo.`;
+                mostrarTexto(error);
+            }
+
+            let comprobacion = listaEstudiantes.eliminar_estudiante(elim_estu);//si el estudiante existe, entonces se elimina indicando su id
+
+            if (comprobacion != false) {
+                console.log(`El estudiante con ID ${elim_estu} ha sido eliminado correctamente.`);
+                let texto = `El estudiante con ID ${elim_estu} ha sido eliminado correctamente.`;
+                mostrarTexto(texto);
+                //mostrar.innerHTML = ""; // Limpiar el contenido del section
+                let mostrar_Estu2 = `Estudiantes en la lista:`;
+
+                mostrarTexto(mostrar_Estu2);
+
+                for (let persona2 of listaEstudiantes.gestor) {
+                    let personas2 = `${persona2.id}, ${persona2.nombre}, ${persona2.edad}, ${persona2.direccion} `;
+                    mostrarTexto(personas2);
+                }
+                listaEstudiantes.listar_estudiantes(); //lo muestra en consola
+            } else {
+                const error = `No se encontró ningún estudiante con ID ${elim_estu}.`;
+                mostrarTexto(error);
+            }
+        }
+    });
+
+});
 
 ///caso 6
 
+document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded se utiliza para asegurarse de que el DOM esté listo antes de intentar manipularlo
+    const boton = document.getElementById("6");
+    const articulo = document.querySelector(".opcion6");
+    const form = document.querySelector(".opcion6 form");
+    const inputs = form.querySelectorAll("input");
+    const mostrar = document.getElementById("mostrar6"); // Añadido
 
+    function mostrarTexto(texto) {
+        const p = document.createElement("p");// crea la etiqueta p
+        p.textContent = texto;//pone la etiqueta al principio
+        mostrar.appendChild(p);//pone la etiqueta al final
+    }
+
+    // Ocultar el articulo al cargar la página
+    articulo.style.display = "none";
+
+    // Mostrar el articulo al hacer clic en el botón
+    boton.addEventListener("click", function () {
+        articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
+    });
+
+
+    // Cargar datos guardados en localStorage
+    inputs.forEach(input => {
+        const valor = localStorage.getItem(input.id);
+        if (valor) {
+            input.value = valor;
+        }
+
+        // Guardar cambios en localStorage cada vez que se edite un input
+        input.addEventListener("input", function () {
+            localStorage.setItem(input.id, input.value);
+        });
+    });
+
+    form.addEventListener("submit", function (evento) {
+        let valido = true;
+
+        inputs.forEach(input => {
+            if (input.value.trim() === "") {
+                valido = false;
+                input.style.border = "2px solid red"; // Resalta el input vacío
+            } else {
+                input.style.border = ""; // Elimina el borde rojo si se completa
+                input.value = '';
+            }
+        });
+
+        if (!valido) { //En verdad no hace falta validarlo ya que todos los campos son obligatorios por el html
+            evento.preventDefault(); // Evita el envío del articulo
+            alert("Por favor, completa todos los campos antes de continuar.");
+        } else {
+            console.log("articulo enviado correctamente");
+
+            mostrar.innerHTML = ""; // Limpiar el contenido del section
+
+            let mostrar_Asig2 = `Asignaturas en la lista:`;
+
+            mostrarTexto(mostrar_Asig2);
+
+            for (let asignatura of listaAsignaturas.gestor) {
+                let asignaturas = `${asignatura.nombre}`;
+                mostrarTexto(asignaturas);
+            }
+            listaAsignaturas.listar_asignaturas();//muestra las asignaturas antes de eliminarlas
+
+            let elim_asig = localStorage.getItem("Elim_Asig");
+
+            if (typeof elim_asig != "string" || elim_asig.trim() === "") {
+                const error = `El nombre de la asignatura introducido no es válido.`;
+                mostrarTexto(error);
+            }
+
+            let comprobacion2 = listaAsignaturas.eliminar_asignatura(elim_asig, listaEstudiantes);
+
+            if (comprobacion2 != false) {
+                console.log(`La asignatura ha sido eliminada correctamente.`);
+                let texto = `La asignatura ha sido eliminada correctamente.`;
+                mostrarTexto(texto);
+
+                let mostrar_Asig3 = `Asignaturas en la lista:`;
+
+                mostrarTexto(mostrar_Asig3);
+
+                for (let asignatura2 of listaAsignaturas.gestor) {
+                    let asignaturas2 = `${asignatura2.nombre}`;
+                    mostrarTexto(asignaturas2);
+                }
+                listaAsignaturas.listar_asignaturas();
+            } else {
+                const error = `No se encontró ningún estudiante con nombre ${elim_asig}.`;
+                mostrarTexto(error);
+            }
+        }
+    });
+});
+
+///caso 7
+
+
+///caso 8
+
+
+///caso 9
+
+///caso 10
+
+///caso 11
+
+///caso 12
 
 /////caso 13
 document.addEventListener("DOMContentLoaded", function () {

@@ -63,3 +63,17 @@ label{
     align-self: center;
     background-color: aquamarine;    
 }
+
+#submit5{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    background-color: aquamarine;    
+}
+
+#submit6{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    background-color: aquamarine;    
+}
