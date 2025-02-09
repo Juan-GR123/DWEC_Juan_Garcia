@@ -333,14 +333,14 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         } else {
             console.log("articulo enviado correctamente");
 
-            let id = localStorage.getItem("id"); 
-            id= Number(id);
+            let id = localStorage.getItem("ID");
+            id = Number(id);
 
-             //Buscamos el id del estudiante en el array que hemos creado de estudiantes
-             let encontrarE = listaEstudiantes.obtener_estudiante(id);
+            //Buscamos el id del estudiante en el array que hemos creado de estudiantes
+            let encontrarE = listaEstudiantes.obtener_estudiante(id);
 
 
-             if (encontrarE != false) {
+            if (encontrarE != false) {
                 let asig = localStorage.getItem("nombreA2");
                 //Buscamos el nombre de la asignatura en el array que hemos creado de Asignaturas
                 let encontrarA = listaAsignaturas.obtener_asignatura(asig);
@@ -352,7 +352,15 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                         const fechas = `${encontrarE.nombre} ha sido matriculado en  ${encontrarA.nombre} con éxito.`;
                         mostrarTexto(fechas);
                         //mostramos al estudiante elegido y sus asignaturas matriculadas
+                    } else {
+                        mostrar.innerHTML = ""; // Limpiar el contenido del section
+                        const error = `El estudiantes ${encontrarE.nombre} ya esta matriculado en la asignatura ${encontrarA.nombre}.`;
+                        mostrarTexto(error);
                     }
+                } else {
+                    mostrar.innerHTML = ""; // Limpiar el contenido del section
+                    const error = `No se encontró ningúna asignatura con nombre ${asig}.`;
+                    mostrarTexto(error);
                 }
                 encontrarE.asignaturas.forEach((elemento, clave) => {//numero de asignaturas en las que esta matriculado el estudiante
                     console.log(`${clave}. ${elemento.nombre}`);
@@ -366,6 +374,106 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
 ///caso 4
 
+document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded se utiliza para asegurarse de que el DOM esté listo antes de intentar manipularlo
+    const boton = document.getElementById("4");
+    const articulo = document.querySelector(".opcion4");
+    const form = document.querySelector(".opcion4 form");
+    const inputs = form.querySelectorAll("input");
+    const mostrar = document.getElementById("mostrar4"); // Añadido
+
+    function mostrarTexto(texto) {
+        const p = document.createElement("p");// crea la etiqueta p
+        p.textContent = texto;//pone la etiqueta al principio
+        mostrar.appendChild(p);//pone la etiqueta al final
+    }
+
+    // Ocultar el articulo al cargar la página
+    articulo.style.display = "none";
+
+    // Mostrar el articulo al hacer clic en el botón
+    boton.addEventListener("click", function () {
+        articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
+    });
+
+
+    // Cargar datos guardados en localStorage
+    inputs.forEach(input => {
+        const valor = localStorage.getItem(input.id);
+        if (valor) {
+            input.value = valor;
+        }
+
+        // Guardar cambios en localStorage cada vez que se edite un input
+        input.addEventListener("input", function () {
+            localStorage.setItem(input.id, input.value);
+        });
+    });
+
+    form.addEventListener("submit", function (evento) {
+        let valido = true;
+
+        inputs.forEach(input => {
+            if (input.value.trim() === "") {
+                valido = false;
+                input.style.border = "2px solid red"; // Resalta el input vacío
+            } else {
+                input.style.border = ""; // Elimina el borde rojo si se completa
+                input.value = '';
+            }
+        });
+
+        if (!valido) { //En verdad no hace falta validarlo ya que todos los campos son obligatorios por el html
+            evento.preventDefault(); // Evita el envío del articulo
+            alert("Por favor, completa todos los campos antes de continuar.");
+        } else {
+            console.log("articulo enviado correctamente");
+
+            let id2 = localStorage.getItem("IDDes");
+            id2 = Number(id2);
+
+            //Buscamos el id del estudiante en el array que hemos creado de estudiantes
+            let estu_des = listaEstudiantes.obtener_estudiante(id2);
+            if (estu_des != false) {
+                mostrar.innerHTML = ""; // Limpiar el contenido del section
+                let mostrar_Asig = `Asignaturas en las que está matriculado ${estu_des.nombre}:`;
+                mostrarTexto(mostrar_Asig);
+                estu_des.asignaturas.forEach((elemento, clave) => {//muestro las asignaturas en las que esta matriculado el estudiante
+                    console.log(`${clave}. ${elemento.nombre}`);
+                    let texto = `${clave}. ${elemento.nombre}`;
+                    mostrarTexto(texto);
+
+                });
+                let asig_estu = localStorage.getItem("desAsig");
+                let asig_des = listaAsignaturas.obtener_asignatura(asig_estu);
+                if (asig_des != false) {
+                    let desma = estu_des.desmatricular(asig_des);
+                    if (desma == true) {
+                        console.log(`${estu_des.nombre} ha sido desmatriculado en ${asig_des.nombre} con éxito.`);
+                        //mostrar.innerHTML = ""; // Limpiar el contenido del section
+                        const fechas = `${estu_des.nombre} ha sido desmatriculado en  ${asig_des.nombre} con éxito.`;
+                        mostrarTexto(fechas);
+                    } else {
+                        mostrar.innerHTML = ""; // Limpiar el contenido del section
+                        const error1 = `El estudiantes ${estu_des.nombre} no esta matriculado en la asignatura ${asig_des.nombre}.`;
+                        mostrarTexto(error1);
+                    }
+                } else {
+                    mostrar.innerHTML = ""; // Limpiar el contenido del section
+                    const error2 = `No se encontró ningúna asignatura con nombre ${asig_estu}.`;
+                    mostrarTexto(error2);
+                }
+
+
+                estu_des.asignaturas.forEach((elemento, clave) => {
+                    console.log(`${clave}. ${elemento.nombre}`);
+                    let texto = `${clave}. ${elemento.nombre}`;
+                    mostrarTexto(texto);
+                });
+            }
+        }
+    });
+
+});
 
 ///caso 5
 
