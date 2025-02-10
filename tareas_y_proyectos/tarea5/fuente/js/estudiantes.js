@@ -324,6 +324,22 @@ export class Estudiantes {
         console.log(this.#asignaturas);
     }
 
+
+     /**
+     * ## método asig_mostrar_pantalla()
+     * <br>
+     * En este método se devolverán las asignaturas y las notas del estudiante
+     */
+     asig_mostrar_pantalla(){
+        let array = [];
+
+        this.#asignaturas.forEach(asig => {
+          array.push(`\n Asignatura: ${asig.nombre}, Nota: ${asig.nota}`);
+        });
+        return array;
+    }
+
+
     /**
      * 
      *    ## Calculará el promedio de todas las calificaciones del estudiante.<br>

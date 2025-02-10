@@ -910,6 +910,51 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
 ///caso 9
 
+document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded se utiliza para asegurarse de que el DOM esté listo antes de intentar manipularlo
+    const boton = document.getElementById("9");
+    const articulo = document.querySelector(".opcion9");
+    const mostrar = document.getElementById("mostrar9"); // Añadido
+
+    function mostrarTexto(texto) {
+        texto.split("\n").forEach(linea => { // Divide el texto en líneas
+            const p = document.createElement("p");
+            p.textContent = linea;
+            mostrar.appendChild(p);
+        });
+    }
+
+    // Ocultar el articulo al cargar la página
+    articulo.style.display = "none";
+
+    // Mostrar el articulo al hacer clic en el botón
+    boton.addEventListener("click", function () {
+        articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
+        
+        mostrar.innerHTML = ""; // Limpiar el contenido del section
+    
+        listaEstudiantes.gestor.forEach(elemento => {
+            console.log(`Estudiante: ${elemento.nombre}, Promedio: ${elemento.promedio()}, Asignaturas: ${elemento.asig_mostrar()}`);
+            let texto9 = `Estudiante: ${elemento.nombre}, Promedio: ${elemento.promedio()}, Asignaturas: ${elemento.asig_mostrar_pantalla()}`;
+            mostrarTexto(texto9);
+
+            console.log("Ahora se calculará el promedio de notas de todos los estudiantes");
+            let promedio_todos = "Ahora se calculará el promedio de notas de todos los estudiantes";
+            mostrarTexto(promedio_todos);
+
+
+            let promedio_total = listaEstudiantes.promedio_listas();
+
+            console.log(`El promedio de todos los estudiantes será ${promedio_total}`);
+            let conclusion = `El promedio de todos los estudiantes será ${promedio_total}`;
+            mostrarTexto(conclusion);
+        });
+    });
+
+
+});
+
+
+
 ///caso 10
 
 ///caso 11

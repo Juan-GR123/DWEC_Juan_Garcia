@@ -36,58 +36,17 @@ label{
     margin: 10px;
 }
 
-#submit{
+#submit,
+#submit2,
+#submit3,
+#submit4,
+#submit5,
+#submit6,
+#submit7,
+#submit8,
+#submit9{
     display: flex;
     justify-content: center;
     align-self: center;
     background-color: aquamarine;
-}
-
-#submit2{
-        display: flex;
-        justify-content: center;
-        align-self: center;
-        background-color: aquamarine;    
-}
-
-#submit3{
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    background-color: aquamarine;    
-}
-
-#submit4{
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    background-color: aquamarine;    
-}
-
-#submit5{
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    background-color: aquamarine;    
-}
-
-#submit6{
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    background-color: aquamarine;    
-}
-
-#submit7{
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    background-color: aquamarine;    
-}
-
-#submit8{
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    background-color: aquamarine;    
 }
