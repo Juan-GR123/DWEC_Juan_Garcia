@@ -974,13 +974,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 p.textContent = linea;
                 mostrar.appendChild(p);
             });
-        } else if (typeof texto === "string") {
-            // Si es una cadena, divídela en líneas si tiene comas
-            texto.split(",").forEach(linea => {
-                const p = document.createElement("p");
-                p.textContent = linea.trim(); // Elimina espacios en blanco extra
-                mostrar.appendChild(p);
-            });
         } else {
             // Si no es un string ni un array, convierte a string y muestra
             const p = document.createElement("p");
@@ -1278,3 +1271,4 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.reload();
     });
 });
+//como puedo hacer para que cuando cambie algun valor como desmatricular algun estudiante al recargar la pagina ese valor se quede cambiado
