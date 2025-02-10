@@ -44,7 +44,10 @@ label{
 #submit6,
 #submit7,
 #submit8,
-#submit9{
+#submit9,
+#submit10,
+#submit11,
+#submit12{
     display: flex;
     justify-content: center;
     align-self: center;

@@ -956,10 +956,112 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
 
 ///caso 10
+document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded se utiliza para asegurarse de que el DOM esté listo antes de intentar manipularlo
+    const boton = document.getElementById("10");
+    const articulo = document.querySelector(".opcion10");
+    const form = document.querySelector(".opcion10 form");
+    const inputs = form.querySelectorAll("input");
+    const mostrar = document.getElementById("mostrar10"); // Añadido
 
+    function mostrarTexto(texto) {
+        if (Array.isArray(texto)) {
+            // Si es un array, recorre cada elemento y créalo como un párrafo
+            texto.forEach(linea => {
+                const p = document.createElement("p");
+                p.textContent = linea;
+                mostrar.appendChild(p);
+            });
+        } else if (typeof texto === "string") {
+            // Si es una cadena, divídela en líneas si tiene comas
+            texto.split(",").forEach(linea => {
+                const p = document.createElement("p");
+                p.textContent = linea.trim(); // Elimina espacios en blanco extra
+                mostrar.appendChild(p);
+            });
+        } else {
+            // Si no es un string ni un array, convierte a string y muestra
+            const p = document.createElement("p");
+            p.textContent = String(texto);
+            mostrar.appendChild(p);
+        }
+    }
+
+    // Ocultar el articulo al cargar la página
+    articulo.style.display = "none";
+
+    // Mostrar el articulo al hacer clic en el botón
+    boton.addEventListener("click", function () {
+        articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
+    });
+
+
+    // Cargar datos guardados en localStorage
+    inputs.forEach(input => {
+        /*const valor = localStorage.getItem(input.id);
+        if (valor) {
+            input.value = valor; //pone en los inputs los valores que tienen sus localstorage
+        }*/
+
+        // Guardar cambios en localStorage cada vez que se edite un input
+        input.addEventListener("input", function () {
+            localStorage.setItem(input.id, input.value);
+        });
+    });
+
+    form.addEventListener("submit", function (evento) {
+        let valido = true;
+
+        inputs.forEach(input => {
+            if (input.value.trim() === "") {
+                valido = false;
+                input.style.border = "2px solid red"; // Resalta el input vacío
+            } else {
+                input.style.border = ""; // Elimina el borde rojo si se completa
+                input.value = '';
+            }
+        });
+
+        if (!valido) {
+            evento.preventDefault(); // Evita el envío del articulo
+            alert("Por favor, completa todos los campos antes de continuar.");
+        } else {
+            mostrar.innerHTML = ""; // Limpiar el contenido del section
+            let F_matricula = localStorage.getItem("ID_10");
+            F_matricula = Number(F_matricula);
+
+            if (isNaN(F_matricula) || F_matricula <= 0) {
+               let error = "El ID debe ser un número positivo.";
+                mostrarTexto(error);
+            }else if(listaEstudiantes.obtener_estudiante(F_matricula) == false){
+                let error = "El estudiante no existe.";
+                mostrarTexto(error);
+            }else{
+                let estudiante_fecha = listaEstudiantes.obtener_estudiante(F_matricula);
+
+                if (estudiante_fecha != false) {
+                    console.log("Las asignaturas de las que se ha matriculado y desmatriculado hasta el momento son: ");
+                    console.log(estudiante_fecha.registros);
+                    
+                    let texto = "Las asignaturas de las que se ha matriculado y desmatriculado hasta el momento son: ";
+                    mostrarTexto(texto);
+                    mostrarTexto(estudiante_fecha.registros);
+                
+                }
+            }
+        }
+
+    });
+
+
+});
 ///caso 11
 
+
+
 ///caso 12
+
+
+
 
 /////caso 13
 document.addEventListener("DOMContentLoaded", function () {
