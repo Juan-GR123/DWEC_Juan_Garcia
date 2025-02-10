@@ -3,6 +3,8 @@
  * 
  */
 
+// Tengo que hacer que si se cambia algun valor se guarden aunque se recarge la página
+
 
 import { Direccion } from './direccion.js';
 
@@ -936,18 +938,19 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             console.log(`Estudiante: ${elemento.nombre}, Promedio: ${elemento.promedio()}, Asignaturas: ${elemento.asig_mostrar()}`);
             let texto9 = `Estudiante: ${elemento.nombre}, Promedio: ${elemento.promedio()}, Asignaturas: ${elemento.asig_mostrar_pantalla()}`;
             mostrarTexto(texto9);
-
-            console.log("Ahora se calculará el promedio de notas de todos los estudiantes");
-            let promedio_todos = "Ahora se calculará el promedio de notas de todos los estudiantes";
-            mostrarTexto(promedio_todos);
-
-
-            let promedio_total = listaEstudiantes.promedio_listas();
-
-            console.log(`El promedio de todos los estudiantes será ${promedio_total}`);
-            let conclusion = `El promedio de todos los estudiantes será ${promedio_total}`;
-            mostrarTexto(conclusion);
         });
+
+        console.log("Ahora se calculará el promedio de notas de todos los estudiantes");
+        let promedio_todos = "Ahora se calculará el promedio de notas de todos los estudiantes";
+        mostrarTexto(promedio_todos);
+
+
+        let promedio_total = listaEstudiantes.promedio_listas();
+
+        console.log(`El promedio de todos los estudiantes será ${promedio_total}`);
+        let conclusion = `El promedio de todos los estudiantes será ${promedio_total}`;
+        mostrarTexto(conclusion);
+
     });
 
 
@@ -1182,7 +1185,71 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
 
 ///caso 12
+document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded se utiliza para asegurarse de que el DOM esté listo antes de intentar manipularlo
+    const boton = document.getElementById("12");
+    const articulo = document.querySelector(".opcion12");
+    const mostrar = document.getElementById("mostrar12"); // Añadido
 
+    function mostrarTexto(texto) {
+        const p = document.createElement("p");// crea la etiqueta p
+        p.textContent = texto;//pone la etiqueta al principio
+        mostrar.appendChild(p);//pone la etiqueta al final
+    }
+
+    function mostrarTexto2(texto) {
+        texto.split("\n").forEach(linea => { // Divide el texto en líneas
+            const p = document.createElement("p");
+            p.textContent = linea;
+            mostrar.appendChild(p);
+        });
+    }
+
+
+    // Ocultar el articulo al cargar la página
+    articulo.style.display = "none";
+
+    // Mostrar el articulo al hacer clic en el botón
+    boton.addEventListener("click", function () {
+        articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
+
+        mostrar.innerHTML = ""; // Limpiar el contenido del section
+        console.log("A continuación se mostrarán los informes de cada uno de los estudiantes: ");
+        listaEstudiantes.listar_informes();
+
+        let texto = "A continuación se mostrarán los informes de cada uno de los estudiantes: ";
+        mostrarTexto(texto);
+
+        listaEstudiantes._gestor.forEach(informe => {
+            mostrarTexto("───────────────────────────────");
+            mostrarTexto(informe.toString());
+
+            mostrarTexto("Dirección:");
+            mostrarTexto(`Calle: ${informe.direccion.calle}`);
+            mostrarTexto(`Número: ${informe.direccion.numero}`);
+            mostrarTexto(`Piso: ${informe.direccion.piso}`);
+            mostrarTexto(`Código Postal: ${informe.direccion.codigo_postal}`);
+            mostrarTexto(`Provincia: ${informe.direccion.provincia}`);
+            mostrarTexto(`Localidad: ${informe.direccion.localidad}`);
+
+            mostrarTexto("Asignaturas y calificaciones:");
+            informe.asignaturas.forEach(asig => {
+                mostrarTexto(`Asignatura: ${asig.nombre}`); // Muestra el nombre de la asignatura
+            });
+            mostrarTexto2(`Notas: ${informe.asig_mostrar_pantalla()}`);// Muestra las notas de las asignaturas
+
+
+            mostrarTexto("Fechas de matriculación y desmatriculación:");
+            mostrarTexto(`Fecha: ${informe.registros}`);
+
+
+            mostrarTexto("Promedio del estudiante:");
+            mostrarTexto(informe.promedio() || "No disponible");
+        });
+
+    });
+
+
+});
 
 
 
