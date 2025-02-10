@@ -603,10 +603,10 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
     // Cargar datos guardados en localStorage
     inputs.forEach(input => {
-       /* const valor = localStorage.getItem(input.id);
-        if (valor) {
-            input.value = valor;
-        }*/
+        /* const valor = localStorage.getItem(input.id);
+         if (valor) {
+             input.value = valor;
+         }*/
 
         // Guardar cambios en localStorage cada vez que se edite un input
         input.addEventListener("input", function () {
@@ -885,19 +885,19 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 let calculamos = "Ahora calcularemos el promedio de todas las notas del estudiante elegido";
                 mostrarTexto(calculamos);
 
-               
+
                 let promedio = obtener_promedio.promedio();//se calcula el promedio
-                
+
                 obtener_promedio.asignaturas.forEach(asignatura => {
                     let textoAsignatura = `Asignatura: ${asignatura.nombre}, Nota: ${asignatura.nota}`;
                     mostrarTexto(textoAsignatura);
                 });
                 mostrarTexto(`El promedio de notas del estudiante ${obtener_promedio.nombre} es ${promedio}`);
-               
+
 
                 console.log(obtener_promedio.asignaturas);//se muestran las asignaturas con sus notas
                 console.log(`El promedio de notas del estudiante ${obtener_promedio.nombre} es ${promedio}`);
-            }else{
+            } else {
                 mostrar.innerHTML = "";
                 let error = "El estudiante no existe";
                 mostrarTexto(error);
@@ -929,9 +929,9 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
     // Mostrar el articulo al hacer clic en el botón
     boton.addEventListener("click", function () {
         articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
-        
+
         mostrar.innerHTML = ""; // Limpiar el contenido del section
-    
+
         listaEstudiantes.gestor.forEach(elemento => {
             console.log(`Estudiante: ${elemento.nombre}, Promedio: ${elemento.promedio()}, Asignaturas: ${elemento.asig_mostrar()}`);
             let texto9 = `Estudiante: ${elemento.nombre}, Promedio: ${elemento.promedio()}, Asignaturas: ${elemento.asig_mostrar_pantalla()}`;
@@ -1026,26 +1026,36 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             alert("Por favor, completa todos los campos antes de continuar.");
         } else {
             mostrar.innerHTML = ""; // Limpiar el contenido del section
+            let mostrar_Estu4 = `Estudiantes en la lista:`;
+
+            mostrarTexto(mostrar_Estu4);
+
+            for (let persona of listaEstudiantes.gestor) {
+                let personas = `${persona.id}, ${persona.nombre}, ${persona.edad}, ${persona.direccion} `;
+                mostrarTexto(personas);
+            }
+
+
             let F_matricula = localStorage.getItem("ID_10");
             F_matricula = Number(F_matricula);
 
             if (isNaN(F_matricula) || F_matricula <= 0) {
-               let error = "El ID debe ser un número positivo.";
+                let error = "El ID debe ser un número positivo.";
                 mostrarTexto(error);
-            }else if(listaEstudiantes.obtener_estudiante(F_matricula) == false){
+            } else if (listaEstudiantes.obtener_estudiante(F_matricula) == false) {
                 let error = "El estudiante no existe.";
                 mostrarTexto(error);
-            }else{
+            } else {
                 let estudiante_fecha = listaEstudiantes.obtener_estudiante(F_matricula);
 
                 if (estudiante_fecha != false) {
                     console.log("Las asignaturas de las que se ha matriculado y desmatriculado hasta el momento son: ");
                     console.log(estudiante_fecha.registros);
-                    
+
                     let texto = "Las asignaturas de las que se ha matriculado y desmatriculado hasta el momento son: ";
                     mostrarTexto(texto);
                     mostrarTexto(estudiante_fecha.registros);
-                
+
                 }
             }
         }
@@ -1055,7 +1065,120 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
 });
 ///caso 11
+document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded se utiliza para asegurarse de que el DOM esté listo antes de intentar manipularlo
+    const boton = document.getElementById("11");
+    const boton_E = document.getElementById("estudiante");
+    const boton_A = document.getElementById("asignatura");
+    const articulo = document.querySelector(".opcion11");
+    const articulo2 = document.querySelector(".articulo_1");
+    const articulo3 = document.querySelector(".articulo_2");
+    const form = document.querySelector(".opcion11 form");
+    const inputs = form.querySelectorAll("input");
+    const mostrar = document.getElementById("mostrar11"); // Añadido
 
+    function mostrarTexto(texto) {
+        const p = document.createElement("p");// crea la etiqueta p
+        p.textContent = texto;//pone la etiqueta al principio
+        mostrar.appendChild(p);//pone la etiqueta al final
+    }
+
+    // Ocultar el articulo al cargar la página
+    articulo.style.display = "none";
+    articulo2.style.display = "none";
+    articulo3.style.display = "none";
+
+    // Mostrar el articulo al hacer clic en el botón
+    boton.addEventListener("click", function () {
+        articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
+    });
+
+    boton_E.addEventListener("click", function () {
+        articulo2.style.display = (articulo2.style.display === "none") ? "block" : "none";
+        boton_A.style.display = (boton_A.style.display === "none") ? "block" : "none";
+    });
+
+    boton_A.addEventListener("click", function () {
+        articulo3.style.display = (articulo3.style.display === "none") ? "block" : "none";
+        boton_E.style.display = (boton_E.style.display === "none") ? "block" : "none";
+    });
+
+
+
+    // Cargar datos guardados en localStorage
+    inputs.forEach(input => {
+        /*const valor = localStorage.getItem(input.id);
+        if (valor) {
+            input.value = valor; //pone en los inputs los valores que tienen sus localstorage
+        }*/
+
+        // Guardar cambios en localStorage cada vez que se edite un input
+        input.addEventListener("input", function () {
+            localStorage.setItem(input.id, input.value);
+        });
+    });
+
+    form.addEventListener("submit", function () {
+        mostrar.innerHTML = ""; // Limpiar el contenido del section
+
+        if (localStorage.getItem("buscarE") != null) {
+            listaEstudiantes.listar_estudiantes();
+            let mostrar_Estu5 = `Estudiantes en la lista:`;
+
+            mostrarTexto(mostrar_Estu5);
+
+            for (let persona of listaEstudiantes.gestor) {
+                let personas = `${persona.id}, ${persona.nombre}, ${persona.edad}, ${persona.direccion} `;
+                mostrarTexto(personas);
+            }
+
+            let buscar_E = localStorage.getItem("buscarE");
+
+            if (buscar_E.trim() !== "") {
+                listaEstudiantes.obtener_nombre_estudiante(buscar_E);//con console log
+                let texto = listaEstudiantes.obtener_nombre_estudiante_pantalla(buscar_E); //con map para devolver un array
+
+                if (Array.isArray(texto)) { //si es un array va mostrando a información
+                    //linea a linea con un foreach
+                    texto.forEach(resul => mostrarTexto(resul));
+                } else {
+                    mostrarTexto("No se encontraron estudiantes con ese nombre.");
+                }
+            }
+
+            localStorage.clear(); //te limpia local storage
+
+        } else if (localStorage.getItem("buscarA") != null) {
+            listaAsignaturas.listar_asignaturas();
+
+            let mostrar_Asig4 = `Asignaturas en la lista:`;
+
+            mostrarTexto(mostrar_Asig4);
+
+            for (let asig of listaAsignaturas.gestor) {
+                let asignaturas = `${asig.nombre} `;
+                mostrarTexto(asignaturas);
+            }
+
+            let buscar_A = localStorage.getItem("buscarA");
+
+            if (buscar_A.trim() !== "") {
+                listaAsignaturas.obtener_muchas_asignaturas(buscar_A); //con console.log
+                let texto_A = listaAsignaturas.obtener_muchas_asignaturas_pantalla(buscar_A);// con map para devolver un array
+                if (Array.isArray(texto_A)) { //si es un array va mostrando a información
+                    //linea a linea con un foreach
+                    texto_A.forEach(resul => mostrarTexto(resul));
+                } else {
+                    mostrarTexto("No se encontraron estudiantes con ese nombre.");
+                }
+            }
+
+
+            localStorage.clear(); //te limpia local storage
+        }
+    });
+
+
+});
 
 
 ///caso 12

@@ -53,3 +53,11 @@ label{
     align-self: center;
     background-color: aquamarine;
 }
+
+#asignatura{
+    background-color: red;
+}
+
+#estudiante{
+    background-color: greenyellow;
+}

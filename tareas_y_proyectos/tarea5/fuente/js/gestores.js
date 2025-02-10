@@ -283,6 +283,34 @@ export class GestorEs extends Gestores {
     }
 
     /**
+     * 
+     * ## Método: obtener_nombre_estudiante_pantalla<br>
+     * 
+     * ### obtener_nombre_estudiante_pantalla(nombre):<br>
+     *  Este método tendrá la misma función que el método obtener_nombre_estudiante(id) con la única diferencia de 
+     *  devolvera un array en vez de console.log() para que se pueda mostrar en pantalla.
+     * <br>
+     * @param {string} nombre - *El nombre o parte del nombre del estudiante.*
+     * @returns {void} Lista los estudiantes encontrados o un mensaje de error si no hay coincidencias.
+     * @throws {error} **Si no existen coincidencias de estudiantes en el array de listas**
+     */
+    obtener_nombre_estudiante_pantalla(nombre) {
+        let obtener = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
+    
+        try {
+            if (obtener.length > 0) {
+                return obtener.map(elemento => "El estudiante encontrado es " + elemento.toString()); 
+                // Ahora devuelve un array en lugar de usar console.log()
+            } else {
+                throw new Error(`No se encontró ningún estudiante con el nombre ${nombre}`);
+            }
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
+            return false; // Devuelve un array con el mensaje de error
+        }
+    }
+
+    /**
      * ## Método: promedio_listas<br>
      * 
      * Calcula el promedio de los promedios de todos los estudiantes en el gestor.
@@ -528,6 +556,22 @@ export class GestorAs extends Gestores {
             return false;
         }
 
+    }
+
+    obtener_muchas_asignaturas_pantalla(nombre) {
+        let obtener_As = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
+    
+        try {
+            if (obtener_As.length > 0) {
+                return obtener_As.map(elemento =>"La asignatura encontrada es " + elemento.toString()); 
+                // Ahora devuelve un array en lugar de usar console.log()
+            } else {
+                throw new Error(`No se encontró ninguna asignatura con el nombre ${nombre}`);
+            }
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
+            return false; // Devuelve un array con el mensaje de error
+        }
     }
 
     /**
