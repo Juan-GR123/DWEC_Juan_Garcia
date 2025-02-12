@@ -101,6 +101,53 @@ const listaEstudiantes = new GestorEs();//inicializamos un objeto de la clase Ge
 const listaAsignaturas = new GestorAs();//inicializamos un objeto de la clase GestorAs que actuará como un array de asignaturas
 let listaDirecciones = [];//inicializamos un array para guardar las direcciones da cada estuadiante
 
+//añadimos aqui las funciones de cargar asignaturas y estudiantes para que se generalice por todo el codigo
+
+// Función para cargar los estudiantes guardados en localStorage
+function cargarEstudiantes() {
+    let estudiantesGuardados = localStorage.getItem("listaEstudiantes_1");
+    console.log(estudiantesGuardados);
+    if (estudiantesGuardados) {
+
+        estudiantesGuardados = estudiantesGuardados ? JSON.parse(estudiantesGuardados) : []; // Convertir a array
+
+        estudiantesGuardados.forEach(valor => {
+            let direccion = new Direccion(
+                valor.direccion.calle,
+                valor.direccion.numero,
+                valor.direccion.piso,
+                valor.direccion.codigo_postal,
+                valor.direccion.provincia,
+                valor.direccion.localidad
+            );
+
+            let estudiante = new Estudiantes(valor.nombre, valor.edad, direccion);
+            listaEstudiantes.agregar_estudiante(estudiante);
+        });
+    }
+}
+
+// Función para cargar las asignaturas desde localStorage
+function cargarAsignaturas() {
+    let asignaturasGuardadas = localStorage.getItem("listaAsignaturas_1");
+    console.log(asignaturasGuardadas);
+
+    if (asignaturasGuardadas) {
+        asignaturasGuardadas = asignaturasGuardadas ? JSON.parse(asignaturasGuardadas) : []; ///con json.parse convertimos el string en un objeto y asi llamamos a los valores
+
+        asignaturasGuardadas.forEach(asig => {
+            let nuevaAsignatura = new Asignaturas(asig.nombreA);
+            listaAsignaturas.agregar_asignatura(nuevaAsignatura);
+        });
+
+    }
+}
+
+    // Cargar los estudiantes y asignaturas al iniciar
+    cargarEstudiantes();
+    cargarAsignaturas();
+
+
 /////caso 1
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -132,31 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(localStorage.getItem("listaEstudiantes_1"));
     }
 
-    // Función para cargar los estudiantes guardados en localStorage
-    function cargarEstudiantes() {
-        let estudiantesGuardados = localStorage.getItem("listaEstudiantes_1");
-        console.log(estudiantesGuardados);
-        if (estudiantesGuardados) {
-
-            estudiantesGuardados = estudiantesGuardados ? JSON.parse(estudiantesGuardados) : []; // Convertir a array
-
-            estudiantesGuardados.forEach(valor => {
-                let direccion = new Direccion(
-                    valor.direccion.calle,
-                    valor.direccion.numero,
-                    valor.direccion.piso,
-                    valor.direccion.codigo_postal,
-                    valor.direccion.provincia,
-                    valor.direccion.localidad
-                );
-
-                let estudiante = new Estudiantes(valor.nombre, valor.edad, direccion);
-                listaEstudiantes.agregar_estudiante(estudiante);
-            });
-
-            mostrarEstudiantes();
-        }
-    }
+    
 
     function mostrarEstudiantes() {
         mostrar.innerHTML = ""; // Limpiar el contenido del div
@@ -168,8 +191,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Cargar los estudiantes al iniciar
-    cargarEstudiantes();
+
+    mostrarEstudiantes();
 
     // Mostrar el articulo al hacer clic en el botón
     boton.addEventListener("click", function () {
@@ -267,22 +290,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         console.log(localStorage.getItem("listaAsignaturas_1"));
     }
 
-    // Función para cargar las asignaturas desde localStorage
-    function cargarAsignaturas() {
-        let asignaturasGuardadas = localStorage.getItem("listaAsignaturas_1");
-        console.log(asignaturasGuardadas);
-
-        if (asignaturasGuardadas) {
-            asignaturasGuardadas = asignaturasGuardadas ? JSON.parse(asignaturasGuardadas) : []; ///con json.parse convertimos el string en un objeto y asi llamamos a los valores
-
-            asignaturasGuardadas.forEach(asig => {
-                let nuevaAsignatura = new Asignaturas(asig.nombreA);
-                listaAsignaturas.agregar_asignatura(nuevaAsignatura);
-            });
-
-            mostrarAsignaturas();
-        }
-    }
+    
 
 
     function mostrarAsignaturas() {
@@ -301,8 +309,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         mostrar.appendChild(p);//pone la etiqueta al final
     }
 
-     // Cargar asignaturas al iniciar la página
-     cargarAsignaturas();
+    mostrarAsignaturas();
 
     // Mostrar el articulo al hacer clic en el botón
     boton.addEventListener("click", function () {
@@ -363,7 +370,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 mostrarAsignaturas(); // Llamada a la función para mostrar estudiantes
                 form.reset(); // Limpiar el formulario
                 articulo.style.display = "none"; // Ocultar el articulo
-            }else {
+            } else {
                 mostrar.innerHTML = ""; // Limpiar el contenido del section
                 mostrarTexto(`Ya existe la asignatura ${nombre}`);
             }
@@ -395,6 +402,43 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
     // Ocultar el articulo al cargar la página
     articulo.style.display = "none";
+
+    function guardarMatriculaciones() {
+        let matriculaciones = listaEstudiantes.gestor.map(mat => ({//se utiliza map para obtener el array de objetos
+            nombre: mat.nombre,
+            asignaturas: mat.asignaturas.map(asig => asig.nombre)
+        }));
+        
+        localStorage.setItem("matriculaciones", JSON.stringify(matriculaciones)); //se pasa a string para guardarlo en local storage
+        console.log(matriculaciones);
+        console.log(localStorage.getItem("matriculaciones"));
+    }
+
+    function cargarMatriculaciones() {
+        let matriculacionesGuardadas = localStorage.getItem("matriculaciones");
+        console.log(matriculacionesGuardadas);
+        if (matriculacionesGuardadas) {
+            let datos = matriculacionesGuardadas ? JSON.parse(matriculacionesGuardadas) : []; // Convertir a array con json.parse
+            console.log(datos);
+
+             datos.forEach(mat => {
+                let estudiante = listaEstudiantes.gestor.find(e => e.nombre === mat.nombre); // Buscar estudiante
+                 //  console.log(estudiante);
+                 if (estudiante) {
+                    mat.asignaturas.forEach(nombreAsig => {
+                        let asignatura = listaAsignaturas.gestor.find(asig => asig.nombre === nombreAsig); // Buscar asignatura en listaAsignaturas
+                        if (asignatura) {
+                            // Usar el método matricular para añadir la asignatura al estudiante
+                            estudiante.matricular(asignatura);
+                        }
+                    });
+                }
+            });
+        }
+    }
+
+    //cargamos las matriculaciones
+    cargarMatriculaciones();
 
     // Mostrar el articulo al hacer clic en el botón
     boton.addEventListener("click", function () {
@@ -452,6 +496,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                         mostrar.innerHTML = ""; // Limpiar el contenido del section
                         const fechas = `${encontrarE.nombre} ha sido matriculado en  ${encontrarA.nombre} con éxito.`;
                         mostrarTexto(fechas);
+                        guardarMatriculaciones();
                         //mostramos al estudiante elegido y sus asignaturas matriculadas
                     } else {
                         mostrar.innerHTML = ""; // Limpiar el contenido del section
@@ -1134,7 +1179,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             let F_matricula = localStorage.getItem("ID_10");
             F_matricula = Number(F_matricula);
 
-            if (isNaN(F_matricula) || F_matricula <= 0) {
+            if (isNaN(F_matricula) || F_matricula < 0) {
                 let error = "El ID debe ser un número positivo.";
                 mostrarTexto(error);
             } else if (listaEstudiantes.obtener_estudiante(F_matricula) == false) {
