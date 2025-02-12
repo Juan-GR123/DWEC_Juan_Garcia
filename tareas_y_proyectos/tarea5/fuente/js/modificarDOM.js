@@ -19,14 +19,12 @@ import { ErrorPersonalizado, validarEstudiante } from './Error.js';
 //////////////////////////////////////
 
 
-const listaEstudiantes = new GestorEs();//inicializamos un objeto de la clase GestorEs que actuará como un array de estudiantes
-const listaAsignaturas = new GestorAs();//inicializamos un objeto de la clase GestorAs que actuará como un array de asignaturas
-let listaDirecciones = [];//inicializamos un array para guardar las direcciones da cada estuadiante
-/*
+
+
 //como hacer que estas variables se guarden en local storage????
 
 //inicializamos una serie de valores que actuarán como valores por defecto para nuestros casos
-listaDirecciones.push(new Direccion("Calle pez", 5, "6ºA", 29005, "Malaga", "Malaga"));
+/*listaDirecciones.push(new Direccion("Calle pez", 5, "6ºA", 29005, "Malaga", "Malaga"));
 listaDirecciones.push(new Direccion("Calle Dolores", 10, "7ºC", 18210, "Granada", "Peligros"));
 listaDirecciones.push(new Direccion("Calle Sierpes ", 20, "10ºB", 41004., "Sevilla", "Sevilla"));
 listaDirecciones.push(new Direccion("Calle Cabezas", 1, "4ºD", 14003, "Cordoba", "Cordoba"));
@@ -92,15 +90,19 @@ listaEstudiantes.gestor[2].agregar_calificacion(listaAsignaturas.gestor[1], 10);
 listaEstudiantes.gestor[3].agregar_calificacion(listaAsignaturas.gestor[1], 10);
 listaEstudiantes.gestor[4].agregar_calificacion(listaAsignaturas.gestor[1], 10);
 
-//console.log(listaAsignaturas.obtener_asignatura("Fisica")); */
 
+
+//console.log(listaAsignaturas.obtener_asignatura("Fisica"));
+*/
 
 ///////////////////////////////////////////////////
 
-
+const listaEstudiantes = new GestorEs();//inicializamos un objeto de la clase GestorEs que actuará como un array de estudiantes
+const listaAsignaturas = new GestorAs();//inicializamos un objeto de la clase GestorAs que actuará como un array de asignaturas
+let listaDirecciones = [];//inicializamos un array para guardar las direcciones da cada estuadiante
 
 /////caso 1
-/*
+
 document.addEventListener("DOMContentLoaded", function () {
     const boton = document.getElementById("1");
     const articulo = document.querySelector(".opcion1");
@@ -111,100 +113,34 @@ document.addEventListener("DOMContentLoaded", function () {
     // Ocultar el articulo al cargar la página
     articulo.style.display = "none";
 
-    function mostrarEstudiantes() {
-        mostrar.innerHTML = ""; // Limpiar el contenido del div
-        listaEstudiantes.gestor.forEach(estudiante => {
-            const estudianteInfo = `Nombre: ${estudiante.nombre}, Edad: ${estudiante.edad}, Dirección: ${estudiante.direccion.calle}, ${estudiante.direccion.numero}, ${estudiante.direccion.piso}, ${estudiante.direccion.codigo_postal}, ${estudiante.direccion.provincia}, ${estudiante.direccion.localidad}`;
-            const p = document.createElement("p");// crea la etiqueta p
-            p.textContent = estudianteInfo;//pone la etiqueta al principio
-            mostrar.appendChild(p);//pone la etiqueta al final
-        });
+    // Función para guardar la lista de estudiantes en localStorage
+    function guardarEstudiantes() {
+        let estudiantes_1 = listaEstudiantes.gestor.map(valor => ({ //se utiliza map para obtener bien el array de objetos en vez de un string
+            nombre: valor.nombre,
+            edad: valor.edad,
+            direccion: {
+                calle: valor.direccion.calle,
+                numero: valor.direccion.numero,
+                piso: valor.direccion.piso,
+                codigo_postal: valor.direccion.codigo_postal,
+                provincia: valor.direccion.provincia,
+                localidad: valor.direccion.localidad
+            }
+        }));
+        console.log(estudiantes_1);
+        localStorage.setItem("listaEstudiantes_1", JSON.stringify(estudiantes_1)); // Guardar como string
+        console.log(localStorage.getItem("listaEstudiantes_1"));
     }
-
-
-    // Mostrar el articulo al hacer clic en el botón
-    boton.addEventListener("click", function () {
-        articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
-    });
-
-    // Cargar datos guardados en localStorage
-    inputs.forEach(input => {
-        /*const valor = localStorage.getItem(input.id);
-        if (valor) {
-            input.value = valor;
-        }*/
-/*
-        // Guardar cambios en localStorage cada vez que se edite un input
-        input.addEventListener("input", function () {
-            localStorage.setItem(input.id, input.value);
-        });
-    });
-
-    // Validar articulo antes de enviarlo
-    form.addEventListener("submit", function (event) {
-        let valido = true;
-
-        inputs.forEach(input => {
-            if (input.value.trim() === "") {
-                valido = false;
-                input.style.border = "2px solid red"; // Resalta el input vacío
-            } else {
-                input.style.border = ""; // Elimina el borde rojo si se completa
-                input.value = '';
-                
-            }
-        });
-
-        if (!valido) { //En verdad no hace falta validarlo ya que todos los campos son obligatorios por el html
-            event.preventDefault(); // Evita el envío del articulo
-            alert("Por favor, completa todos los campos antes de continuar.");
-        } else {
-            console.log("articulo enviado correctamente");
-
-            let nombre = localStorage.getItem("nombre");
-            let edad = localStorage.getItem("edad");
-            let calle = localStorage.getItem("calle");
-            let numero = localStorage.getItem("numero");
-            let piso = localStorage.getItem("piso");
-            let codigo_postal = localStorage.getItem("codigo_postal");
-            let provincia = localStorage.getItem("provincia");
-            let localidad = localStorage.getItem("localidad");
-
-            let nuevaDireccion = new Direccion(calle, numero, piso, codigo_postal, provincia, localidad);
-
-            let nuevoEstudiante = new Estudiantes(nombre, edad, nuevaDireccion);
-
-            let comprobacion_es = listaEstudiantes.agregar_estudiante(nuevoEstudiante);
-
-            if (comprobacion_es != false) {
-                console.log("Estudiante creado y agregado con éxito:");
-                listaEstudiantes.listar_estudiantes(); //como mostrar esto en pantalla?????
-                mostrarEstudiantes(); // Llamada a la función para mostrar estudiantes
-                articulo.style.display = "none"; // Ocultar el articulo
-            }
-
-
-        }
-    });
-});*/
-
-document.addEventListener("DOMContentLoaded", function () {
-    const boton = document.getElementById("1");
-    const articulo = document.querySelector(".opcion1");
-    const form = document.querySelector("form");
-    const inputs = form.querySelectorAll("input");
-    const mostrar = document.getElementById("output");
-
-    // Ocultar el formulario al cargar la página
-    articulo.style.display = "none";
 
     // Función para cargar los estudiantes guardados en localStorage
     function cargarEstudiantes() {
-        let estudiantesGuardados = localStorage.getItem("listaEstudiantes");
+        let estudiantesGuardados = localStorage.getItem("listaEstudiantes_1");
+        console.log(estudiantesGuardados);
         if (estudiantesGuardados) {
-            let estudiantesParseados = JSON.parse(estudiantesGuardados);
 
-            estudiantesParseados.forEach(valor => {
+            estudiantesGuardados = estudiantesGuardados ? JSON.parse(estudiantesGuardados) : []; // Convertir a array
+
+            estudiantesGuardados.forEach(valor => {
                 let direccion = new Direccion(
                     valor.direccion.calle,
                     valor.direccion.numero,
@@ -222,61 +158,39 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Función para guardar la lista de estudiantes en localStorage
-    function guardarEstudiantes() {
-        // Convertimos el gestor a un array de objetos planos para JSON
-        let estudiantesJSON = listaEstudiantes.gestor.map(valor => ({
-            nombre: valor.nombre,
-            edad: valor.edad,
-            direccion: {
-                calle: valor.direccion.calle,
-                numero: valor.direccion.numero,
-                piso: valor.direccion.piso,
-                codigo_postal: valor.direccion.codigo_postal,
-                provincia: valor.direccion.provincia,
-                localidad: valor.direccion.localidad
-            }
-        }));
-
-        localStorage.setItem("listaEstudiantes", JSON.stringify(estudiantesJSON));
-    }
-
-    // Mostrar estudiantes en el DOM
     function mostrarEstudiantes() {
-        mostrar.innerHTML = ""; // Limpiar la lista antes de actualizar
+        mostrar.innerHTML = ""; // Limpiar el contenido del div
         listaEstudiantes.gestor.forEach(estudiante => {
             const estudianteInfo = `Nombre: ${estudiante.nombre}, Edad: ${estudiante.edad}, Dirección: ${estudiante.direccion.calle}, ${estudiante.direccion.numero}, ${estudiante.direccion.piso}, ${estudiante.direccion.codigo_postal}, ${estudiante.direccion.provincia}, ${estudiante.direccion.localidad}`;
-            const p = document.createElement("p");
-            p.textContent = estudianteInfo;
-            mostrar.appendChild(p);
+            const p = document.createElement("p");// crea la etiqueta p
+            p.textContent = estudianteInfo;//pone la etiqueta al principio
+            mostrar.appendChild(p);//pone la etiqueta al final
         });
     }
 
     // Cargar los estudiantes al iniciar
     cargarEstudiantes();
 
-    // Mostrar/ocultar formulario al hacer clic en el botón
+    // Mostrar el articulo al hacer clic en el botón
     boton.addEventListener("click", function () {
-        articulo.style.display = articulo.style.display === "none" ? "block" : "none";
+        articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
     });
 
-    // Detectar cambios en los inputs y guardar automáticamente en localStorage
+    // Cargar datos guardados en localStorage
     inputs.forEach(input => {
+        /*const valor = localStorage.getItem(input.id);
+        if (valor) {
+            input.value = valor;
+        }*/
+
+        // Guardar cambios en localStorage cada vez que se edite un input
         input.addEventListener("input", function () {
             localStorage.setItem(input.id, input.value);
         });
-
-        // Cargar valores guardados al iniciar
-        /*let valorGuardado = localStorage.getItem(input.id);
-        if (valorGuardado) {
-            input.value = valorGuardado;
-        }*/
     });
 
-    // Validar formulario y agregar estudiante
+    // Validar articulo antes de enviarlo
     form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Evita el envío del formulario
-
         let valido = true;
         let datos = {};
 
@@ -290,23 +204,24 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        if (!valido) {
+        if (!valido) { //En verdad no hace falta validarlo ya que todos los campos son obligatorios por el html
+            event.preventDefault(); // Evita el envío del articulo
             alert("Por favor, completa todos los campos antes de continuar.");
         } else {
+            console.log("articulo enviado correctamente");
+
             // Crear la dirección
             let nuevaDireccion = new Direccion(
                 datos.calle,
-                parseInt(datos.numero, 10),
+                Number(datos.numero),
                 datos.piso,
                 datos.codigo_postal,
                 datos.provincia,
                 datos.localidad
             );
 
-            // Crear el estudiante
-            let nuevoEstudiante = new Estudiantes(datos.nombre, parseInt(datos.edad, 10), nuevaDireccion);
+            let nuevoEstudiante = new Estudiantes(datos.nombre, Number(datos.edad), nuevaDireccion);
 
-            // Agregar el estudiante al gestor
             let comprobacion_es = listaEstudiantes.agregar_estudiante(nuevoEstudiante);
 
             if (comprobacion_es != false) {
@@ -320,15 +235,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Limpiar los inputs
                 form.reset();
-
-                // Ocultar el formulario después de agregar un estudiante
-                articulo.style.display = "none";
+                articulo.style.display = "none"; // Ocultar el articulo
             }
+
+
         }
     });
 });
-
-
 
 ///caso 2
 
@@ -342,30 +255,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
     // Ocultar el articulo al cargar la página
     articulo.style.display = "none";
 
-
-    // Función para cargar las asignaturas desde localStorage
-    function cargarAsignaturas() {
-        let asignaturasGuardadas = localStorage.getItem("listaAsignaturas");
-        if (asignaturasGuardadas) {
-            let asignaturasParseadas = JSON.parse(asignaturasGuardadas); ///con json.parse convertimos el string en un objeto y asi llamamos a los valores
-            asignaturasParseadas.forEach(asig => {
-                let nuevaAsignatura = new Asignaturas(asig.nombreA);
-                listaAsignaturas.agregar_asignatura(nuevaAsignatura);
-            });
-
-            mostrarAsignaturas();
-        }
-    }
-
-    // Función para guardar las asignaturas en localStorage
-    function guardarAsignaturas() {
-        let asignaturasJSON = listaAsignaturas.gestor.map(asig => ({
-            nombreA: asig.nombre
-        }));
-
-        localStorage.setItem("listaAsignaturas", JSON.stringify(asignaturasJSON)); //con json.stringify convertimos el objeto en un string
-    }
-
     function mostrarAsignaturas() {
         mostrar.innerHTML = ""; // Limpiar el contenido del div
         listaAsignaturas.gestor.forEach(asignatura => {
@@ -375,16 +264,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             mostrar.appendChild(p);//pone la etiqueta al final
         });
     }
-
-    function mostrarTexto(texto) {
-        const p = document.createElement("p");// crea la etiqueta p
-        p.textContent = texto;//pone la etiqueta al principio
-        mostrar.appendChild(p);//pone la etiqueta al final
-    }
-
-
-    // Cargar asignaturas al iniciar la página
-    cargarAsignaturas();
 
 
     // Mostrar el articulo al hacer clic en el botón
@@ -411,7 +290,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         evento.preventDefault(); // Evita el envío del articulo
 
         let valido = true;
-        let datos = {};
+        let nombre = document.getElementById("nombreA").value.trim(); // Obtener el valor del input
 
         inputs.forEach(input => {
             if (input.value.trim() === "") {
@@ -419,7 +298,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 input.style.border = "2px solid red"; // Resalta el input vacío
             } else {
                 input.style.border = ""; // Elimina el borde rojo si se completa
-                datos[input.id] = input.value.trim(); // Guardamos los valores de los inputs en un objeto
                 //input.value = '';
             }
         });
@@ -432,21 +310,16 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
             console.log("articulo enviado correctamente");
 
-            let N_asignatura = new Asignaturas(datos.nombreA);//nueva asignatura
+            let N_asignatura = new Asignaturas(nombre.trim());//nueva asignatura
 
 
             let comprobacion_as = listaAsignaturas.agregar_asignatura(N_asignatura);
 
             if (comprobacion_as != false) {
-                console.log(`Asignatura ${datos.nombreA} creada y agregada con éxito`);
-                listaAsignaturas.listar_asignaturas(); // Mostrar todas las asignaturas en consola
-                guardarAsignaturas();
+                console.log(`Asignatura ${nombre} creada y agregada con éxito.`);
+                listaAsignaturas.listar_asignaturas(); // Mostrar todas las asignaturas
                 mostrarAsignaturas(); // Llamada a la función para mostrar estudiantes
-                form.reset(); // Limpiar el formulario
                 articulo.style.display = "none"; // Ocultar el articulo
-            } else {
-                mostrar.innerHTML = ""; // Limpiar el contenido del section
-                mostrarTexto(`Ya existe la asignatura ${datos.nombreA}`);
             }
 
             // Limpiar el campo de entrada después de registrar
@@ -472,54 +345,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         const p = document.createElement("p");// crea la etiqueta p
         p.textContent = texto;//pone la etiqueta al principio
         mostrar.appendChild(p);//pone la etiqueta al final
-    }
-
-    function cargarEstudiantes() {
-        let estudiantesGuardados = JSON.parse(localStorage.getItem("listaEstudiantes"));
-        console.log(estudiantesGuardados);
-
-        if (estudiantesGuardados) {
-            estudiantesGuardados.forEach(est => listaEstudiantes.agregar_estudiante(est)); // Usa el método correcto
-        }
-
-        return listaEstudiantes;
-    }
-
-    function cargarAsignaturas() {
-        let asignaturasGuardadas = JSON.parse(localStorage.getItem("listaAsignaturas"));
-        console.log(asignaturasGuardadas);
-
-        if (asignaturasGuardadas) {
-            asignaturasGuardadas.forEach(asig => listaAsignaturas.agregar_asignatura(asig)); // Usa el método correcto
-        }
-
-        return listaAsignaturas;
-    }
-
-    function guardarMatriculaciones() {
-        let matriculaciones = listaEstudiantes.gestor.map(mat => ({
-            nombre: mat.nombre,
-            asignaturas: mat.asignaturas.map(asig => asig.nombre)
-        }));
-        localStorage.setItem("matriculaciones", JSON.stringify(matriculaciones));
-    }
-
-    function cargarMatriculaciones() {
-        let matriculacionesGuardadas = localStorage.getItem("matriculaciones");
-        if (matriculacionesGuardadas) {
-            let datos = JSON.parse(matriculacionesGuardadas);
-            datos.forEach(dato => {
-                let estudiante = listaEstudiantes.obtener_estudiante(dato.nombre);
-                if (estudiante) {
-                    dato.asignaturas.forEach(nombreAsig => {
-                        let asignatura = listaAsignaturas.obtener_asignatura(nombreAsig);
-                        if (asignatura) {
-                            estudiante.matricular(asignatura);
-                        }
-                    });
-                }
-            });
-        }
     }
 
     // Ocultar el articulo al cargar la página
@@ -581,7 +406,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                         mostrar.innerHTML = ""; // Limpiar el contenido del section
                         const fechas = `${encontrarE.nombre} ha sido matriculado en  ${encontrarA.nombre} con éxito.`;
                         mostrarTexto(fechas);
-                        guardarMatriculaciones();
                         //mostramos al estudiante elegido y sus asignaturas matriculadas
                     } else {
                         mostrar.innerHTML = ""; // Limpiar el contenido del section
@@ -601,11 +425,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             }
         }
     });
-    console.log("Lista de estudiantes:", listaEstudiantes);
-    console.log("Lista de asignaturas:", listaAsignaturas);
-    cargarEstudiantes();
-    cargarAsignaturas();
-    cargarMatriculaciones();
 });
 
 ///caso 4
@@ -705,10 +524,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                     let texto = `${clave}. ${elemento.nombre}`;
                     mostrarTexto(texto);
                 });
-            } else {
-                mostrar.innerHTML = "";
-                const error3 = `No se encontró ningún estudiante con ID ${id2}.`;
-                mostrarTexto(error3);
             }
         }
     });
@@ -1494,8 +1309,17 @@ document.addEventListener("DOMContentLoaded", function () {
     articulo.style.display = "none";
 
 
+    function Adios() {
+        mostrar.innerHTML = "";
+        const elemento = document.createElement("p");
+        elemento.textContent = "Adios";
+        mostrar.appendChild(elemento);
+    }
+
+
     boton.addEventListener("click", function () {
         articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
+        Adios();
         localStorage.clear(); //te limpia local storage
         window.location.reload();
     });
