@@ -342,6 +342,30 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
     // Ocultar el articulo al cargar la página
     articulo.style.display = "none";
 
+
+    // Función para cargar las asignaturas desde localStorage
+    function cargarAsignaturas() {
+        let asignaturasGuardadas = localStorage.getItem("listaAsignaturas");
+        if (asignaturasGuardadas) {
+            let asignaturasParseadas = JSON.parse(asignaturasGuardadas); ///con json.parse convertimos el string en un objeto y asi llamamos a los valores
+            asignaturasParseadas.forEach(asig => {
+                let nuevaAsignatura = new Asignaturas(asig.nombreA);
+                listaAsignaturas.agregar_asignatura(nuevaAsignatura);
+            });
+
+            mostrarAsignaturas();
+        }
+    }
+
+    // Función para guardar las asignaturas en localStorage
+    function guardarAsignaturas() {
+        let asignaturasJSON = listaAsignaturas.gestor.map(asig => ({
+            nombreA: asig.nombre
+        }));
+
+        localStorage.setItem("listaAsignaturas", JSON.stringify(asignaturasJSON)); //con json.stringify convertimos el objeto en un string
+    }
+
     function mostrarAsignaturas() {
         mostrar.innerHTML = ""; // Limpiar el contenido del div
         listaAsignaturas.gestor.forEach(asignatura => {
@@ -351,6 +375,16 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             mostrar.appendChild(p);//pone la etiqueta al final
         });
     }
+
+    function mostrarTexto(texto) {
+        const p = document.createElement("p");// crea la etiqueta p
+        p.textContent = texto;//pone la etiqueta al principio
+        mostrar.appendChild(p);//pone la etiqueta al final
+    }
+
+
+    // Cargar asignaturas al iniciar la página
+    cargarAsignaturas();
 
 
     // Mostrar el articulo al hacer clic en el botón
@@ -377,7 +411,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         evento.preventDefault(); // Evita el envío del articulo
 
         let valido = true;
-        let nombre = document.getElementById("nombreA").value.trim(); // Obtener el valor del input
+        let datos = {};
 
         inputs.forEach(input => {
             if (input.value.trim() === "") {
@@ -385,6 +419,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 input.style.border = "2px solid red"; // Resalta el input vacío
             } else {
                 input.style.border = ""; // Elimina el borde rojo si se completa
+                datos[input.id] = input.value.trim(); // Guardamos los valores de los inputs en un objeto
                 //input.value = '';
             }
         });
@@ -397,16 +432,21 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
             console.log("articulo enviado correctamente");
 
-            let N_asignatura = new Asignaturas(nombre.trim());//nueva asignatura
+            let N_asignatura = new Asignaturas(datos.nombreA);//nueva asignatura
 
 
             let comprobacion_as = listaAsignaturas.agregar_asignatura(N_asignatura);
 
             if (comprobacion_as != false) {
-                console.log(`Asignatura ${nombre} creada y agregada con éxito.`);
-                listaAsignaturas.listar_asignaturas(); // Mostrar todas las asignaturas
+                console.log(`Asignatura ${datos.nombreA} creada y agregada con éxito`);
+                listaAsignaturas.listar_asignaturas(); // Mostrar todas las asignaturas en consola
+                guardarAsignaturas();
                 mostrarAsignaturas(); // Llamada a la función para mostrar estudiantes
+                form.reset(); // Limpiar el formulario
                 articulo.style.display = "none"; // Ocultar el articulo
+            } else {
+                mostrar.innerHTML = ""; // Limpiar el contenido del section
+                mostrarTexto(`Ya existe la asignatura ${datos.nombreA}`);
             }
 
             // Limpiar el campo de entrada después de registrar
@@ -432,6 +472,22 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         const p = document.createElement("p");// crea la etiqueta p
         p.textContent = texto;//pone la etiqueta al principio
         mostrar.appendChild(p);//pone la etiqueta al final
+    }
+
+    // Función para cargar estudiantes desde localStorage
+    function cargarEstudiantes() {
+        const estudiantesGuardados = localStorage.getItem("listaEstudiantes");
+        if (estudiantesGuardados) {
+            listaEstudiantes = JSON.parse(estudiantesGuardados);
+        }
+    }
+
+    // Función para cargar asignaturas desde localStorage
+    function cargarAsignaturas() {
+        const asignaturasGuardadas = localStorage.getItem("listaAsignaturas");
+        if (asignaturasGuardadas) {
+            listaAsignaturas = JSON.parse(asignaturasGuardadas);
+        }
     }
 
     // Ocultar el articulo al cargar la página
