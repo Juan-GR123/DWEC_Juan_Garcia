@@ -311,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (comprobacion_es != false) {
                 console.log("Estudiante creado y agregado con éxito:");
-                listaEstudiantes.listar_estudiantes(); //como mostrar esto en pantalla?????
+                listaEstudiantes.listar_estudiantes();
                 // Guardar en localStorage
                 guardarEstudiantes();
 
@@ -474,19 +474,51 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         mostrar.appendChild(p);//pone la etiqueta al final
     }
 
-    // Función para cargar estudiantes desde localStorage
     function cargarEstudiantes() {
-        const estudiantesGuardados = localStorage.getItem("listaEstudiantes");
+        let estudiantesGuardados = JSON.parse(localStorage.getItem("listaEstudiantes"));
+        console.log(estudiantesGuardados);
+
         if (estudiantesGuardados) {
-            listaEstudiantes = JSON.parse(estudiantesGuardados);
+            estudiantesGuardados.forEach(est => listaEstudiantes.agregar_estudiante(est)); // Usa el método correcto
         }
+
+        return listaEstudiantes;
     }
 
-    // Función para cargar asignaturas desde localStorage
     function cargarAsignaturas() {
-        const asignaturasGuardadas = localStorage.getItem("listaAsignaturas");
+        let asignaturasGuardadas = JSON.parse(localStorage.getItem("listaAsignaturas"));
+        console.log(asignaturasGuardadas);
+
         if (asignaturasGuardadas) {
-            listaAsignaturas = JSON.parse(asignaturasGuardadas);
+            asignaturasGuardadas.forEach(asig => listaAsignaturas.agregar_asignatura(asig)); // Usa el método correcto
+        }
+
+        return listaAsignaturas;
+    }
+
+    function guardarMatriculaciones() {
+        let matriculaciones = listaEstudiantes.gestor.map(mat => ({
+            nombre: mat.nombre,
+            asignaturas: mat.asignaturas.map(asig => asig.nombre)
+        }));
+        localStorage.setItem("matriculaciones", JSON.stringify(matriculaciones));
+    }
+
+    function cargarMatriculaciones() {
+        let matriculacionesGuardadas = localStorage.getItem("matriculaciones");
+        if (matriculacionesGuardadas) {
+            let datos = JSON.parse(matriculacionesGuardadas);
+            datos.forEach(dato => {
+                let estudiante = listaEstudiantes.obtener_estudiante(dato.nombre);
+                if (estudiante) {
+                    dato.asignaturas.forEach(nombreAsig => {
+                        let asignatura = listaAsignaturas.obtener_asignatura(nombreAsig);
+                        if (asignatura) {
+                            estudiante.matricular(asignatura);
+                        }
+                    });
+                }
+            });
         }
     }
 
@@ -549,6 +581,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                         mostrar.innerHTML = ""; // Limpiar el contenido del section
                         const fechas = `${encontrarE.nombre} ha sido matriculado en  ${encontrarA.nombre} con éxito.`;
                         mostrarTexto(fechas);
+                        guardarMatriculaciones();
                         //mostramos al estudiante elegido y sus asignaturas matriculadas
                     } else {
                         mostrar.innerHTML = ""; // Limpiar el contenido del section
@@ -568,6 +601,11 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             }
         }
     });
+    console.log("Lista de estudiantes:", listaEstudiantes);
+    console.log("Lista de asignaturas:", listaAsignaturas);
+    cargarEstudiantes();
+    cargarAsignaturas();
+    cargarMatriculaciones();
 });
 
 ///caso 4
@@ -667,6 +705,10 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                     let texto = `${clave}. ${elemento.nombre}`;
                     mostrarTexto(texto);
                 });
+            } else {
+                mostrar.innerHTML = "";
+                const error3 = `No se encontró ningún estudiante con ID ${id2}.`;
+                mostrarTexto(error3);
             }
         }
     });
