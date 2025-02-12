@@ -143,9 +143,9 @@ function cargarAsignaturas() {
     }
 }
 
-    // Cargar los estudiantes y asignaturas al iniciar
-    cargarEstudiantes();
-    cargarAsignaturas();
+// Cargar los estudiantes y asignaturas al iniciar
+cargarEstudiantes();
+cargarAsignaturas();
 
 
 /////caso 1
@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(localStorage.getItem("listaEstudiantes_1"));
     }
 
-    
+
 
     function mostrarEstudiantes() {
         mostrar.innerHTML = ""; // Limpiar el contenido del div
@@ -290,7 +290,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         console.log(localStorage.getItem("listaAsignaturas_1"));
     }
 
-    
+
 
 
     function mostrarAsignaturas() {
@@ -408,7 +408,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             nombre: mat.nombre,
             asignaturas: mat.asignaturas.map(asig => asig.nombre)
         }));
-        
+
         localStorage.setItem("matriculaciones", JSON.stringify(matriculaciones)); //se pasa a string para guardarlo en local storage
         console.log(matriculaciones);
         console.log(localStorage.getItem("matriculaciones"));
@@ -421,10 +421,10 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             let datos = matriculacionesGuardadas ? JSON.parse(matriculacionesGuardadas) : []; // Convertir a array con json.parse
             console.log(datos);
 
-             datos.forEach(mat => {
+            datos.forEach(mat => {
                 let estudiante = listaEstudiantes.gestor.find(e => e.nombre === mat.nombre); // Buscar estudiante
-                 //  console.log(estudiante);
-                 if (estudiante) {
+                //  console.log(estudiante);
+                if (estudiante) {
                     mat.asignaturas.forEach(nombreAsig => {
                         let asignatura = listaAsignaturas.gestor.find(asig => asig.nombre === nombreAsig); // Buscar asignatura en listaAsignaturas
                         if (asignatura) {
@@ -513,6 +513,10 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                     let texto = `${clave}. ${elemento.nombre}`;
                     mostrarTexto(texto);
                 });
+            } else {
+                mostrar.innerHTML = ""; // Limpiar el contenido del section
+                const error = `No se encontró ningún estudiante con ID ${id}.`;
+                mostrarTexto(error);
             }
         }
     });
@@ -535,6 +539,43 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
     // Ocultar el articulo al cargar la página
     articulo.style.display = "none";
+
+    function guardarDesMatriculaciones() {
+        let desmatriculaciones = listaEstudiantes.gestor.map(mat => ({//se utiliza map para obtener el array de objetos
+            nombre: mat.nombre,
+            asignaturas: mat.asignaturas.map(asig => asig.nombre)
+        }));
+
+        localStorage.setItem("desmatriculaciones", JSON.stringify(desmatriculaciones)); //se pasa a string para guardarlo en local storage
+        console.log(desmatriculaciones);
+        console.log(localStorage.getItem("desmatriculaciones"));
+    }
+
+    function cargarDesMatriculaciones() {
+        let desMatriculacionesGuardadas = localStorage.getItem("desmatriculaciones");
+        console.log(desMatriculacionesGuardadas);
+        if (desMatriculacionesGuardadas) {
+            let datos = desMatriculacionesGuardadas ? JSON.parse(desMatriculacionesGuardadas) : []; // Convertir a array con json.parse
+            console.log(datos);
+
+            datos.forEach(mat => {
+                let estudiante = listaEstudiantes.gestor.find(e => e.nombre === mat.nombre); // Buscar estudiante
+                //  console.log(estudiante);
+                if (estudiante) {
+                    mat.asignaturas.forEach(nombreAsig => {
+                        let asignatura = listaAsignaturas.gestor.find(asig => asig.nombre === nombreAsig); // Buscar asignatura en listaAsignaturas
+                        if (asignatura) {
+                            // Usar el método matricular para añadir la asignatura al estudiante
+                            estudiante.desmatricular(asignatura);
+                        }
+                    });
+                }
+            });
+        }
+    }
+
+    //cargamos las desmatriculaciones
+    cargarDesMatriculaciones();
 
     // Mostrar el articulo al hacer clic en el botón
     boton.addEventListener("click", function () {
@@ -592,7 +633,10 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 let asig_estu = localStorage.getItem("desAsig");
                 let asig_des = listaAsignaturas.obtener_asignatura(asig_estu);
                 if (asig_des != false) {
+                    guardarDesMatriculaciones();// tenemos que guardarlo antes de que se desmatricule la asignatura
+
                     let desma = estu_des.desmatricular(asig_des);
+                    
                     if (desma == true) {
                         console.log(`${estu_des.nombre} ha sido desmatriculado en ${asig_des.nombre} con éxito.`);
                         //mostrar.innerHTML = ""; // Limpiar el contenido del section
