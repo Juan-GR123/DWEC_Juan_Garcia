@@ -18,13 +18,16 @@ import { ErrorPersonalizado, validarEstudiante } from './Error.js';
 
 //////////////////////////////////////
 
+const listaEstudiantes = new GestorEs();//inicializamos un objeto de la clase GestorEs que actuará como un array de estudiantes
+const listaAsignaturas = new GestorAs();//inicializamos un objeto de la clase GestorAs que actuará como un array de asignaturas
+let listaDirecciones = [];//inicializamos un array para guardar las direcciones da cada estuadiante
 
 
 
 //como hacer que estas variables se guarden en local storage????
 
-//inicializamos una serie de valores que actuarán como valores por defecto para nuestros casos
-/*listaDirecciones.push(new Direccion("Calle pez", 5, "6ºA", 29005, "Malaga", "Malaga"));
+/*//inicializamos una serie de valores que actuarán como valores por defecto para nuestros casos
+listaDirecciones.push(new Direccion("Calle pez", 5, "6ºA", 29005, "Malaga", "Malaga"));
 listaDirecciones.push(new Direccion("Calle Dolores", 10, "7ºC", 18210, "Granada", "Peligros"));
 listaDirecciones.push(new Direccion("Calle Sierpes ", 20, "10ºB", 41004., "Sevilla", "Sevilla"));
 listaDirecciones.push(new Direccion("Calle Cabezas", 1, "4ºD", 14003, "Cordoba", "Cordoba"));
@@ -97,9 +100,9 @@ listaEstudiantes.gestor[4].agregar_calificacion(listaAsignaturas.gestor[1], 10);
 
 ///////////////////////////////////////////////////
 
-const listaEstudiantes = new GestorEs();//inicializamos un objeto de la clase GestorEs que actuará como un array de estudiantes
-const listaAsignaturas = new GestorAs();//inicializamos un objeto de la clase GestorAs que actuará como un array de asignaturas
-let listaDirecciones = [];//inicializamos un array para guardar las direcciones da cada estuadiante
+//const listaEstudiantes = new GestorEs();//inicializamos un objeto de la clase GestorEs que actuará como un array de estudiantes
+//const listaAsignaturas = new GestorAs();//inicializamos un objeto de la clase GestorAs que actuará como un array de asignaturas
+//let listaDirecciones = [];//inicializamos un array para guardar las direcciones da cada estuadiante
 
 //añadimos aqui las funciones de cargar asignaturas y estudiantes para que se generalice por todo el codigo
 
@@ -636,7 +639,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                     guardarDesMatriculaciones();// tenemos que guardarlo antes de que se desmatricule la asignatura
 
                     let desma = estu_des.desmatricular(asig_des);
-                    
+
                     if (desma == true) {
                         console.log(`${estu_des.nombre} ha sido desmatriculado en ${asig_des.nombre} con éxito.`);
                         //mostrar.innerHTML = ""; // Limpiar el contenido del section
@@ -682,6 +685,26 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
     // Ocultar el articulo al cargar la página
     articulo.style.display = "none";
 
+    // Función para guardar la lista de estudiantes en localStorage
+    function guardarEstudiantes() {
+        let estudiantes_1 = listaEstudiantes.gestor.map(valor => ({ //se utiliza map para obtener bien el array de objetos en vez de un string
+            nombre: valor.nombre,
+            edad: valor.edad,
+            direccion: {
+                calle: valor.direccion.calle,
+                numero: valor.direccion.numero,
+                piso: valor.direccion.piso,
+                codigo_postal: valor.direccion.codigo_postal,
+                provincia: valor.direccion.provincia,
+                localidad: valor.direccion.localidad
+            }
+        }));
+        console.log(estudiantes_1);
+        localStorage.setItem("listaEstudiantes_1", JSON.stringify(estudiantes_1)); // Guardar como string
+        console.log(localStorage.getItem("listaEstudiantes_1"));
+    }
+
+
     // Mostrar el articulo al hacer clic en el botón
     boton.addEventListener("click", function () {
         articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
@@ -726,6 +749,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
             mostrarTexto(mostrar_Estu);
 
+
             for (let persona of listaEstudiantes.gestor) {
                 let personas = `${persona.id}, ${persona.nombre}, ${persona.edad}, ${persona.direccion} `;
                 mostrarTexto(personas);
@@ -737,7 +761,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             let elim_estu = localStorage.getItem("ID_Eli");
             elim_estu = Number(elim_estu);
 
-            if (isNaN(elim_estu) || elim_estu <= 0) {
+            if (isNaN(elim_estu) || elim_estu < 0) {
                 const error = `El ID introducido debe ser un número positivo.`;
                 mostrarTexto(error);
             }
@@ -748,6 +772,8 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 console.log(`El estudiante con ID ${elim_estu} ha sido eliminado correctamente.`);
                 let texto = `El estudiante con ID ${elim_estu} ha sido eliminado correctamente.`;
                 mostrarTexto(texto);
+                // Guardar en localStorage
+                guardarEstudiantes();
                 //mostrar.innerHTML = ""; // Limpiar el contenido del section
                 let mostrar_Estu2 = `Estudiantes en la lista:`;
 
@@ -784,6 +810,18 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
     // Ocultar el articulo al cargar la página
     articulo.style.display = "none";
+
+    // Función para guardar las asignaturas en localStorage
+    function guardarAsignaturas() {
+        let asignaturas_1 = listaAsignaturas.gestor.map(asig => ({ //se utiliza map para obtener el array de objetos
+            nombreA: asig.nombre
+        }));
+
+
+        localStorage.setItem("listaAsignaturas_1", JSON.stringify(asignaturas_1)); //con json.stringify convertimos el objeto en un string
+        console.log(asignaturas_1);
+        console.log(localStorage.getItem("listaAsignaturas_1"));
+    }
 
     // Mostrar el articulo al hacer clic en el botón
     boton.addEventListener("click", function () {
@@ -848,6 +886,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 console.log(`La asignatura ha sido eliminada correctamente.`);
                 let texto = `La asignatura ha sido eliminada correctamente.`;
                 mostrarTexto(texto);
+                guardarAsignaturas();
 
                 let mostrar_Asig3 = `Asignaturas en la lista:`;
 
@@ -882,6 +921,43 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
     // Ocultar el articulo al cargar la página
     articulo.style.display = "none";
+
+    // Función para guardar estudiantes y sus notas en localStorage
+    function guardarNotas() {
+        let estudiantesNotas = listaEstudiantes.gestor.map(est => ({
+            id: est.id,
+            nombre: est.nombre,
+            asignaturas: est.asignaturas.map(asig => ({
+                nombre: asig.nombre,
+                nota: asig.nota
+            }))
+        }));
+
+        localStorage.setItem("notasEstudiantes", JSON.stringify(estudiantesNotas)); //lo paso a string para guardarlo
+        console.log(estudiantesNotas);
+    }
+
+    // Función para cargar estudiantes con sus notas desde localStorage
+    function cargarNotas() {
+        let estudiantesGuardados = localStorage.getItem("notasEstudiantes");
+        console.log(estudiantesGuardados);
+
+        if (estudiantesGuardados) {
+            estudiantesGuardados = JSON.parse(estudiantesGuardados); //paso de string a array
+
+            estudiantesGuardados.forEach(estudianteData => {
+                let estudiante = listaEstudiantes.obtener_estudiante(estudianteData.id);
+                if (estudiante) {
+                    estudianteData.asignaturas.forEach(asigData => {
+                        estudiante.agregar_calificacion({ nombre: asigData.nombre }, asigData.nota);
+                    });
+                }
+            });
+        }
+    }
+
+    // Cargar notas al inicio
+    cargarNotas();
 
     // Mostrar el articulo al hacer clic en el botón
     boton.addEventListener("click", function () {
@@ -967,6 +1043,8 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                         mostrarTexto(promedio_Nuevo);
                         console.log(`El promedio ${nota_promedio_calificaciones} de la asignatura ${asignatura_N.nombre} será asignado al estudiante ${estudiante.nombre}`);
                         estudiante.agregar_calificacion(asignatura_N, nota_promedio_calificaciones);
+                        // Guardar las notas en localStorage
+                        guardarNotas();
                     } else {
                         mostrar.innerHTML = "";
                         let error1 = "El estudiante no existe";

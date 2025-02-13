@@ -291,7 +291,7 @@ export class Estudiantes {
     */
 
 
-    agregar_calificacion(asignatura, nota) {
+    agregar_calificacion(asignatura, nota) { 
         // Validar que la nota sea un número válido
         try {
             if (typeof nota != 'number' || nota < 0 || nota > 10) {
