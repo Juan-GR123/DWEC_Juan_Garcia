@@ -677,8 +677,9 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 let asig_des = listaAsignaturas.obtener_asignatura(asig_estu);
                 if (asig_des != false) {
                     guardarDesMatriculaciones();// tenemos que guardarlo antes de que se desmatricule la asignatura
-                    guardarRegistros();
+                   
                     let desma = estu_des.desmatricular(asig_des);
+                    guardarRegistros();
 
                     if (desma == true) {
                         console.log(`${estu_des.nombre} ha sido desmatriculado en ${asig_des.nombre} con éxito.`);
