@@ -406,6 +406,22 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
     // Ocultar el articulo al cargar la página
     articulo.style.display = "none";
 
+    //tiene que guardar los registros en localStorage
+    function guardarRegistros(){
+        let registros = listaEstudiantes.gestor.map(reg => ({
+            registros: reg.registros
+            }));
+
+            localStorage.setItem("registros",JSON.stringify(registros));
+            console.log(registros);
+    }
+
+    function cargarRegistros(){
+        let registros2 = localStorage.getItem("registros");
+        
+    }
+
+
     function guardarMatriculaciones() {
         let matriculaciones = listaEstudiantes.gestor.map(mat => ({//se utiliza map para obtener el array de objetos
             nombre: mat.nombre,
@@ -542,6 +558,8 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
     // Ocultar el articulo al cargar la página
     articulo.style.display = "none";
+
+    //comentar el cargar des y matriculaciones y cambiar el metodo guardar matriculaciones para que guarde los registros directamente en las asignaturas
 
     function guardarDesMatriculaciones() {
         let desmatriculaciones = listaEstudiantes.gestor.map(mat => ({//se utiliza map para obtener el array de objetos
