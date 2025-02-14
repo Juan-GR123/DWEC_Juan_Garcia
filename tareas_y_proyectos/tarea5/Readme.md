@@ -9,7 +9,7 @@
 -   textContent
 -   InnerText
 -   hidden
--   
+-   addEventListener
 
 ### 3. utilizar elementos DOM: validación mixta, con estilado y mensajes de error nativos.
 

@@ -150,6 +150,37 @@ function cargarAsignaturas() {
 cargarEstudiantes();
 cargarAsignaturas();
 
+//tiene que guardar los registros en localStorage
+function guardarRegistros() {
+    let registros = listaEstudiantes.gestor.map(reg => ({
+        id: reg.id,
+        nombre: reg.nombre,
+        registros: reg.registros
+    }));
+
+    localStorage.setItem("registros", JSON.stringify(registros));
+    console.log(registros);
+}
+
+function cargarRegistros(estudiante) {
+    let registros2 = localStorage.getItem("registros");
+    //console.log(registros2);
+    let final = [];
+
+    if (registros2) {
+        let mostrarR = registros2 ? JSON.parse(registros2) : [];
+        //console.log(mostrarR);
+
+        for (let dato of mostrarR) {
+            if (dato.id == estudiante.id) {
+                final = dato.registros;
+            }
+        }
+        //console.log(final);
+        return final;
+    }
+}
+
 
 /////caso 1
 
@@ -406,26 +437,13 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
     // Ocultar el articulo al cargar la página
     articulo.style.display = "none";
 
-    //tiene que guardar los registros en localStorage
-    function guardarRegistros(){
-        let registros = listaEstudiantes.gestor.map(reg => ({
-            registros: reg.registros
-            }));
-
-            localStorage.setItem("registros",JSON.stringify(registros));
-            console.log(registros);
-    }
-
-    function cargarRegistros(){
-        let registros2 = localStorage.getItem("registros");
-        
-    }
-
 
     function guardarMatriculaciones() {
         let matriculaciones = listaEstudiantes.gestor.map(mat => ({//se utiliza map para obtener el array de objetos
+            id: mat.id,
             nombre: mat.nombre,
-            asignaturas: mat.asignaturas.map(asig => asig.nombre)
+            asignaturas: mat.asignaturas.map(asig => asig.nombre),
+            registros: mat.registros
         }));
 
         localStorage.setItem("matriculaciones", JSON.stringify(matriculaciones)); //se pasa a string para guardarlo en local storage
@@ -441,7 +459,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             console.log(datos);
 
             datos.forEach(mat => {
-                let estudiante = listaEstudiantes.gestor.find(e => e.nombre === mat.nombre); // Buscar estudiante
+                let estudiante = listaEstudiantes.gestor.find(e => e.id === mat.id); // Buscar estudiante
                 //  console.log(estudiante);
                 if (estudiante) {
                     mat.asignaturas.forEach(nombreAsig => {
@@ -514,9 +532,10 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                         console.log(`${encontrarE.nombre} ha sido matriculado en ${encontrarA.nombre} con éxito.`);
                         mostrar.innerHTML = ""; // Limpiar el contenido del section
                         const fechas = `${encontrarE.nombre} ha sido matriculado en  ${encontrarA.nombre} con éxito.`;
-                        mostrarTexto(fechas);
+                        mostrarTexto(fechas);//mostramos al estudiante elegido y sus asignaturas matriculadas
                         guardarMatriculaciones();
-                        //mostramos al estudiante elegido y sus asignaturas matriculadas
+                        guardarRegistros();
+
                     } else {
                         mostrar.innerHTML = ""; // Limpiar el contenido del section
                         const error = `El estudiantes ${encontrarE.nombre} ya esta matriculado en la asignatura ${encontrarA.nombre}.`;
@@ -532,6 +551,8 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                     let texto = `${clave}. ${elemento.nombre}`;
                     mostrarTexto(texto);
                 });
+
+
             } else {
                 mostrar.innerHTML = ""; // Limpiar el contenido del section
                 const error = `No se encontró ningún estudiante con ID ${id}.`;
@@ -563,6 +584,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
     function guardarDesMatriculaciones() {
         let desmatriculaciones = listaEstudiantes.gestor.map(mat => ({//se utiliza map para obtener el array de objetos
+            id: mat.id,
             nombre: mat.nombre,
             asignaturas: mat.asignaturas.map(asig => asig.nombre)
         }));
@@ -580,7 +602,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             console.log(datos);
 
             datos.forEach(mat => {
-                let estudiante = listaEstudiantes.gestor.find(e => e.nombre === mat.nombre); // Buscar estudiante
+                let estudiante = listaEstudiantes.gestor.find(e => e.id === mat.id); // Buscar estudiante
                 //  console.log(estudiante);
                 if (estudiante) {
                     mat.asignaturas.forEach(nombreAsig => {
@@ -655,7 +677,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 let asig_des = listaAsignaturas.obtener_asignatura(asig_estu);
                 if (asig_des != false) {
                     guardarDesMatriculaciones();// tenemos que guardarlo antes de que se desmatricule la asignatura
-
+                    guardarRegistros();
                     let desma = estu_des.desmatricular(asig_des);
 
                     if (desma == true) {
@@ -1330,11 +1352,12 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
                 if (estudiante_fecha != false) {
                     console.log("Las asignaturas de las que se ha matriculado y desmatriculado hasta el momento son: ");
-                    console.log(estudiante_fecha.registros);
+                    console.log(cargarRegistros(estudiante_fecha));
 
                     let texto = "Las asignaturas de las que se ha matriculado y desmatriculado hasta el momento son: ";
                     mostrarTexto(texto);
-                    mostrarTexto(estudiante_fecha.registros);
+                    /*mostrarTexto(estudiante_fecha.registros);*/
+                    mostrarTexto(cargarRegistros(estudiante_fecha));
 
                 }
             }
@@ -1516,7 +1539,10 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
 
             mostrarTexto("Fechas de matriculación y desmatriculación:");
-            mostrarTexto(`Fecha: ${informe.registros}`);
+            mostrarTexto(`Fecha:`);
+            //console.log(informe); 
+            //console.log(cargarRegistros(informe));
+            mostrarTexto(cargarRegistros(informe));
 
 
             mostrarTexto("Promedio del estudiante:");
