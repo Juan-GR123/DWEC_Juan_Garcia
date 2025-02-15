@@ -296,10 +296,10 @@ export class GestorEs extends Gestores {
      */
     obtener_nombre_estudiante_pantalla(nombre) {
         let obtener = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
-    
+
         try {
             if (obtener.length > 0) {
-                return obtener.map(elemento => "El estudiante encontrado es " + elemento.toString()); 
+                return obtener.map(elemento => "El estudiante encontrado es " + elemento.toString());
                 // Ahora devuelve un array en lugar de usar console.log()
             } else {
                 throw new Error(`No se encontró ningún estudiante con el nombre ${nombre}`);
@@ -560,10 +560,10 @@ export class GestorAs extends Gestores {
 
     obtener_muchas_asignaturas_pantalla(nombre) {
         let obtener_As = this._gestor.filter(elemento => elemento.nombre.toLowerCase().includes(nombre.toLowerCase()));
-    
+
         try {
             if (obtener_As.length > 0) {
-                return obtener_As.map(elemento =>"La asignatura encontrada es " + elemento.toString()); 
+                return obtener_As.map(elemento => "La asignatura encontrada es " + elemento.toString());
                 // Ahora devuelve un array en lugar de usar console.log()
             } else {
                 throw new Error(`No se encontró ninguna asignatura con el nombre ${nombre}`);

@@ -155,6 +155,7 @@ function guardarRegistros() {
     let registros = listaEstudiantes.gestor.map(reg => ({
         id: reg.id,
         nombre: reg.nombre,
+        asignaturas: reg.asignaturas.map(asig => asig.nombre),
         registros: reg.registros
     }));
 
@@ -181,6 +182,31 @@ function cargarRegistros(estudiante) {
     }
 }
 
+/*function guardarMatriculaciones() {
+    let matriculaciones = listaEstudiantes.gestor.map(mat => ({//se utiliza map para obtener el array de objetos
+        id: mat.id,
+        nombre: mat.nombre,
+        asignaturas: mat.asignaturas.map(asig => asig.nombre),
+        registros: mat.registros
+    }));
+
+    localStorage.setItem("matriculaciones", JSON.stringify(matriculaciones)); //se pasa a string para guardarlo en local storage
+    console.log(matriculaciones);
+    console.log(localStorage.getItem("matriculaciones"));
+}
+
+
+function guardarDesMatriculaciones() {
+    let desmatriculaciones = listaEstudiantes.gestor.map(mat => ({//se utiliza map para obtener el array de objetos
+        id: mat.id,
+        nombre: mat.nombre,
+        asignaturas: mat.asignaturas.map(asig => asig.nombre)
+    }));
+
+    localStorage.setItem("desmatriculaciones", JSON.stringify(desmatriculaciones)); //se pasa a string para guardarlo en local storage
+    console.log(desmatriculaciones);
+    console.log(localStorage.getItem("desmatriculaciones"));
+}*/
 
 /////caso 1
 
@@ -438,21 +464,10 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
     articulo.style.display = "none";
 
 
-    function guardarMatriculaciones() {
-        let matriculaciones = listaEstudiantes.gestor.map(mat => ({//se utiliza map para obtener el array de objetos
-            id: mat.id,
-            nombre: mat.nombre,
-            asignaturas: mat.asignaturas.map(asig => asig.nombre),
-            registros: mat.registros
-        }));
 
-        localStorage.setItem("matriculaciones", JSON.stringify(matriculaciones)); //se pasa a string para guardarlo en local storage
-        console.log(matriculaciones);
-        console.log(localStorage.getItem("matriculaciones"));
-    }
 
     function cargarMatriculaciones() {
-        let matriculacionesGuardadas = localStorage.getItem("matriculaciones");
+        let matriculacionesGuardadas = localStorage.getItem("registros");
         console.log(matriculacionesGuardadas);
         if (matriculacionesGuardadas) {
             let datos = matriculacionesGuardadas ? JSON.parse(matriculacionesGuardadas) : []; // Convertir a array con json.parse
@@ -533,7 +548,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                         mostrar.innerHTML = ""; // Limpiar el contenido del section
                         const fechas = `${encontrarE.nombre} ha sido matriculado en  ${encontrarA.nombre} con éxito.`;
                         mostrarTexto(fechas);//mostramos al estudiante elegido y sus asignaturas matriculadas
-                        guardarMatriculaciones();
+                        //guardarMatriculaciones();
                         guardarRegistros();
 
                     } else {
@@ -582,20 +597,10 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
     //comentar el cargar des y matriculaciones y cambiar el metodo guardar matriculaciones para que guarde los registros directamente en las asignaturas
 
-    function guardarDesMatriculaciones() {
-        let desmatriculaciones = listaEstudiantes.gestor.map(mat => ({//se utiliza map para obtener el array de objetos
-            id: mat.id,
-            nombre: mat.nombre,
-            asignaturas: mat.asignaturas.map(asig => asig.nombre)
-        }));
 
-        localStorage.setItem("desmatriculaciones", JSON.stringify(desmatriculaciones)); //se pasa a string para guardarlo en local storage
-        console.log(desmatriculaciones);
-        console.log(localStorage.getItem("desmatriculaciones"));
-    }
 
     function cargarDesMatriculaciones() {
-        let desMatriculacionesGuardadas = localStorage.getItem("desmatriculaciones");
+        let desMatriculacionesGuardadas = localStorage.getItem("registros");
         console.log(desMatriculacionesGuardadas);
         if (desMatriculacionesGuardadas) {
             let datos = desMatriculacionesGuardadas ? JSON.parse(desMatriculacionesGuardadas) : []; // Convertir a array con json.parse
@@ -676,8 +681,8 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 let asig_estu = localStorage.getItem("desAsig");
                 let asig_des = listaAsignaturas.obtener_asignatura(asig_estu);
                 if (asig_des != false) {
-                    guardarDesMatriculaciones();// tenemos que guardarlo antes de que se desmatricule la asignatura
-                   
+                    //guardarDesMatriculaciones();// tenemos que guardarlo antes de que se desmatricule la asignatura
+
                     let desma = estu_des.desmatricular(asig_des);
                     guardarRegistros();
 
@@ -806,8 +811,23 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 const error = `El ID introducido debe ser un número positivo.`;
                 mostrarTexto(error);
             }
+            //eliminamos tambien al estudiante de la clase Estudiantes para que no haya conflicto de ID
+            let idEliminar = listaEstudiantes._gestor[elim_estu];
+            console.log(idEliminar);
+
+            // Liberar el ID eliminado en Estudiantes.numeros
+            const indexId = Estudiantes.numeros.indexOf(idEliminar.id);
+            console.log(indexId);
+            if (indexId !== -1) {
+                Estudiantes.numeros.splice(indexId, 1);
+            }
+
 
             let comprobacion = listaEstudiantes.eliminar_estudiante(elim_estu);//si el estudiante existe, entonces se elimina indicando su id
+
+
+
+
 
             if (comprobacion != false) {
                 console.log(`El estudiante con ID ${elim_estu} ha sido eliminado correctamente.`);
@@ -815,6 +835,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 mostrarTexto(texto);
                 // Guardar en localStorage
                 guardarEstudiantes();
+                guardarRegistros();
                 //mostrar.innerHTML = ""; // Limpiar el contenido del section
                 let mostrar_Estu2 = `Estudiantes en la lista:`;
 
@@ -928,6 +949,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 let texto = `La asignatura ha sido eliminada correctamente.`;
                 mostrarTexto(texto);
                 guardarAsignaturas();
+                guardarRegistros();
 
                 let mostrar_Asig3 = `Asignaturas en la lista:`;
 

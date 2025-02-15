@@ -153,6 +153,8 @@ export class Estudiantes {
         return `${this.#id}: ${this.#nombre},  ${this.#edad}, ${this.#direccion}`;
     }
 
+
+
     /**
     * @typedef {Object} asignatura - **Objeto con el nombre y nota de la asignatura.**
     * @property {string} nombre - *El nombre de la asignatura*
@@ -291,7 +293,7 @@ export class Estudiantes {
     */
 
 
-    agregar_calificacion(asignatura, nota) { 
+    agregar_calificacion(asignatura, nota) {
         // Validar que la nota sea un número válido
         try {
             if (typeof nota != 'number' || nota < 0 || nota > 10) {
@@ -325,16 +327,16 @@ export class Estudiantes {
     }
 
 
-     /**
-     * ## método asig_mostrar_pantalla()
-     * <br>
-     * En este método se devolverán las asignaturas y las notas del estudiante
-     */
-     asig_mostrar_pantalla(){
+    /**
+    * ## método asig_mostrar_pantalla()
+    * <br>
+    * En este método se devolverán las asignaturas y las notas del estudiante
+    */
+    asig_mostrar_pantalla() {
         let array = [];
 
         this.#asignaturas.forEach(asig => {
-          array.push(`\n Asignatura: ${asig.nombre}, Nota: ${asig.nota}`);
+            array.push(`\n Asignatura: ${asig.nombre}, Nota: ${asig.nota}`);
         });
         return array;
     }
