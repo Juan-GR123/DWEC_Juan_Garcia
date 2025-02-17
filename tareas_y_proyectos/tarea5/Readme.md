@@ -20,7 +20,7 @@
 - Valida que todos los campos estén completos antes de enviar el formulario.
 - Las asignaturas se guardan en localStorage y se muestran en la página.
 
-### Caso 3: Matricular Estudiantes en Asignaturas
+### Caso 3: Matricular Estudiantes de Asignatura
 - Permite matricular a un estudiante en una asignatura seleccionada.
 - Valida que el estudiante y la asignatura existan en la base de datos.
 - Muestra un mensaje de éxito o error según el caso (si ya está matriculado o no se encuentra la asignatura).
@@ -44,14 +44,14 @@
 - Guarda la lista actualizada de asignaturas en localStorage después de la eliminación.
 - Muestra la lista de asignaturas actualizada.
 
-### Caso 7
+### Caso 7: Calificar asignaturas y estudiantes
 
 - Muestra y oculta el artículo de la asignatura al hacer clic en el botón.
 - Valida que todos los campos estén completos antes de enviar el formulario.
 - Añade la calificación a la asignatura seleccionada y calcula el promedio de las calificaciones.
 - Asocia la calificación final de la asignatura al estudiante y elimina las calificaciones previas de la asignatura para que no haya conflictos con las nuevas notas.
 
-### Caso 8
+### Caso 8: Promedio de un estudiante
 
 - Muestra y oculta el artículo de la lista de estudiantes al hacer clic en el botón.
 - Guarda los valores de los inputs en localStorage y los carga al iniciar.
@@ -59,13 +59,13 @@
 - Calcula el promedio de las calificaciones del estudiante seleccionado y muestra las asignaturas con sus respectivas notas.
 
 
-### Caso 9: Mostrar Lista de Estudiantes y Promedio General
+### Caso 9: Promedio de todos los estudiantes
 
 - Obtiene la lista de estudiantes y muestra su información (nombre, promedio, asignaturas).
 
 - Calcula el promedio de todos los estudiantes y lo muestra en pantalla.
 
-### Caso 10: Validación y Registro de Datos de Estudiantes
+### Caso 10: Fechas de matriculación o desmatriculación
 
 - Permite ingresar datos de estudiantes en un formulario.
 
