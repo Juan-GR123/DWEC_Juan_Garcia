@@ -610,7 +610,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
 
 
-    function cargarDesMatriculaciones() {
+   /* function cargarDesMatriculaciones() {
         let desMatriculacionesGuardadas = localStorage.getItem("registros");
         console.log(desMatriculacionesGuardadas);
         if (desMatriculacionesGuardadas) {
@@ -631,7 +631,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 }
             });
         }
-    }
+    }*/
 
     //cargamos las desmatriculaciones
     //cargarDesMatriculaciones();
