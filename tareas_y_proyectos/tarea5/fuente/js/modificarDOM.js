@@ -182,31 +182,71 @@ function cargarRegistros(estudiante) {
     }
 }
 
-/*function guardarMatriculaciones() {
-    let matriculaciones = listaEstudiantes.gestor.map(mat => ({//se utiliza map para obtener el array de objetos
-        id: mat.id,
-        nombre: mat.nombre,
-        asignaturas: mat.asignaturas.map(asig => asig.nombre),
-        registros: mat.registros
-    }));
+function cargarMatriculaciones() {
+    let matriculacionesGuardadas = localStorage.getItem("registros");
+    console.log(matriculacionesGuardadas);
+    if (matriculacionesGuardadas) {
+        let datos = matriculacionesGuardadas ? JSON.parse(matriculacionesGuardadas) : []; // Convertir a array con json.parse
+        console.log(datos);
 
-    localStorage.setItem("matriculaciones", JSON.stringify(matriculaciones)); //se pasa a string para guardarlo en local storage
-    console.log(matriculaciones);
-    console.log(localStorage.getItem("matriculaciones"));
+        datos.forEach(mat => {
+            let estudiante = listaEstudiantes.gestor.find(e => e.id === mat.id); // Buscar estudiante
+            //  console.log(estudiante);
+            if (estudiante) {
+                mat.asignaturas.forEach(nombreAsig => {
+                    let asignatura = listaAsignaturas.gestor.find(asig => asig.nombre === nombreAsig); // Buscar asignatura en listaAsignaturas
+                    if (asignatura) {
+                        // Usar el método matricular para añadir la asignatura al estudiante
+                        estudiante.matricular(asignatura);
+                    }
+                });
+            }
+        });
+    }
 }
 
+//cargamos las matriculaciones
+cargarMatriculaciones();
 
-function guardarDesMatriculaciones() {
-    let desmatriculaciones = listaEstudiantes.gestor.map(mat => ({//se utiliza map para obtener el array de objetos
-        id: mat.id,
-        nombre: mat.nombre,
-        asignaturas: mat.asignaturas.map(asig => asig.nombre)
+// Función para guardar estudiantes y sus notas en localStorage
+function guardarNotas() {
+    let estudiantesNotas = listaEstudiantes.gestor.map(est => ({
+        id: est.id,
+        nombre: est.nombre,
+        asignaturas: est.asignaturas.map(asig => ({
+            nombre: asig.nombre,
+            nota: asig.nota
+        }))
     }));
 
-    localStorage.setItem("desmatriculaciones", JSON.stringify(desmatriculaciones)); //se pasa a string para guardarlo en local storage
-    console.log(desmatriculaciones);
-    console.log(localStorage.getItem("desmatriculaciones"));
-}*/
+    localStorage.setItem("notasEstudiantes", JSON.stringify(estudiantesNotas)); //lo paso a string para guardarlo
+    console.log(estudiantesNotas);
+}
+
+// Función para cargar estudiantes con sus notas desde localStorage
+function cargarNotas() {
+    let estudiantesGuardados = localStorage.getItem("notasEstudiantes");
+    console.log(estudiantesGuardados);
+
+    if (estudiantesGuardados) {
+        estudiantesGuardados = JSON.parse(estudiantesGuardados); //paso de string a array
+
+        estudiantesGuardados.forEach(estudianteData => {
+            let estudiante = listaEstudiantes.obtener_estudiante(estudianteData.id);
+            console.log(estudiante);
+            if (estudiante) {
+                estudianteData.asignaturas.forEach(asigData => {
+                    estudiante.agregar_calificacion(asigData, asigData.nota);
+                    console.log(estudiante);
+                });
+            }
+        });
+    }
+}
+
+// Cargar notas al inicio
+cargarNotas();
+
 
 /////caso 1
 
@@ -463,35 +503,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
     // Ocultar el articulo al cargar la página
     articulo.style.display = "none";
 
-
-
-
-    function cargarMatriculaciones() {
-        let matriculacionesGuardadas = localStorage.getItem("registros");
-        console.log(matriculacionesGuardadas);
-        if (matriculacionesGuardadas) {
-            let datos = matriculacionesGuardadas ? JSON.parse(matriculacionesGuardadas) : []; // Convertir a array con json.parse
-            console.log(datos);
-
-            datos.forEach(mat => {
-                let estudiante = listaEstudiantes.gestor.find(e => e.id === mat.id); // Buscar estudiante
-                //  console.log(estudiante);
-                if (estudiante) {
-                    mat.asignaturas.forEach(nombreAsig => {
-                        let asignatura = listaAsignaturas.gestor.find(asig => asig.nombre === nombreAsig); // Buscar asignatura en listaAsignaturas
-                        if (asignatura) {
-                            // Usar el método matricular para añadir la asignatura al estudiante
-                            estudiante.matricular(asignatura);
-                        }
-                    });
-                }
-            });
-        }
-    }
-
-    //cargamos las matriculaciones
-    cargarMatriculaciones();
-
     // Mostrar el articulo al hacer clic en el botón
     boton.addEventListener("click", function () {
         articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
@@ -623,7 +634,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
     }
 
     //cargamos las desmatriculaciones
-    cargarDesMatriculaciones();
+    //cargarDesMatriculaciones();
 
     // Mostrar el articulo al hacer clic en el botón
     boton.addEventListener("click", function () {
@@ -684,6 +695,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                     //guardarDesMatriculaciones();// tenemos que guardarlo antes de que se desmatricule la asignatura
 
                     let desma = estu_des.desmatricular(asig_des);
+                    guardarNotas();
                     guardarRegistros();
 
                     if (desma == true) {
@@ -811,11 +823,12 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 const error = `El ID introducido debe ser un número positivo.`;
                 mostrarTexto(error);
             }
-            //eliminamos tambien al estudiante de la clase Estudiantes para que no haya conflicto de ID
+
             let idEliminar = listaEstudiantes._gestor[elim_estu];
             console.log(idEliminar);
 
             // Liberar el ID eliminado en Estudiantes.numeros
+            //eliminamos tambien al estudiante de la clase Estudiantes para que no haya conflicto de ID al crear un nuevo usuario
             const indexId = Estudiantes.numeros.indexOf(idEliminar.id);
             console.log(indexId);
             if (indexId !== -1) {
@@ -984,43 +997,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
     // Ocultar el articulo al cargar la página
     articulo.style.display = "none";
-
-    // Función para guardar estudiantes y sus notas en localStorage
-    function guardarNotas() {
-        let estudiantesNotas = listaEstudiantes.gestor.map(est => ({
-            id: est.id,
-            nombre: est.nombre,
-            asignaturas: est.asignaturas.map(asig => ({
-                nombre: asig.nombre,
-                nota: asig.nota
-            }))
-        }));
-
-        localStorage.setItem("notasEstudiantes", JSON.stringify(estudiantesNotas)); //lo paso a string para guardarlo
-        console.log(estudiantesNotas);
-    }
-
-    // Función para cargar estudiantes con sus notas desde localStorage
-    function cargarNotas() {
-        let estudiantesGuardados = localStorage.getItem("notasEstudiantes");
-        console.log(estudiantesGuardados);
-
-        if (estudiantesGuardados) {
-            estudiantesGuardados = JSON.parse(estudiantesGuardados); //paso de string a array
-
-            estudiantesGuardados.forEach(estudianteData => {
-                let estudiante = listaEstudiantes.obtener_estudiante(estudianteData.id);
-                if (estudiante) {
-                    estudianteData.asignaturas.forEach(asigData => {
-                        estudiante.agregar_calificacion({ nombre: asigData.nombre }, asigData.nota);
-                    });
-                }
-            });
-        }
-    }
-
-    // Cargar notas al inicio
-    cargarNotas();
 
     // Mostrar el articulo al hacer clic en el botón
     boton.addEventListener("click", function () {
