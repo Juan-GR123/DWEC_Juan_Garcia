@@ -1,3 +1,19 @@
 .texto-rojo{
    color: red;
 }
+
+section{
+   position: relative;
+}
+
+p{
+   height: 50px;
+   background-color: coral;
+}
+
+#animacion{
+   width: 150px;
+   height: 100px;
+   background-color: coral;
+   position: relative;
+}
