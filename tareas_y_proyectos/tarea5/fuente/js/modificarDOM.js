@@ -300,17 +300,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Cargar datos guardados en localStorage
-    inputs.forEach(input => {
-        /*const valor = localStorage.getItem(input.id);
-        if (valor) {
-            input.value = valor;
-        }*/
-
+    /*inputs.forEach(input => {
         // Guardar cambios en localStorage cada vez que se edite un input
         input.addEventListener("input", function () {
             localStorage.setItem(input.id, input.value);
         });
-    });
+    });*/
 
     // Validar articulo antes de enviarlo
     form.addEventListener("submit", function (event) {
@@ -416,20 +411,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
     });
 
-
-    // Cargar datos guardados en localStorage
-    inputs.forEach(input => {
-        /*const valor = localStorage.getItem(input.id);
-        if (valor) {
-            input.value = valor;
-        }*/
-
-        // Guardar cambios en localStorage cada vez que se edite un input
-        input.addEventListener("input", function () {
-            localStorage.setItem(input.id, input.value);
-        });
-    });
-
     // Validar articulo antes de enviarlo
     form.addEventListener("submit", function (evento) {
         evento.preventDefault(); // Evita el envío del articulo
@@ -508,19 +489,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
     });
 
-    // Cargar datos guardados en localStorage
-    inputs.forEach(input => {
-        /*const valor = localStorage.getItem(input.id);
-        if (valor) {
-            input.value = valor;
-        }*/
-
-        // Guardar cambios en localStorage cada vez que se edite un input
-        input.addEventListener("input", function () {
-            localStorage.setItem(input.id, input.value);
-        });
-    });
-
     // Validar articulo antes de enviarlo
     form.addEventListener("submit", function (evento) {
         let valido = true;
@@ -531,7 +499,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 input.style.border = "2px solid red"; // Resalta el input vacío
             } else {
                 input.style.border = ""; // Elimina el borde rojo si se completa
-                input.value = '';
+                //input.value = '';
             }
         });
 
@@ -541,7 +509,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         } else {
             console.log("articulo enviado correctamente");
 
-            let id = localStorage.getItem("ID");
+            let id = document.querySelector("#ID").value;
             id = Number(id);
 
             //Buscamos el id del estudiante en el array que hemos creado de estudiantes
@@ -549,7 +517,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
 
             if (encontrarE != false) {
-                let asig = localStorage.getItem("nombreA2");
+                let asig = document.querySelector("#nombreA2").value;
                 //Buscamos el nombre de la asignatura en el array que hemos creado de Asignaturas
                 let encontrarA = listaAsignaturas.obtener_asignatura(asig);
                 if (encontrarA != false) {
@@ -642,19 +610,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
     });
 
 
-    // Cargar datos guardados en localStorage
-    inputs.forEach(input => {
-        /*const valor = localStorage.getItem(input.id);
-        if (valor) {
-            input.value = valor;
-        }*/
-
-        // Guardar cambios en localStorage cada vez que se edite un input
-        input.addEventListener("input", function () {
-            localStorage.setItem(input.id, input.value);
-        });
-    });
-
     form.addEventListener("submit", function (evento) {
         let valido = true;
 
@@ -664,7 +619,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 input.style.border = "2px solid red"; // Resalta el input vacío
             } else {
                 input.style.border = ""; // Elimina el borde rojo si se completa
-                input.value = '';
+               // input.value = '';
             }
         });
 
@@ -674,7 +629,8 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         } else {
             console.log("articulo enviado correctamente");
 
-            let id2 = localStorage.getItem("IDDes");
+            let id2 = document.getElementById("IDDes").value;
+            //console.log(id2);
             id2 = Number(id2);
 
             //Buscamos el id del estudiante en el array que hemos creado de estudiantes
@@ -689,7 +645,8 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                     mostrarTexto(texto);
 
                 });
-                let asig_estu = localStorage.getItem("desAsig");
+                let asig_estu = document.getElementById("desAsig").value;
+                //console.log(asig_estu);
                 let asig_des = listaAsignaturas.obtener_asignatura(asig_estu);
                 if (asig_des != false) {
                     //guardarDesMatriculaciones();// tenemos que guardarlo antes de que se desmatricule la asignatura
@@ -768,20 +725,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
     });
 
-
-    // Cargar datos guardados en localStorage
-    inputs.forEach(input => {
-        /*const valor = localStorage.getItem(input.id);
-        if (valor) {
-            input.value = valor;
-        }*/
-
-        // Guardar cambios en localStorage cada vez que se edite un input
-        input.addEventListener("input", function () {
-            localStorage.setItem(input.id, input.value);
-        });
-    });
-
     form.addEventListener("submit", function (evento) {
         let valido = true;
 
@@ -791,7 +734,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 input.style.border = "2px solid red"; // Resalta el input vacío
             } else {
                 input.style.border = ""; // Elimina el borde rojo si se completa
-                input.value = '';
             }
         });
 
@@ -816,7 +758,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
 
 
 
-            let elim_estu = localStorage.getItem("ID_Eli");
+            let elim_estu = document.getElementById("ID_Eli").value;
             elim_estu = Number(elim_estu);
 
             if (isNaN(elim_estu) || elim_estu < 0) {
@@ -903,20 +845,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
     });
 
-
-    // Cargar datos guardados en localStorage
-    inputs.forEach(input => {
-        /* const valor = localStorage.getItem(input.id);
-         if (valor) {
-             input.value = valor;
-         }*/
-
-        // Guardar cambios en localStorage cada vez que se edite un input
-        input.addEventListener("input", function () {
-            localStorage.setItem(input.id, input.value);
-        });
-    });
-
     form.addEventListener("submit", function (evento) {
         let valido = true;
 
@@ -926,7 +854,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 input.style.border = "2px solid red"; // Resalta el input vacío
             } else {
                 input.style.border = ""; // Elimina el borde rojo si se completa
-                input.value = '';
             }
         });
 
@@ -948,7 +875,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             }
             listaAsignaturas.listar_asignaturas();//muestra las asignaturas antes de eliminarlas
 
-            let elim_asig = localStorage.getItem("Elim_Asig");
+            let elim_asig = document.getElementById("Elim_Asig").value;
 
             if (typeof elim_asig != "string" || elim_asig.trim() === "") {
                 const error = `El nombre de la asignatura introducido no es válido.`;
@@ -1003,20 +930,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
     });
 
-
-    // Cargar datos guardados en localStorage
-    inputs.forEach(input => {
-        /*const valor = localStorage.getItem(input.id);
-        if (valor) {
-            input.value = valor;
-        }*/
-
-        // Guardar cambios en localStorage cada vez que se edite un input
-        input.addEventListener("input", function () {
-            localStorage.setItem(input.id, input.value);
-        });
-    });
-
     form.addEventListener("submit", function (evento) {
         let valido = true;
 
@@ -1026,7 +939,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 input.style.border = "2px solid red"; // Resalta el input vacío
             } else {
                 input.style.border = ""; // Elimina el borde rojo si se completa
-                input.value = '';
             }
         });
 
@@ -1035,7 +947,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             alert("Por favor, completa todos los campos antes de continuar.");
         } else {
             //se califican asignaturas y el promedio de esas notas seran la nota final del estudiantes
-            let nombre_asig = localStorage.getItem("nombre_Asig");
+            let nombre_asig = document.getElementById("nombre_Asig").value;
             let asignatura_N = listaAsignaturas.obtener_asignatura(nombre_asig);
 
             if (asignatura_N != false) {
@@ -1043,7 +955,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 let nota = 0;
                 let calificacion_compr = null;
 
-                nota = localStorage.getItem("nota_Asig");
+                nota = document.getElementById("nota_Asig").value;
                 nota = Number(nota);
                 calificacion_compr = asignatura_N.agregar_calificacion(nota);
 
@@ -1065,7 +977,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                         mostrarTexto(personas);
                     }
 
-                    let id_Estudiante = localStorage.getItem("Agregar_ID");
+                    let id_Estudiante = document.getElementById("Agregar_ID").value;
                     id_Estudiante = Number(id_Estudiante);
                     let estudiante = listaEstudiantes.obtener_estudiante(id_Estudiante);
 
@@ -1142,19 +1054,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
         articulo.style.display = (articulo.style.display === "none") ? "block" : "none";
     });
 
-
-    // Cargar datos guardados en localStorage
-    inputs.forEach(input => {
-        /*const valor = localStorage.getItem(input.id);
-        if (valor) {
-            input.value = valor; //pone en los inputs los valores que tienen sus localstorage
-        }*/
-
-        // Guardar cambios en localStorage cada vez que se edite un input
-        input.addEventListener("input", function () {
-            localStorage.setItem(input.id, input.value);
-        });
-    });
+  
 
     form.addEventListener("submit", function (evento) {
         let valido = true;
@@ -1165,7 +1065,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 input.style.border = "2px solid red"; // Resalta el input vacío
             } else {
                 input.style.border = ""; // Elimina el borde rojo si se completa
-                input.value = '';
             }
         });
 
@@ -1183,7 +1082,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 let personas = `${persona.id}, ${persona.nombre}, ${persona.edad}, ${persona.direccion} `;
                 mostrarTexto(personas);
             }
-            let promedio_Es = localStorage.getItem("ID_8");
+            let promedio_Es = document.getElementById("ID_8").value;
             promedio_Es = Number(promedio_Es);
             let obtener_promedio = listaEstudiantes.obtener_estudiante(promedio_Es);
 
@@ -1296,19 +1195,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
     });
 
 
-    // Cargar datos guardados en localStorage
-    inputs.forEach(input => {
-        /*const valor = localStorage.getItem(input.id);
-        if (valor) {
-            input.value = valor; //pone en los inputs los valores que tienen sus localstorage
-        }*/
-
-        // Guardar cambios en localStorage cada vez que se edite un input
-        input.addEventListener("input", function () {
-            localStorage.setItem(input.id, input.value);
-        });
-    });
-
     form.addEventListener("submit", function (evento) {
         let valido = true;
 
@@ -1318,7 +1204,6 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 input.style.border = "2px solid red"; // Resalta el input vacío
             } else {
                 input.style.border = ""; // Elimina el borde rojo si se completa
-                input.value = '';
             }
         });
 
@@ -1337,7 +1222,7 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
             }
 
 
-            let F_matricula = localStorage.getItem("ID_10");
+            let F_matricula = document.getElementById("ID_10").value;
             F_matricula = Number(F_matricula);
 
             if (isNaN(F_matricula) || F_matricula < 0) {
@@ -1405,24 +1290,10 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
     });
 
 
-
-    // Cargar datos guardados en localStorage
-    inputs.forEach(input => {
-        /*const valor = localStorage.getItem(input.id);
-        if (valor) {
-            input.value = valor; //pone en los inputs los valores que tienen sus localstorage
-        }*/
-
-        // Guardar cambios en localStorage cada vez que se edite un input
-        input.addEventListener("input", function () {
-            localStorage.setItem(input.id, input.value);
-        });
-    });
-
     form.addEventListener("submit", function () {
         mostrar.innerHTML = ""; // Limpiar el contenido del section
 
-        if (localStorage.getItem("buscarE") != null) {
+        if (document.getElementById("buscarE").value != "") {
             listaEstudiantes.listar_estudiantes();
             let mostrar_Estu5 = `Estudiantes en la lista:`;
 
@@ -1433,8 +1304,8 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 mostrarTexto(personas);
             }
 
-            let buscar_E = localStorage.getItem("buscarE");
-
+            let buscar_E = document.getElementById("buscarE").value;
+            console.log(buscar_E);
             if (buscar_E.trim() !== "") {
                 listaEstudiantes.obtener_nombre_estudiante(buscar_E);//con console log
                 let texto = listaEstudiantes.obtener_nombre_estudiante_pantalla(buscar_E); //con map para devolver un array
@@ -1447,9 +1318,11 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 }
             }
 
-            localStorage.clear(); //te limpia local storage
+            inputs.forEach(input =>{
+                input.value = '';
+            });
 
-        } else if (localStorage.getItem("buscarA") != null) {
+        } else if (document.getElementById("buscarA").value != "") {
             listaAsignaturas.listar_asignaturas();
 
             let mostrar_Asig4 = `Asignaturas en la lista:`;
@@ -1461,11 +1334,13 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 mostrarTexto(asignaturas);
             }
 
-            let buscar_A = localStorage.getItem("buscarA");
+            let buscar_A = document.getElementById("buscarA").value;
+            console.log(buscar_A);
 
             if (buscar_A.trim() !== "") {
                 listaAsignaturas.obtener_muchas_asignaturas(buscar_A); //con console.log
                 let texto_A = listaAsignaturas.obtener_muchas_asignaturas_pantalla(buscar_A);// con map para devolver un array
+                console.log(texto_A);
                 if (Array.isArray(texto_A)) { //si es un array va mostrando a información
                     //linea a linea con un foreach
                     texto_A.forEach(resul => mostrarTexto(resul));
@@ -1474,8 +1349,9 @@ document.addEventListener("DOMContentLoaded", function () { // DOMContentLoaded 
                 }
             }
 
-
-            localStorage.clear(); //te limpia local storage
+            inputs.forEach(input =>{
+                input.value = '';
+            });
         }
     });
 
