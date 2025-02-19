@@ -2,64 +2,64 @@ import $, { event } from 'jquery'; //referencia a todos los elementos de jquery
 
 
 $(() => {
-    const apiUrl = 'https://unsplash-image-search-api.p.rapidapi.com/search?page=1&query=Tesla';
-    const apiKey = ''; // Sustituye con tu clave de RapidAPI
-    let page = 1;
+    const apiUrl = 'https://jsonplaceholder.typicode.com/posts'; // Reemplaza esta URL por la de tu API si es necesario
+    const apiKey = ''; // Si estás usando una API que requiere autenticación, coloca aquí tu clave
     let loading = false;
 
-    function loadImages(page) {
+    // Función para cargar las tarjetas
+    function loadCards() {
         if (loading) return;
         loading = true;
 
         $.ajax({
             url: apiUrl,
             method: 'GET',
-            data: {
-                page: page,
-                per_page: 10, // Número de imágenes por página
-            },
             headers: {
-                'x-rapidapi-key': '',
                 'X-RapidAPI-Key': apiKey,
-                'X-RapidAPI-Host': 'unsplash-image-search-api.p.rapidapi.com',
+                'X-RapidAPI-Host': 'jsonplaceholder30.p.rapidapi.com'
             },
             success: function (response) {
-                console.log(response);  // Verifica la respuesta para asegurarte de la estructura de los datos
+                console.log(response); // Verifica la respuesta
 
-                // Accedemos correctamente a la propiedad "data.results"
-                const images = response.data.results; // Ahora tomamos `response.data.results`
+                // Limitar la cantidad de tarjetas cargadas para la demo (puedes quitar este límite si deseas cargar más)
+                const data = response.slice(0, 10); // Limitamos a 10 elementos para probar
 
-                if (Array.isArray(images)) {
-                    images.forEach(image => {
-                        const imageElement = `
-                                    <article class="bg-white shadow-md rounded-lg overflow-hidden">
-                                        <img class="w-full h-64 object-cover" src="${image.urls.small}" alt="${image.alt_description}">
-                                    </article>
-                                `;
-                        $('#image-container').append(imageElement);
-                    });
-                } else {
-                    console.error('La respuesta de la API no contiene un array en "data.results":', response);
-                }
+                data.forEach(item => {
+                    // Agregar un parámetro de tiempo único para evitar la caché
+                    const card = `
+                          <article class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out">
+                            <img class="w-full h-60 object-cover" src="https://cataas.com/cat?unique=${Math.random()}" alt="Imagen de ejemplo">
+                             <section class="p-4">
+                                <h3 class="text-xl font-semibold text-gray-800">${item.title}</h3>
+                                 <p class="text-gray-600 text-sm mt-2">${item.body.substring(0, 100)}...</p>
+                             </section>
+                             </article>
+                    `;
+                    $('#card-container').append(card);
+                });
 
                 loading = false;
             },
             error: function (error) {
-                console.error('Error al cargar imágenes:', error);
+                console.error('Error al cargar las tarjetas:', error);
                 loading = false;
             }
         });
     }
 
-    // Cargar las primeras imágenes al inicio
-    loadImages(page);
-
-    // Detectar el scroll infinito
-    $(window).scroll(() => {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
-            page++;
-            loadImages(page);
+    // Función para detectar si se llegó al final de la página
+    function checkScroll() {
+        // Detectamos si el usuario ha llegado al final de la página
+        const scrollPosition = $(window).scrollTop() + $(window).height();
+        const documentHeight = $(document).height();
+        if (scrollPosition >= documentHeight - 200) {
+            loadCards(); // Cargar más tarjetas si llegamos cerca del final
         }
-    });
-});
+    }
 
+    // Cargar las primeras tarjetas al inicio
+    loadCards();
+
+    // Evento de scroll para cargar más tarjetas cuando el usuario llegue al final
+    $(window).on('scroll', checkScroll);
+});
