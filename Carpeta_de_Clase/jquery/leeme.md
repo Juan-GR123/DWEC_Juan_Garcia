@@ -1,4 +1,4 @@
-jqy¡uery
+jquery
 
 - biblioteca Javascript
 - 
