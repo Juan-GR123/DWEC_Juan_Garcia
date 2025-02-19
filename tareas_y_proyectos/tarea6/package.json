@@ -5,8 +5,8 @@
   "scripts": {
     "vigilar": "tailwindcss -i ./fuente/estilos/principal.css -o ./fuente/estilos/salida.css --watch",
     "compilar": "tailwindcss -i ./fuente/estilos/principal.css -o ./fuente/estilos/salida.css",
-    "parcel:des": "parcel serve fuente/index.html --dist-dir compilado/desarrollo",
-    "parcel:prod": "parcel build fuente/index.html --dist-dir compilado/desarrollo",
+    "parcel:des": "parcel serve fuente/jquery.html --dist-dir compilado/desarrollo",
+    "parcel:prod": "parcel build fuente/jquery.html --dist-dir compilado/desarrollo",
     "prod": "run-s limpia parcel:prod",
     "limpia": "rimraf compilado .parcel-cache",
     "des": "run-s limpia parcel:des"
