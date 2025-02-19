@@ -22,7 +22,7 @@ $(() => {
                 console.log(response); // Verifica la respuesta
 
                 // Limitar la cantidad de tarjetas cargadas para la demo (puedes quitar este límite si deseas cargar más)
-                const data = response.slice(0, 10); // Limitamos a 10 elementos para probar
+                const data = response.slice(0, 10); // Limitamos a 10 elementos para probar 
 
                 data.forEach(item => {
                     // Agregar un parámetro de tiempo único para evitar la caché
@@ -61,5 +61,5 @@ $(() => {
     loadCards();
 
     // Evento de scroll para cargar más tarjetas cuando el usuario llegue al final
-    $(window).on('scroll', checkScroll);
+    $(window).on('scroll', checkScroll); //Activa la función checkScroll cada vez que el usuario se desplaza.
 });
