@@ -1,7 +1,7 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-import MiComponente from './components/MiComponente.vue';
+import HelloWorld from './components/nodos/HelloWorld.vue'
+import TheWelcome from './components/nodos/TheWelcome.vue'
+import MiComponente from './components/nodos/MiComponente.vue';
 </script>
 
 <template>
