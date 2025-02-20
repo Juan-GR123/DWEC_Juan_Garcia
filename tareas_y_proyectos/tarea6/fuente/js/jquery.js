@@ -11,7 +11,7 @@ $(() => {
         if (loading) return;
         loading = true;
 
-        $.ajax({
+        $.ajax({ // $.ajax Permite enviar y recibir datos sin recargar la página, soportando métodos como GET, POST, PUT, y DELETE.
             url: apiUrl,
             method: 'GET',
             headers: {
@@ -20,11 +20,11 @@ $(() => {
             },
             success: function (response) {
                 console.log(response); // Verifica la respuesta
+                //array de objetos, en este caso serán objetos con titulos y resumenes
 
-                // Limitar la cantidad de tarjetas cargadas para la demo (puedes quitar este límite si deseas cargar más)
                 const data = response.slice(0, 10); // Limitamos a 10 elementos para probar 
 
-                data.forEach(item => {
+                data.forEach(item => { //item es un objeto dentro del array
                     // Agregar un parámetro de tiempo único para evitar la caché
                     const card = `
                           <article class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out">
@@ -34,7 +34,7 @@ $(() => {
                                  <p class="text-gray-600 text-sm mt-2">${item.body.substring(0, 100)}...</p>
                              </section>
                              </article>
-                    `;
+                    `; //con item.body lo que hace es acceder a un elemento del objeto y con substring se le indica que solamente coja los 100 primeros caracteres
                     $('#card-container').append(card);
                 });
 

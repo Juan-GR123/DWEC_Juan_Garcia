@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
         .then(response => {
-            if (!response.ok) throw new Error('Error en la solicitud');
-            return response.json();
+            if (!response.ok) throw new Error('Error en la solicitud'); //response.ok es una propiedad del objeto Response de la API que verifica si el código de estado está entre 200 y 299
+            return response.json(); //lo pasa a un objeto
         })
         .then(data => {
             const cardContainer = document.getElementById('card-container');
@@ -37,10 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     </section>
                 `;
 
-                cardContainer.appendChild(article);
+                cardContainer.appendChild(article); //agrega el contenido de article al elemento llamado card-container
             });
 
-            loading = false;
+            loading = false; //se reestablece el valor loading=false para que se pueda seguir utilizando la funcion
         })
         .catch(error => {
             console.error('Error al cargar las tarjetas:', error);
