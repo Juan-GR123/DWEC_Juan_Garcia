@@ -1,14 +1,48 @@
-document.addEventListener('DOMContentLoaded', () => {
     const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
     const apiKey = ''; // Si necesitas una clave de API
-    let loading = false;
 
     // Función para cargar las tarjetas
-    function loadCards() {
-        if (loading) return;
-        loading = true;
+    async function loadCards() {//async se utiliza al declarar una función y hace que devuelva una promesa.
+        try{
+            const response = await fetch(apiUrl, { //await solo se puede usar dentro de funciones asíncronas y permite esperar el resultado de una promesa antes de continuar con la ejecución.
+                method: 'GET',
+                headers: {
+                    'X-RapidAPI-Key': apiKey,
+                    'X-RapidAPI-Host': 'jsonplaceholder30.p.rapidapi.com'
+                }
+            });
 
-        fetch(apiUrl, {
+            if (!response.ok) {
+                throw new Error('Error en la solicitud');
+            }
+
+            const data = await response.json();
+            const cardContainer = document.getElementById('card-container');
+            const posts = data.slice(0, 10); // Solo 10 elementos para probat
+
+            posts.forEach(item => {
+                const imageUrl = `https://cataas.com/cat?unique=${Math.random()}`; // Imagen aleatoria
+
+                const article = document.createElement('article');
+                article.className = 'bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out';
+
+                article.innerHTML = `
+                    <img class="w-full h-60 object-cover" src="${imageUrl}" alt="Imagen de ejemplo">
+                    <section class="p-4">
+                        <h3 class="text-xl font-semibold text-gray-800">${item.title}</h3>
+                        <p class="text-gray-600 text-sm mt-2">${item.body.substring(0, 100)}...</p>
+                    </section>
+                `;
+
+                cardContainer.appendChild(article); //agrega el contenido de article al elemento llamado card-container
+            });
+
+        }catch(error){
+            console.error('Error al cargar las tarjetas:', error);
+        }
+    }
+    
+       /* fetch(apiUrl, {
             method: 'GET',
             headers: {
                 'X-RapidAPI-Key': apiKey,
@@ -46,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error al cargar las tarjetas:', error);
             loading = false;
         });
-    }
+    }*/
 
     // Detectar el scroll y cargar más tarjetas
     function checkScroll() {
@@ -65,4 +99,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Evento de scroll para scroll infinito
     window.addEventListener('scroll', checkScroll);
-});
