@@ -1141,22 +1141,6 @@ input[type="range"]::-ms-fill-lower {
   margin-bottom: 1.5rem;
 }
 
-.me-2\.5 {
-  margin-inline-end: 0.625rem;
-}
-
-.mr-4 {
-  margin-right: 1rem;
-}
-
-.ms-1 {
-  margin-inline-start: 0.25rem;
-}
-
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -1165,8 +1149,20 @@ input[type="range"]::-ms-fill-lower {
   margin-bottom: 1.5rem;
 }
 
+.me-2\.5 {
+  margin-inline-end: 0.625rem;
+}
+
 .me-4 {
   margin-inline-end: 1rem;
+}
+
+.ms-1 {
+  margin-inline-start: 0.25rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
 }
 
 .block {
@@ -1189,10 +1185,6 @@ input[type="range"]::-ms-fill-lower {
   height: 0.75rem;
 }
 
-.h-32 {
-  height: 8rem;
-}
-
 .h-60 {
   height: 15rem;
 }
@@ -1203,10 +1195,6 @@ input[type="range"]::-ms-fill-lower {
 
 .w-3 {
   width: 0.75rem;
-}
-
-.w-32 {
-  width: 8rem;
 }
 
 .w-full {
@@ -1235,10 +1223,6 @@ input[type="range"]::-ms-fill-lower {
 
 .items-center {
   align-items: center;
-}
-
-.justify-between {
-  justify-content: space-between;
 }
 
 .gap-6 {
@@ -1288,11 +1272,6 @@ input[type="range"]::-ms-fill-lower {
   background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
 }
 
-.bg-gray-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
-}
-
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
@@ -1307,8 +1286,9 @@ input[type="range"]::-ms-fill-lower {
   padding: 1rem;
 }
 
-.text-center {
-  text-align: center;
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .text-sm {
@@ -1319,11 +1299,6 @@ input[type="range"]::-ms-fill-lower {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
 }
 
 .font-medium {
@@ -1441,12 +1416,12 @@ input[type="range"]::-ms-fill-lower {
 }
 
 @media (min-width: 768px) {
-  .md\:ms-2 {
-    margin-inline-start: 0.5rem;
-  }
-
   .md\:me-6 {
     margin-inline-end: 1.5rem;
+  }
+
+  .md\:ms-2 {
+    margin-inline-start: 0.5rem;
   }
 
   .md\:grid-cols-3 {

@@ -1,13 +1,13 @@
 import $, { event } from 'jquery'; //referencia a todos los elementos de jquery
 
-
 $(() => {
     const apiUrl = 'https://jsonplaceholder.typicode.com/posts'; // Reemplaza esta URL por la de tu API si es necesario
     const apiKey = ''; // Si estás usando una API que requiere autenticación, coloca aquí tu clave
-
+    let loading=false;
     // Función para cargar las tarjetas
     function loadCards() {
-      
+        if (loading) return;
+        loading = true;
 
         $.ajax({ // $.ajax Permite enviar y recibir datos sin recargar la página, soportando métodos como GET, POST, PUT, y DELETE.
             url: apiUrl,
@@ -15,9 +15,10 @@ $(() => {
             headers: {
                 'X-RapidAPI-Key': apiKey,
                 'X-RapidAPI-Host': 'jsonplaceholder30.p.rapidapi.com'
-            },
-            success: function (response) {
-                console.log(response); // Verifica la respuesta
+            }
+        })
+            .done(function (response) {
+                //console.log(response); // Verifica la respuesta
                 //array de objetos, en este caso serán objetos con titulos y resumenes
 
                 const data = response.slice(0, 10); // Limitamos a 10 elementos para probar 
@@ -35,11 +36,15 @@ $(() => {
                     `; //con item.body lo que hace es acceder a un elemento del objeto y con substring se le indica que solamente coja los 100 primeros caracteres
                     $('#card-container').append(card);
                 });
-            },
-            error: function (error) {
+            })
+            .fail(function (error) {
                 console.error('Error al cargar las tarjetas:', error);
-            }
-        });
+            })
+            .always(function () {
+                console.log("Promesa completada"); // Se ejecuta siempre, haya éxito o fallo)
+                loading = false;
+            })
+
     }
 
     // Función para detectar si se llegó al final de la página

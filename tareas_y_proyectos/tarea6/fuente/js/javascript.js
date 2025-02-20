@@ -1,8 +1,12 @@
     const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
     const apiKey = ''; // Si necesitas una clave de API
+    let loading = false;
 
     // Función para cargar las tarjetas
     async function loadCards() {//async se utiliza al declarar una función y hace que devuelva una promesa.
+        if (loading) return; // Si ya está cargando, no vuelve a ejecutar
+        loading = true;      // Marca como "cargando"
+
         try{
             const response = await fetch(apiUrl, { //await solo se puede usar dentro de funciones asíncronas y permite esperar el resultado de una promesa antes de continuar con la ejecución.
                 method: 'GET',
@@ -39,6 +43,8 @@
 
         }catch(error){
             console.error('Error al cargar las tarjetas:', error);
+        }finally{
+            loading = false; // Restablece la bandera al finalizar la carga (éxito o error)
         }
     }
     
