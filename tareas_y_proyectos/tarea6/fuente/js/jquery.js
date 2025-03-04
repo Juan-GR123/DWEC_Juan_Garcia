@@ -1,4 +1,4 @@
-import $, { event } from 'jquery'; //referencia a todos los elementos de jquery
+// import $, { event } from 'jquery'; //referencia a todos los elementos de jquery
 
 $(() => {
     const apiUrl = 'https://jsonplaceholder.typicode.com/posts'; // Reemplaza esta URL por la de tu API si es necesario
